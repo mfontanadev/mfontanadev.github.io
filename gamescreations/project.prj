@@ -1,0 +1,63 @@
+[Debug Settings]
+Program Arguments=
+Selected Debugger=0
+Source Paths=
+Symbol Paths=
+Working Directory=
+[Files]
+0=images_main_juegos.htm
+1=images_main_utilitarios.htm
+2=images_util_directx.htm
+3=images_util_dos.htm
+4=images_util_efectos.htm
+5=images_util_mvs6.htm
+6=index.htm
+7=Indice.txt
+8=mweb3.css
+9=myBody.htm
+10=myFooter.htm
+11=myHeader.htm
+12=myToolbar.htm
+13=project.prj
+14=Desc_Curriculum.htm
+15=Desc_Home.htm
+16=images_investigacion_directx.htm
+17=images_investigacion_matematica.htm
+18=images_investigacion_mvs6.htm
+19=images_investigacion_simulacion.htm
+20=images_juegos_dosmonocromo.htm
+21=images_juegos_dosvga.htm
+22=images_juegos_winmvs6.htm
+23=images_main_investigacion.htm
+24=Curriculum.htm
+25=images_main.htm
+[Open Files]
+Active File Display Mode=-1
+Open File0=
+[uemakeXp]
+ReleaseMode=0
+[Project Information]
+Compilable=1
+Use Relative Directory=1
+Relative to Project File=1
+Project Start=D9070600040004000E002A00050000002B
+Include Sub Directories=1
+Project Tagfile=
+Project Wordfile=
+Filter=
+Using VCS=0
+Save Account=0
+Create Tagfile=0
+CTags Legacy Support=0
+Working Time=26337
+Project Directory=F:\Mios\Programas\Mi Web\V3.0\Host pages
+[Files - myStyles]
+0=myStyles\antiBanner.js
+1=myStyles\utils.js
+[Group]
+0=myStyles
+[Folders]
+Html=1
+myStyles=1
+[Project ID]
+Signature=UE Proj: v.1

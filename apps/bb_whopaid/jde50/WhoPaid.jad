@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: WhoPaid
+RIM-COD-Module-Dependencies: net_rim_cldc
+MIDlet-Jar-Size: 63182
+MIDlet-1: Whopaid,img/icon.png,
+RIM-COD-Creation-Time: 1356528779
+MIDlet-Jar-URL: WhoPaid.jar
+RIM-COD-URL: WhoPaid.cod
+RIM-COD-SHA1: ff 93 66 08 50 42 94 99 86 96 15 4f 68 4c 4d f3 21 2e 72 24
+RIM-COD-Size: 25240
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 0.8.5
+MIDlet-Name: WhoPaid
+MIDlet-Vendor: BlackBerry Developer
+MicroEdition-Profile: MIDP-2.0
+RIM-MIDlet-Flags-1: 0

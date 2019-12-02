@@ -1,0 +1,630 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			body 
+			{
+				margin: 0px;
+				padding: 0px;
+			}
+			#myCanvas 
+			{
+				border: 0px solid #000000;
+				/*background: blue;*/
+				/*width: 600px;
+				height: 800px;*/
+				
+				display: block;
+				margin: 0 auto;
+			}
+		</style>
+		<script language="javascript" type="text/javascript" src="lib\soundjs-NEXT.min.js"></script>
+		<script language="javascript" type="text/javascript" src="lib\chlib.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\fire.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\hero.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\enemy.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\maze.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\particle.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\indicator.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\engine.js"></script>		
+		<script language="javascript" type="text/javascript" src="classes\radar.js"></script>		
+		<script language="javascript" type="text/javascript" src="classes\shield.js"></script>	
+		<script language="javascript" type="text/javascript" src="classes\energy.js"></script>	
+
+		<script language="javascript" type="text/javascript" src="classes\chbutton.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\cannon.js"></script>	
+		<script language="javascript" type="text/javascript" src="classes\smoke.js"></script>
+
+		<script language="javascript" type="text/javascript" src="classes\decoration.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\level.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\animated.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\animation.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\resourceMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\keyboardMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\joystickMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\fontMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\storageMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\sndManager.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\xmlMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\consts.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\chtimer.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="classes\viewIntro.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewPlay.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewHelp.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewLevel.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewGameOver.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="data\game_data.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script>
+			// Thanks to
+			// http://www.canvasdemos.com/2009/07/09/game-development-tutorials/
+			var C_EDITOR_MODE = false;
+						
+			// Frequency controler.
+			var m_startTime = 0;
+			var m_elapsedTime = 0;
+		  
+			// Graphics
+			var m_canvas = null;
+			var m_context = null;
+			var m_mousePosX = 0;
+			var m_mousePosY = 0;
+		  	var m_mouseClick = false;
+			var m_camw = 0;
+			var m_camh = 0;
+			var m_textArea = null;
+			var m_div = null;
+						
+			// Singletons
+			var m_appState = 0;
+			var m_resourceMngr = null;
+			var m_keyboardMngr = null;
+			var m_fontMngr = null;
+			var m_storeMngr = null;
+			var m_editorMngr = null;
+			var m_sndManager = null;
+			var m_joystickMngr = null;
+			var m_xmlMngr = null;
+
+			var m_renderTime = 1;
+			var m_canvasWidth = 0;
+			var m_canvasHeight = 0;
+			
+			// ***************************************
+			// App vars
+			// ***************************************
+			var m_maze = new Maze();
+			//var m_score = new Score();
+			
+			var m_viewIntro = new ViewIntro();
+			var m_viewPlay = new ViewPlay();
+			var m_viewHelp = new ViewHelp();
+			var m_viewLevel = new ViewLevel();
+			var m_viewGameOver = new ViewGameOver();
+
+			var m_scaleX = 1;
+			var m_scaleY = 1;
+		
+			//var m_audio = null;
+			
+			// ***************************************
+			// Entry point
+			// ***************************************
+	
+			window.onload = function() 
+			{
+				m_appState = C_APP_STATE_INTRO;
+				
+				// Init context.
+				m_canvas = document.getElementById('myCanvas');
+				m_context = m_canvas.getContext('2d');
+								
+				m_camw = m_canvas.width / 2;
+				m_camh = m_canvas.height / 2;
+				C_OFFSET_X_PLAY_AREA = m_camw;
+				C_OFFSET_Y_PLAY_AREA = m_camh;
+
+				m_textArea= document.getElementById('mytextarea_id');
+				msglog( "w,h=(" + window.screen.availWidth + "," + window.screen.availHeight + ")");
+				
+				m_canvas.onselectstart = function() { return false; };
+				
+				function resize() 
+				{
+					msglog( "w,h=(" +  window.innerWidth + "," +window.innerHeight + ")");
+				
+					// Our canvas must cover full height of screen
+					// regardless of the resolution
+					if (window.innerHeight <= window.innerWidth )
+					{
+							var height = window.innerHeight;
+						
+							msglog( "resize 1");
+						
+							var ratio = (m_canvas.width+30)/m_canvas.height;
+							var width = height * ratio;
+							if (width > m_canvas.width)
+							{
+								width = m_canvas.width;
+								if (height > m_canvas.height)
+									height = m_canvas.height;
+							}
+
+							m_canvas.style.width = width+'px';
+							m_canvas.style.height = height+'px';
+							
+							msglog("ratio=" + ratio);
+							msglog("w,h=" + width + "," + height);
+							msglog("iw,ih=" + window.innerWidth + "," + window.innerHeight);
+							msglog("wa,ha=" + window.screen.availWidth + "," + window.screen.availHeight);
+							msglog("window.innerWidth=" + window.innerWidth);
+							
+							m_canvasWidth = width;
+							m_canvasHeight = height;
+							
+							this.m_scaleX = m_canvasWidth / m_canvas.width;
+							this.m_scaleY = m_canvasHeight / m_canvas.height;
+					}
+					else
+					{
+						var width = window.innerWidth;
+
+						msglog( "resize 2");
+							var ratio = (m_canvas.height+30)/m_canvas.width;
+							var height = width * ratio;
+							if (height > m_canvas.height)
+							{
+								height = m_canvas.height;
+								if (width > m_canvas.width)
+									width = m_canvas.width;
+							}
+
+							m_canvas.style.width = width+'px';
+							m_canvas.style.height = height+'px';
+							
+							msglog("canvas width=" + m_canvas.width);
+							msglog("width=" + width);
+							msglog("window.innerWidth=" + window.innerWidth);
+							
+							m_canvasWidth = width;
+							m_canvasHeight = height;
+					
+							this.m_scaleX = m_canvasWidth / m_canvas.width;
+							this.m_scaleY = m_canvasHeight / m_canvas.height;
+					}
+					
+				}
+			
+				window.addEventListener('load', resize, false);
+				window.addEventListener('resize', resize, false);
+				resize();
+				
+				//m_audio = document.getElementById('C_SND_BOMBO_ID2');
+				// Init local store managar
+				m_storeMngr = new StorageMngr();
+				m_storeMngr.initWith(C_LOCAL_STORE_NAMESPACE);
+				//m_storeMngr.showAll();
+
+				m_xmlMngr = new XmlMngr();
+				m_xmlMngr.initWith();
+				
+				// Init grafical resource manager.
+				m_resourceMngr = new ResourceMngr();
+				m_resourceMngr.initWith
+				(
+					// Al terminar de cargar las images ejecutar la funcion.
+					function()
+					{
+						initAfterBitmapsLoaded();
+					}
+				);
+			};
+
+			
+			function initAfterBitmapsLoaded() 
+			{
+				msglog("Bitmaps loaded");
+
+				m_sndManager = new SndManager();
+				m_sndManager.initWith
+				(
+				    sound_manifest,
+					"sounds/",
+					gl_sound_definition,
+					gl_sound_definitionClassic,
+					function()
+					{
+						msglog('callback sound function');
+						initAfterSoundsLoaded();
+					},
+					false
+				);
+				m_sndManager.load();
+			}
+			
+			function initAfterSoundsLoaded() 
+			{
+				msglog("Sounds loaded");
+
+				// Init keykoard manager
+				m_joystickMngr = new JoystickMngr();
+				m_joystickMngr.initWith();
+
+				m_canvas.addEventListener("mousedown", mouseDown, false);
+				m_canvas.addEventListener("mousemove", mouseXY, false);
+				m_canvas.addEventListener("touchstart", touchDown, false);
+				m_canvas.addEventListener("touchmove", touchXY, true);
+				m_canvas.addEventListener("touchend", touchUp, false);
+				document.body.addEventListener("mouseup", mouseUp, false);
+				document.body.addEventListener("touchcancel", touchUp, false);
+				
+ 			    function mouseUp() {
+					m_mouseClick = false;
+					mouseXY();
+				}
+		 
+				function touchUp() {
+					m_mouseClick = false;
+					// no touch to track, so just show state
+					showPos();
+				}
+		 
+				function mouseDown() {
+					//m_audio.play();				
+					m_mouseClick = true;
+					mouseXY();
+					showPos();
+				}
+		 
+				function touchDown() {
+					//m_audio.play();				
+					m_mouseClick = true;
+					touchXY();
+				}
+		 
+				function mouseXY(e) {
+					if (!e)
+						var e = event;
+					
+					var rect = m_canvas.getBoundingClientRect();
+					m_mousePosX = e.pageX - rect.left;
+					m_mousePosY = e.pageY - rect.top;
+					
+					//This assumes that canvas is at 1,1. Good idea when viewport.width = canvas.width.
+					//m_mousePosX = e.pageX - m_canvas.offsetLeft;
+					//m_mousePosY = e.pageY - m_canvas.offsetTop;
+					//showPos();
+				}
+		 
+				function touchXY(e) {
+					if (!e)
+						var e = event;
+					e.preventDefault();
+					
+					var rect = m_canvas.getBoundingClientRect();
+					m_mousePosX = e.targetTouches[0].pageX - rect.left;
+					m_mousePosY = e.targetTouches[0].pageY - rect.top;
+					
+					//This assumes that canvas is at 1,1. Good idea when viewport.width = canvas.width.
+					//m_mousePosX = e.targetTouches[0].pageX - m_canvas.offsetLeft;
+					//m_mousePosY = e.targetTouches[0].pageY - m_canvas.offsetTop;
+					showPos();
+				}
+		
+				function showPos() {
+					var str = m_mousePosX + ", " + m_mousePosY;
+				
+					// large, centered, bright green text
+					//m_context.font = "24pt Helvetica";
+					//m_context.textAlign = "center";
+					//m_context.textBaseline = "middle";
+					//m_context.fillStyle = "rgb(64,255,64)";
+					var str = m_mousePosX + ", " + m_mousePosY;
+					if (m_mouseClick)
+						str += " down";
+					if (!m_mouseClick)
+						str += " up";
+					//m_context.clearRect(0, 0, m_canvas.width, m_canvas.height);
+					// draw text at center, max length to fit on canvas
+					//m_context.fillText(str, m_canvas.width / 2, m_canvas.height / 2, m_canvas.width - 10);
+					// plot cursor
+					//m_context.fillStyle = "white";
+					//m_context.fillRect(m_canvas -5, m_canvas -5, 10, 10);
+					msglog(str);
+				}
+				
+				m_mousePosX = m_canvas.width / 2;
+				m_mousePosY = m_canvas.height / 2;
+
+				// Init keykoard manager
+				m_keyboardMngr = new KeyboardMngr();
+				m_keyboardMngr.initWith();
+
+            	document.onkeydown = function(event) 
+            	{
+            		//logmsg.log("Key down: " + event.keyCode);
+					m_keyboardMngr.keyDown(event.keyCode);
+					return false;
+            	}
+            	
+            	document.onkeyup = function(event) 
+            	{
+					m_keyboardMngr.keyUp(event.keyCode);
+					return false;
+				}
+
+				// Init font mngr
+				m_fontMngr = new FontMngr();
+				m_fontMngr.initWith();
+
+				// Score
+				//m_score.initWith();
+				m_maze.initWith();
+				
+				// Init timer counter.
+				m_startTime = (new Date()).getTime();
+
+				m_viewIntro.initWith(m_maze);
+				m_viewPlay.initWith(m_maze);
+				m_viewHelp.initWith(m_maze);
+				m_viewLevel.initWith(m_maze);
+				//m_viewGameOver.initWith(C_STATE_VIEW_GAMEOVER_LOST);
+			
+				btnIntro();
+				//btnLevel1();
+			
+				animate();
+			}
+
+			// Game loop		  
+			function animate() 
+			{
+				// handle inputs
+				handleInputs();
+
+				// updates
+				if (updateTimer() == true)
+				{
+					// game logic
+					implementGameLogic();
+				}
+
+				// render
+				render(m_canvas, m_context);
+
+				// log
+				if (C_LOG == true)
+				{
+					var message = 'Mouse position: ' + m_mousePosX + ',' + m_mousePosY + ", fps=" + Math.round(m_elapsedTime,2);
+					writeMessage(m_context, message, C_DEBUG_MODE);
+				}
+													
+				// request new frame
+				requestAnimFrame(function() { animate(); });
+			}
+
+			// Update timer.
+			function updateTimer()
+			{
+				var result = false;
+				
+				//var currentDate = (new Date()).getTime();
+				var currentDate = Date.now();
+				
+				m_elapsedTime = currentDate - m_startTime;
+				m_startTime = currentDate;
+					
+			 	if (m_elapsedTime >= C_FPS_MS)
+			 	{
+					//console.log("time: " + m_elapsedTime.toString());
+			 		m_renderTime = 0;
+			 		result = true;
+			 	}
+			 	
+			 	return result;	
+			}
+		  
+			// Get cycle time
+			function getElapsedTime()
+			{
+				return m_elapsedTime;
+			}
+
+			// Handle input
+			function handleInputs()
+			{
+				m_keyboardMngr.implementGameLogic();
+				m_joystickMngr.implementGameLogic(m_keyboardMngr);
+				
+				switch(m_appState)
+				{
+					case C_APP_STATE_INTRO:
+						m_viewIntro.handleInputs();
+					break;
+
+					case C_APP_STATE_PLAY:
+						m_viewPlay.handleInputs();
+					break;
+
+					case C_APP_STATE_HELP:
+						m_viewHelp.handleInputs();
+					break;
+
+					case C_APP_STATE_LEVEL:
+						m_viewLevel.handleInputs();
+					break;
+
+					case C_APP_STATE_GAMEOVER:
+						m_viewGameOver.handleInputs();
+					break;
+				}
+			}
+
+			// Implement game logic.
+			function implementGameLogic()
+			{
+				switch(m_appState)
+				{
+					case C_APP_STATE_INTRO:
+						m_viewIntro.implementGameLogic();
+					break;
+
+					case C_APP_STATE_PLAY:
+						m_viewPlay.implementGameLogic();
+					break;
+
+					case C_APP_STATE_HELP:
+						m_viewHelp.implementGameLogic();
+					break;
+
+					case C_APP_STATE_LEVEL:
+						m_viewLevel.implementGameLogic();
+					break;
+
+					case C_APP_STATE_GAMEOVER:
+						m_viewGameOver.implementGameLogic();
+					break;
+				}
+			}
+			
+			// Render		  
+			function render(_canvas, _context)
+			{
+				// clear
+				_context.clearRect(0, 0, _canvas.width, _canvas.height);
+
+				switch(m_appState)
+				{
+					case C_APP_STATE_INTRO:
+						m_viewIntro.render(_canvas, _context);
+					break;
+
+					case C_APP_STATE_PLAY:
+						m_viewPlay.render(_canvas, _context);
+					break;
+
+					case C_APP_STATE_HELP:
+						m_viewHelp.render(_canvas, _context);
+					break;
+
+					case C_APP_STATE_LEVEL:
+						m_viewLevel.render(_canvas, _context);
+					break;
+
+					case C_APP_STATE_GAMEOVER:
+						m_viewGameOver.render(_canvas, _context);
+					break;
+				}
+				
+				//m_keyboardMngr.showKeyboardMatrix(_canvas, _context);
+				if (C_DEBUG_SHOW_JOYSTICK == true)
+					m_joystickMngr.render(_canvas, _context);
+			}
+
+			// Looping callback
+			window.requestAnimFrame = (function(callback) 
+			{
+				return window.requestAnimationFrame || 
+				window.webkitRequestAnimationFrame || 
+				window.mozRequestAnimationFrame || 
+				window.oRequestAnimationFrame || 
+				window.msRequestAnimationFrame ||
+				function(callback) 
+				{
+				  window.setTimeout(callback, 1);
+				};
+			})();
+
+			// Implement game logic - particles
+			function play()
+			{ 
+				m_appState = C_APP_STATE_PLAY;
+			}
+
+			// Freeze elements logic.
+			function stop()
+			{ 
+			}
+
+			function btnIntro()
+			{ 
+				m_keyboardMngr.reset();
+				m_appState = C_APP_STATE_INTRO;
+			}
+			function btnHelp()
+			{ 
+				m_keyboardMngr.reset();
+				m_appState = C_APP_STATE_HELP;
+			}
+
+			function btnCredits()
+			{ 
+				cred = document.getElementById('credits');
+				divCanvas = document.getElementById('divCanvas');
+				
+				if (cred.style.display == 'none')
+				{
+					cred.style.display = 'block';
+					divCanvas.style.display = 'none';
+				}
+				else
+				{
+					cred.style.display = 'none';
+					divCanvas.style.display = 'block';
+				}
+			}
+			
+			function btnPlay()
+			{ 
+				m_keyboardMngr.reset();
+				m_appState = C_APP_STATE_PLAY;
+
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_LEVEL_1_KEY);
+
+				m_viewPlay.initWithReset();
+			}
+		</script>
+	</head>
+  
+	<body bgcolor="#101010">
+	<div id="maindiv" align="center">
+			<div id="credits" align="center" style="display: none;">
+				<p id = "gameTitle" style="font-size:11pt;font-family:Calibri;color:silver;line-height:0pt;">Tanks (v1.0.4)</p>
+				<p style="font-size:10pt;font-family:Calibri;color:lime;line-height:0pt;">by Mauricio E. Fontana (mfontanadev@gmail.com)</p>
+				<a style="font-size:10pt;font-family:Calibri;color:green;line-height:0pt;" href="https://github.com/mfontanadev/tanks">https://github.com/mfontanadev/tanks</a>
+				</br>
+				</br>
+				<button id="id_btnHideCredits" style="width: 100px;" onclick="btnCredits()">BACK</button>
+			</div>
+
+			<table>
+			<row>
+				<td>
+				<textarea id="mytextarea_id" name="mytextarea" style="width:250px;height:500px;"></textarea>
+				</td>
+				<td>
+					<canvas id="myCanvas" width="768" height="448" ></canvas>
+				</td>
+			</row>
+			</table>
+	</div>
+		<audio id="C_SND_ENGINE_0_ID" src="sounds\engine_0.wav" style="display:none"></audio>
+		<audio id="C_SND_ENGINE_MOVING_ID" src="sounds\engine_moving.wav" style="display:none"></audio>
+		<audio id="C_SND_HITTED_ID" src="sounds\hitted.wav" style="display:none"></audio>
+		<audio id="C_SND_SHOOT_ID" src="sounds\shoot.wav" style="display:none"></audio>
+		<audio id="C_SND_TANQUETA_ID" src="sounds\tanqueta.wav" style="display:none"></audio>
+		<audio id="C_SND_TANQUETA_EN_ID" src="sounds\tanqueta.wav" style="display:none"></audio>
+		<audio id="C_SND_ENGINE_STARTING_ID" src="sounds\engine_starting.wav" style="display:none"></audio>
+		<audio id="C_SND_ENGINE_STARTED_ID" src="sounds\engine_started.wav" style="display:none"></audio>
+		<audio id="C_SND_BULLET_IMPACT_ID" src="sounds\bullet_impact.wav" style="display:none"></audio>
+		<audio id="C_SND_RADAR_BUTTON_ID" src="sounds\radar_button.wav" style="display:none"></audio>
+		<audio id="C_SND_BULLET_NOT_IMPACT_ID" src="sounds\bullet_not_impact.wav" style="display:none"></audio>
+
+	</body>
+  
+</html>

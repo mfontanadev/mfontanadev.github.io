@@ -1,0 +1,70 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+- url: /index.html
+  static_files: index.html
+  upload: index.html
+- url: /navigation.html
+  static_files: navigation.html
+  upload: navigation.html
+- url: /about.html
+  static_files: about.html
+  upload: about.html
+- url: /products.html
+  static_files: products.html
+  upload: products.html
+- url: /projects.html
+  static_files: projects.html
+  upload: projects.html
+- url: /videos.html
+  static_files: videos.html
+  upload: videos.html
+
+
+- url: /js
+  static_dir: js
+- url: /css
+  static_dir: css
+- url: /img
+  static_dir: img
+- url: /swf
+  static_dir: swf
+- url: /apps
+  static_dir: apps
+- url: /gamescreations
+  static_dir: gamescreations
+- url: /gamescreations/DOWNLOADS
+  static_dir: gamescreations/DOWNLOADS
+- url: /test
+  static_dir: test
+- url: /games
+  static_dir: games
+
+- url: /oldsite
+  static_dir: oldsite
+- url: /oldsite
+  static_files: /oldsite/index.html
+  upload: /oldsite/index.html
+
+- url: /games/deployLittleConstructor
+  static_dir: games/deployLittleConstructor
+- url: /games/deployLittleConstructor/
+  static_files: /games/deployLittleConstructor/index.html
+  upload: /games/deployLittleConstructor/index.html
+
+- url: /games/deploytanks
+  static_dir: games/deploytanks
+- url: /games/deploytanks/
+  static_files: /games/deploytanks/index.html
+  upload: /games/deploytanks/index.html
+- url: /games/deploytanks/indexns
+  static_files: /games/deploytanks/indexns.html
+  upload: /games/deploytanks/indexns.html
+
+libraries:
+- name: webapp2
+  version: "2.5.1"

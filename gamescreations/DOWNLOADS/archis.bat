@@ -1,0 +1,1 @@
+dir *.* > archis.txt

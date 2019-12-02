@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			body 
+			{
+				margin: 0px;
+				padding: 0px;
+			}
+			#myCanvas 
+			{
+				border: 1px solid #AAAAAA;
+			}
+			div
+			{
+				 visibility: hidden;
+				 display: none;
+			}
+		</style>
+	
+		<script language="javascript" type="text/javascript" src="chlib.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\brick.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\fire.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\hero.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\enemy.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\maze.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\particle.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\smogcar.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\decoration.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\level.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\score.js"></script>
+		<script language="javascript" type="text/javascript" src="resourceMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="consts.js"></script>
+		<script language="javascript" type="text/javascript" src="fontMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="storageMngr.js"></script>
+		<script language="javascript" type="text/javascript" src="framework\sndManager.js"></script>
+
+		<script language="javascript" type="text/javascript" src="classes\viewIntro.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewPlay.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewHelp.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\viewLevel.js"></script>
+		<script language="javascript" type="text/javascript" src="data\game_data.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\indicator.js"></script>
+		<script language="javascript" type="text/javascript" src="classes\engine.js"></script>		
+		<script>
+			// Thanks to
+			// http://www.canvasdemos.com/2009/07/09/game-development-tutorials/
+			var C_EDITOR_MODE = true;
+			
+			// Frequency controler.
+			var m_startTime = 0;
+			var m_elapsedTime = 0;
+		  
+			// Graphics
+			var m_canvas = null;
+			var m_context = null;
+			var m_mousePosX = 0;
+			var m_mousePosY = 0;
+			var m_camw = 0;
+			var m_camh = 0;
+			
+			var m_canvasInd1 = null;
+			var m_contextInd1 = null;
+			
+			// Singletons
+			var m_resourceMngr = null;
+			var m_keyboard = null;
+			var m_fontMngr = null;
+			var m_storeMngr = null;
+			var m_editorMngr = null;
+			
+
+			var C_DEBUG_MODE = true;
+			var C_LOG = true;
+			var C_FPS_RENDER = 50;
+			var m_renderTime = 1;
+			
+			// ***************************************
+			// App vars
+			// ***************************************
+			var m_maze = new Maze();
+			
+			// ***************************************
+			// Entry point
+			// ***************************************
+			window.onload = function() 
+			{
+				// Init context.
+				m_canvas = document.getElementById('myCanvas');
+				m_context = m_canvas.getContext('2d');
+
+				// Init local store managar
+				m_storeMngr = new StorageMngr();
+				m_storeMngr.initWith(C_LOCAL_STORE_NAMESPACE);
+				m_storeMngr.showAll();
+				
+				m_editorMngr = new EditorMngr();
+				m_editorMngr.initWith(m_canvas, m_maze);	
+				
+				// Mouse events
+				m_canvas.addEventListener('mousemove', function(evt) 
+				{
+					var rect = m_canvas.getBoundingClientRect();
+					m_mousePosX =  evt.clientX - rect.left;
+					m_mousePosY =  evt.clientY - rect.top;
+				}, false);
+
+				m_mousePosX = m_canvas.width / 2;
+				m_mousePosY = m_canvas.height / 2;
+
+				// Init keykoard manager
+				m_keyboard = new chKeyboard();
+				m_keyboard.initWith();
+
+            	document.onkeydown = function(event) 
+            	{
+            		//logmsg.log("Key down: " + event.keyCode);
+					m_keyboard.keyDown(event.keyCode);
+					return false;
+            	}
+            	
+            	document.onkeyup = function(event) 
+            	{
+					m_keyboard.keyUp(event.keyCode);
+					return false;
+				}
+
+				// Init font mngr
+				m_fontMngr = new FontMngr();
+				m_fontMngr.initWith();
+						
+				// Init grafical resource manager.
+				m_resourceMngr = new ResourceMngr();
+				m_resourceMngr.initWith
+				(
+					// Al terminar de cargar las images ejecutar la funcion.
+					function()
+					{
+						init();
+
+						// Init timer counter.
+						m_startTime = (new Date()).getTime();
+
+						animate();
+					}
+				);
+			};
+
+			function init() 
+			{
+				initEditorLayout();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_EMPTY_KEY);
+				m_maze.start();
+			}
+
+			// Game loop		  
+			function animate() 
+			{
+				// handle inputs
+				// handleInput();
+
+				// updates
+				if (updateTimer() == true)
+				{
+					// game logic
+					implementGameLogic();
+
+//					m_keyboard.reset();
+				}
+
+				// render
+				render(m_canvas, m_context);
+
+				// log
+				if (C_LOG == true)
+				{
+					var message = 'Mouse position: ' + m_mousePosX + ',' + m_mousePosY + ", fps=" + Math.round(1000 / m_elapsedTime,0);
+					writeMessage(m_context, message, C_DEBUG_MODE);
+					//logmsg.log(m_elapsedTime);
+				}
+													
+				// request new frame
+				requestAnimFrame(function() { animate(); });
+			}
+
+			// Update timer.
+			function updateTimer()
+			{
+				var result = false;
+				
+				m_elapsedTime = (new Date()).getTime() - m_startTime;
+				m_startTime = (new Date()).getTime();
+				
+				if (m_renderTime > 0)	
+					m_renderTime += getElapsedTime();
+					
+			 	if (m_renderTime > 1000 / C_FPS_RENDER)
+			 	{
+			 		m_renderTime = 1;
+			 		result = true;
+			 	}
+			 	
+			 	return result;	
+				
+			}
+		  
+			// Get cycle time
+			function getElapsedTime()
+			{
+				return m_elapsedTime;
+			}
+
+			// Implement game logic.
+			function implementGameLogic()
+			{
+				m_keyboard.implementGameLogic();
+				//m_maze.implementGameLogic();
+				m_editorMngr.implementGameLogic();
+			}
+			
+			// Render		  
+			function render(_canvas, _context)
+			{
+				// clear
+				_context.clearRect(0, 0, _canvas.width, _canvas.height);
+
+				// Render maze.
+				m_maze.render(_canvas, _context);
+				
+				// Render editor.
+				m_editorMngr.render(_canvas, _context);
+				
+				// Render KEYBOARD
+				var particle = null;
+				for (var i = 0; i < 256; i++) 
+				{
+					if (m_keyboard.isKeyDown(i))
+					{
+						renderCircle(_canvas, _context, i * 5, 10, 3, rgbaToColor(0, 0, 0, 0.5));
+						//msglog('keydownkey=' + i);
+					}
+				}
+				
+				/*
+				m_fontMngr.drawText(_canvas, _context, 'VERSION 1.0', 0, 0, rgbToColor(255,0,0));
+				m_fontMngr.drawText(_canvas, _context, 'STOP SMOG', 0, 16, rgbToColor(255,0,0));
+
+				m_fontMngr.drawTextSmall(_canvas, _context, 'VERSION 1.0', 8*20, 0, rgbToColor(255,255,0));
+				m_fontMngr.drawTextSmall(_canvas, _context, 'STOP SMOG', 8*20, 16, rgbToColor(255,0,255));
+				*/
+			}
+
+			// Looping callback
+			window.requestAnimFrame = (function(callback) 
+			{
+				return window.requestAnimationFrame || 
+				window.webkitRequestAnimationFrame || 
+				window.mozRequestAnimationFrame || 
+				window.oRequestAnimationFrame || 
+				window.msRequestAnimationFrame ||
+				function(callback) 
+				{
+				  window.setTimeout(callback, 1000 / C_FPS_RENDER);
+				};
+			})();
+
+			function initEditorLayout()
+			{
+				var btnPlay = document.getElementById('id_btnPlay');
+				var btnStop = document.getElementById('id_btnStop');
+
+				btnPlay.style.visibility = 'visible';                
+				btnStop.style.visibility = 'hidden'; 
+			}
+			
+			// Implement game logic - particles
+			function play()
+			{ 
+				var btnPlay = document.getElementById('id_btnPlay');
+				var btnStop = document.getElementById('id_btnStop');
+
+				btnPlay.style.visibility = 'hidden';                
+				btnStop.style.visibility = 'visible'; 
+				
+				m_maze.start();
+			}
+
+			// Freeze elements logic.
+			function stop()
+			{ 
+				var btnPlay = document.getElementById('id_btnPlay');
+				var btnStop = document.getElementById('id_btnStop');
+
+				btnPlay.style.visibility = 'visible';                
+				btnStop.style.visibility = 'hidden'; 
+				
+				m_maze.stop();
+			}
+
+			// Freeze elements logic.
+			function newLevel()
+			{ 
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(-1);
+				m_editorMngr.saveEdition();
+				m_maze.loadLevel(C_EDITOR_NEW_EDITION);
+			}
+			
+			function btnLevelHelp()
+			{ 
+
+
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_LEVEL_HELP_KEY);
+			}
+
+			function btnLevelIntro()
+			{ 
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_LEVEL_INTRO_KEY);
+			}
+			function btnLevel1()
+			{ 
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_LEVEL_1_KEY);
+				
+				m_viewPlay.initWithReset();
+			}
+			function btnLevel2()
+			{ 
+				m_maze.stop();
+				m_maze.initWith();
+				m_maze.loadLevel(C_EDITOR_LEVEL_2_KEY);
+			}
+			function btnSave()
+			{ 
+				m_maze.stop();
+				m_editorMngr.saveEdition();
+			}
+			
+		</script>
+	</head>
+  
+	<body>
+	
+		<div align="center" style="display: block; visibility: visible;">
+			<table>
+			<row>
+				<p style="font-size:13pt;font-family:Calibri;line-height:0pt;">Mauricio E. Fontana</p>
+			</row>
+			<row>
+				<p style="font-size:10pt;font-family:Calibri;color:green;line-height:0pt;">mfontanadev@gmail.com</p>
+			</row>
+			</table>
+		</div>
+
+		<div align="center" style="display: block; visibility: visible;">
+			<table>
+			<row>
+				<td>
+					<canvas id="myCanvas" width="600" height="480" ></canvas>
+					<div align="center" style="display: block; visibility: visible;">
+						<button id="id_btnPlay" onclick="play()">Play</button>
+						<button id="id_btnStop" onclick="stop()">Stop</button>
+						<button id="id_btnNew" onclick="newLevel()">New</button>
+					</div>
+
+				</td>
+				<td>
+					<button id="id_btnLevelIntro" style="width: 100px;" onclick="btnLevelIntro()">Intro</button>
+						<br>
+						<button id="id_btnLevelHelp" style="width: 100px;" onclick="btnLevelHelp()">Help</button>
+					<br>
+					<button id="id_btnLevel1" style="width: 100px;"  onclick="btnLevel1()">Level 1</button>
+					<br>
+					<button id="id_btnLEvel2" style="width: 100px;"  onclick="btnLevel2()">Level 2</button>
+					<br>
+					<br>
+					<button id="id_btnSave" style="width: 100px;"  onclick="btnSave()">SAVE CURRENT</button>
+					<br>
+				</td>
+			</row>
+			</table>
+		</div>
+
+
+	</body>
+  
+</html>

@@ -1,0 +1,179 @@
+BODY
+{
+    FONT-SIZE: 12pt;
+    COLOR: black;
+    FONT-FAMILY: Arial
+}
+#LINK
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    COLOR: steelblue;
+    FONT-FAMILY: Arial;
+    TEXT-DECORATION: none
+}
+
+#ID_titulos
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 10pt;
+    COLOR: purple;
+    FONT-FAMILY: Tahoma, Arial
+}
+.class_UnselectedItem
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    FONT-FAMILY: Arial;
+    COLOR: white;
+    background-color: #B45CC0;
+}
+.class_SelectedItem
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    FONT-FAMILY: Arial;
+    COLOR: black;
+    background-color: #842CA0;
+}
+.class_ToolbarLeft
+{
+    background-image: url('myStyles/toolbar_left.bmp');
+    background-repeat: no-repeat;
+		BACKGROUND-POSITION: 0 5; 
+}
+.class_ToolbarCenter
+{
+    background-image: url('myStyles/toolbar_center.bmp');
+    background-repeat: repeat-x;
+    BACKGROUND-POSITION: 0 5; 
+}
+.class_ToolbarRight
+{
+    background-image: url('myStyles/toolbar_right.bmp');
+    background-repeat: no-repeat;
+		BACKGROUND-POSITION: 0 5; 
+}
+
+.class_HeaderBackground
+{
+    background-image: url('myStyles/header_background.jpg');
+    background-repeat: repeat-x;
+
+}
+
+.link
+{
+    TEXT-DECORATION: none;
+    ALIGN: center;
+    
+}
+
+.linksel
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    FONT-FAMILY: Arial;
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none;
+    ALIGN: center;
+}
+
+.linkunsel
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    FONT-FAMILY: Arial;
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none;
+    ALIGN: center;
+}
+
+.xstooltip 
+{
+    visibility: hidden; 
+    position: absolute; 
+    top: 0;  
+    left: 0; 
+    z-index: 2; 
+
+	p
+	{margin-right:0cm;
+	margin-left:0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	}
+
+}
+
+
+.tooltipStyleFont
+{
+    font-family: Tahoma;
+    FONT-SIZE: 11px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.tooltipStyle
+{
+    width: 400px;
+    FONT-SIZE: 11px;
+}
+.tooltipStyleMainTittle
+{
+    color: #FFFFFF;
+    font-family: "Arial Black";
+    FONT-SIZE: 13px;
+}
+.tooltipStyleTitlesDesc
+{
+    color: #BB55BB;
+    font-weight: bold;
+    FONT-SIZE: 11px;
+}
+.style7
+{
+    color: #FFFFFF;
+}
+
+/*Estilos usados para construir la grilla de thumbails*/
+.class_imagesText
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 11px;
+    COLOR: steelblue;
+    FONT-FAMILY: Arial;
+    TEXT-DECORATION: none;
+}
+
+.class_imagesFrame
+{
+	background-image: url('myStyles/marcos_finr.png');
+	BACKGROUND-POSITION: center; 
+	BACKGROUND-REPEAT: no-repeat;
+
+	halign:"center";
+	valign:"center" ;
+}
+
+.class_linkDownload
+{
+	HEIGHT:5px;
+	BACKGROUND-POSITION: center; 
+	BACKGROUND-REPEAT: no-repeat;
+	halign:"center";
+	valign:"top" ;
+}
+
+.class_imagesDim
+{
+	WIDTH:160px;
+	HEIGHT:118px;
+}
+
+.class_btnSelBck
+{
+    background-image: url('myStyles/btnSelBck.bmp');
+    background-repeat: no-repeat;
+}
+

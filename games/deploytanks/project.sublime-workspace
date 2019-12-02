@@ -1,0 +1,405 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"mo",
+				"modifyEnergy"
+			],
+			[
+				"indi",
+				"indicatorValue"
+			],
+			[
+				"m_e",
+				"m_energy"
+			],
+			[
+				"m_s",
+				"m_shield"
+			],
+			[
+				"set",
+				"setRpmLo"
+			],
+			[
+				"m_ro",
+				"m_rpmRowAngle"
+			],
+			[
+				"C_ENGINE_RPM_",
+				"C_ENGINE_RPM_STARTING"
+			],
+			[
+				"C_en",
+				"C_ENGINE_RPM_HI"
+			],
+			[
+				"is",
+				"isRotating"
+			],
+			[
+				"C_dir",
+				"C_DIR_RIGHT"
+			],
+			[
+				"stop",
+				"stopRotation"
+			],
+			[
+				"m_ra",
+				"m_range"
+			],
+			[
+				"m_di",
+				"m_disolvePower"
+			],
+			[
+				"m_fi",
+				"m_findRange"
+			],
+			[
+				"in",
+				"addIndicator"
+			],
+			[
+				"m_arr",
+				"m_arrIndicator"
+			],
+			[
+				"link",
+				"m_linkedTank"
+			],
+			[
+				"m_y",
+				"m_yTank"
+			],
+			[
+				"m_x",
+				"m_xTank"
+			],
+			[
+				"C_cls",
+				"C_CLASS_PLAYER"
+			],
+			[
+				"C_CLASS_",
+				"C_CLASS_ENEMY"
+			],
+			[
+				"m_pa",
+				"m_parentClass"
+			],
+			[
+				"c_OBJ_TYPE_G",
+				"C_OBJ_TYPE_TRASH_GLASS"
+			],
+			[
+				"m_ma",
+				"m_maxTrashGeneration"
+			],
+			[
+				"C_obj_type_",
+				"C_OBJ_TYPE_RIGHT_GENERATOR"
+			],
+			[
+				"m_trash",
+				"m_maxTrash"
+			],
+			[
+				"C_OBJ_TYPE_TR",
+				"C_OBJ_TYPE_RIGHT_GENERATOR"
+			],
+			[
+				"m_tr",
+				"m_maxTrash"
+			],
+			[
+				"C_OBJ_TYPE_",
+				"C_OBJ_TYPE_DOWN_BAND"
+			],
+			[
+				"C_OBJ_",
+				"C_OBJ_TYPE_LEFT_BAND"
+			],
+			[
+				"C_OBJ_TYPE_TRASH_",
+				"C_OBJ_TYPE_TRASH_PLASTIC"
+			],
+			[
+				"C_OB",
+				"C_OBJ_TYPE_TRASH_PLASTIC"
+			],
+			[
+				"rende",
+				"renderRectangle"
+			],
+			[
+				"C_OBJ_TYPE_CONTAINER_",
+				"C_OBJ_TYPE_CONTAINER_PAPER"
+			],
+			[
+				"C_ob",
+				"C_OBJ_TYPE_CONTAINER_GLASS"
+			],
+			[
+				"m_tra",
+				"m_trashCounter"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"get",
+				"getSplitterDirection"
+			],
+			[
+				"C_DIR",
+				"C_DIR_LEFT"
+			],
+			[
+				"m_ar",
+				"m_arrAnimations"
+			],
+			[
+				"C_obj_tpe_tr",
+				"C_OBJ_TYPE_TRASH_PAPER"
+			],
+			[
+				"m_",
+				"m_maze"
+			],
+			[
+				"m_mover",
+				"m_moverIndex"
+			],
+			[
+				"m_m",
+				"m_movCounter"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/R440/Tools/Sublime Text 2.0.2 x64/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Users/R440/Tools/Sublime Text 2.0.2 x64/Data/Packages/User/Distraction Free.sublime-settings",
+		"/D/Work/HTML5/Tanks/trunk/classes/viewIntro.js",
+		"/D/Work/HTML5/Tanks/trunk/framework/sndManager.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/shield.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/radar.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/hero.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/maze.js",
+		"/D/Work/HTML5/Tanks/trunk/framework/consts.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/engine.js",
+		"/D/Work/HTML5/Tanks/trunk/lib/chlib.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/chbutton.js",
+		"/D/Work/HTML5/Tanks/trunk/index.html",
+		"/D/Work/HTML5/Tanks/trunk/classes/energy.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/level.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/button.js",
+		"/D/Work/HTML5/Tanks/trunk/data/game_data.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/enemy.js",
+		"/D/Work/HTML5/Tanks/trunk/framework/keyboardMngr.js",
+		"/D/Work/HTML5/Tanks/trunk/classes/fire.js",
+		"/D/Work/HTML5/Tanks/trunk/project.sublime-project",
+		"/D/Work/HTML5/SeparaBasura/trunk/project.sublime-project",
+		"/D/Work/HTML5/Tanks/trunk/classes/animation.js",
+		"/D/Work/HTML5/Tanks/trunk/treninto.html",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/level.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/index.html",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/maze.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/score.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/sprite.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/framework/consts.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/data/game_data.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/data/cell_sheet.anim",
+		"/D/Work/HTML5/SeparaBasura/trunk/framework/editorMngr.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/hero.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/lib/chlib.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/viewHelp.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/framework/keyboardMngr.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/editor/editor.js",
+		"/D/Work/HTML5/SeparaBasura/trunk/classes/animation.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"C_ENGINE_RPM_STARTING",
+			"calculateRpmRowAngle",
+			"modifyEnergy",
+			"playin",
+			"isPlaying",
+			"Button",
+			"m_cvShield",
+			"m_cvRadar",
+			"m_cvEngine",
+			"m_linkedTank",
+			"pushButton",
+			"CONSOLE",
+			"console",
+			"C_DIR_RIGHT",
+			"m_movDir",
+			"console",
+			"sqr",
+			"modulo",
+			"clear",
+			"m_movCounter",
+			"C_DIR_RIGHT",
+			"dir",
+			"m_movCounter",
+			"addToContainer",
+			"level",
+			"setTrashRemainging",
+			"saveEdition",
+			"updateData",
+			"updateSelectedCursor",
+			"load",
+			"º",
+			"m_trashRemaining",
+			"find",
+			"pad",
+			"pSprite",
+			"SPRITES",
+			"initData",
+			"up_ban",
+			"checkCollition",
+			"saveEdition",
+			"SAVECU",
+			"getIDFromToolboxCursor",
+			"clear",
+			"getObjectsInCell",
+			"collisionRectangle",
+			"collition",
+			"mouse",
+			"getMovementOffsetsByType",
+			"renderPlayersZOrder",
+			"renderByType",
+			"m_moverIndex",
+			"getCurrentAnimationStartByType",
+			"m_moverIndex",
+			"getMovementOffsetsByType",
+			"getCurrentAnimationStartByType",
+			"m_movCounter"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"ChButton"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 244.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,271 @@
+<html>
+	<head>
+		<script type="text/javascript" src="myStyles/antiBanner.js"></script>
+		<script type="text/javascript" src="myStyles/utils.js"></script>
+		<meta http-equiv="Content-Language" content="es">
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+		<link rel="stylesheet" href="mweb3.css" type="text/css" media="screen" />
+		<meta name="ProgId" content="FrontPage.Editor.Document">
+		<title>Home</title>
+		<base target="myFooter">
+	</head>
+	
+	<body>
+
+<P ALIGN=CENTER><FONT FACE="Arial"><FONT SIZE=5><B>L-Garden</B></FONT></FONT></P>
+
+<P ALIGN=LEFT><FONT FACE="Arial"><B>Concepto:</B></FONT></P>
+<P ALIGN=JUSTIFY>&nbsp;&nbsp;&nbsp; <FONT FACE="Arial"><FONT SIZE=2>L-Garden
+es la combinaci&oacute;n de Sistemas-L aplicado a estructuras
+arb&oacute;reas. Se llaman Sistemas-L, (la L es por Aristid Lindermayer su
+creador,&nbsp; a quien debo pedirle disculpas por haber usado su creación para
+mis fines), es un lenguaje en base a símbolos y reglas. Una definición más
+detallada podemos encontrarla en <a href="http://es.wikipedia.org/wiki/Sistema-L">http://es.wikipedia.org/wiki/Sistema-L</a>.</FONT></FONT></P>
+
+<TABLE WIDTH=100% BORDER=0 style="height: 746px">
+	<TR VALIGN=TOP>
+		<TD WIDTH="59%" class="style4">
+			<P ALIGN=LEFT><FONT FACE="Arial"><B>Como pasar de los Sistemas-L a un &quot;árbol&quot;:</B></FONT></P>
+			<P ALIGN=JUSTIFY>&nbsp;&nbsp;&nbsp; <font size="2" face="Arial">Para
+            nuestro caso lso elementos del lenjuage que utilizaremos son: símbolos, 
+                semilla y reglas. La semilla es una secuencia de </font><FONT FACE="Arial"><FONT SIZE=2><I>
+                símbolos
+			</I></FONT></FONT><FONT FACE="Arial"><FONT SIZE=2>a la cual se le aplican
+            <I>
+                reglas </I>para obtener una nueva semilla. 
+                Luego, los </FONT></FONT><FONT FACE="Arial"><FONT SIZE=2><I>elementos
+			</I></FONT></FONT><FONT FACE="Arial"><FONT SIZE=2>de la </FONT></FONT><FONT FACE="Arial"><FONT SIZE=2><I>
+                semilla
+			</I></FONT></FONT><FONT FACE="Arial"><FONT SIZE=2>pueden ser dibujados de manera que 
+                se obtenga una estructura en forma de árbol.</FONT></FONT></P>
+			<P ALIGN=JUSTIFY class="style1"><FONT SIZE=2 face="Arial">
+			    &nbsp;&nbsp;&nbsp; A continuación se explican brevemente los
+            pasos para pasar de los elementos del sistema L a una
+            representación 3D: </FONT></P>
+			<OL>
+				<LI>
+                   <P ALIGN=JUSTIFY><FONT SIZE=2 face="Arial"><b>Definición de
+                    elementos:</b> lo primero 
+                        que debemos hacer es elegir los elementos que formarán nuestro
+                    àrbol 3D <i>(ver 
+                        figura de la izquierda).</i></FONT></P>
+                <LI>
+                    <P ALIGN=JUSTIFY><FONT SIZE=2 face="Arial"><b>Genetic parser: </b>este algoritmo se 
+                        encarga de transformar los <i>elementos </i>en el <i>código genético, </i>el 
+                        cual inicialmente es igual a la semilla, pero puede pasar que las reglas se 
+                        apliquen una y otra vez para obtener un código genético más elaborado.</FONT></P>
+				<LI>
+                    <P ALIGN=JUSTIFY>
+                        <FONT SIZE=2 face="Arial" style="text-align: justify"><b>Representación del 
+                        código genético: </b>&nbsp;la idea es armar un graficador que reemplace cada
+                        símbolo por una imagen. Algunos símbolos pueden ser utilizados para&nbsp; 
+                        cumplir con acciones en vez de ser imágenes, por ejemplo los &quot;[&quot; indican que 
+                        debemos rotar la imagen un ángulo determinado. </FONT>
+                    </p>
+                <LI>
+                    <P ALIGN=JUSTIFY>
+                        <FONT SIZE=2 face="Arial" style="text-align: justify"><b>3D Engine: </b>&nbsp;graficador 
+                        que se encarga de representar el código genético en forma tridimensional.</FONT></p>
+			</OL>
+			<P ALIGN=LEFT><FONT FACE="Arial"><B>L-Garden aplicación:</B></FONT></P>
+			<P ALIGN=JUSTIFY>&nbsp;&nbsp;&nbsp; <FONT SIZE=2 face="Arial">La aplicación adjunta 
+                a esta documentación permite ver la representación tridimensional de los códigos 
+                genéticos preestablecidos. <b>Nota:</b> para salir de la aplicación pulsar tecla 
+                ESC. </FONT></P>
+			<P ALIGN=JUSTIFY>&nbsp;&nbsp;&nbsp; <FONT SIZE=2 face="Arial">Para comenzar a 
+                utilizar la aplicación hay que ejecutar el archivo L-Garden.exe, (puede ser 
+                necesario instalar DirectX 8 o 9). La pantalla inicial muestra cuatro recuadros 
+                (indicadores) con dos botones cada uno y un recuadro mayor con la
+            representación 
+                3D del código genético actual. La idea es utilizar los indicadores para variar 
+                parámetros del código genético. </FONT>&nbsp;</P>
+			<P ALIGN=JUSTIFY>&nbsp;&nbsp;&nbsp; <FONT SIZE=2 face="Arial">A continuación se 
+                explica la funcionalidad de cada uno de los indicadores: </FONT></P>
+            <P ALIGN=LEFT>
+                <IMG SRC="ImagenesExpo/IcLong.bmp" NAME="IcLong_bmp" ALT="Arbol 3D" ALIGN=BOTTOM WIDTH=27 HEIGHT=27 BORDER=0>
+                <FONT SIZE=2 face="Arial"> :modifica la longitud de las ramas.</FONT>
+            </P>
+            <P ALIGN=LEFT>
+                <IMG SRC="ImagenesExpo/IcGen.bmp" NAME="IcGen_bmp" ALT="Arbol 3D" ALIGN=BOTTOM WIDTH=27 HEIGHT=27 BORDER=0>
+                <FONT SIZE=2 face="Arial"> :modifica la edad (veces que se aplican las reglas a la semilla) del árbol.</FONT>
+            </P>
+            <P ALIGN=LEFT>
+                <IMG SRC="ImagenesExpo/IcType.bmp" NAME="IcType_bmp1" 
+                    ALT="Arbol 3D" ALIGN=BOTTOM WIDTH=27 HEIGHT=27 BORDER=0>
+                <FONT SIZE=2 face="Arial"> :selecciona un código genético diferente.</FONT>
+            </P>
+                <P ALIGN=LEFT>
+                    <IMG SRC="ImagenesExpo/IcAngle.bmp" NAME="IcAngle_bmp1" 
+                        ALT="Arbol 3D" ALIGN=BOTTOM WIDTH=27 HEIGHT=27 BORDER=0>
+                    <FONT SIZE=2 face="Arial"> :modifica el angulo de abpertura de las ramas.</FONT>
+                </P>
+		</TD>
+		<TD WIDTH = 1% class="style3" rowspan="2">
+		
+		<TD WIDTH="40%" ALIGN=CENTER style="border: 2px solid #C0C0C0" class="style4">
+            <br />		
+			
+           <DIV ID="DIV1">
+	            <table cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <FONT SIZE=2 face="Arial"><i>Símbolos:</i> 0 , 1 , [ , ] , R</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Semilla:</i>  <font color="#008000"><b> R 1 [ 1 0 ] 1 [1 0 ]</b></font></FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 1:</i> 0= [ 1 0 ] [ 1 0 ]</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 2:</i> 1= 1</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 3:</i> [= [</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 4:</i> ]= ]</FONT><br />
+                            
+                        </td>
+                    </tr>
+                </table>
+            </DIV>
+
+			
+			<P ALIGN=CENTER style="margin-top: 0px; margin-bottom: 0px; height: 25px">+</P>
+
+            <DIV ID="DIV1">
+	            <table cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <P ALIGN=CENTER><FONT SIZE=3 face="Arial"><b>GENETIC PARSER</b></FONT></P>
+                        </td>
+                    </tr>
+                </table>
+            </DIV>
+
+			<P ALIGN=CENTER style="margin-top: 0px; margin-bottom: 0px; height: 25px">=</P>
+            
+            <DIV ID="Marco5">
+	            <table cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td >
+                            <P ALIGN=CENTER><FONT SIZE=3 face="Arial" color="#008000"><b> A [ B C ] D [ E F ]</b></FONT></P>
+                        </td>
+                    </tr>
+                </table>
+            </DIV>
+
+			<P ALIGN=CENTER><FONT FACE="Arial"><FONT SIZE=2>Formas en que se puede interpretar el <i>código genético</i>.</FONT></FONT></P>
+			
+			<P ALIGN=CENTER>
+			<IMG SRC="ImagenesExpo/grafo.bmp" NAME="grafo_bmp" ALT="Grafo" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+            &nbsp;&nbsp;&nbsp;						
+			<IMG SRC="ImagenesExpo/arbol.bmp" NAME="arbol_bmp" ALT="Arbol 2D" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+			</P>
+			<P ALIGN=CENTER style="margin-top: 0px; margin-bottom: 0px; height: 25px">+</P>
+            <DIV ID="DIV2">
+	            <table cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <P ALIGN=CENTER><FONT SIZE=3 face="Arial"><b>3D ENGINE</b></FONT></P>
+                        </td>
+                    </tr>
+                </table>
+            </DIV>
+            <P ALIGN=CENTER style="margin-top: 0px; margin-bottom: 0px; height: 25px">=</P>
+            <P ALIGN=CENTER style="height: 45px">
+                <IMG SRC="ImagenesExpo/arbol3d.bmp" NAME="arbol3d_bmp" ALT="Arbol 3D" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+            </P>
+            <br />
+		</TD>
+	</TR>
+	</table>
+
+<TABLE WIDTH=100% BORDER=0 >
+	<TR>
+		<TD width="96%" align="center">
+            <p align="left">
+            <FONT FACE="Arial"><B>Imàgenes generadas con L-Garden:</B></FONT><P align=left>&nbsp;&nbsp;&nbsp;
+            <font size="2" face="Arial">A continuación se muestran los screenshots 
+            de un còdigo genético luego de pasar por el graficador 3D:</font></P>
+
+	            <table WIDTH=100%200px cellpadding="0" cellspacing = "0" border="0px" >
+                    <tr>
+                        <td>
+	            <table WIDTH=232px HEIGHT=300px   cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td valign="top">
+                            <FONT SIZE=2 face="Arial"><i>Semilla:</i>  <font color="#008000"><b> R - [ 1 1 1 1 1 - [ 1 1 1 1 1 ] [ 1 1 1 ] [ 1 1 1 1 1 ] ] + [ 1 1 1 1 - [ 1 1 1 1 1 ] [ 1 1 1 ] [ 1 1 1 1 1 ] ] + [ 1 1 1 - [ 1 1 1 1 1 ] [ 1 1 1 ] [ 1 1 1 1 1 ] ]</b></font></FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 1:</i> 0= 0</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 2:</i> 1= 1 [ 0 ] [ 0 ]</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 3:</i> [= [</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Regla 4:</i> ]= ]</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Escala inicial:</i> 1</FONT><br />
+                           	 <FONT SIZE=2 face="Arial"><i>Escala incremento:</i> 0.5</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Angulo inicial:</i> 15</FONT><br />
+                            <FONT SIZE=2 face="Arial"><i>Angulo incremento:</i> 5</FONT><br />
+                        </td>
+                    </tr>
+                </table>
+		
+                        </td>
+                        <td>
+	            <table WIDTH=232px HEIGHT=300px   cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <p align="center">
+                            <FONT SIZE=2 face="Arial"><i>Generación 0</i> </FONT><br />
+                            <br />
+								<IMG SRC="ImagenesExpo/tree1.JPG" NAME="tree1.JPG" ALT="Grafo" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+                            
+                            </p>
+                            
+                        </td>
+                    </tr>
+                </table>
+                        </td>
+                        <td>
+	            <table WIDTH=232px HEIGHT=300px   cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <p align="center">
+                            <FONT SIZE=2 face="Arial"><i>Generación 1</i> </FONT><br />
+                            <br />
+								<IMG SRC="ImagenesExpo/tree2.JPG" NAME="tree2.JPG" ALT="Grafo" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                        </td>
+                        <td>
+	            <table WIDTH=232px HEIGHT=300px   cellpadding="10" cellspacing = "0" border="1px" style="border-color: #C0C0C0">
+                    <tr>
+                        <td>
+                            <p align="center">
+                            <FONT SIZE=2 face="Arial"><i>Generación 2</i> </FONT><br />
+                            <br />
+								<IMG SRC="ImagenesExpo/tree3.JPG" NAME="tree3.JPG" ALT="Grafo" ALIGN=BOTTOM BORDER=1 style="border-color: #C0C0C0">
+
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+                        </td>
+
+                    </tr>
+                </table>
+          
+	</TR>
+</table>
+            <br />
+
+ <TABLE WIDTH=100% BORDER=0 >
+	<TR>
+		<TD>
+			    <P ALIGN=LEFT><FONT FACE="Arial"><B>Referencias:</B></FONT></P>
+			    <FONT SIZE=2 face="Arial"><i>Autor:</i>  Mauricio E. Fontana</FONT>
+			    <FONT SIZE=2 face="Arial"><i>&nbsp;<br /> Email:</i> mfontanadev@google.com</FONT>
+			    <FONT SIZE=2 face="Arial"><i>&nbsp;<br /> Web page:</i>
+                    <a href="http://ar.geocities.com/mfontanadev">
+                    http://ar.geocities.com/mfontanadev</a></FONT>
+			    <FONT SIZE=2 face="Arial"><i>&nbsp;<br /> Fecha de desarrollo:</i> agosto-septiembre 2009</FONT>
+			    <FONT SIZE=2 face="Arial"><i>&nbsp;<br /> Lenguaje de programación:</i> C++ con DirectX 8</FONT>
+                    
+		<TD>		
+	</TR>
+</table>
+
+</BODY>

@@ -1,0 +1,36 @@
+body 
+{
+  font-family: 'Helvetica Neue', sans-serif !important;
+}
+
+.card-title-bold {
+  font-weight: bolder;
+}
+
+.card-body 
+{
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 5px;
+}
+
+.a-nostyle 
+{
+	text-decoration : none; color : #000; 
+}
+
+.a-nostyle:hover 
+{
+	color: black;
+}
+
+.main-title
+{
+  grid-column: span 12;
+  margin-bottom: 5px;
+  padding-top: 0;
+  font-family: 'Georgia';
+}
+
+.pointer       
+{ cursor: pointer; }

@@ -1,0 +1,66 @@
+FALTA: libro
+FALTA: foto de nave
+FALTA: papenbombuman
+
+
+Categorias:
+
+Z- GENERADO EL ZIP
+M- Chequeado LEAME.BAT el nuevo mail.
+C- Tiene LEAME.COM
+D- Tiene LEAME.DOC
+
+- FALTA FOTO SMALL
+
+JUEGOS
+	DOS MONOCROMO 											
+		nO VA Cruzadas(bug)					Z
+		Memotest 										Z		C
+		Miniraly 										Z		C
+		Telefono 										Z		C
+		Tetris              				Z		C
+
+	DOS VGA								
+		Celeticos										Z		C
+-		F Nave											Z		M		
+		Pattom vs. Rommel						Z		D
+		Track Pack									Z		C
+  	Trenes											Z		M
+                      
+	WINDOWS - MVS C++ 6.0        
+		Reserva             				Z		M
+		Space Mmm Invaders					Z		M
+
+
+UTILITARIOS
+	EFECTOS																								
+		Blendeo 										Z		M											
+		Fuego												Z		M
+		Scr Saver Bezier						Z		M
+		Scr Saver FotoZ							Z		M
+
+	DOS C++ 											
+		Generador de Laberintos			Z   M
+		360  												Z		M                 
+									
+	WINDOWS VS C++ 6.0																							
+	
+	WINDOWS - DIRECTX 9 	
+		Caidita 3D									Z		M	
+	
+INVESTIGACION
+	SIMULACION 												
+		Algoritmo genético					Z		M		
+		Dominó (testear)						Z   M
+																
+	C++ 3D - MATEMATICA																
+		Funciones Sombreadas				Z 	M											
+		Nurbs												Z 	M             
+		Punto Medio 3D 							Z 	M   												
+	
+	WINDOWS - VS C++ 6.0 	
+	
+	WINDOWS - DIRECTX 9
+		
+		
+		

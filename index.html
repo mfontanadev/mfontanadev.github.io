@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>mfontanadev home</title>
+	
+	<script type='text/javascript' src='js/jquery-3.4.1.min.js'></script>
+	<script type='text/javascript' src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+	<script type='text/javascript' src="js/main.js"></script>
+	<script>
+		setSiteTitle();
+		injectionOfNavigationBar("#id_nav-bar-item-home");
+	</script> 
+</head>
+
+<body onload="init();">
+	<!--Navigation bar-->
+	<div id="nav-placeholder">
+			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav mx-auto"><li class="nav-item"><a id="id_nav-bar-item-home" class="nav-link">...</a></li></ul></div>
+			</nav>
+		</div>
+
+	<br>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<div class="row">
+			<div class="col">
+				<h2 class="main-title">
+					What is this?
+				</h2>
+				<div class="rich-text z-container text-justify">
+					<p class="card-text">Essentially, I want to share my programs (many inspired on the desingns of the nature), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing. Enjoy and I hope it be usefull, sources on github (see <a href="https://github.com/mfontanadev">link</a>).</p>
+				</div>
+			</div>
+		</div>
+
+		<br>
+		
+		<div class="row"><div class="col"><h4>Latest</h4></div></div>
+		
+		<div class="row">
+			  
+		  	<div id="idLittleConstructor" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0" >
+			  		<img src="img/little-constructor.jpg" class="card-img-top pointer" onclick="showCardButtons('idLittleConstructor');">
+				  	<div class="d-none" id="cardButtons">    
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+						</table>
+					</div>	
+
+				  	<div class="card-body" id="cardBody">
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
+				<div class="card text-justify border-0" >
+					<img src="img/wishflower.jpg" class="card-img-top pointer" onclick="showCardButtons('idWishFlower');">
+
+					<div class="d-none" id="cardButtons">    
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+						</table>
+					</div>
+
+					<div class="card-body" id="cardBody">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
+
+				</div>
+			</div>
+
+		  	<div id="idPoliticFight" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0" >
+			  		<img src="img/politic-fight.jpg" class="card-img-top pointer"  onclick="showCardButtons('idPoliticFight');">
+					
+					<div class="d-none" id="cardButtons">    
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+						</table>
+					</div>
+
+				  	<div class="card-body" id="cardBody">
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
+				
+				</div>
+		  	</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
