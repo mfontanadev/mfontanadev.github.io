@@ -115,7 +115,7 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted)
 	      	(
 		      	//"http://127.0.0.1:8081/navigation.html", 
 		      	//"navigation.html", 
-		      	"http://mfontanadevhome.appspot.com/navigation.html",
+		      	"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
 					$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
