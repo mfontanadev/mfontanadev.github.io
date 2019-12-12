@@ -7,7 +7,7 @@ Second: license
 */
 
 /*
-http://mfontanadevhome.appspot.com/ - Little Constructor - 3dEngineJS hyper minimal.
+http://mfontanadev.github.io/ - Little Constructor - 3dEngineJS hyper minimal.
 @mfontanadev
 
 License
@@ -19,7 +19,7 @@ under certain conditions; See license for details.
 Original works located at:
 PENDIENTE https://www.github.com/onelonecoder
 
-http://mfontanadevhome.appspot.com/
+http://mfontanadev.github.io/
 PENDIENTE https://www.youtube.com/javidx9
 
 GNU GPLv3
@@ -5674,7 +5674,7 @@ function showHelpScreen()
     gEngine.locateText(3, 25, "Up/Down:select piece when they are stacked in a column.");
     gEngine.locateText(3, 26, "RETURN:rotate the selected piece.");
 
-    gEngine.locateText(1, 28, "See more at: http://mfontanadevhome.appspot.com/");
+    gEngine.locateText(1, 28, "See more at: http://mfontanadev.github.io/");
     gEngine.setFontSize(9);
 
 }

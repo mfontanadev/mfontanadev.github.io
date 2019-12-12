@@ -27,7 +27,7 @@ function populateCardsData_english(_cards)
 			"idLittleConstructor", 
 			"Little constructor" ,
 			"Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
-			"http://mfontanadevhome.appspot.com/games/deployLittleConstructor/index.html",
+			"http://mfontanadev.github.io/games/deployLittleConstructor/index.html",
 			""
 		)
 	)
@@ -47,7 +47,7 @@ function populateCardsData_english(_cards)
 			"idPoliticFight", 
 			"Politic Fight" ,
 			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be political but I'm not good at drawing.",
-			"http://politicfight.appspot.com/",
+			"http://mfontanadev.github.io/games/deployPoliticFight/index.html",
 			""
 		)
 	)

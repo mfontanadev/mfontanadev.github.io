@@ -1,0 +1,151 @@
+// Global constants
+// *****************
+
+var C_DEBUG_MODE = true;
+var C_LOG = true;
+var C_FPS_RENDER = 60;
+
+var C_DEBUG_SHOW_LINES = false;
+var C_SHOW_METRICS = false;
+var C_DEBUG_SHOW_JOYSTICK = false;
+	
+// App globals
+var C_LOCAL_STORE_NAMESPACE = "politicfight";
+// App states
+var C_APP_STATE_INTRO = 1;
+var C_APP_STATE_PLAY = 2;
+var C_APP_STATE_HELP = 3;
+var C_APP_STATE_LEVEL = 4;
+var C_APP_STATE_EDITION = 5;
+var C_APP_STATE_FRAMER = 6;
+
+var C_BUTTON_RIGHT_KEY = C_KEY_RIGHT;
+var C_BUTTON_UP_KEY = C_KEY_UP;
+var C_BUTTON_LEFT_KEY = C_KEY_LEFT;
+var C_BUTTON_DOWN_KEY = C_KEY_DOWN;
+
+var C_BUTTON_A_KEY = C_KEY_CHAR_J;	// Jump
+var C_BUTTON_B_KEY = C_KEY_CHAR_K;	// Protect
+var C_BUTTON_C_KEY = C_KEY_CHAR_L;	// Punch
+
+var C_BUTTON_SIZE = 20;
+// Objects constants
+
+// Background constans
+var C_BACKGROUND_SCROLL_UP_LIMIT = 140;
+var C_BACKGROUND_SCROLL_DOWN_LIMIT = 175;
+
+// Maze constants
+
+// Menu items
+var C_MAIN_MENU_ITEM_PLAY = 0;
+var C_MAIN_MENU_ITEM_HELP = 1;
+var C_MAIN_MENU_ITEM_EXIT = 2;
+
+// Hero constant:	
+var C_HERO_GUY_HITTED_ENERGY = 5;
+var C_HERO_GUY_BAD_HITTED_ENERGY = 20;
+var C_HIT_PROXIMITY = 16;
+var C_PLAYER_SPEED = 2;
+
+var C_STATUS_NOT_SET = 0;
+var C_STATUS_ALIVE = 1;
+var C_STATUS_DIE = 2;
+
+// Animation flags
+var C_ANIM_NONE = -1;
+var C_ANIM_STAND = 0;
+var C_ANIM_WALKING = 1;
+var C_ANIM_HIT = 2;
+var C_ANIM_PAIN = 3;
+var C_ANIM_DYING = 4;
+var C_ANIM_PROTECTING = 5;
+var C_ANIM_PROTECTING_HITTED = 6;
+var C_ANIM_TAKE = 7;
+var C_ANIM_HIT2 = 8;
+
+var C_ANIM_RAY_TRAVEL = 9;
+var C_ANIM_RAY_OUT = 10;
+
+
+// Class definitions
+var C_CLASS_NONE = 0;
+var C_OBJ_TYPE_NONE = 0;
+
+var C_CLASS_FIRE = 1;
+var C_CLASS_PARTICLE = 2;
+var C_CLASS_BRICK = 3;
+	var C_OBJ_TYPE_STONE = 0;
+	var C_OBJ_TYPE_WOOD = 1;
+	var C_OBJ_TYPE_GENERATOR = 2;
+	var C_OBJ_TYPE_BRICK = 3;
+var C_CLASS_PLAYER = 4;
+	var C_OBJ_TYPE_PLAYER = 40;
+	var C_OBJ_TYPE_PLAYER_GUY = 41;
+	var C_OBJ_TYPE_PLAYER_CODY = 42;
+
+var C_CLASS_SMOGCAR = 5;
+	var C_OBJ_TYPE_SMOGCAR_CW = 4;		// clock wise when corner bifurcation
+	var C_OBJ_TYPE_SMOGCAR_ACW = 5;		// anti clock wise when corner bifurcation
+var C_CLASS_DECORATION = 6;
+	var C_OBJ_TYPE_GREEN = 660;			
+	var C_OBJ_TYPE_I = 601;			
+	var C_OBJ_TYPE_II = 602;			
+	var C_OBJ_TYPE_III = 603;			
+	var C_OBJ_TYPE_IIII = 604;			
+	var C_OBJ_TYPE_H = 605;			
+	var C_OBJ_TYPE_V = 606;			
+	var C_OBJ_TYPE_X = 607;			
+	var C_OBJ_GREEN_FAR = 608;
+	var C_OBJ_LEVEL_BACKGROUND = 610;
+	
+var C_CLASS_ANIMATION = 7;
+	var C_OBJ_ANIM_GUY_STAND = 701;
+	var C_OBJ_ANIM_GUY_WALKING = 702;
+	var C_OBJ_ANIM_GUY_HIT = 703;
+	var C_OBJ_ANIM_GUY_PAIN = 704;
+	var C_OBJ_ANIM_GUY_DYING = 705;
+	var C_OBJ_ANIM_GUY_PROTECTING = 706;
+	
+	var C_OBJ_ANIM_GUY_BAD_STAND = 720;
+	var C_OBJ_ANIM_GUY_BAD_WALKING = 721;
+	var C_OBJ_ANIM_GUY_BAD_HIT = 722;
+	var C_OBJ_ANIM_GUY_BAD_PAIN = 723;
+	var C_OBJ_ANIM_GUY_BAD_DYING = 724;
+	var C_OBJ_ANIM_GUY_BAD_PROTECTING = 725;
+	
+var C_CLASS_ENEMY = 8;
+	var C_OBJ_TYPE_ENEMY = 80;
+	var C_OBJ_TYPE_ENEMY_GUY = 81;
+	//var C_OBJ_TYPE_ENEMY_GUY2 = 82;
+	var C_OBJ_TYPE_ENEMY_RYDEN = 82;
+		
+	
+var C_CLASS_LEVEL = 9;
+	var C_OBJ_TYPE_LEVEL_SINGLE = 90;
+
+var C_CLASS_POTION = 10;
+	var C_OBJ_TYPE_POTION_STRONG = 1001;
+	var C_OBJ_TYPE_POTION_SPEED = 1002;
+	var C_OBJ_TYPE_POTION_STAMINA = 1003;
+
+var C_CLASS_STAGE = 11;
+	var C_OBJ_TYPE_STAGE_SINGLE = 1101;
+	
+var C_CLASS_RESOURCE = 12;
+	var C_OBJ_TYPE_BITMAP = 1201;
+
+var C_CLASS_ANIMATED = 13;
+	var C_OBJ_TYPE_ANIMATED_SINGLE = 1301;
+
+	
+	
+var C_RESOURCE_ID_GO_INDICATOR = 1;
+var C_RESOURCE_ID_GO2_INDICATOR = 2;
+
+// Animation flags
+var C_ANIM_RAIDEN_FIRE1 = 100;
+var C_ANIM_RAIDEN_FIRE2 = 101;
+	
+
+
