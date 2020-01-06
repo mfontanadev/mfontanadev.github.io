@@ -48,7 +48,7 @@ function populateCardsData_english(_cards)
 			"Politic Fight" ,
 			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be political but I'm not good at drawing.",
 			"http://mfontanadev.github.io/games/deployPoliticFight/index.html",
-			""
+			"https://github.com/mfontanadev/appPoliticFight"
 		)
 	)
 }
