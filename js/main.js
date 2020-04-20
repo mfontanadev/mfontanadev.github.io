@@ -27,7 +27,7 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idEngineJSSenoid", 
 			"EngineJS senoid" ,
-			"img/enginejs-senoid.jpg",
+			"img/engineJS-senoid.jpg",
 			"App that shows you senoid function in a 3D way but, really this another excuse to play with hyper minimal 3dEngineJS, based on @javidx9 tutorial about 3D and Perlin noise.",
 			"https://mfontanadev.github.io/games/deployJSEngineSenoid/JSEngine_senoid_v1.0.html",
 			"https://github.com/mfontanadev/POCs/tree/master/JSEngine_senoid"
