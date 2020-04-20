@@ -11,10 +11,11 @@ function init()
 	setCardsHtmlElements(Cards);
 }
 
-function CardItem(_id, _title, _description, _appURL, _sourcesURL) 
+function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
 {
 	this.id = _id;
 	this.title = _title;
+	this.image = _image;
 	this.description = _description;
 	this.appURL = _appURL;
 	this.sourcesURL = _sourcesURL;	
@@ -26,7 +27,8 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idEngineJSSenoid", 
 			"EngineJS senoid" ,
-			"App that shows you senoid function in a 3D way but, really this another excuse to play with hyper minimal 3dEngineJS, based on @javidx9 tutorial about 3D and Perlin noise.'>link</a>).",
+			"img/enginejs-senoid.jpg",
+			"App that shows you senoid function in a 3D way but, really this another excuse to play with hyper minimal 3dEngineJS, based on @javidx9 tutorial about 3D and Perlin noise.",
 			"https://mfontanadev.github.io/games/deployJSEngineSenoid/JSEngine_senoid_v1.0.html",
 			"https://github.com/mfontanadev/POCs/tree/master/JSEngine_senoid"
 		)
@@ -35,7 +37,8 @@ function populateCardsData_english(_cards)
 	_cards.push(
 		new CardItem(
 			"idLittleConstructorThreeJS", 
-			"Little constructor ThreeJS" ,
+			"Little constructor ThreeJS",
+			"img/little-constructor-threejs.jpg",
 			"Same as 'Little constructor' with ThreeJS render engine (it looks solid). Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
 			"https://mfontanadev.github.io/games/deployLittleConstructorThreeJS/index.html",
 			"https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJS"
@@ -46,6 +49,7 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idLittleConstructor", 
 			"Little constructor" ,
+			"img/little-constructor.jpg",
 			"Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
 			"http://mfontanadev.github.io/games/deployLittleConstructor/index.html",
 			"https://github.com/mfontanadev/appLittleConstructor"
@@ -56,6 +60,7 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idWishFlower", 
 			"Wishflower" ,
+			"img/wishflower.jpg",
 			"Artgame where you can make a wish. Using fractal L-Systems and inspired in 'Plum Park in Kameido'.",
 			"http://wishflower.herokuapp.com",
 			"https://github.com/mfontanadev/wishflower"
@@ -66,6 +71,7 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idPoliticFight", 
 			"Politic Fight" ,
+			"img/politic-fight.jpg",
 			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be politician but I'm not good at drawing.",
 			"http://mfontanadev.github.io/games/deployPoliticFight/index.html",
 			"https://github.com/mfontanadev/appPoliticFight"
@@ -80,32 +86,16 @@ function setCardsHtmlElements(_cards)
 	});
 }
 
-function injectionCardsText2(_cardItem)
-{
-	// Card title
-	$("#"+_cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
-	$("#"+_cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
-
-	// Card button close.
-	var buttonCloseHtml = "<button type=\"button\" class=\"close\" onclick=\"hideCardButtons('" + _cardItem.id + "');\" >x</button>";
-	$("#"+_cardItem.id).find("[id='idButtonClose']").html(buttonCloseHtml);
-
-	// Card buttons play and close.
-	var buttonsHtml = "<button  style=\"margin-right:10px\" id=\"btnPlay\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
-	if (_cardItem.sourcesURL.length > 0)
-		buttonsHtml += "<button id=\"btnSources\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.sourcesURL + "');\">Sources</button>";
-	$("#"+_cardItem.id).find("[id='idButtons']").html(buttonsHtml);
-}
-
 function injectionCardsText(_cardItem)
 {
 	// Card title
 	$("#"+_cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
 	$("#"+_cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
 
-	// Card button close.
-	//var buttonCloseHtml = "<button type=\"button\" class=\"close\" onclick=\"hideCardButtons('" + _cardItem.id + "');\" >x</button>";
-	//$("#"+_cardItem.id).find("[id='idButtonClose']").html(buttonCloseHtml);
+	// Card image
+	var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
+
+	$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
 
 	// Card buttons play and close.
 	var buttonsHtml = "<button id=\"btnPlay\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
@@ -113,7 +103,6 @@ function injectionCardsText(_cardItem)
 	if (_cardItem.sourcesURL.length > 0)
 	{
 		buttonsHtml += "<button id=\"btnSources\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.sourcesURL + "');\">Sources</button>";
-		//buttonsHtml += "<br>";
 	}
 	buttonsHtml += "<button id=\"btnClose\" style=\"font-size:.675rem; width:30%;\" type=\"button\" class=\"btn btn-dark btn-sm\" onclick=\"hideCardButtons('" + _cardItem.id + "');\">Close</button>";
 	
