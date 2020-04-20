@@ -24,6 +24,16 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idEngineJSSenoid", 
+			"EngineJS senoid" ,
+			"App that shows you senoid function in a 3D way but, really this another excuse to play with hyper minimal 3dEngineJS, based on @javidx9 tutorial about 3D and Perlin noise.'>link</a>).",
+			"https://mfontanadev.github.io/games/deployJSEngineSenoid/JSEngine_senoid_v1.0.html",
+			"https://github.com/mfontanadev/POCs/tree/master/JSEngine_senoid"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idLittleConstructorThreeJS", 
 			"Little constructor ThreeJS" ,
 			"Same as 'Little constructor' with ThreeJS render engine (it looks solid). Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
@@ -56,7 +66,7 @@ function populateCardsData_english(_cards)
 		new CardItem(
 			"idPoliticFight", 
 			"Politic Fight" ,
-			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be political but I'm not good at drawing.",
+			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be politician but I'm not good at drawing.",
 			"http://mfontanadev.github.io/games/deployPoliticFight/index.html",
 			"https://github.com/mfontanadev/appPoliticFight"
 		)
