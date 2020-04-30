@@ -1,21 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<!-- Version 2.0 -->
-		<title>three.js - geometry senoid</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="main.css">
+		<title>Default title</title>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161722306-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-161722306-1');
+		</script>
+		
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="appLittleConstructorThreeJS.js"></script>
+
 		<style>
-			body {
-				background-color: #f0f0f0;
-				color: #444;
-			}
-			a {
-				color: #08f;
-			}
+		body 
+		{
+			background-color:black;
+			margin:10px;
+			text-align:center;
+		}
 		</style>
 	</head>
-	<body onload="window.location.replace('POC_senoid_threejs.html');">
+
+	<body onload="load();">
+		<div align="center">
+			<canvas id="cv" width="800" height="300"></canvas>
+		</div> 
 	</body>
-</html>
+</html>|
