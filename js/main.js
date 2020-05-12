@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idThreeJSSenoid", 
+			"ThreeJS senoid" ,
+			"img/threejs-senoid.png",
+			"App that shows you some zFunctions like senoid, raindrop, Perlin noise, in a 3D way but, really this is another excuse to play with Three.js.",
+			"https://mfontanadev.github.io/games/deployThreeJSSenoid/POC_senoid_threejs.html",
+			"https://github.com/mfontanadev/POCs/tree/master/ThreeJS_senoid"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idEngineJSSenoid", 
 			"EngineJS senoid" ,
 			"img/engineJS-senoid.jpg",
@@ -99,7 +110,7 @@ function injectionCardsText(_cardItem)
 
 	// Card buttons play and close.
 	var buttonsHtml = "<button id=\"btnPlay\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
-	//buttonsHtml += "<br>";
+
 	if (_cardItem.sourcesURL.length > 0)
 	{
 		buttonsHtml += "<button id=\"btnSources\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.sourcesURL + "');\">Sources</button>";
@@ -122,13 +133,10 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted)
 	    {
 	      $("#nav-placeholder").load
 	      	(
-		      	//"http://127.0.0.1:8081/navigation.html", 
-		      	//"navigation.html", 
 		      	"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
 					$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
-		      		//$("#id_nav-bar-item-main").css('color', 'blue'); 
 		      	}
 	      	); 
 	    }
