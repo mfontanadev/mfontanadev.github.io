@@ -133,14 +133,28 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted)
 	    {
 	      $("#nav-placeholder").load
 	      	(
-		      	"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+				//"http://localhost:8080/navigation.html",
+				"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
 					$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
+					$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
 		      	}
 	      	); 
 	    }
 	);
+}
+
+function logoClick(_currentPageTag)
+{
+	if (_currentPageTag === "#id_nav-bar-item-home")
+	{
+		$('#myModal').modal('show')
+	}
+	else
+	{
+		window.location.href = "index.html";
+	}
 }
 
 function showCardButtons(_idElement)
