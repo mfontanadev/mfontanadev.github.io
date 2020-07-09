@@ -23,6 +23,17 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function populateCardsData_english(_cards)
 {
+ 	_cards.push(
+		new CardItem(
+			"idRiseOfLadybug", 
+			"Rise of Ladybug" ,
+			"img/rise-of-ladybug-thumb.jpg",
+			"Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
+			"https://mfontanadev.github.io/games/deployRiseOfLadybug/index.html",
+			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug"
+		)
+	)
+
 	_cards.push(
 		new CardItem(
 			"idThreeJSSenoid", 
