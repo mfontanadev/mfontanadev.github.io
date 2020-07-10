@@ -26,11 +26,11 @@ function populateCardsData_english(_cards)
  	_cards.push(
 		new CardItem(
 			"idRiseOfLadybug", 
-			"Rise of Ladybug" ,
+			"Rise of Ladybug (chapter1_menupage)" ,
 			"img/rise-of-ladybug-thumb.jpg",
-			"Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
-			"https://mfontanadev.github.io/games/deployRiseOfLadybug/index.html",
-			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug"
+			"WARINIG: GAME UNDER CONSTRUCTION. Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
+			"https://mfontanadev.github.io/games/deployRiseOfLadybug/chapter1_menupage/index.html",
+			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug/chapter1_menupage/RiseOfLadybug"
 		)
 	)
 
