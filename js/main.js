@@ -2,7 +2,7 @@ var Cards = new Array();
 
 function setSiteTitle()
 {
-	document.title = "mfontanadev home v1.2.1"
+	document.title = "mfontanadev home v1.2.2"
 }
 
 function init()
@@ -23,12 +23,23 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function populateCardsData_english(_cards)
 {
+	_cards.push(
+		new CardItem(
+			"idRiseOfLadybug_part2", 
+			"Rise of Ladybug Part #2" ,
+			"img/rise-of-ladybug-thumb.jpg",
+			"Part #2 alias chapter2_interMissionPage. WARINIG: GAME UNDER CONSTRUCTION. Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
+			"https://mfontanadev.github.io/games/deployRiseOfLadybug/chapter2_interMissionPage/index.html",
+			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug/chapter2_interMissionPage/RiseOfLadybug"
+		)
+	)
+
  	_cards.push(
 		new CardItem(
-			"idRiseOfLadybug", 
-			"Rise of Ladybug (chapter1_menupage)" ,
+			"idRiseOfLadybug_part1", 
+			"Rise of Ladybug Part #1" ,
 			"img/rise-of-ladybug-thumb.jpg",
-			"WARINIG: GAME UNDER CONSTRUCTION. Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
+			"Part #1 alias chapter1_menupage. WARINIG: GAME UNDER CONSTRUCTION. Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
 			"https://mfontanadev.github.io/games/deployRiseOfLadybug/chapter1_menupage/index.html",
 			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug/chapter1_menupage/RiseOfLadybug"
 		)
