@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idRiseOfLadybug_part3", 
+			"Rise of Ladybug Part #3" ,
+			"img/rise-of-ladybug-thumb.jpg",
+			"Part #3 alias chapter3_gamePage, final part. GAME PLAYABLE, ENJOY. Minigame to push myself to follow a no time schedule (max 2 hours per day) and much more. See datails on Git.",
+			"https://mfontanadev.github.io/games/deployRiseOfLadybug/chapter3_gamePage/index.html",
+			"https://github.com/mfontanadev/POCs/tree/master/RiseOfLadybug/chapter3_gamePage/RiseOfLadybug"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idRiseOfLadybug_part2", 
 			"Rise of Ladybug Part #2" ,
 			"img/rise-of-ladybug-thumb.jpg",
