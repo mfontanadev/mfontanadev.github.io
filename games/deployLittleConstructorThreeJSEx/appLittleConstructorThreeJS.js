@@ -1649,7 +1649,7 @@ PieceFactory.prototype.getCURSOR = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("cursorMark.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("cursorMark.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, 1, 0);
     newMesh.setZOrder(9999);
     newMesh.color(255, 255, 0, 1);
@@ -1666,7 +1666,7 @@ PieceFactory.prototype.getBOARD = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("BOARD.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("BOARD.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY() * -1, 0);
 
     piece.mesh = newMesh;
@@ -1680,7 +1680,7 @@ PieceFactory.prototype.getDOOR = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("DOOR.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("DOOR.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1695,7 +1695,7 @@ PieceFactory.prototype.getWINDOW = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("WINDOW.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("WINDOW.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1710,7 +1710,7 @@ PieceFactory.prototype.getSOCLE = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("SOCLE.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("SOCLE.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1725,7 +1725,7 @@ PieceFactory.prototype.getPILAR_TALL = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_TALL.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_TALL.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1740,7 +1740,7 @@ PieceFactory.prototype.getPILAR_MEDIUM = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_MEDIUM.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_MEDIUM.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1755,7 +1755,7 @@ PieceFactory.prototype.getPILAR_SMALL = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_SMALL.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("PILAR_SMALL.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1770,7 +1770,7 @@ PieceFactory.prototype.getRAILING = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("RAILING.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("RAILING.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -1785,7 +1785,7 @@ PieceFactory.prototype.getCABRIADA_base = function(_angle)
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("CABRIADA.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("CABRIADA.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
     newMesh.setAngleY(Helper.graToRad(_angle));
 
@@ -1811,7 +1811,7 @@ PieceFactory.prototype.getROOF_base = function(_angle)
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("ROOF.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("ROOF.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
     newMesh.setAngleY(Helper.graToRad(_angle));
 
@@ -1837,7 +1837,7 @@ PieceFactory.prototype.getFLOOR = function()
     var piece = new Piece();
 
     var newMesh = new Mesh();
-    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("FLOOR.obj"), this.createShapeFromFile, true);
+    newMesh.loadMeshFromFile(Helper.resolveURLToResourceFolder("FLOOR.OBJ"), this.createShapeFromFile, true);
     newMesh.setPosition(0, newMesh.getHalfY(), 0);
 
     piece.mesh = newMesh;
@@ -2219,12 +2219,12 @@ BluePlane.prototype.createBoard = function()
     var pilar = null;
 
     var pilarBase = new Mesh();
-    pilarBase.loadMeshFromFile(Helper.resolveURLToResourceFolder("holeMark.obj"), null, true);
+    pilarBase.loadMeshFromFile(Helper.resolveURLToResourceFolder("holeMark.OBJ"), null, true);
     pilarBase.updateCenter();
     pilarBase.center();
  
     var groundBase = new Mesh();
-    groundBase.loadMeshFromFile(Helper.resolveURLToResourceFolder("groundMark.obj"), null, true);
+    groundBase.loadMeshFromFile(Helper.resolveURLToResourceFolder("groundMark.OBJ"), null, true);
     groundBase.updateCenter();
     groundBase.center();
  
