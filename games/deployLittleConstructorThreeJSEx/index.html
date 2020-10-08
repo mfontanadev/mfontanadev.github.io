@@ -56,7 +56,9 @@
 	</head>
 
 	<body onload="load();">
+
 		<div class="Panel" id="menubar">
+			<!-- File header menu -->
 			<div class="menu">
 				<div class="title">File</div>
 				<div class="options">
@@ -65,49 +67,15 @@
 
 					<div id="idSave"  class="option">Save</div>
 					<div id="idOpenSaveAs"  class="option">Save As</div>
-					<div id="idSaveAsModal" class="modal">
-						<div class="modal-content">
-							<p align="center">Filename:<input id="file-save-as" type="input" name="name" />.bpl</p>
-							<div align="center">
-								<table  width="50%">
-									<tr>
-										<td width="50%" align="center">
-											<button id="idSaveAsOk" type="button" id="idOkSaveAs">Save</button>	
-										</td>
-										<td width="50%" align="center">
-											<button id="idSaveAsCancel" type="button" id="idCloseSaveAs">Cancel</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-
 					<div id="idPrint"  class="option">Print</div>
 					<div id="idOpenPrintAs"  class="option">Print As</div>
-					<div id="idPrintAsModal" class="modal">
-						<div class="modal-content">
-							<p align="center">Filename:<input id="file-print-as" type="input" name="name" />.ppl</p>
-							<div align="center">
-								<table  width="50%">
-									<tr>
-										<td width="50%" align="center">
-											<button id="idPrintAsOk" type="button" id="idOkPrintAs">Save</button>	
-										</td>
-										<td width="50%" align="center">
-											<button id="idPrintAsCancel" type="button" id="idClosePrintAs">Cancel</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
 					<hr>
 					<div id="idClearBoard"  class="option">Clear board</div>
 				</div>
 
 			</div>
 
+			<!-- Examples header menu -->
 			<div class="menu">
 				<div class="title">Examples</div>
 				<div class="options">
@@ -115,20 +83,11 @@
 				</div>
 			</div>
 
+			<!-- About header menu -->
 			<div class="menu">
 				<div class="title">Help</div>
 				<div class="options">
 					<div id="idOpenAbout" class="option">About</div>
-					<div id="idAboutModal" class="modal">
-						<div class="modal-content">
-							<span id="idCloseAbout" class="close">&times;</span>
-							<p align="center">Little constructor ThreeJS</p>
-							<p align="center">by <a href="https://mfontanadev.github.io/" target="_blank" rel="noopener">mfontanadev</a> v3.0</p>
-							<br>
-							<p align="center">Icons designed by: Darius Dan, Gregor Cresnar from <a href="https://www.flaticon.es/" title="Flaticon"> www.flaticon.es</a></p>
-						</div>
-					</div>
-
 					<div id="idSourceCode"  class="option">Source code</div>
 				</div>
 			</div>
@@ -162,6 +121,54 @@
 			<button id="btnPieceDelete" class="Button"><img title="Delete piece" src="img/delete.svg"></button>
 		</div>
 
+		<!-- Modal elements -->
+		<div id="idSaveAsModal" class="modal">
+			<div class="modal-content">
+				<p align="center">Filename:<input id="file-save-as" type="input" name="name" />.bpl</p>
+				<div align="center">
+					<table  width="50%">
+						<tr>
+							<td width="50%" align="center">
+								<button id="idSaveAsOk" type="button" id="idOkSaveAs">Save</button>	
+							</td>
+							<td width="50%" align="center">
+								<button id="idSaveAsCancel" type="button" id="idCloseSaveAs">Cancel</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div id="idPrintAsModal" class="modal">
+			<div class="modal-content">
+				<p align="center">Filename:<input id="file-print-as" type="input" name="name" />.ppl</p>
+				<div align="center">
+					<table  width="50%">
+						<tr>
+							<td width="50%" align="center">
+								<button id="idPrintAsOk" type="button" id="idOkPrintAs">Save</button>	
+							</td>
+							<td width="50%" align="center">
+								<button id="idPrintAsCancel" type="button" id="idClosePrintAs">Cancel</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div id="idAboutModal" class="modal">
+			<div class="modal-content">
+				<span id="idCloseAbout" class="close">&times;</span>
+				<p align="center">Little constructor ThreeJS</p>
+				<p align="center">by <a href="https://mfontanadev.github.io/" target="_blank" rel="noopener">mfontanadev</a> v3.0</p>
+				<br>
+				<p align="center">Icons designed by: Darius Dan, Gregor Cresnar from <a href="https://www.flaticon.es/" title="Flaticon"> www.flaticon.es</a></p>
+			</div>
+		</div>
+
+		<!-- Render area elements -->
 		<div id="container"></div>
 		<div id="info"></div>
 	</body>
