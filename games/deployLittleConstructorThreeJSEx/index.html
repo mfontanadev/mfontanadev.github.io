@@ -94,13 +94,22 @@
 		</div>
 
 		<div id="toolbar" class="Panel" >
-			<button id="btnTranslate" class="Button"><img title="Translate" src="img/translate.svg"></button>
-			<button id="btnRotate" class="Button"><img title="Rotate" src="img/rotate.svg"></button>
-			
 			<button id="btnZoomIn" class="Button"><img title="Zoom in" src="img/zoom-in.svg"></button>
 			<button id="btnZoomOut" class="Button"><img title="Zoom out" src="img/zoom-out.svg"></button>
 		</div>
+		
+		<div id="rotate" class="Panel" >
+			<button id="btnRotate" class="Button"><img title="Rotate" src="img/rotate.svg"></button>
+		</div>
 
+		<div class="slidecontainerH">
+			<input id="idSliderH" type="range" min="0" max="100" value="0">
+		</div>
+		
+		<div class="slidecontainerV">
+			<input id="idSliderV" type="range" orient="vertical" min="0" max="100" value="0">
+		</div>
+		
 		<div id="pieceToolbar" class="Panel">
 			<button class="Button" id="btnPILAR_SMALL">		<img title="PILAR_SMALL" src="img/PILAR_SMALL.png"></button>
 			<button class="Button" id="btnRAILING">			<img title="RAILING" src="img/RAILING.png"></button>
@@ -160,11 +169,14 @@
 
 		<div id="idAboutModal" class="modal">
 			<div class="modal-content">
-				<span id="idCloseAbout" class="close">&times;</span>
 				<p align="center">Little constructor ThreeJS</p>
-				<p align="center">by <a href="https://mfontanadev.github.io/" target="_blank" rel="noopener">mfontanadev</a> v3.0</p>
+				<p align="center">by <a href="https://mfontanadev.github.io/" target="_blank" rel="noopener">mfontanadev</a> v3.0.2</p>
 				<br>
 				<p align="center">Icons designed by: Darius Dan, Gregor Cresnar from <a href="https://www.flaticon.es/" title="Flaticon"> www.flaticon.es</a></p>
+				"
+				<div align="center">
+					<button id="idCloseAbout" type="button">Close</button>
+				</div>
 			</div>
 		</div>
 

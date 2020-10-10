@@ -103,8 +103,8 @@ a {
 
 #pieceToolbar {
     position: absolute;
-    right: 10px;
     bottom: 10px;
+    right: 10px;
     height: 48px;
     background: #eee;
     text-align: center;
@@ -209,3 +209,43 @@ button
     text-decoration: none;
     cursor: pointer;
   }
+
+
+  #rotate {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 32px;
+    background: #eee;
+    text-align: center;
+}
+
+    #rotate button, #rotate input {
+        height: 32px;
+    }
+
+        #rotate button img {
+            width: 16px;
+            opacity: 0.9;
+        }
+
+.slidecontainerH {
+    position: absolute;
+    left: 50px;
+    bottom: 10px;
+    width: 100px;
+}
+
+.slidecontainerV {
+    position: absolute;
+    left: 10px;
+    bottom: 50px;
+}
+
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 32px;
+    height: 100px;
+}

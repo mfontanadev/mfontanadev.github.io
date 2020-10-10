@@ -3014,7 +3014,8 @@ BluePlane.prototype.getFilename = function(_fileName)
 // their kung fuu is better. 
 //
 SpaceThree.self = null;
-var counter = 0;
+SpaceThree.MAX_AZIMUTH_ANGLE = 85;
+SpaceThree.MIN_AZIMUTH_ANGLE = 20;
 
 function SpaceThree() 
 {
@@ -3027,8 +3028,8 @@ function SpaceThree()
     // CameRA
     this.cameraT = new THREE.PerspectiveCamera( 40, window.innerWidth/window.innerHeight, 0.1, 10000 );
     this.cameraT.lookAt( 0, 0, 0 );
-    this.cameraAngle = 45;
-    this.cameraPolarAngle = 45;
+    this.inclinationCameraAngle = 45;
+    this.azimuthCameraAngle = 45;
     this.cameraRadious = 300;
 
     // Renderer
@@ -3432,9 +3433,22 @@ SpaceThree.prototype.addPointLight = function(_color, _intensity, _x, _y, _z, _d
 }
 
 // CAMERA
-SpaceThree.prototype.rotateCamera = function() 
+SpaceThree.prototype.rotateCameraPercent = function(_value) 
 {
-    this.cameraAngle = ((this.cameraAngle + 90) % 360);
+    this.inclinationCameraAngle = Math.floor(_value / 100 * 360);
+    this.updateCameraPosition();
+}
+
+SpaceThree.prototype.rotateCameraPercentAzimuthAngle = function(_value) 
+{
+    var range = SpaceThree.MAX_AZIMUTH_ANGLE - SpaceThree.MIN_AZIMUTH_ANGLE;
+    this.azimuthCameraAngle = Math.floor((100 - _value) / 100 * range) + SpaceThree.MIN_AZIMUTH_ANGLE;
+    this.updateCameraPosition();
+}
+
+SpaceThree.prototype.rotateCamera = function(_angle) 
+{
+    this.inclinationCameraAngle = ((this.inclinationCameraAngle + _angle) % 360);
     this.updateCameraPosition();
 }
 
@@ -3446,11 +3460,14 @@ SpaceThree.prototype.zoomCamera = function(_delta)
 
 SpaceThree.prototype.updateCameraPosition = function() 
 {
-    var x = Math.cos(Helper.graToRad(this.cameraAngle)) * this.cameraRadious;
-    var y = Math.sin(Helper.graToRad(this.cameraPolarAngle)) * this.cameraRadious;
-    var z = Math.sin(Helper.graToRad(this.cameraAngle)) * this.cameraRadious;
+    var x = this.cameraRadious * Math.sin(Helper.graToRad(this.azimuthCameraAngle)) *  Math.cos(Helper.graToRad(this.inclinationCameraAngle));
+    var y = this.cameraRadious * Math.cos(Helper.graToRad(this.azimuthCameraAngle));
+    var z = this.cameraRadious * Math.sin(Helper.graToRad(this.azimuthCameraAngle)) *  Math.sin(Helper.graToRad(this.inclinationCameraAngle));
 
     this.setCamera(x, y, z);
+
+    this.editor.updateSliderH(this.inclinationCameraAngle);
+    this.editor.updateSliderV(this.azimuthCameraAngle);
 }
 
 SpaceThree.prototype.getCamera = function() 
@@ -3475,7 +3492,7 @@ SpaceThree.prototype.setCamera = function(_x, _y, _z)
 // Entry point to the aplication, main loop, inputs controlle, core
 //
 
-var C_VERSION_TITLE = "Little constructor ThreeJS v3.0";
+var C_VERSION_TITLE = "Little constructor ThreeJS v3.0.2";
 var gEngine = null; 
 var C_SERVER_IP = "localhost:8080";
 
@@ -3508,7 +3525,6 @@ var defaultIndex = 0;
 var lastSelectedObject = null;
 
 var leftToolbarElements = [
-    "btnTranslate", 
     "btnRotate", 
     "btnZoomIn", 
     "btnZoomOut"];
@@ -3539,23 +3555,19 @@ function onUserCreate()
     spaceThree.setEditor(this);
     spaceThree.appendToDocumentBody();
     spaceThree.addPointLight(0xFFFFFF, 1, -100, 100, 0, 300, true);
-    spaceThree.rotateCamera();
+    spaceThree.rotateCamera(90);
     spaceThree.resetScene();
 
     // Object manager
     bluePlane.setEditor(this);
 
     // UI control events
+    setVisibilityPieceActionsToolbar(false);
+
     addEventsToMenu();
     addEventsToLeftToolbar();
     addEventsToPiecesToolbar();
-
     addEventsToPieceActionsToolbar();
-    
-    addEventsToAboutOption();
-    addEventsToSourceCodeOption();
-
-    setVisibilityPieceActionsToolbar(false);
 }
 
 function onUserUpdate() 
@@ -3574,62 +3586,39 @@ function onUserUpdate()
 }
 
 // EVENTS
-function addEventsToAboutOption()
-{
-    var modal = document.getElementById("idAboutModal");
-
-    var btn = document.getElementById("idOpenAbout");
-    var span = document.getElementById("idCloseAbout");
-
-    btn.onclick = function() {modal.style.display = "block";}
-    span.onclick = function() {modal.style.display = "none";}
-
-    window.onclick = function(event) 
-    {
-        if (event.target == modal) 
-        {
-            modal.style.display = "none";
-        }
-    }
-}
-
-function addEventsToSourceCodeOption()
-{
-    var btn = document.getElementById("idSourceCode");
-    btn.onclick = function() {window.open("https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJS")};
-}
-
 function addEventsToMenu()
 {
+    addEventToFileSection();
+    addEventToExampleSection();
+    addEventToAboutSection();
+}
+
+function addEventToFileSection()
+{
+    document.getElementById('idLoad').addEventListener("click", function() 
+    {
+        document.getElementById('file-load').click();
+    });
+   
     document.getElementById('file-load').addEventListener("change", function(e) 
     {
         var file = e.target.files[0]; 
         bluePlane.loadBoardFromFile(file);
     });
 
-    document.getElementById('idLoad').addEventListener("click", function() 
-    {
-        document.getElementById('file-load').click();
-    });
-    
     document.getElementById('idSave').addEventListener("click", function() 
     {
         bluePlane.saveBoard(bluePlane.getFilename() + ".bpl"); 
     });
+
+    addSaveAsEvents();
 
     document.getElementById('idPrint').addEventListener("click", function() 
     {
         bluePlane.printBoard(bluePlane.getFilename() + ".ppl"); 
     });
 
-    addSaveAsEvents();
-
     addPrintAsEvents();
-
-    document.getElementById('idExampleLittleHouse').addEventListener("click", function() 
-    {
-        bluePlane.loadBoard('obj/house.bpl');
-    });
 
     document.getElementById('idClearBoard').addEventListener("click", function() 
     {
@@ -3656,14 +3645,6 @@ function addSaveAsEvents()
     }
 
     document.getElementById("idSaveAsCancel").onclick = function() {modal.style.display = "none";}
-
-    window.onclick = function(event) 
-    {
-        if (event.target == modal) 
-        {
-            modal.style.display = "none";
-        }
-    }
 }
 
 function addPrintAsEvents()
@@ -3685,14 +3666,37 @@ function addPrintAsEvents()
     }
 
     document.getElementById("idPrintAsCancel").onclick = function() {modal.style.display = "none";}
+}
 
-    window.onclick = function(event) 
+function addEventToExampleSection()
+{
+    document.getElementById('idExampleLittleHouse').addEventListener("click", function() 
     {
-        if (event.target == modal) 
-        {
-            modal.style.display = "none";
-        }
-    }
+        bluePlane.loadBoard('obj/house.bpl');
+    });
+}
+
+function addEventToAboutSection()
+{
+    addEventsToAboutOption();
+    addEventsToSourceCodeOption();
+}
+
+function addEventsToAboutOption()
+{
+    var modal = document.getElementById("idAboutModal");
+
+    var btn = document.getElementById("idOpenAbout");
+    var span = document.getElementById("idCloseAbout");
+
+    btn.onclick = function() {modal.style.display = "block";}
+    span.onclick = function() {modal.style.display = "none";}
+}
+
+function addEventsToSourceCodeOption()
+{
+    var btn = document.getElementById("idSourceCode");
+    btn.onclick = function() {window.open("https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJS")};
 }
 
 function addEventsToLeftToolbar()
@@ -3701,6 +3705,19 @@ function addEventsToLeftToolbar()
     {
         document.getElementById(element).addEventListener("click", function() {onClicButtonLeftToolbar(element);});
     });
+
+    addEventsToRotation();
+}
+
+function addEventsToRotation()
+{
+    //https://stackoverflow.com/questions/18544890/onchange-event-on-input-type-range-is-not-triggering-in-firefox-while-dragging
+
+    document.getElementById("idSliderH").addEventListener("input", function() {rotateCameraSliderH(this.value)});
+    document.getElementById("idSliderH").addEventListener("change", function() {rotateCameraSliderH(this.value)});
+
+    document.getElementById("idSliderV").addEventListener("input", function() {rotateCameraSliderV(this.value)});
+    document.getElementById("idSliderV").addEventListener("change", function() {rotateCameraSliderV(this.value)});
 }
 
 function onClicButtonLeftToolbar(id) 
@@ -3708,7 +3725,7 @@ function onClicButtonLeftToolbar(id)
     switch ( id ) 
     {
         case 'btnRotate': 
-            this.rotateCamera(); 
+            this.rotateCameraFixed(90); 
             break;
         case 'btnZoomIn': 
             this.zoomCamera(-50); 
@@ -3719,10 +3736,20 @@ function onClicButtonLeftToolbar(id)
     }
 }
 
-function rotateCamera()
+function rotateCameraSliderH(_value)
 {
-    spaceThree.rotateCamera();
+    spaceThree.rotateCameraPercent(_value);
 }
+
+function rotateCameraFixed(_angle)
+{
+    spaceThree.rotateCamera(_angle);
+}
+
+function rotateCameraSliderV(_value)
+{
+    spaceThree.rotateCameraPercentAzimuthAngle(_value);
+} 
 
 function zoomCamera(_zoomDelta)
 {
@@ -3824,7 +3851,18 @@ function updateFileNameInfo(_fileName)
     document.getElementById("info").innerHTML = _fileName + ".bpl";
 }
 
+function updateSliderH(_angle)
+{
+    var percentValue = (_angle / 360) * 100;
+    document.getElementById("idSliderH").value = percentValue;
+}
 
+function updateSliderV(_angle)
+{
+    var range = SpaceThree.MAX_AZIMUTH_ANGLE - SpaceThree.MIN_AZIMUTH_ANGLE;
+    var percentValue = 100 - ((_angle - SpaceThree.MIN_AZIMUTH_ANGLE) / range) * 100;
+    document.getElementById("idSliderV").value = percentValue;
+}
 
 
 
