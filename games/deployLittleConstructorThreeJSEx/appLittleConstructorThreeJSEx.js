@@ -2141,18 +2141,6 @@ BluePlane.prototype.getLinkPointAtIndex = function(_column, _row)
     );
 }
 
-BluePlane.prototype.moveCursor = function(_columnDelta, _rowDelta) 
-{
-    var actualX = this.cursor.link.indexPos.x;
-    var actualY = this.cursor.link.indexPos.y;
-    
-    if (actualX + _columnDelta >= 0 && actualX + _columnDelta < BluePlane.C_BOARD_COLUMNS &&
-        actualY + _rowDelta >= 0 && actualY + _rowDelta < BluePlane.C_BOARD_ROWS)
-    {
-        this.cursor.setLink(this.getLinkPointAtIndex(actualX + _columnDelta, actualY + _rowDelta));
-    }
-}
-
 BluePlane.prototype.findLinkpointFromPieceId = function(_pieceId) 
 {
     var result = null;
@@ -2173,35 +2161,6 @@ BluePlane.prototype.findLinkpointFromPieceId = function(_pieceId)
     }
 
     return result;
-}
-
-BluePlane.prototype.getCursor = function() 
-{
-    return this.cursor;
-}
-
-
-
-
-
-
-
-BluePlane.prototype.deleteSelectedPiece = function() 
-{
-    if (this.cursor === null || this.getSelectedPiece() === null)
-        return;
-
-    var piece = this.getSelectedPiece();
-    var pieceUuid = piece.getMesh().getUuid();
-
-    this.cursor.getLink().removePiece(piece.getId());
-    this.reorganizePiecesYPosition(this.cursor.getLink());
-    
-    this.removePiece(piece.getMesh().getId());
-   
-    this.setPieceToSelectedAndHideOthers(null);
-    //this.selectedPiece = null;
-    this.editor.spaceThree.deleteMeshByUUID(pieceUuid);
 }
 
 BluePlane.prototype.createCursor = function() 
@@ -2262,81 +2221,27 @@ BluePlane.prototype.createBoard = function()
     }
 }
 
-BluePlane.prototype.togleSelectPiece = function()
+BluePlane.prototype.deleteSelectedPiece = function() 
 {
-    if (this.selectedPiece === null)
-    {
-        this.selectPieceAtCursor();
-    }
-    else
-    {
-        this.selectedPiece.setSelected(false);
-        this.selectedPiece = null;
-    }
-}
+    if (this.cursor === null || this.getSelectedPiece() === null)
+        return;
 
-BluePlane.prototype.toggleNextSelectedPiece = function()
-{
-    if (this.selectedPiece !== null)
-    {
-        var pieceId = this.selectedPiece.getId();
+    var piece = this.getSelectedPiece();
+    var pieceUuid = piece.getMesh().getUuid();
 
-        for (let index = 0; index < this.cursor.link.pieces.length; index++) 
-        {
-            const element = this.cursor.link.pieces[index];
-            
-            if (element.getId() === pieceId)
-            {
-                if (index + 1 < this.cursor.link.pieces.length)
-                {
-                    this.togleSelectPiece();
-
-                    this.selectedPiece = this.cursor.link.pieces[index + 1];
-                    this.selectedPiece.setSelected(true);
-                }
-                break;
-            }
-        }
-    }
-}
-
-BluePlane.prototype.togglePreviousSelectedPiece = function()
-{
-    if (this.selectedPiece !== null)
-    {
-        var pieceId = this.selectedPiece.getId();
-
-        for (let index = this.cursor.link.pieces.length - 1; index >= 0; index--) 
-        {
-            const element = this.cursor.link.pieces[index];
-            
-            if (element.getId() === pieceId)
-            {
-                if (index - 1 >= 0)
-                {
-                    this.togleSelectPiece();
-
-                    this.selectedPiece = this.cursor.link.pieces[index - 1];
-                    this.selectedPiece.setSelected(true);
-                }
-                break;
-            }
-        }
-    }
+    this.cursor.getLink().removePiece(piece.getId());
+    this.reorganizePiecesYPosition(this.cursor.getLink());
+    
+    this.removePiece(piece.getMesh().getId());
+   
+    this.setPieceToSelectedAndHideOthers(null);
+    //this.selectedPiece = null;
+    this.editor.spaceThree.deleteMeshByUUID(pieceUuid);
 }
 
 BluePlane.prototype.getSelectedPiece = function() 
 {
     return this.selectedPiece;
-}
-
-BluePlane.prototype.selectPieceAtCursor = function() 
-{
-    if (this.cursor.link.pieces.length > 0)
-    {
-        this.selectedPiece = this.cursor.link.pieces[0];
-        this.selectedPiece.setSelected(true);
-    }
 }
 
 BluePlane.prototype.rotateSelectedPiece = function() 
@@ -2369,8 +2274,7 @@ BluePlane.prototype.moveSelectedPieceDown = function()
     this.cursor.getLink().movePieceDown(piece.getId());
 
     this.reorganizePiecesYPosition(this.cursor.getLink());
-    }
-
+}
 
 BluePlane.prototype.loadBoard = function(_fileName) 
 {
@@ -2413,7 +2317,6 @@ BluePlane.prototype.loadBoardFromFile = function(_fileName)
         this.setFilename(_fileName.name);
     }
 }
-
 
 BluePlane.prototype.setBoardFromData = function(_data) 
 {
@@ -2660,54 +2563,9 @@ BluePlane.prototype.getMaxLayer = function()
     return result;
 }
 
-BluePlane.prototype.selectNextLayer = function() 
-{
-    if (this.currentLayer < this.getMaxLayer() - 1)
-    {
-        this.currentLayer++;
-        this.onlyShowCurrentLayer();
-    }
-}
-
-BluePlane.prototype.selectPreviousLayer = function() 
-{
-    if (this.currentLayer > -1)
-    {
-        this.currentLayer--;
-        this.onlyShowCurrentLayer();
-    }
-}
-
-BluePlane.prototype.onlyShowCurrentLayer = function() 
-{
-    var element = null; 
-    for (var index = 0; index < this.linkPoints.length; index++) 
-    {
-        element = this.linkPoints[index];
-
-        for (var p = 0; p < element.pieces.length; p++) 
-        {
-            elementPiece = element.pieces[p];
-
-            elementPiece.getMesh().hide  = true;
-            if (p === this.currentLayer || this.currentLayer === -1)
-            {
-                elementPiece.getMesh().hide = false;
-            }
-        }            
-    }
-}
-
-
-
 BluePlane.prototype.getMeshCollection = function()
 { 
     return this.meshCollection;
-}
-
-BluePlane.prototype.setMeshCollection = function(_meshCollection)
-{ 
-    this.meshCollection = _meshCollection;
 }
 
 BluePlane.prototype.removePiece = function(_pieceId) 
@@ -2728,10 +2586,6 @@ BluePlane.prototype.removePiece = function(_pieceId)
     }
 }
 
-// ********************************************************************************
-// ********************************************************************************
-// ********************************************************************************
-// SECTION MINIMAL FUNCTIONALITY
 BluePlane.prototype.createAndAddSelectedPieceToCursorPosition = function(_pieceType) 
 {
     this.addPieceAtLinkpoint(this.cursor.getLink(), PieceFactory.getInstance().createPiece(_pieceType));
@@ -2875,7 +2729,6 @@ BluePlane.prototype.moveCursorToMouseHittedAndSelectPiece = function(_objects)
     this.selectedPiece = foundPiece;
 }
 
-//TODO: create a function to get an array of Pieces (extracted from linkpoints)
 BluePlane.prototype.getPieceHittedByMouse = function(_objects) 
 {
     var piece = null;
@@ -3016,6 +2869,8 @@ BluePlane.prototype.getFilename = function(_fileName)
 SpaceThree.self = null;
 SpaceThree.MAX_AZIMUTH_ANGLE = 85;
 SpaceThree.MIN_AZIMUTH_ANGLE = 20;
+SpaceThree.MAX_ZOOM = 800;
+SpaceThree.MIN_ZOOM = 30;
 
 function SpaceThree() 
 {
@@ -3030,7 +2885,7 @@ function SpaceThree()
     this.cameraT.lookAt( 0, 0, 0 );
     this.inclinationCameraAngle = 45;
     this.azimuthCameraAngle = 45;
-    this.cameraRadious = 300;
+    this.cameraRadious = 400;
 
     // Renderer
     this.rendererT = new THREE.WebGLRenderer( { antialias: true } );
@@ -3050,6 +2905,9 @@ function SpaceThree()
     this.mygroup = new THREE.Group();
     this.editor = null;
     this.selectedObjects = null;
+
+    // Events
+    this.onCameraChangeHandler = null;
 }
 
 // SETUP AND ESCENE
@@ -3454,8 +3312,24 @@ SpaceThree.prototype.rotateCamera = function(_angle)
 
 SpaceThree.prototype.zoomCamera = function(_delta) 
 {
-    this.cameraRadious = this.cameraRadious + _delta;
-    this.updateCameraPosition();
+    var newValue = this.cameraRadious + _delta;
+    this.validateAndSetZoom(newValue);
+}
+
+SpaceThree.prototype.zoomCameraPercent = function(_value) 
+{
+    var range = SpaceThree.MAX_ZOOM - SpaceThree.MIN_ZOOM;
+    var newValue =  Math.floor((100 - _value) / 100 * range) + SpaceThree.MIN_ZOOM;
+    this.validateAndSetZoom(newValue);
+}
+
+SpaceThree.prototype.validateAndSetZoom = function(_value) 
+{
+    if (_value >= SpaceThree.MIN_ZOOM && _value <= SpaceThree.MAX_ZOOM)
+    {
+        this.cameraRadious = _value;
+        this.updateCameraPosition();
+    }
 }
 
 SpaceThree.prototype.updateCameraPosition = function() 
@@ -3466,8 +3340,8 @@ SpaceThree.prototype.updateCameraPosition = function()
 
     this.setCamera(x, y, z);
 
-    this.editor.updateSliderH(this.inclinationCameraAngle);
-    this.editor.updateSliderV(this.azimuthCameraAngle);
+    if (this.onCameraChangeHandler !== null)
+        this.onCameraChangeHandler(this.inclinationCameraAngle, this.azimuthCameraAngle, this.cameraRadious);
 }
 
 SpaceThree.prototype.getCamera = function() 
@@ -3484,7 +3358,10 @@ SpaceThree.prototype.setCamera = function(_x, _y, _z)
     this.cameraT.updateProjectionMatrix();
 }
 
- 
+SpaceThree.prototype.onCameraChange = function(_callback)
+{
+    this.onCameraChangeHandler = _callback;
+} 
 // --------------------------------------------------------------- 
 // CLASS: app.js 
 // --------------------------------------------------------------- 
@@ -3555,8 +3432,9 @@ function onUserCreate()
     spaceThree.setEditor(this);
     spaceThree.appendToDocumentBody();
     spaceThree.addPointLight(0xFFFFFF, 1, -100, 100, 0, 300, true);
-    spaceThree.rotateCamera(90);
     spaceThree.resetScene();
+    spaceThree.onCameraChange(updateCameraControls);
+    spaceThree.rotateCamera(90);
 
     // Object manager
     bluePlane.setEditor(this);
@@ -3586,6 +3464,7 @@ function onUserUpdate()
 }
 
 // EVENTS
+// FILE MENU EVENTS
 function addEventsToMenu()
 {
     addEventToFileSection();
@@ -3668,6 +3547,7 @@ function addPrintAsEvents()
     document.getElementById("idPrintAsCancel").onclick = function() {modal.style.display = "none";}
 }
 
+// EXAMPLE MENU EVENTS
 function addEventToExampleSection()
 {
     document.getElementById('idExampleLittleHouse').addEventListener("click", function() 
@@ -3676,6 +3556,7 @@ function addEventToExampleSection()
     });
 }
 
+// ABOUT MENU EVENTS
 function addEventToAboutSection()
 {
     addEventsToAboutOption();
@@ -3696,9 +3577,10 @@ function addEventsToAboutOption()
 function addEventsToSourceCodeOption()
 {
     var btn = document.getElementById("idSourceCode");
-    btn.onclick = function() {window.open("https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJS")};
+    btn.onclick = function() {window.open("https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJSEx")};
 }
 
+// LEFT TOOLBAR EVENTS
 function addEventsToLeftToolbar()
 {
     leftToolbarElements.forEach(element => 
@@ -3706,18 +3588,9 @@ function addEventsToLeftToolbar()
         document.getElementById(element).addEventListener("click", function() {onClicButtonLeftToolbar(element);});
     });
 
+    addEventsToZoom();
+
     addEventsToRotation();
-}
-
-function addEventsToRotation()
-{
-    //https://stackoverflow.com/questions/18544890/onchange-event-on-input-type-range-is-not-triggering-in-firefox-while-dragging
-
-    document.getElementById("idSliderH").addEventListener("input", function() {rotateCameraSliderH(this.value)});
-    document.getElementById("idSliderH").addEventListener("change", function() {rotateCameraSliderH(this.value)});
-
-    document.getElementById("idSliderV").addEventListener("input", function() {rotateCameraSliderV(this.value)});
-    document.getElementById("idSliderV").addEventListener("change", function() {rotateCameraSliderV(this.value)});
 }
 
 function onClicButtonLeftToolbar(id) 
@@ -3736,6 +3609,31 @@ function onClicButtonLeftToolbar(id)
     }
 }
 
+function addEventsToZoom()
+{
+    document.getElementById("idSliderZoom").addEventListener("input", function() {zoomCameraSliderV(this.value)});
+    document.getElementById("idSliderZoom").addEventListener("change", function() {zoomCameraSliderV(this.value)});
+}
+
+function zoomCamera(_zoomDelta)
+{
+    spaceThree.zoomCamera(_zoomDelta);
+}
+
+function zoomCameraSliderV(_value)
+{
+    spaceThree.zoomCameraPercent(_value);
+}
+
+function addEventsToRotation()
+{
+    document.getElementById("idSliderH").addEventListener("input", function() {rotateCameraSliderH(this.value)});
+    document.getElementById("idSliderH").addEventListener("change", function() {rotateCameraSliderH(this.value)});
+
+    document.getElementById("idSliderV").addEventListener("input", function() {rotateCameraSliderV(this.value)});
+    document.getElementById("idSliderV").addEventListener("change", function() {rotateCameraSliderV(this.value)});
+}
+
 function rotateCameraSliderH(_value)
 {
     spaceThree.rotateCameraPercent(_value);
@@ -3751,11 +3649,7 @@ function rotateCameraSliderV(_value)
     spaceThree.rotateCameraPercentAzimuthAngle(_value);
 } 
 
-function zoomCamera(_zoomDelta)
-{
-    spaceThree.zoomCamera(_zoomDelta);
-}
-
+// PIECE TOOLBAR EVENTS
 function addEventsToPiecesToolbar()
 {
     pieceToolbarElements.forEach(element => 
@@ -3851,18 +3745,20 @@ function updateFileNameInfo(_fileName)
     document.getElementById("info").innerHTML = _fileName + ".bpl";
 }
 
-function updateSliderH(_angle)
+function updateCameraControls(_inclinationCameraAngle, _azimuthCameraAngle, _zoomCamera)
 {
-    var percentValue = (_angle / 360) * 100;
+    var percentValue = 0;
+    
+    percentValue = (_inclinationCameraAngle / 360) * 100;
     document.getElementById("idSliderH").value = percentValue;
-}
 
-function updateSliderV(_angle)
-{
-    var range = SpaceThree.MAX_AZIMUTH_ANGLE - SpaceThree.MIN_AZIMUTH_ANGLE;
-    var percentValue = 100 - ((_angle - SpaceThree.MIN_AZIMUTH_ANGLE) / range) * 100;
+    var rangeRot = SpaceThree.MAX_AZIMUTH_ANGLE - SpaceThree.MIN_AZIMUTH_ANGLE;
+    percentValue = 100 - ((_azimuthCameraAngle - SpaceThree.MIN_AZIMUTH_ANGLE) / rangeRot) * 100;
     document.getElementById("idSliderV").value = percentValue;
-}
 
+    var rangeZoom = SpaceThree.MAX_ZOOM - SpaceThree.MIN_ZOOM;
+    var percentValue = 100 - ((_zoomCamera - SpaceThree.MIN_ZOOM) / rangeZoom) * 100;
+    document.getElementById("idSliderZoom").value = percentValue;
+}
 
 

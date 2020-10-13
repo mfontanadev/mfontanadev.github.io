@@ -229,14 +229,14 @@ button
             opacity: 0.9;
         }
 
-.slidecontainerH {
+.sliderContainerH {
     position: absolute;
     left: 50px;
     bottom: 10px;
     width: 100px;
 }
 
-.slidecontainerV {
+.sliderContainerV {
     position: absolute;
     left: 10px;
     bottom: 50px;
@@ -249,3 +249,46 @@ input[type=range][orient=vertical]
     width: 32px;
     height: 100px;
 }
+
+#btnZoomInPanel {
+    position: absolute;
+    left: 10px;
+    top: 42px;
+    width: 32px;
+    background: #eee;
+    text-align: center;
+}
+
+    #btnZoomInPanel button, #btnZoomInPanel input {
+        height: 32px;
+    }
+
+        #btnZoomInPanel button img {
+            width: 16px;
+            opacity: 0.9;
+        }
+
+#sliderContainerZoomV {
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    width: 100px;
+}
+
+#btnZoomOutPanel {
+    position: absolute;
+    left: 10px;
+    top: 189px;
+    width: 32px;
+    background: #eee;
+    text-align: center;
+}
+
+    #btnZoomOutPanel button, #btnZoomOutPanel input {
+        height: 32px;
+    }
+
+        #btnZoomOutPanel button img {
+            width: 16px;
+            opacity: 0.9;
+        }

@@ -1,5 +1,3 @@
-	<!--Iconos diseñados por <a href="https://www.flaticon.es/autores/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon"> www.flaticon.es</a>-->
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -51,7 +49,7 @@
 			}
 		</script>
 
-		<script src="appLittleConstructorThreeJS.js"></script>
+		<script src="appLittleConstructorThreeJSEx.js"></script>
 
 	</head>
 
@@ -93,20 +91,30 @@
 			</div>
 		</div>
 
-		<div id="toolbar" class="Panel" >
+
+		<!-- Zoom controls -->
+		<div id="btnZoomInPanel" class="Panel">
 			<button id="btnZoomIn" class="Button"><img title="Zoom in" src="img/zoom-in.svg"></button>
-			<button id="btnZoomOut" class="Button"><img title="Zoom out" src="img/zoom-out.svg"></button>
 		</div>
 		
+		<div id="sliderContainerZoomV"  class="Panel">
+			<input id="idSliderZoom" type="range" orient="vertical" min="0" max="100" value="0">
+		</div>
+		
+		<div id="btnZoomOutPanel" class="Panel">
+			<button id="btnZoomOut" class="Button"><img title="Zoom out" src="img/zoom-out.svg"></button>
+		</div>
+
+		<!-- Rotate controls -->
 		<div id="rotate" class="Panel" >
 			<button id="btnRotate" class="Button"><img title="Rotate" src="img/rotate.svg"></button>
 		</div>
 
-		<div class="slidecontainerH">
+		<div class="sliderContainerH">
 			<input id="idSliderH" type="range" min="0" max="100" value="0">
 		</div>
 		
-		<div class="slidecontainerV">
+		<div class="sliderContainerV">
 			<input id="idSliderV" type="range" orient="vertical" min="0" max="100" value="0">
 		</div>
 		
