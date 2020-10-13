@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idLittleConstructorThreeJSEx", 
+			"Little constructor ThreeJSEx",
+			"img/little-constructor-threejs-ex.png",
+			"Same as 'Little constructor ThreeJS' with new UX, now it is user friendly. Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
+			"https://mfontanadev.github.io/games/deployLittleConstructorThreeJSEx/index.html",
+			"https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJSEx"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idMicroSpy", 
 			"MicroSpy" ,
 			"img/microspy-thumb.jpg",
@@ -166,7 +177,8 @@ function injectionCardsText(_cardItem)
 
 function navigateTo(_url)
 {
-	window.location = _url;
+	//window.location = _url;
+	window.open(_url);
 }
 
 
