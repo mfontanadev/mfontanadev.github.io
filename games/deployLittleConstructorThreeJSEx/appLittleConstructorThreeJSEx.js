@@ -103,6 +103,14 @@ Helper.radToGra = function(radians)
     return 180 * radians / Math.PI;
 }
 
+Helper.distance = function(x1, y1, x2, y2)
+{
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 // STRINGS
 Helper.padChar = function(num, size, char) 
 {
@@ -2690,7 +2698,9 @@ BluePlane.prototype.implementGameLogic = function()
 {
     if (this.editor.spaceThree.mouse.leftButtonDown === true)  
     {
-        if (this.waitMouseUpToMoveCursorAgaing === false)
+        // Note: avoid click over piece if some joystick's button was pressed before.
+        if (this.waitMouseUpToMoveCursorAgaing === false &&
+            this.editor.spaceThree.getWaitMouseUp() === false)
         {
             var intersectedObjects = this.editor.spaceThree.getSelectedObjectsByMouse();
             this.moveCursorToMouseHittedAndSelectPiece(intersectedObjects);
@@ -2812,6 +2822,12 @@ BluePlane.prototype.moveCursorToMouseHitted = function(_piece, _objects)
     {
         this.cursor.setLink(linkPointFromPiece);
         this.cursor.getMesh().actionUpdate = true;
+        
+        this.editor.setVisibilityPieceToolbar(true);
+    }
+    else
+    {
+        this.editor.setVisibilityPieceToolbar(false);
     }
 }
 
@@ -2908,6 +2924,19 @@ function SpaceThree()
 
     // Events
     this.onCameraChangeHandler = null;
+
+    this.moveState = { up: 0, down: 0, left: 0, right: 0, forward: 0, back: 0, pitchUp: 0, pitchDown: 0, yawLeft: 0, yawRight: 0, rollLeft: 0, rollRight: 0 };
+    this.moveVector = new THREE.Vector3( 0, 0, 0 );
+    this.rotationVector = new THREE.Vector3( 0, 0, 0 );
+    this.lastPosition = new THREE.Vector3();
+    this.movementSpeed = 5.0;
+    this.rollSpeed = 0.05;
+    this.tmpQuaternion = new THREE.Quaternion();
+    this.waitMouseUp = false;
+
+    this.lastQuaternion = new THREE.Quaternion();
+    this.lastPosition = new THREE.Vector3();
+    this.lastRotation = new THREE.Vector3();
 }
 
 // SETUP AND ESCENE
@@ -2919,6 +2948,8 @@ SpaceThree.prototype.appendToDocumentBody = function()
     this.addSkyDome();
     this.addResizeEvent();
     this.addMouseEvents();
+
+    this.addFlyingControlEvents();
 }
 
 SpaceThree.prototype.addGrid = function() 
@@ -3057,9 +3088,181 @@ SpaceThree.prototype.addMouseEvents = function()
     }
 }
 
+SpaceThree.prototype.addFlyingControlEvents = function()
+{
+    window.addEventListener( 'keydown', this.keyDown, false );
+    window.addEventListener( 'keyup', this.keyUp, false );
+}
+
+SpaceThree.prototype.keyUp  = function ( event ) {
+
+    switch ( event.keyCode ) {
+        case 87: /*W*/ SpaceThree.self.moveState.up = 0; break;
+        case 83: /*S*/ SpaceThree.self.moveState.down = 0; break;
+
+        case 65: /*A*/ SpaceThree.self.moveState.yawLeft = 0; break;
+        case 68: /*D*/ SpaceThree.self.moveState.yawRight = 0; break;
+
+        case 38: /*up*/ SpaceThree.self.moveState.forward = 0; break;
+        case 40: /*down*/ SpaceThree.self.moveState.back = 0; break;
+    }
+
+    SpaceThree.self.updateMovementVector();
+    SpaceThree.self.updateRotationVector();
+};
+
+SpaceThree.prototype.keyDown = function ( event ) {
+
+    switch ( event.keyCode ) {
+        case 87: /*W*/ SpaceThree.self.moveState.up = 1; break;
+        case 83: /*S*/ SpaceThree.self.moveState.down = 1; break;
+
+        case 65: /*A*/ SpaceThree.self.moveState.yawLeft = 1; break;
+        case 68: /*D*/ SpaceThree.self.moveState.yawRight = 1; break;
+
+        case 38: /*up*/ SpaceThree.self.moveState.forward = 1; break;
+        case 40: /*down*/ SpaceThree.self.moveState.back = 1; break;
+    }
+
+    SpaceThree.self.updateMovementVector();
+    SpaceThree.self.updateRotationVector();
+};
+
+SpaceThree.prototype.updateMovementVector = function () {
+
+    this.moveVector.x = ( - this.moveState.left + this.moveState.right );
+    this.moveVector.y = ( - this.moveState.down + this.moveState.up );
+    this.moveVector.z = ( - this.moveState.forward + this.moveState.back );
+
+    //console.log( 'move:', [ this.moveVector.x, this.moveVector.y, this.moveVector.z ] );
+};
+
+SpaceThree.prototype.updateRotationVector = function () {
+
+    this.rotationVector.x = ( - this.moveState.pitchDown + this.moveState.pitchUp );
+    this.rotationVector.y = ( - this.moveState.yawRight + this.moveState.yawLeft );
+    this.rotationVector.z = ( - this.moveState.rollRight + this.moveState.rollLeft );
+
+    //console.log( 'rotate:', [ this.rotationVector.x, this.rotationVector.y, this.rotationVector.z ] );
+};
+
 // LIFE CYCLE
 SpaceThree.prototype.handleInputs = function()
 {
+    if (this.editor.flyingMode === true)
+        this.checkMouseDownFlyingControls();
+}
+
+SpaceThree.prototype.checkMouseDownFlyingControls = function()
+{
+    if (this.editor.spaceThree.mouse.leftButtonDown === true)  
+    {
+        var btnCross = document.getElementById("btnCross");
+        var btnUpDown = document.getElementById("btnUpDown");
+
+        var cx = 0;
+        var cy = 0;
+        // NOTE: only when btnCross is enebled the width is scaled.
+        // It will be better create a class and do it better.
+        var radious = btnCross.width / 3;
+
+        // Test up movement
+        cx = (btnCross.width / 2) + btnCross.offsetLeft;
+        cy = (btnCross.height / 3) * 0.5 + btnCross.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.up = 1;
+        }
+
+        // Test down movement
+        cx = (btnCross.width / 2) + btnCross.offsetLeft;
+        cy = (btnCross.height / 3) * 2.5 + btnCross.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.down = 1;
+        }
+
+        // Test left movement
+        cx = (btnCross.width / 3) * 0.5 + btnCross.offsetLeft;
+        cy = (btnCross.height / 2) + btnCross.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.yawLeft = 1;
+        }
+
+        // Test right movement
+        cx = (btnCross.width / 3) * 2.5 + btnCross.offsetLeft;
+        cy = (btnCross.height / 2) + btnCross.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.yawRight = 1;
+        }
+
+        // Test forward movement
+        cx = (btnUpDown.width / 2) + btnUpDown.offsetLeft;
+        cy = (btnUpDown.height / 3) * 0.5 + btnUpDown.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.forward = 1;
+        }
+
+        // Test back movement
+        cx = (btnUpDown.width / 2) + btnUpDown.offsetLeft;
+        cy = (btnUpDown.height / 3) * 2.5 + btnUpDown.offsetTop;
+        if (Helper.distance(cx, cy, this.editor.spaceThree.mouse.x, this.editor.spaceThree.mouse.y) < radious)
+        {
+            this.moveState.back = 1;
+        }
+
+        /*var btnPointer = document.getElementById("btnPointer");
+        btnPointer.style.left = cx + "px";
+        btnPointer.style.top = cy + "px";
+        */
+
+        var someMovementPending = (SpaceThree.self.moveState.up +
+            SpaceThree.self.moveState.down + 
+            SpaceThree.self.moveState.yawLeft +
+            SpaceThree.self.moveState.yawRight +
+            SpaceThree.self.moveState.forward + 
+            SpaceThree.self.moveState.back) > 0;
+
+        if (someMovementPending === true)
+        {
+            this.updateMovementVector();
+            this.updateRotationVector();
+           
+            this.waitMouseUp = true;
+            this.cleanJoystickFlags();
+        }
+    }
+    else
+    {
+        if (this.waitMouseUp === true)
+        {
+            this.waitMouseUp = false;
+            this.cleanJoystickFlags();
+
+            this.updateMovementVector();
+            this.updateRotationVector();
+        }
+    }
+}
+
+SpaceThree.prototype.cleanJoystickFlags = function()
+{ 
+    SpaceThree.self.moveState.up = 0; 
+    SpaceThree.self.moveState.down = 0;
+
+    SpaceThree.self.moveState.yawLeft = 0;
+    SpaceThree.self.moveState.yawRight = 0;
+
+    SpaceThree.self.moveState.forward = 0; 
+    SpaceThree.self.moveState.back = 0;
+}
+
+SpaceThree.prototype.getWaitMouseUp = function()
+{ 
+    return this.waitMouseUp;
 }
 
 SpaceThree.prototype.implementGameLogic = function()
@@ -3069,6 +3272,21 @@ SpaceThree.prototype.implementGameLogic = function()
     this.selectedObjects = this.calculateSelectedObjectsByMouse();
 
     this.updateThreeJSMeshes(_meshCollection);
+
+    this.updateFlyingControl();
+}
+
+SpaceThree.prototype.updateFlyingControl = function()
+{
+    var moveMult = this.movementSpeed;
+    var rotMult = this.rollSpeed;
+
+    this.cameraT.translateX( this.moveVector.x * moveMult );
+    this.cameraT.translateY( this.moveVector.y * moveMult );
+    this.cameraT.translateZ( this.moveVector.z * moveMult );
+
+    this.tmpQuaternion.set( this.rotationVector.x * rotMult, this.rotationVector.y * rotMult, this.rotationVector.z * rotMult, 1 ).normalize();
+    this.cameraT.quaternion.multiply( this.tmpQuaternion );
 }
 
 SpaceThree.prototype.render = function()
@@ -3361,6 +3579,36 @@ SpaceThree.prototype.setCamera = function(_x, _y, _z)
 SpaceThree.prototype.onCameraChange = function(_callback)
 {
     this.onCameraChangeHandler = _callback;
+}
+
+SpaceThree.prototype.startFlyingControl = function()
+{
+    if (this.lastRotation.x === 0 && this.lastRotation.y === 0 && this.lastRotation.z === 0)
+    {
+        this.cameraT.position.y = 10;
+        this.cameraT.lookAt(  0,  this.cameraT.position.y,  0);
+    }
+    else
+    {
+        this.cameraT.position.x = this.lastPosition.x;
+        this.cameraT.position.y = this.lastPosition.y;
+        this.cameraT.position.z = this.lastPosition.z;
+
+        this.cameraT.rotation.x = this.lastRotation.x;
+        this.cameraT.rotation.y = this.lastRotation.y;
+        this.cameraT.rotation.z = this.lastRotation.z;
+    }
+    
+    this.cameraT.updateProjectionMatrix();
+}
+
+SpaceThree.prototype.cancelFlyingControl = function()
+{
+    //this.lastQuaternion.copy( this.cameraT.quaternion );
+    this.lastPosition.copy( this.cameraT.position );
+    this.lastRotation.copy( this.cameraT.rotation );
+
+    this.updateCameraPosition();
 } 
 // --------------------------------------------------------------- 
 // CLASS: app.js 
@@ -3369,7 +3617,7 @@ SpaceThree.prototype.onCameraChange = function(_callback)
 // Entry point to the aplication, main loop, inputs controlle, core
 //
 
-var C_VERSION_TITLE = "Little constructor ThreeJS v3.0.2";
+var C_VERSION_TITLE = "Little constructor ThreeJS v3.1.0";
 var gEngine = null; 
 var C_SERVER_IP = "localhost:8080";
 
@@ -3388,23 +3636,14 @@ function load()
 //
 var spaceThree = new SpaceThree();
 var bluePlane = new BluePlane();
-var helpMode = false;
-
-var defaultWX = 10;
-var defaultWY = 10;
-var defaultWZ = 10;
-var defaultMeshColor = "100 100 100";
-var defaultOffX = 0;
-var defaultOffY = 0;
-var defaultOffZ = 0;
-var defaultIndex = 0;
-
-var lastSelectedObject = null;
+var flyingMode = false;
 
 var leftToolbarElements = [
     "btnRotate", 
     "btnZoomIn", 
-    "btnZoomOut"];
+    "btnZoomOut",
+    "btnFlying",
+    "btnCancelFlying"];
 
 var pieceToolbarElements = [
     "btnPILAR_SMALL", 
@@ -3446,6 +3685,8 @@ function onUserCreate()
     addEventsToLeftToolbar();
     addEventsToPiecesToolbar();
     addEventsToPieceActionsToolbar();
+
+    showControlsOnFlying();
 }
 
 function onUserUpdate() 
@@ -3467,6 +3708,9 @@ function onUserUpdate()
 // FILE MENU EVENTS
 function addEventsToMenu()
 {
+    document.getElementById("btnCross").disabled = true; 
+    document.getElementById("btnUpDown").disabled = true; 
+
     addEventToFileSection();
     addEventToExampleSection();
     addEventToAboutSection();
@@ -3606,6 +3850,16 @@ function onClicButtonLeftToolbar(id)
         case 'btnZoomOut':
             this.zoomCamera(50); 
             break;
+        case 'btnFlying': 
+            flyingMode = true;
+            this.hideControlsOnFlying();
+            this.spaceThree.startFlyingControl();  
+            break;
+        case 'btnCancelFlying':
+            flyingMode = false;
+            this.showControlsOnFlying();
+            this.spaceThree.cancelFlyingControl();  
+            break;
     }
 }
 
@@ -3740,6 +3994,20 @@ function setVisibilityPieceActionsToolbar(_visible)
     }
 }
 
+function setVisibilityPieceToolbar(_visible) 
+{
+    var panel = document.getElementById("pieceToolbar");
+
+    if (_visible === true)
+    {
+        panel.style.display = "block";
+    }
+    else
+    {
+        panel.style.display = "none";
+    }
+}
+
 function updateFileNameInfo(_fileName)
 {
     document.getElementById("info").innerHTML = _fileName + ".bpl";
@@ -3761,4 +4029,42 @@ function updateCameraControls(_inclinationCameraAngle, _azimuthCameraAngle, _zoo
     document.getElementById("idSliderZoom").value = percentValue;
 }
 
+function hideControlsOnFlying()
+{
+    document.getElementById("btnFlyingPanel").style.display = "none";
+    document.getElementById("btnCancelFlyingPanel").style.display = "block";
 
+    this.setVisibilityPieceToolbar(false);
+    this.setVisibilityPieceActionsToolbar(false);
+
+    document.getElementById("btnZoomInPanel").style.display = "none";
+    document.getElementById("sliderContainerZoomV").style.display = "none";
+    document.getElementById("btnZoomOutPanel").style.display = "none";
+
+    document.getElementById("btnRotatePanel").style.display = "none";
+    document.getElementById("sliderContainerRotateH").style.display = "none";
+    document.getElementById("sliderContainerRotateV").style.display = "none";
+
+    document.getElementById("btnCross").style.display = "block";
+    document.getElementById("btnUpDown").style.display = "block";
+}
+
+function showControlsOnFlying()
+{
+    document.getElementById("btnFlyingPanel").style.display = "block";
+    document.getElementById("btnCancelFlyingPanel").style.display = "none";
+
+    this.setVisibilityPieceToolbar(true);
+    this.bluePlane.showHidePieceActionsToolbar();
+
+    document.getElementById("btnZoomInPanel").style.display = "block";
+    document.getElementById("sliderContainerZoomV").style.display = "block";
+    document.getElementById("btnZoomOutPanel").style.display = "block";
+
+    document.getElementById("btnRotatePanel").style.display = "block";
+    document.getElementById("sliderContainerRotateH").style.display = "block";
+    document.getElementById("sliderContainerRotateV").style.display = "block";
+    
+    document.getElementById("btnCross").style.display = "none";
+    document.getElementById("btnUpDown").style.display = "none";
+}

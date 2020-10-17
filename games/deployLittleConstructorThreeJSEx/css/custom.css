@@ -103,9 +103,9 @@ a {
 
 #pieceToolbar {
     position: absolute;
-    bottom: 10px;
+    top: 112px;
     right: 10px;
-    height: 48px;
+    width: 48px;
     background: #eee;
     text-align: center;
 }
@@ -123,7 +123,7 @@ a {
     position: absolute;
     right: 10px;
     top: 42px;
-    width: 32px;
+    height: 32px;
     background: #eee;
     text-align: center;
 }
@@ -211,7 +211,7 @@ button
   }
 
 
-  #rotate {
+  #btnRotatePanel {
     position: absolute;
     left: 10px;
     bottom: 10px;
@@ -220,11 +220,11 @@ button
     text-align: center;
 }
 
-    #rotate button, #rotate input {
+    #btnRotatePanel button, #btnRotatePanel input {
         height: 32px;
     }
 
-        #rotate button img {
+        #btnRotatePanel button img {
             width: 16px;
             opacity: 0.9;
         }
@@ -292,3 +292,66 @@ input[type=range][orient=vertical]
             width: 16px;
             opacity: 0.9;
         }
+
+#btnFlyingPanel {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 32px;
+    background: #eee;
+    text-align: center;
+}
+
+    #btnFlyingPanel button, #btnFlyingPanel input {
+        height: 32px;
+    }
+
+        #btnFlyingPanel button img {
+            width: 16px;
+            opacity: 0.9;
+        }
+        
+#btnCancelFlyingPanel {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 32px;
+    background: #eee;
+    text-align: center;
+}
+
+    #btnCancelFlyingPanel button, #btnCancelFlyingPanel input {
+        height: 32px;
+    }
+
+        #btnCancelFlyingPanel button img {
+            width: 16px;
+            opacity: 0.9;
+        }
+
+
+#btnCross {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    width: 150px;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+#btnUpDown {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    width: 150px;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+#btnPointer {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    width: 10px;
+    pointer-events: none;
+}
