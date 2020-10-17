@@ -111,6 +111,15 @@ Helper.distance = function(x1, y1, x2, y2)
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+Helper.distance3D = function(x1, y1, z1, x2, y2, z2)
+{
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var dz = z2 - z1;
+
+    return Math.sqrt(dx * dx + dy * dy + dz * dz);
+}
+
 // STRINGS
 Helper.padChar = function(num, size, char) 
 {
@@ -3128,22 +3137,19 @@ SpaceThree.prototype.keyDown = function ( event ) {
     SpaceThree.self.updateRotationVector();
 };
 
-SpaceThree.prototype.updateMovementVector = function () {
-
+SpaceThree.prototype.updateMovementVector = function () 
+{
     this.moveVector.x = ( - this.moveState.left + this.moveState.right );
     this.moveVector.y = ( - this.moveState.down + this.moveState.up );
     this.moveVector.z = ( - this.moveState.forward + this.moveState.back );
-
-    //console.log( 'move:', [ this.moveVector.x, this.moveVector.y, this.moveVector.z ] );
 };
 
-SpaceThree.prototype.updateRotationVector = function () {
-
+SpaceThree.prototype.updateRotationVector = function () 
+{
     this.rotationVector.x = ( - this.moveState.pitchDown + this.moveState.pitchUp );
     this.rotationVector.y = ( - this.moveState.yawRight + this.moveState.yawLeft );
     this.rotationVector.z = ( - this.moveState.rollRight + this.moveState.rollLeft );
 
-    //console.log( 'rotate:', [ this.rotationVector.x, this.rotationVector.y, this.rotationVector.z ] );
 };
 
 // LIFE CYCLE
@@ -3273,19 +3279,28 @@ SpaceThree.prototype.implementGameLogic = function()
 
     this.updateThreeJSMeshes(_meshCollection);
 
-    this.updateFlyingControl();
+    this.updateCametaWithFlyingValues();
 }
 
-SpaceThree.prototype.updateFlyingControl = function()
+SpaceThree.prototype.updateCametaWithFlyingValues = function()
 {
-    var moveMult = this.movementSpeed;
-    var rotMult = this.rollSpeed;
+    this.applyCameraTransformations(this.movementSpeed, this.rollSpeed);
 
-    this.cameraT.translateX( this.moveVector.x * moveMult );
-    this.cameraT.translateY( this.moveVector.y * moveMult );
-    this.cameraT.translateZ( this.moveVector.z * moveMult );
+    // If camera is outside limits, the wollback transformations.
+    if (Helper.distance3D(this.cameraT.position.x, this.cameraT.position.y, this.cameraT.position.z, 0, 0, 0) > SpaceThree.MAX_ZOOM ||
+        this.cameraT.position.y < 5)
+    {
+        this.applyCameraTransformations(this.movementSpeed * -1, this.rollSpeed * -1);
+    }
+}
 
-    this.tmpQuaternion.set( this.rotationVector.x * rotMult, this.rotationVector.y * rotMult, this.rotationVector.z * rotMult, 1 ).normalize();
+SpaceThree.prototype.applyCameraTransformations = function(_moveMult, _rotMult)
+{ 
+    this.cameraT.translateX( this.moveVector.x * _moveMult );
+    this.cameraT.translateY( this.moveVector.y * _moveMult );
+    this.cameraT.translateZ( this.moveVector.z * _moveMult );
+
+    this.tmpQuaternion.set( this.rotationVector.x * _rotMult, this.rotationVector.y * _rotMult, this.rotationVector.z * _rotMult, 1 ).normalize();
     this.cameraT.quaternion.multiply( this.tmpQuaternion );
 }
 
