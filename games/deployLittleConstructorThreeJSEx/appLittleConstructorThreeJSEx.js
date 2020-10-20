@@ -3043,12 +3043,18 @@ SpaceThree.prototype.addMouseEvents = function()
         // Force calculation here because to use this data in BluePlane class,
         // touchStart is different to mouseDown, it fires first.
         SpaceThree.self.selectedObjects = SpaceThree.self.calculateSelectedObjectsByMouse();
+        
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     this.rendererT.domElement.addEventListener( 'touchend', onTouchEnd, false );
     function onTouchEnd( event ) 
     {
         SpaceThree.self.mouse.leftButtonDown = false;
+        
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     this.rendererT.domElement.addEventListener( 'touchmove', onTouchMove, false );
@@ -3073,6 +3079,9 @@ SpaceThree.prototype.addMouseEvents = function()
             SpaceThree.self.mouse.middleButtonDown = true;
         if (event.button === 2)
             SpaceThree.self.mouse.rightButtonDown = true;
+
+        event.preventDefault();
+		event.stopPropagation();
     }
 
     this.rendererT.domElement.addEventListener( 'mouseup', onMouseUp, false );
@@ -3084,6 +3093,9 @@ SpaceThree.prototype.addMouseEvents = function()
             SpaceThree.self.mouse.middleButtonDown = false;
         if (event.button === 2)
             SpaceThree.self.mouse.rightButtonDown = false;
+
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     this.rendererT.domElement.addEventListener( 'mousemove', onMouseMove, false );
@@ -3632,7 +3644,7 @@ SpaceThree.prototype.cancelFlyingControl = function()
 // Entry point to the aplication, main loop, inputs controlle, core
 //
 
-var C_VERSION_TITLE = "Little constructor ThreeJS v3.1.0";
+var C_VERSION_TITLE = "Little constructor ThreeJS v3.1.1";
 var gEngine = null; 
 var C_SERVER_IP = "localhost:8080";
 
@@ -3844,7 +3856,7 @@ function addEventsToLeftToolbar()
 {
     leftToolbarElements.forEach(element => 
     {
-        document.getElementById(element).addEventListener("click", function() {onClicButtonLeftToolbar(element);});
+        document.getElementById(element).addEventListener("click", function(event) {onClicButtonLeftToolbar(event, element);});
     });
 
     addEventsToZoom();
@@ -3852,7 +3864,7 @@ function addEventsToLeftToolbar()
     addEventsToRotation();
 }
 
-function onClicButtonLeftToolbar(id) 
+function onClicButtonLeftToolbar(event, id) 
 {
     switch ( id ) 
     {
@@ -3923,11 +3935,11 @@ function addEventsToPiecesToolbar()
 {
     pieceToolbarElements.forEach(element => 
     {
-        document.getElementById(element).addEventListener("click", function() {onClicButtonPiecesToolbar(element);});
+        document.getElementById(element).addEventListener("click", function(event) {onClicButtonPiecesToolbar(event, element);});
     });
 }
 
-function onClicButtonPiecesToolbar(id)
+function onClicButtonPiecesToolbar(event, id)
 {
     switch ( id ) 
     {
@@ -3968,11 +3980,11 @@ function addEventsToPieceActionsToolbar()
 {
     pieceActionsToolbarElements.forEach(element => 
     {
-        document.getElementById(element).addEventListener("click", function() {onClicButtonPieceActionsToolbar(element);});
+        document.getElementById(element).addEventListener("click", function(event) {onClicButtonPieceActionsToolbar(event, element);});
     });
 }
 
-function onClicButtonPieceActionsToolbar(id) 
+function onClicButtonPieceActionsToolbar(event, id) 
 {
     switch ( id ) 
     {
