@@ -71,7 +71,7 @@ WhoPaidApplication.prototype.initDelayed = function()
 
 WhoPaidApplication.prototype.getVersionName = function() 
 {
-    return "1.1.1";
+    return "1.1.2";
 }
 
 WhoPaidApplication.prototype.autoLogin  = function() 

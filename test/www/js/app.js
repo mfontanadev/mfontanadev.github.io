@@ -6,6 +6,8 @@ function init()
 	{
 		appLog("********** On deviceReady");
 		
+		document.body.requestFullscreen();
+
 		logCordovaFile(cordova.file);
 
 		whoPaidApplication = new WhoPaidApplication();
