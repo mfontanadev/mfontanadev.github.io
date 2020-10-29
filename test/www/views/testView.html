@@ -1,0 +1,65 @@
+<ons-page id="testView">
+  <ons-toolbar>
+    <div class="left">
+      <!-- Toolbar-button with different icons depending on the platform. -->
+      <ons-toolbar-button component="button/menu" onclick="onsenNavigateTo('mainView');">Back</ons-toolbar-button>
+    </div>
+    <div class="center">TestView</div>
+    <div class="right">
+    </div>
+  </ons-toolbar>
+
+    <div style="text-align: center; margin-top: 50px">
+    <p>
+      <ons-button onclick="testClearLogArea();">Clear log area</ons-button>
+      <ons-button onclick="gotoLogin();">Login</ons-button>
+    </p>
+
+    <p>
+      File CRUD
+      <br>
+      <ons-button width="40px" style="background-color: blue" onclick="testCreateFile();">Cre</ons-button>
+      <ons-button width="40px" style="background-color: blue" onclick="testReadFile();">Rea</ons-button>
+      <ons-button width="40px" style="background-color: blue" onclick="testAppendFile();">Ins</ons-button>
+      <ons-button width="40px" style="background-color: blue" onclick="testUpdateFile();">Upd</ons-button>
+      <ons-button width="40px" style="background-color: blue" onclick="testDeleteFile();">Del</ons-button>
+    </p>
+
+    <p>
+      DBmanager CRUD
+      <br>
+      <ons-button width="40px" style="background-color: red" onclick="testEmptyTable();">Empty</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testReadTable();">Rea</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testUpdateTable('002');">Upd</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testInsertTable();">Ins</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testDeleteTable();">Del</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testPopulateTable(0, 5);">Pop 5</ons-button>
+      <ons-button width="40px" style="background-color: red" onclick="testPopulateTable(0, 200);">Pop 200</ons-button>
+    </p>
+
+    <p>
+      Category test
+      <br>
+      <ons-button width="60px" style="background-color: green" onclick="loadCategories();">Load cat</ons-button>
+      <ons-button width="60px" style="background-color: green" onclick="deleteCategory('02');">Del cat</ons-button>
+      <ons-button width="60px" style="background-color: green" onclick="bechParse(200);">Bench</ons-button>
+      <ons-button width="60px" style="background-color: green" onclick="deleteUser();">Del usr</ons-button>
+      <ons-button width="60px" style="background-color: green" onclick="loadUsers();">Load usr</ons-button>
+    </p>
+
+
+    <p>
+      Table Files
+      <br>
+      <ons-button width="60px" style="background-color: red" onclick="testDeleteTableByName('Category');">D Category </ons-button>
+      <ons-button width="60px" style="background-color: red" onclick="testDeleteTableByName('User');">D User</ons-button>
+      <ons-button width="60px" style="background-color: red" onclick="testDeleteTableByName('Spent');">D Spent</ons-button>
+      <ons-button width="60px" style="background-color: red" onclick="testDeleteTableByName('SubCategory');">D SubCat</ons-button>
+    </p>
+
+    <p>
+      <textarea id="logArea" class="textarea" rows="10" cols="40" width="100%"></textarea>
+    </p>
+    </div>
+
+  </ons-page>

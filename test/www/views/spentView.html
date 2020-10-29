@@ -1,0 +1,44 @@
+<ons-page  id="spentView">
+  <ons-toolbar>
+    <div class="left">
+      <!-- Toolbar-button with different icons depending on the platform. -->
+      <ons-toolbar-button component="button/menu" onclick="onsenNavigateTo('mainView');">Back</ons-toolbar-button>
+    </div>
+    <div id="idSpentView_Title" class="center">...</div>
+    <div class="right">
+      <!-- Toolbar-button with different icons depending on the platform. -->
+
+      <ons-toolbar-button component="button/menu">
+          <ons-icon icon="fa-save" onclick="SpentViewController.onclick_commitSpent();"></ons-icon>
+      </ons-toolbar-button>          
+      </div>
+  </ons-toolbar>
+
+  <ons-list>
+      <!-- Spent input -->
+      <ons-list-header id="lblSpentQtty"><strong>Me spent / Not me spent</strong></ons-list-header>
+
+      <ons-list-item modifier="nodivider">
+          <ons-input id="edMeNewSpent" class="center list-item__center" modifier="underbar material" value="" type="text" /></ons-input>
+          <ons-input id="edNotMeNewSpent"  class='right list-item__center' modifier="underbar material" value="" type="text" /></ons-input>
+      </ons-list-item>
+
+      <!-- Category input -->
+      <ons-list-header id="lblCategory"><strong>Category</strong></ons-list-header>
+      <ons-list id="idSpentType">
+      </ons-list>
+   
+       <!-- Date -->
+      <ons-list-header id="lblDate"><strong>Date</strong></ons-list-header>
+      <ons-list-item >
+          <ons-input id="edDatePicker" class="list-item__center" vmodifier="underbar material" value="" type="text" ></ons-input>
+      </ons-list-item>
+
+      <!-- Description -->
+      <ons-list-header id="lblDescription"><strong>Description</strong></ons-list-header>
+      <ons-list-item >
+          <ons-input id="edObservation" class="list-item__center" modifier="underbar material" value="" type="text"></ons-input>
+      </ons-list-item>
+  </ons-list>
+
+</ons-page>

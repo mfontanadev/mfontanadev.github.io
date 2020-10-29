@@ -1,0 +1,53 @@
+/*
+.size_text_l3 {font-size: 14px !important;}
+
+.color_app_background {color: #FCFDFD;}
+.color_labels_gray {color: #394956;}
+.color_labels {color: #101010;}
+.color_gray {color: #646568;}
+.color_light_gray {color: #d8d8da;}
+.color_headers_background {color: #1F4769;}
+.color_background_selectedItem {color: #789B73;}
+.color_background_list_group {color: #457695;}
+
+.color_debt {color: #ed5e61;}
+.color_notdebt {color: #9EDA38;}
+
+.color_buttons {color: #789B73;}
+.color_buttons_down {color: #4e684a;}
+
+
+label {font-size: 14px !important;}
+
+.buttons_color {background-color: #789B73;}
+.buttons_width {width: 100%; max-width: 160px;}
+.inputs_middle_width {width: 100%; max-width: 160px;}
+.list_middle_width {width: 100%; max-width: 160px;}
+
+.layout_view {text-align: center; max-width: 360px; margin: 0 auto;}
+.title_view {margin-bottom: 20px; margin: 0 auto;}
+
+.layout_horizontal {width: 100%; padding-bottom: 15px;}
+.layout_horizontal_middle {width: 50%;}
+
+.toolbar_color {background-color: blue; color: white;}
+
+*/
+
+
+
+.list-header
+{
+    background: #bbb;
+    padding: 2px 0 0 15px;
+}
+
+.list-header--material 
+{
+    background: #bbb;
+    padding: 2px 0 0 15px;
+}
+
+.list-header--material:not(:first-of-type) {
+    padding: 2px 0 0 15px;
+}
