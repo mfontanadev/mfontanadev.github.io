@@ -77,7 +77,7 @@ UserEntity.prototype.log = function()
 	"m_id=" + this.getId() + ", " + 
 	"m_username=" + this.getUsername() + "; " +
 	"m_password=" + this.getPassword() + "; " +
-	"m_recoveryQuestoin=" + this.getRecoveryQuestion() + "; " +
+	"m_recoveryQuestion=" + this.getRecoveryQuestion() + "; " +
 	"m_recoveryAnswer=" + this.getRecoveryAnswer() + "; ";
 }
 
