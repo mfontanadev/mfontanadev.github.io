@@ -9,9 +9,18 @@ function AboutViewController()
 AboutViewController.prototype.init = function()
 {
   this.setPageTitle();
+
+  this.updateInfo();
 }
 
 AboutViewController.prototype.setPageTitle = function() 
 {
-    document.querySelector('#idAboutView_Title').innerHTML = "About+";
+    document.querySelector('#idAboutView_Title').innerHTML = "About";
+}
+
+AboutViewController.prototype.updateInfo = function() 
+{
+  document.querySelector('#idAboutAppNameNAdVersion').innerHTML = appNameAndVersion();
+  document.querySelector('#idAboutProvider').innerHTML = "Provided by mfontanadev";
+  document.querySelector('#idAboutDeveloper').innerHTML = "mfontanadev@gmail.com";
 }

@@ -7,6 +7,12 @@ function MainViewController()
 
 MainViewController.prototype.init = function()
 {
+  this.setPageTitle();
+}
+
+MainViewController.prototype.setPageTitle = function() 
+{
+    document.querySelector('#idMainView_Title').innerHTML = appName();
 }
 
 MainViewController.newSpent = function()

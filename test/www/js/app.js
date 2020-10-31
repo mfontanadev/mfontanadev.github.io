@@ -2,24 +2,24 @@ var whoPaidApplication = null;
 
 function init()
 {
+	appSetPageTitle();
+
 	document.addEventListener('deviceReady', function () 
 	{
 		appLog("********** On deviceReady");
 		
-		document.body.requestFullscreen();
-
-		logCordovaFile(cordova.file);
-
-		whoPaidApplication = new WhoPaidApplication();
-		whoPaidApplication.init();
-
+		//appLogCordovaFile(cordova.file);
 		//log(ons.platform.isIPad());
 
+		// Init app singleton to hold: database, session and global constants.
+		whoPaidApplication = new WhoPaidApplication();
+		whoPaidApplication.init();
+		
 		// Call init function of controllers classes after transition is finished.
 		// This will be called after 'deviceReady'
-		document.addEventListener('init', function(event) {
+		document.addEventListener('init', function(event) 
+		{
 			appLog("********** On init");
-
 			onInitEvent(event);
 		});
 	});
@@ -55,7 +55,7 @@ function appClearLog()
 	}
 }
 
-function logCordovaFile(_file)
+function appLogCordovaFile(_file)
 {
 	appLog("\n\n")
 	appLog("cordova.file:" + cordova.file);
@@ -77,3 +77,73 @@ function logCordovaFile(_file)
 		appLog("\n\n")
 	}
 }
+
+function appVersion()
+{
+    return "1.1.3";
+}
+
+function appName()
+{
+    return "WhoPaidEx";
+}
+
+function appNameAndVersion()
+{
+	return appName() + " v" + appVersion();
+}
+
+function appSetPageTitle()
+{
+	var fullName = appNameAndVersion();
+
+	appLog(fullName);
+	document.title = fullName;
+}
+
+function appToggleFullScreen() 
+{
+	if (!document.fullscreenElement) 
+	{
+		document.getElementById("idToggleFullScreen").innerHTML = "Exit full screen";
+		document.documentElement.requestFullscreen();
+	} 
+	else 
+	{
+	  if (document.exitFullscreen) 
+	  {
+		document.getElementById("idToggleFullScreen").innerHTML = "Full Screen";
+		document.exitFullscreen(); 
+	  }
+	}
+  }
+
+  /*
+  function appRequestFullscreen(ele) {
+	if (ele.requestFullscreen) {
+	  ele.requestFullscreen();
+	} else if (ele.webkitRequestFullscreen) {
+	  ele.webkitRequestFullscreen();
+	} else if (ele.mozRequestFullScreen) {
+	  ele.mozRequestFullScreen();
+	} else if (ele.msRequestFullscreen) {
+	  ele.msRequestFullscreen();
+	} else {
+	  console.log('Fullscreen API is not supported.');
+	}
+  };
+
+  var exitFullscreen = function () {
+	if (document.exitFullscreen) {
+	  document.exitFullscreen();
+	} else if (document.webkitExitFullscreen) {
+	  document.webkitExitFullscreen();
+	} else if (document.mozCancelFullScreen) {
+	  document.mozCancelFullScreen();
+	} else if (document.msExitFullscreen) {
+	  document.msExitFullscreen();
+	} else {
+	  console.log('Fullscreen API is not supported.');
+	}
+  };
+  */

@@ -1,13 +1,3 @@
-var C_VIEW_MODE_NOT_SET = 0;
-var C_VIEW_MODE_EDITION = 1;
-var C_VIEW_MODE_NEW = 2;
-
-var C_VIEW_PAGE_ID_MENU = "menuView";
-var C_VIEW_PAGE_ID_ABOUT = "aboutView";
-var C_VIEW_PAGE_ID_SPENT = "spentView";
-var C_VIEW_PAGE_ID_MAIN_VIEW = "mainView";
-var C_VIEW_PAGE_ID_SPENT_LIST = "spentListView";
-
 function WhoPaidApplication() 
 {
     this.m_db = null;
@@ -18,9 +8,6 @@ WhoPaidApplication.prototype.init = function()
 {
 	var _this = this;
 
-	appLog("On WhoPaidApplication");
-	appLog("   Version v" + this.getVersionName());
-	
 	// Force singleton creation.
 	this.getSession();
 
@@ -64,14 +51,11 @@ WhoPaidApplication.prototype.initDelayed = function()
 	// Load all data.
 	this.getSession().init();
 
-	// *** Unit Tests ***
+	// Unit Tests
 	runModelTests();
-	//this.autoLogin();
-}
 
-WhoPaidApplication.prototype.getVersionName = function() 
-{
-    return "1.1.3";
+	// Debug porpouses
+	//this.autoLogin();
 }
 
 WhoPaidApplication.prototype.autoLogin  = function() 
