@@ -73,7 +73,7 @@ WhoPaidApplication.prototype.autoLogin  = function()
 			{
 				whoPaidApplication.getSession().setCurrentUser(_userEntity);
 				appLog("Current user ID:" + _userEntity.log());
-				onsenNavigateTo(C_VIEW_PAGE_ID_MAIN_VIEW);
+				onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 			}
 			else
                 appLog("AutoLogin; FAILED");

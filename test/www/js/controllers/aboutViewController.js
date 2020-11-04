@@ -24,3 +24,8 @@ AboutViewController.prototype.updateInfo = function()
   document.querySelector('#idAboutProvider').innerHTML = "Provided by mfontanadev";
   document.querySelector('#idAboutDeveloper').innerHTML = "mfontanadev@gmail.com";
 }
+
+AboutViewController.navigateToBack = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+}

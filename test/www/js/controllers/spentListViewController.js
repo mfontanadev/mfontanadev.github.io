@@ -181,3 +181,8 @@ SpentListViewController.onclick_listSpent = function(_sender, _id)
 {
   testGetAllSpent();
 }
+
+SpentListViewController.navigateToBack = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+}

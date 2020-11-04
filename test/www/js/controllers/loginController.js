@@ -5,7 +5,7 @@ function login()
   
 	if (username === 'admin' && password === 'admin') 
 	{
-		onsenNavigateTo(C_VIEW_PAGE_ID_MAIN_VIEW);
+		onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 	} 
 	else 
 	{
@@ -19,7 +19,7 @@ function login()
 				if (_userEntity !== null && _userEntity.getPassword() === password)
 				{
 					whoPaidApplication.getSession().setCurrentUser(_userEntity);
-					onsenNavigateTo(C_VIEW_PAGE_ID_MAIN_VIEW);
+					onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 				}
 				else
 					ons.notification.alert('ERROR: User or password incorrect.');

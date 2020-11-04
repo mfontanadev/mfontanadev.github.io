@@ -8,6 +8,7 @@ function init()
 	{
 		appLog("********** On deviceReady");
 		
+		FullScreen.init("myNavigator");
 		//appLogCordovaFile(cordova.file);
 		//log(ons.platform.isIPad());
 
@@ -80,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.3";
+    return "1.1.4";
 }
 
 function appName()
@@ -103,47 +104,16 @@ function appSetPageTitle()
 
 function appToggleFullScreen() 
 {
-	if (!document.fullscreenElement) 
+	var fsElement = document.getElementById(FullScreen.fullScreenApi.fullScreenElement);
+	
+	if (!FullScreen.fullScreenApi.isFullScreen()) 
 	{
 		document.getElementById("idToggleFullScreen").innerHTML = "Exit full screen";
-		document.documentElement.requestFullscreen();
+		FullScreen.fullScreenApi.requestFullScreen(fsElement);
 	} 
 	else 
 	{
-	  if (document.exitFullscreen) 
-	  {
 		document.getElementById("idToggleFullScreen").innerHTML = "Full Screen";
-		document.exitFullscreen(); 
-	  }
+		FullScreen.fullScreenApi.cancelFullScreen(fsElement);
 	}
-  }
-
-  /*
-  function appRequestFullscreen(ele) {
-	if (ele.requestFullscreen) {
-	  ele.requestFullscreen();
-	} else if (ele.webkitRequestFullscreen) {
-	  ele.webkitRequestFullscreen();
-	} else if (ele.mozRequestFullScreen) {
-	  ele.mozRequestFullScreen();
-	} else if (ele.msRequestFullscreen) {
-	  ele.msRequestFullscreen();
-	} else {
-	  console.log('Fullscreen API is not supported.');
-	}
-  };
-
-  var exitFullscreen = function () {
-	if (document.exitFullscreen) {
-	  document.exitFullscreen();
-	} else if (document.webkitExitFullscreen) {
-	  document.webkitExitFullscreen();
-	} else if (document.mozCancelFullScreen) {
-	  document.mozCancelFullScreen();
-	} else if (document.msExitFullscreen) {
-	  document.msExitFullscreen();
-	} else {
-	  console.log('Fullscreen API is not supported.');
-	}
-  };
-  */
+}

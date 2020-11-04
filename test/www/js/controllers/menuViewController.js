@@ -19,3 +19,13 @@ MenuViewController.prototype.init = function()
 MenuViewController.prototype.setPageTitle = function() 
 {
 }
+
+MenuViewController.navigateToAboutView = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_ABOUT);
+}
+
+MenuViewController.navigateToTestView = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_TEST);
+}

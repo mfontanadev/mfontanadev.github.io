@@ -186,7 +186,7 @@ SpentViewController.prototype.addCurrentSpent = function()
     function(_result)
     {
       whoPaidApplication.getSession().loadAllSpent(null, null);
-      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN_VIEW);
+      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
     },
     function(_result)
     {
@@ -209,7 +209,7 @@ SpentViewController.prototype.updateCurrentSpent = function()
     function(_result)
     {
       whoPaidApplication.getSession().loadAllSpent(null, null);
-      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN_VIEW);
+      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
     },
     function(_result)
     {
@@ -232,3 +232,13 @@ SpentViewController.onclick_listSpent = function(_sender, _id)
 {
   testGetAllSpent();
 } 
+
+SpentViewController.navigateToBack = function()
+{
+  _this = whoPaidApplication.getSession().m_spentViewController;
+
+  if (_this.VIEW_MODE === C_VIEW_MODE_NEW)
+    onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+  else if (_this.VIEW_MODE === C_VIEW_MODE_EDITION)
+    onsenNavigateTo(C_VIEW_PAGE_ID_SPENT_LIST);
+}

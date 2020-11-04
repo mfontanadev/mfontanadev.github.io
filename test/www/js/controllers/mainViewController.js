@@ -20,3 +20,8 @@ MainViewController.newSpent = function()
   whoPaidApplication.getSession().resetCurrentSpent();
   onsenNavigateTo(C_VIEW_PAGE_ID_SPENT);
 }
+
+MainViewController.navigateToSpentListView = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_SPENT_LIST);
+}

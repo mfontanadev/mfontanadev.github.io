@@ -1,15 +1,22 @@
-function testClearLogArea()
+TestViewController._this = null;
+
+function TestViewController() 
+{
+	TestViewController._this = this;
+	this.VIEW_MODE = C_VIEW_MODE_NOT_SET;
+}
+
+TestViewController.testClearLogArea = function()
 {
 	appClearLog();
 }
 
-function gotoLogin()
+TestViewController.gotoLogin = function()
 {
-	onsenNavigateTo("loginView.html");	
+	onsenNavigateTo(C_VIEW_PAGE_ID_LOGIN);	
 }
 
-
-function testCreateFile()
+TestViewController.testCreateFile = function()
 {
 	FileEx.writeToFile
 	(
@@ -20,7 +27,7 @@ function testCreateFile()
 	);
 }
 
-function testReadFile()
+TestViewController.testReadFile = function()
 {
 	FileEx.readFile
 	(
@@ -30,7 +37,7 @@ function testReadFile()
 	);
 }
 
-function testAppendFile()
+TestViewController.testAppendFile = function()
 {
 	FileEx.appendToFile
 	(
@@ -40,7 +47,7 @@ function testAppendFile()
 	);
 }
 
-function testUpdateFileOld()
+TestViewController.testUpdateFileOld = function()
 {
 	FileEx.updateFile
 	(
@@ -50,7 +57,7 @@ function testUpdateFileOld()
 	);
 }
 
-function testUpdateFile()
+TestViewController.testUpdateFile = function()
 {
 	FileEx.updateFileAndroid
 	(
@@ -60,7 +67,7 @@ function testUpdateFile()
 	);
 }
 
-function testDeleteFile()
+TestViewController.testDeleteFile = function()
 {
 	FileEx.deleteFile
 	(
@@ -70,7 +77,7 @@ function testDeleteFile()
 	);
 }
 
-function testEmptyTable()
+TestViewController.testEmptyTable = function()
 {
 	whoPaidApplication.getDB().emptyTable
 	(
@@ -80,7 +87,7 @@ function testEmptyTable()
 	);
 }
 
-function testReadTable()
+TestViewController.testReadTable = function()
 {
 	whoPaidApplication.getDB().readTable
 	(
@@ -90,7 +97,7 @@ function testReadTable()
 	);
 }
 
-function testUpdateTable(_id)
+TestViewController.testUpdateTable = function(_id)
 {
 	var ent = null;
 	var tmpCategoty = new DBCursor();
@@ -125,7 +132,7 @@ function testUpdateTable(_id)
 	);
 }
 
-function testInsertTable()
+TestViewController.testInsertTable = function()
 {
 	// Agregar algunas categorias.
 	var record = new Array();
@@ -142,7 +149,7 @@ function testInsertTable()
 	);
 }
 
-function testDeleteTable()
+TestViewController.testDeleteTable = function()
 {
 	whoPaidApplication.getDB().deleteTable
 	(
@@ -152,7 +159,7 @@ function testDeleteTable()
 	);
 }
 
-function testPopulateTable(_index, _max)
+TestViewController.testPopulateTable = function(_index, _max)
 {
 	if (_index <= _max)
 	{
@@ -176,15 +183,14 @@ function testPopulateTable(_index, _max)
 			{ 
 				appLog("OK (" + _result + "), table:"); 
 				
-				window.setTimeout( function() {	testPopulateTable(_index + 1, _max); }, Config.C_DELAY_INSERT_RECORD_MS);
+				window.setTimeout(function() {	testPopulateTable(_index + 1, _max); }, Config.C_DELAY_INSERT_RECORD_MS);
 			},
 			function(_result) { appLog("ERROR (" + _result + "), table:"); }
 		);
 	}
 }
 
-
-function loadCategories()
+TestViewController.loadCategories = function()
 {
 	var ent = null;
 	var tmpCategoty = new DBCursor();
@@ -220,7 +226,7 @@ function loadCategories()
 	
 }
 
-function deleteCategory(_id)
+TestViewController.deleteCategory = function(_id)
 {
 	appLog("Delete category id:" + _id);
 	whoPaidApplication.getDB().deleteRecord
@@ -233,7 +239,7 @@ function deleteCategory(_id)
 	);		
 }
 
-function bechParse(_max)
+TestViewController.bechParse = function(_max)
 {
 	var result = "";
 	var timeDiff = new TimeDiff();
@@ -299,7 +305,7 @@ function bechParse(_max)
 
 }
 
-function loadUsers()
+TestViewController.loadUsers = function()
 {
 	var ent = null;
 	var tmpUser = new DBCursor();
@@ -341,8 +347,7 @@ function loadUsers()
 	
 }
 
-
-function deleteUser()
+TestViewController.deleteUser = function()
 {
 	whoPaidApplication.getDB().deleteTable
 	(
@@ -352,7 +357,7 @@ function deleteUser()
 	);
 }
 
-function testDeleteTableByName(_tableName)
+TestViewController.testDeleteTableByName = function(_tableName)
 {
 	whoPaidApplication.getDB().deleteTable
 	(
@@ -360,4 +365,9 @@ function testDeleteTableByName(_tableName)
 		function(_result) { appLog("OK (" + _result + "), table:" + tableName); },
 		function(_result) { appLog("ERROR (" + _result + "), table:" + tableName); }
 	);
+}
+
+TestViewController.navigateToBack = function()
+{
+  onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 }

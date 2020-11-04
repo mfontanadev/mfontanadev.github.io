@@ -22,10 +22,12 @@ function onInitEvent(_event)
 		whoPaidApplication.getSession().m_menuViewController.init();		
 	else if (page.id === C_VIEW_PAGE_ID_SPENT) 
 		whoPaidApplication.getSession().m_spentViewController.init();	
-	else if (page.id === C_VIEW_PAGE_ID_MAIN_VIEW)
+	else if (page.id === C_VIEW_PAGE_ID_MAIN)
 		whoPaidApplication.getSession().m_mainViewController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_SPENT_LIST)
 		whoPaidApplication.getSession().m_spentListViewController.init();	
+	else if (page.id === C_VIEW_PAGE_ID_TEST)
+		whoPaidApplication.getSession().m_testViewController.init();	
 }
 
 function onsenMenuOpen()

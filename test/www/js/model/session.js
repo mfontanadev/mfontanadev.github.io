@@ -16,6 +16,7 @@ function Session()
     this.m_spentViewController = new SpentViewController();
     this.m_spentListViewController = new SpentListViewController();
     this.m_mainViewController = new MainViewController();
+    this.m_testViewController = new MainViewController();
 }
 
 Session.prototype.init = function() 
