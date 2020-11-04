@@ -81,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.5";
+    return "1.1.6";
 }
 
 function appName()
@@ -117,3 +117,53 @@ function appToggleFullScreen()
 		FullScreen.fullScreenApi.cancelFullScreen(fsElement);
 	}
 }
+
+
+/*
+function appToggleFullScreen() 
+{
+	if (!document.fullscreenElement) 
+	{
+		document.getElementById("idToggleFullScreen").innerHTML = "Exit full screen";
+		document.documentElement.requestFullscreen();
+	} 
+	else 
+	{
+	  if (document.exitFullscreen) 
+	  {
+		document.getElementById("idToggleFullScreen").innerHTML = "Full Screen";
+		document.exitFullscreen(); 
+	  }
+	}
+}
+*/
+
+  /*
+  function appRequestFullscreen(ele) {
+	if (ele.requestFullscreen) {
+	  ele.requestFullscreen();
+	} else if (ele.webkitRequestFullscreen) {
+	  ele.webkitRequestFullscreen();
+	} else if (ele.mozRequestFullScreen) {
+	  ele.mozRequestFullScreen();
+	} else if (ele.msRequestFullscreen) {
+	  ele.msRequestFullscreen();
+	} else {
+	  console.log('Fullscreen API is not supported.');
+	}
+  };
+
+  var exitFullscreen = function () {
+	if (document.exitFullscreen) {
+	  document.exitFullscreen();
+	} else if (document.webkitExitFullscreen) {
+	  document.webkitExitFullscreen();
+	} else if (document.mozCancelFullScreen) {
+	  document.mozCancelFullScreen();
+	} else if (document.msExitFullscreen) {
+	  document.msExitFullscreen();
+	} else {
+	  console.log('Fullscreen API is not supported.');
+	}
+  };
+  */

@@ -59,11 +59,13 @@ FullScreen.init = function(_fullScreenElement)
 		}
 		FullScreen.fullScreenApi.requestFullScreen = function(el) 
 		{
-			return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
+			return document.documentElement.requestFullscreen();
+			//return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
 		}
 		FullScreen.fullScreenApi.cancelFullScreen = function(el)
 		{
-			return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
+			return document.exitFullscreen(); 
+			//return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
 		}		
 	}
 
@@ -83,7 +85,7 @@ FullScreen.init = function(_fullScreenElement)
 
 	if (FullScreen.fullScreenApi.supportsFullScreen) 
 	{
-		appLog("prefix:" + this.prefix);
+		appLog("prefix:" + FullScreen.fullScreenApi.prefix);
 		appLog("YES: Your browser supports FullScreen");
 	}
 	else
