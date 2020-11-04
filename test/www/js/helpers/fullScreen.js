@@ -23,7 +23,6 @@ FullScreen.init = function(_fullScreenElement)
 	if (typeof document.cancelFullScreen != 'undefined') 
 	{
 		FullScreen.fullScreenApi.supportsFullScreen = true;
-		//FullScreen.fullScreenApi.fullScreenElement = '';
 	}
 	else 
 	{	
@@ -59,13 +58,31 @@ FullScreen.init = function(_fullScreenElement)
 		}
 		FullScreen.fullScreenApi.requestFullScreen = function(el) 
 		{
-			return document.documentElement.requestFullscreen();
-			//return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
+			appLog("prefix:" + FullScreen.fullScreenApi.prefix);
+			if (typeof document.documentElement != 'undefined' )
+			{
+				appLog("requestFullScreen document:");
+				return document.documentElement.requestFullscreen();
+			}
+			else
+			{
+				appLog("requestFullScreen prefix:");
+				return (this.prefix === '') ? el.requestFullScreen() : el[this.prefix + 'RequestFullScreen']();
+			}
 		}
 		FullScreen.fullScreenApi.cancelFullScreen = function(el)
 		{
-			return document.exitFullscreen(); 
-			//return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
+			appLog("prefix:" + FullScreen.fullScreenApi.prefix);
+			if (typeof document.documentElement != 'undefined' )
+			{
+				appLog("cancelFullScreen document:");
+				return document.exitFullscreen(); 
+			}
+			else
+			{
+				appLog("cancelFullScreen prefix:");
+				return (this.prefix === '') ? document.cancelFullScreen() : document[this.prefix + 'CancelFullScreen']();
+			}
 		}		
 	}
 

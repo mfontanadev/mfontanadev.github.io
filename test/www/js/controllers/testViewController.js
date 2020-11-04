@@ -16,6 +16,11 @@ TestViewController.gotoLogin = function()
 	onsenNavigateTo(C_VIEW_PAGE_ID_LOGIN);	
 }
 
+TestViewController.fullScreen = function()
+{
+	appToggleFullScreen();
+}
+
 TestViewController.testCreateFile = function()
 {
 	FileEx.writeToFile
