@@ -7,7 +7,7 @@ function init()
 	document.addEventListener('deviceReady', function () 
 	{
 		appLog("********** On deviceReady");
-		
+		appLog("Device type:" + getDeviceType());
 		FullScreen.init("myNavigator");
 		//appLogCordovaFile(cordova.file);
 		//log(ons.platform.isIPad());
@@ -81,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.10";
+    return "1.1.11";
 }
 
 function appName()
@@ -118,6 +118,21 @@ function appToggleFullScreen()
 	}
 }
 
+function getDeviceType()
+{
+	const ua = navigator.userAgent;
+	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) 
+	{
+	  return "tablet";
+	}
+
+	if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) 
+	{
+	  return "mobile";
+	}
+	
+	return "desktop";
+};
 
 /*
 function appToggleFullScreen() 

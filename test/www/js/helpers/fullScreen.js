@@ -59,7 +59,7 @@ FullScreen.init = function(_fullScreenElement)
 		FullScreen.fullScreenApi.requestFullScreen = function(el) 
 		{
 			appLog("prefix:" + FullScreen.fullScreenApi.prefix);
-			if (typeof document.documentElement != 'undefined' )
+			if (typeof document.documentElement != 'undefined' && getDeviceType() === "desktop")
 			{
 				appLog("requestFullScreen document:" +  document.documentElement);
 				return document.documentElement.requestFullscreen();
@@ -73,7 +73,7 @@ FullScreen.init = function(_fullScreenElement)
 		FullScreen.fullScreenApi.cancelFullScreen = function(el)
 		{
 			appLog("prefix:" + FullScreen.fullScreenApi.prefix);
-			if (typeof document.documentElement != 'undefined' )
+			if (typeof document.documentElement != 'undefined' && getDeviceType() === "desktop")
 			{
 				appLog("cancelFullScreen document:");
 				return document.exitFullscreen(); 
