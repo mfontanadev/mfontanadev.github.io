@@ -61,7 +61,7 @@ FullScreen.init = function(_fullScreenElement)
 			appLog("prefix:" + FullScreen.fullScreenApi.prefix);
 			if (typeof document.documentElement != 'undefined' )
 			{
-				appLog("requestFullScreen document:");
+				appLog("requestFullScreen document:" +  document.documentElement);
 				return document.documentElement.requestFullscreen();
 			}
 			else
