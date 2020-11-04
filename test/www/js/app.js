@@ -81,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.12";
+    return "1.1.13";
 }
 
 function appName()
@@ -120,6 +120,37 @@ function appToggleFullScreen()
 
 function getDeviceType()
 {
+	appLog("isIPad:" + ons.platform.isIPad());
+	appLog("isIPhoneX:" + ons.platform.isIPhoneX());
+	appLog("isIPhone:" + ons.platform.isIPhone());
+	appLog("isAndroidPhone:" + ons.platform.isAndroidPhone());
+	appLog("isAndroidTablet:" + ons.platform.isAndroidTablet());
+
+	var returnValue = "undefined";
+
+	if (ons.platform.isIPad() === true ||
+		ons.platform.isAndroidTablet() === true)
+	{
+		returnValue = "tablet";
+	}
+	else if (ons.platform.isAndroidPhone() === true ||
+			 ons.platform.isIPhoneX() === true ||
+			ons.platform.isIPhone() === true)
+	{
+		returnValue = "mobile";
+	}
+	else
+	{
+		returnValue = "desktop";
+	}
+
+	appLog("device type:" + returnValue);
+	return returnValue;
+}
+
+/*
+function getDeviceType()
+{
 	const ua = navigator.userAgent;
 
 	appLog(ua);
@@ -135,6 +166,7 @@ function getDeviceType()
 	
 	return "desktop";
 };
+*/
 
 /*
 function appToggleFullScreen() 

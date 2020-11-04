@@ -19,7 +19,7 @@ WhoPaidApplication.prototype.init = function()
 	window.setTimeout( function() 
 	{	
 		_this.initDelayed();
-	}, 1000);
+	}, 10000);
 }
 
 WhoPaidApplication.prototype.getSession = function()
