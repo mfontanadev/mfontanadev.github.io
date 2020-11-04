@@ -23,6 +23,7 @@ FullScreen.init = function(_fullScreenElement)
 	if (typeof document.cancelFullScreen != 'undefined') 
 	{
 		FullScreen.fullScreenApi.supportsFullScreen = true;
+		//FullScreen.fullScreenApi.fullScreenElement = '';
 	}
 	else 
 	{	
@@ -82,10 +83,11 @@ FullScreen.init = function(_fullScreenElement)
 
 	if (FullScreen.fullScreenApi.supportsFullScreen) 
 	{
+		appLog("prefix:" + this.prefix);
 		appLog("YES: Your browser supports FullScreen");
 	}
 	else
 	{
-		appLog("YES: Your browser supports FullScreen");
+		appLog("NO: Your browser not supports FullScreen");
 	}
 };
