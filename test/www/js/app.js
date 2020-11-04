@@ -81,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.11";
+    return "1.1.12";
 }
 
 function appName()
@@ -121,12 +121,14 @@ function appToggleFullScreen()
 function getDeviceType()
 {
 	const ua = navigator.userAgent;
+
+	appLog(ua);
 	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) 
 	{
 	  return "tablet";
 	}
 
-	if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) 
+	if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua)) 
 	{
 	  return "mobile";
 	}
