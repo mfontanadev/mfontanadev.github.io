@@ -81,7 +81,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.13";
+    return "1.1.14";
 }
 
 function appName()
