@@ -27,10 +27,19 @@ DBAppDictionary.C_DB_TABLE_CATEGORY_ID = "CategoryId";
 DBAppDictionary.C_DB_TABLE_SPENT_SUBCATEGORY_ID = "SubCategoryId";
 DBAppDictionary.C_DB_TABLE_SPENT_OBSERVATION = "Obvervation";
 
-
 function DBAppDictionary(_dbManager) 
 {
     this.m_dbManager = _dbManager;
+    this.m_stillUpdatingCounter = 0;
+    this.m_dbReadyCallback = null;
+}
+
+/**
+ * Init tables with default values, only if debug flag is true.
+ */
+DBAppDictionary.prototype.isStillUpdating = function()
+{
+    return this.m_stillUpdatingCounter !== 0;
 }
 
 /**
@@ -81,18 +90,24 @@ DBAppDictionary.prototype.createDB = function()
 /**
  * Init tables with default values, only if debug flag is true.
  */
-DBAppDictionary.prototype.init = function()
+DBAppDictionary.prototype.init = function(_dbReadyCallback)
 {
+    this.m_dbReadyCallback = _dbReadyCallback;
     appLog("\nON DBAppDictionary");
     appLog("Test 1.0");
 
     //if (Consts.DEBUG == true)
     {
-        this.initTableCategoryForTesting();
-        this.initTableUserForTesting();
-        this.initTableSubCategoryForTesting();
-        this.initTableSpentForTesting();
+       this.initTableCategoryForTesting();
+       this.initTableUserForTesting();
+       this.initTableSubCategoryForTesting();
+       this.initTableSpentForTesting();
     }
+}
+
+DBAppDictionary.prototype.stopDBReadyEvent = function()
+{
+    this.m_dbReadyCallback = null;
 }
 
 /**
@@ -149,6 +164,16 @@ DBAppDictionary.prototype.initTableCategoryForTesting = function()
             record.push("BB");
             record.push("6");
             records.push(record);
+
+            /*
+            for (let index = 10; index < 40; index++) {
+                    
+                record = new Array();
+                record.push(index.toString());
+                record.push("BB" + index.toString());
+                record.push("6" + index.toString());
+                records.push(record);     
+            }*/
 
             _this.insertRecords(DBAppDictionary.C_DB_TABLE_CATEGORY, records, 0);
         },
@@ -361,21 +386,38 @@ DBAppDictionary.prototype.insertRecords = function(_tableName, _records, _index)
 
     if (_index < _records.length)
     {
+        this.m_stillUpdatingCounter++;
         this.m_dbManager.insertRecord
         (
             _tableName,
             _records[_index],
             function(_result) 
             { 
-                appLog("OK (" + _result + "), table:" + _tableName);
-                _index++; 
-                window.setTimeout( function() 
-                {	
-                    _this.insertRecords(_tableName, _records, _index);
-                }, Config.C_DELAY_INSERT_RECORD_MS);
+                //appLog("OK (" + _result + "), table:" + _tableName);
+                _index++;
+                _this.m_stillUpdatingCounter--;
+                window.setTimeout
+                ( 
+                    function() 
+                    {	
+                        _this.insertRecords(_tableName, _records, _index);
+                    },
+                    Config.C_DELAY_INSERT_RECORD_MS
+                );
             },
-            function(_result) { appLog("ERROR (" + _result + "), table:" + _tableName); }
+            function(_result) 
+            { 
+                _this.m_stillUpdatingCounter -= _index;
+                appLog("ERROR (" + _result + "), table:" + _tableName); 
+            }
         );
+    }
+
+    console.log(this.m_stillUpdatingCounter );
+    if (this.isStillUpdating() === false)
+    {
+        if (this.m_dbReadyCallback !== null)
+            this.m_dbReadyCallback();
     }
 }
 

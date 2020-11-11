@@ -27,7 +27,7 @@ function DBManager()
     this.m_dbLocation = "defaultDataPath";
 }
 
-DBManager.prototype.init = function() 
+DBManager.prototype.init = function(_dbReadyCallback) 
 {
     appLog("\nOn DBManager");
 
@@ -42,7 +42,7 @@ DBManager.prototype.init = function()
         this.createDB(this.m_dbLocation);
                     
         // Table initialitation.
-        this.m_appDictionary.init();
+        this.m_appDictionary.init(_dbReadyCallback);
     }
     else
     {
@@ -66,6 +66,11 @@ DBManager.prototype.createDB = function(_dbPath)
 DBManager.prototype.getDbLocation = function()
 {
     return this.m_dbLocation;
+}
+
+DBManager.prototype.stopDBReadyEvent = function()
+{
+    this.m_appDictionary.stopDBReadyEvent();
 }
 
 // Create a new entry in table collection (it do not create the file associated)

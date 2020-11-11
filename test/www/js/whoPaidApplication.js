@@ -2,6 +2,8 @@ function WhoPaidApplication()
 {
     this.m_db = null;
 	this.m_session = null;
+	this.m_initTimeout = null;
+	this.m_stopInitDB = false;
 }
 
 WhoPaidApplication.prototype.init = function() 
@@ -11,15 +13,31 @@ WhoPaidApplication.prototype.init = function()
 	// Force singleton creation.
 	this.getSession();
 
+	// Timeout db initialization, force app init.
+	this.m_initTimeout = window.setTimeout( function() 
+	{	
+		_this.stopTimeoutDBEvent();
+		_this.initDelayed();
+	}, Config.C_INIT_DB_TIMEOUT * 1000);	
+
 	// Initialize data base engine.	
 	this.getDB();
-	
-	// Lazy load of data.
-	// TODO: use som mechanism of synch to be sure that all data was loaded before start. 
-	window.setTimeout( function() 
-	{	
-		_this.initDelayed();
-	}, 10000);
+	this.m_db.init
+	(
+		function() 
+		{	
+			console.log("Finish");
+			_this.stopTimeoutDBEvent();
+			_this.initDelayed();
+		}
+	);
+}
+
+WhoPaidApplication.prototype.stopTimeoutDBEvent = function()
+{
+	console.log("*****STOP TIMEOUT EVENT");
+	this.m_db.stopDBReadyEvent();
+	clearTimeout(this.m_initTimeout);
 }
 
 WhoPaidApplication.prototype.getSession = function()
@@ -39,7 +57,6 @@ WhoPaidApplication.prototype.getDB = function()
 	{
 		appLog("getDB");
 		this.m_db = new DBManager();
-		this.m_db.init();
 	}
 
 	return this.m_db;
@@ -48,6 +65,7 @@ WhoPaidApplication.prototype.getDB = function()
 // Give time to database files to be ready.
 WhoPaidApplication.prototype.initDelayed = function() 
 {
+	appLog("initdelayed");
 	// Load all data.
 	this.getSession().init();
 
