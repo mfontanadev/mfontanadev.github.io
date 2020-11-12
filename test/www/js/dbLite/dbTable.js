@@ -228,8 +228,13 @@ DBTable.prototype.selectAll = function(_cursor, includeDeletedRecords, _callback
         
             if (_data.length !== 0)
             {
-                _cursor.setRows(_this.parseFields(_this.m_fields, _data, includeDeletedRecords));
-                _callbackOK(DBManager.C_DB_RESULT_OK);
+                var rows = _this.parseFields(_this.m_fields, _data, includeDeletedRecords);
+                _cursor.setRows(rows);
+
+                if (rows.length > 0)
+                    _callbackOK(DBManager.C_DB_RESULT_OK);
+                else
+                    _callbackOK(DBManager.C_DB_RESULT_EMPTY_RECORD);
             }
             else
             {
@@ -261,18 +266,22 @@ DBTable.prototype.getMaxID = function(_fieldToLook, _callbackOK, _callbackError)
             function(_resultCode)
             {
                 var nResultCode = DBManager.C_DB_RESULT_EMPTY_RECORD;
-
+                var maxValue = "";
+                
                 if (_resultCode === DBManager.C_DB_RESULT_OK)
                 {
-                    var maxValue = "";
                     var fieldValue = "";
                     for (var i = 0; i < allRecords.rows().length; i++)
                     {
                         fieldValue = allRecords.getString(i, lookToFieldIndex);
-                        
+                        console.log(fieldValue);
                         if (fieldValue > maxValue)
                             maxValue = fieldValue;
                     }
+                }
+                else if (_resultCode === DBManager.C_DB_RESULT_EMPTY_RECORD)
+                {
+                    maxValue = 0;
                 }
 
                 _callbackOK(maxValue);

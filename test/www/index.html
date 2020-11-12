@@ -23,13 +23,20 @@
             {
                 min-width: 250px;
                 max-width: 640px;
-                margin: 4px auto;
+                border: solid lightgray;
+                border-width: 1px;
+                margin: 0px auto;
+                /*margin: 4px auto;
                 border: solid lightgray;
                 border-width: 3px;
                 border-radius: 10px;
+                */
+            }
+
+            #myNavigator 
+            {
                 background-color: #efeff4;
             }
-           
         </style>
         
         <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -91,9 +98,8 @@
         <script src="js/test/tests.js"></script>
     </head>
 
-    <body onload="init();">
+    <body style="background-color:green;" onload="init();" >
         <!-- First navigation component: Navigator. This will remain always on top of the app. -->
-        <ons-navigator id="myNavigator" page="views/testView.html">
-        </ons-navigator>
+        <ons-navigator id="myNavigator" page="views/testView.html"></ons-navigator>
     </body>
 </html>

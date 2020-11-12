@@ -75,6 +75,8 @@ Session.prototype.loadAllSpent = function(_cOK, _cERROR)
       function(_result) 
       { 
         Session._this.m_arrSpent = _result;
+        console.log(_result);
+
         if (_cOK != null)
             _cOK(_result);
       },
@@ -155,4 +157,24 @@ Session.prototype.getCategoryById = function(_id)
 Session.prototype.getSubCategoryById = function(_id) 
 {
     return this.getArrayById(this.m_arrSubCategory, _id);
+}
+
+// Calculate total spent by month
+Session.prototype.getTotalsByMonth = function() 
+{
+    var retValue = 
+    {
+        player1TotalSpent:0,
+        player2TotalSpent:0,
+        bothTotalSpent:0
+    }
+
+    this.m_arrSpent.forEach(element => {
+        retValue.player1TotalSpent += element.getPlayer1Spent_float();
+        retValue.player2TotalSpent += element.getPlayer2Spent_float();
+    });
+
+    retValue.bothTotalSpent = retValue.player1TotalSpent + retValue.player2TotalSpent;
+
+    return retValue;
 }

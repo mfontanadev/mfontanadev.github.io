@@ -105,11 +105,6 @@ DBAppDictionary.prototype.init = function(_dbReadyCallback)
     }
 }
 
-DBAppDictionary.prototype.stopDBReadyEvent = function()
-{
-    this.m_dbReadyCallback = null;
-}
-
 /**
  * Populate table with some data for testing porpourses.
  */

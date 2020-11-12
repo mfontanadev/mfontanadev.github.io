@@ -2,8 +2,6 @@ function WhoPaidApplication()
 {
     this.m_db = null;
 	this.m_session = null;
-	this.m_initTimeout = null;
-	this.m_stopInitDB = false;
 }
 
 WhoPaidApplication.prototype.init = function() 
@@ -13,13 +11,6 @@ WhoPaidApplication.prototype.init = function()
 	// Force singleton creation.
 	this.getSession();
 
-	// Timeout db initialization, force app init.
-	this.m_initTimeout = window.setTimeout( function() 
-	{	
-		_this.stopTimeoutDBEvent();
-		_this.initDelayed();
-	}, Config.C_INIT_DB_TIMEOUT * 1000);	
-
 	// Initialize data base engine.	
 	this.getDB();
 	this.m_db.init
@@ -27,17 +18,9 @@ WhoPaidApplication.prototype.init = function()
 		function() 
 		{	
 			console.log("Finish");
-			_this.stopTimeoutDBEvent();
 			_this.initDelayed();
 		}
 	);
-}
-
-WhoPaidApplication.prototype.stopTimeoutDBEvent = function()
-{
-	console.log("*****STOP TIMEOUT EVENT");
-	this.m_db.stopDBReadyEvent();
-	clearTimeout(this.m_initTimeout);
 }
 
 WhoPaidApplication.prototype.getSession = function()
@@ -66,6 +49,7 @@ WhoPaidApplication.prototype.getDB = function()
 WhoPaidApplication.prototype.initDelayed = function() 
 {
 	appLog("initdelayed");
+	
 	// Load all data.
 	this.getSession().init();
 

@@ -2,6 +2,7 @@
 //
 // Plugin
 // https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-file/index.html
+DBManager._this = null;
 
 // FIELD TYPES
 DBManager.C_FIELD_TYPE_TEXT = "TEXT";
@@ -22,15 +23,22 @@ DBManager.C_DB_RESULT_TABLE_FILE_NOT_FOUND = 10006;
 
 function DBManager() 
 {
+    DBManager._this = this;
+
     this.m_tables = new Array();
     this.m_appDictionary = new DBAppDictionary(this);
     this.m_dbLocation = "defaultDataPath";
+
+    this.m_initTimeout = null;
+    this.m_stopDictionaryReadyEvent = false;
+	this.m_dbReadyCallback = null;
 }
 
 DBManager.prototype.init = function(_dbReadyCallback) 
 {
     appLog("\nOn DBManager");
 
+    this.m_dbReadyCallback = _dbReadyCallback;
     //this.m_dbLocation = FileEx.getValidStorageDataPath();
 
     // Some valid db path found
@@ -41,13 +49,35 @@ DBManager.prototype.init = function(_dbReadyCallback)
         appLog("    Create database...");
         this.createDB(this.m_dbLocation);
                     
+        // Timeout db initialization, force app init.
+        this.m_initTimeout = window.setTimeout( function() 
+        {	
+            DBManager._this.m_stopDictionaryReadyEvent = true;
+            DBManager._this.triggerDBReadyEvent();
+        }, Config.C_INIT_DB_TIMEOUT * 1000);	
+
         // Table initialitation.
-        this.m_appDictionary.init(_dbReadyCallback);
+        this.m_appDictionary.init
+        (		
+            function() 
+            {	
+                console.log("Finish");
+                DBManager._this.triggerDBReadyEvent();
+            }
+        );
     }
     else
     {
         appLog("    Storages not availables");
     }
+}
+
+DBManager.prototype.triggerDBReadyEvent = function()
+{
+    clearTimeout(DBManager._this.m_initTimeout);
+
+    if (DBManager._this.m_dbReadyCallback !== null && DBManager._this.m_stopDictionaryReadyEvent === false)
+        DBManager._this.m_dbReadyCallback()
 }
 
 DBManager.prototype.createDB = function(_dbPath)

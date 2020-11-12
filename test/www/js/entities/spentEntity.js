@@ -129,7 +129,6 @@ SpentEntity.prototype.getDate_YYYMMDD = function()
     return Helper.stringLeftFill(sYear, "0", 4) + "/" + Helper.stringLeftFill(sMonth, "0", 2) + "/" + Helper.stringLeftFill(sDay, "0", 2);  
 }
 
-
 SpentEntity.prototype.setDateWithTime = function(_yyyy, _mm, _dd) 
 {
     this.setDate(Helper.getDateWithTime(_yyyy, _mm, _dd, this.m_Date.substring(11, 19)));
