@@ -25,6 +25,25 @@ TestViewController.fullScreen = function()
 	appToggleFullScreen();
 }
 
+TestViewController.dumpLog = function()
+{
+	var _string = appLogData();
+
+	var logArea = document.querySelector('#logArea');
+	if (typeof logArea !== 'undefined' && logArea !== null)
+	{
+		logArea.value = logArea.value + _string + "\n"; 
+		logArea.scrollTop = logArea.scrollHeight;
+		logArea.style.display = 'block';	
+
+		var logAreaDiv = document.querySelector('#divLogArea');
+		if (typeof logAreaDiv !== 'undefined' && logAreaDiv !== null)
+		{
+			logArea.style.width = (logAreaDiv.clientWidth - 16) + "px";
+		}
+	}
+}
+
 // RAW FILE TESTS
 TestViewController.testCreateFile = function()
 {

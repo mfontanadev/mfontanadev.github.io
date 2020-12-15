@@ -1,6 +1,7 @@
 var appData = {
 	'session': null,
-	'db': null	
+	'db': null,	
+	'log': ""
 }
 
 function init()
@@ -61,6 +62,17 @@ function appDB()
 	return appData.db;
 }
 
+function appLogData()
+{
+	if (appData.log === null)
+	{
+		appLog("getLog");
+		appData.log = "";
+	}
+
+	return appData.log;
+}
+
 // Give time to database files to be ready.
 function appInitDelayed()
 {
@@ -75,7 +87,7 @@ function appInitDelayed()
 	// Debug porpouses
 	// appautoLogin();
 
-	onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+	//onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 }
 
 function appAutoLogin()
@@ -111,6 +123,7 @@ function appLog(_string)
 	if (Config.C_LOG === true)
 	{
 		console.log(_string);
+		appData.log += _string;
 
 		var logArea = document.querySelector('#logArea');
 		if (typeof logArea !== 'undefined' && logArea !== null)
