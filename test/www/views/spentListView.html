@@ -1,17 +1,18 @@
 <ons-page  id="spentListView">
-  <ons-toolbar>
-    <div class="left">
-      <!-- Toolbar-button with different icons depending on the platform. -->
-      <ons-toolbar-button component="button/menu" onclick="SpentListViewController.navigateToBack();">Back</ons-toolbar-button>
-    </div>
-    <div class="center">Spent list</div>
-    <div class="right">
-      <!-- Toolbar-button with different icons depending on the platform. -->
-      </div>
-  </ons-toolbar>
+  <!-- Spent widget -->
+  <div id="idSpentidget"></div>
 
   <!-- Spent list -->
   <ons-list id="idSpentList">
   </ons-list>
+
+  <ons-alert-dialog id="spentListView-delete" modifier="rowfooter">
+    <div id="spentListView-delete-title" class="alert-dialog-title">...</div>
+    <div id="spentListView-delete-content" class="alert-dialog-content">...</div>
+    <div class="alert-dialog-footer">
+      <ons-alert-dialog-button id="spentListView-delete-button-cancel" onclick="{}">Cancel</ons-alert-dialog-button>
+      <ons-alert-dialog-button id="spentListView-delete-button-ok" onclick="{}">OK</ons-alert-dialog-button>
+    </div>
+  </ons-alert-dialog>
 
 </ons-page>

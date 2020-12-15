@@ -20,6 +20,7 @@ DBManager.C_DB_RESULT_TABLE_NOT_FOUND = 10003;
 DBManager.C_DB_RESULT_EMPTY_RECORD = 10004;
 DBManager.C_DB_RESULT_EMPTY_VALUES = 10005;
 DBManager.C_DB_RESULT_TABLE_FILE_NOT_FOUND = 10006;
+DBManager.C_DB_RESULT_INSERT_INDEX_OT_OF_BOUND = 10007;
 
 function DBManager() 
 {
@@ -140,6 +141,45 @@ DBManager.prototype.insertRecord = function(_tableName, _values, _callbackOK, _c
     else
     {
         _callbackError(DBManager.C_DB_RESULT_TABLE_NOT_FOUND);
+    }
+}	
+
+DBManager.prototype.insertRecordArray = function(_tableName, _records, _index, _callbackOK, _callbackError)
+{
+    _this = this;
+
+    if (_index < _records.length)
+    {
+        this.insertRecord
+        (
+            _tableName,
+            _records[_index],
+            function(_result) 
+            { 
+                _index++;
+
+                if (_index < _records.length)
+                {
+                    window.setTimeout
+                    ( 
+                        function() 
+                        {	
+                            _this.insertRecordArray(_tableName, _records, _index, _callbackOK, _callbackError);
+                        },
+                        Config.C_DELAY_INSERT_RECORD_MS
+                    );
+                }
+                else
+                {
+                    _callbackOK(_result);
+                }
+            },
+            function(_result) 
+            { 
+                appLog("ERROR (" + _result + "), table:" + _tableName); 
+                _callbackError(_result);
+            }
+        );
     }
 }	
 

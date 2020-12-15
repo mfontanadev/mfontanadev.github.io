@@ -2,66 +2,104 @@
   <ons-toolbar>
     <div class="left">
       <!-- Toolbar-button with different icons depending on the platform. -->
-      <ons-toolbar-button component="button/menu" onclick="TestViewController.navigateToBack();">Back</ons-toolbar-button>
+      <ons-toolbar-button component="button/menu">
+        <ons-icon icon="angle-double-left" onclick="TestViewController.navigateToBack();"></ons-icon>
+      </ons-toolbar-button>
     </div>
     <div class="center">TestView</div>
     <div class="right">
     </div>
   </ons-toolbar>
 
-    <div style="text-align: center; margin-top: 50px">
-    <p>
-      <ons-button onclick="TestViewController.testClearLogArea();">Clear log area</ons-button>
-      <ons-button onclick="TestViewController.gotoLogin();">Login</ons-button>
-      <ons-button onclick="TestViewController.fullScreen();">Full Screen</ons-button>
-      <div id="idToggleFullScreen">Full Screen Status</div>
-    </p>
 
-    <p>
-      File CRUD
-      <br>
-      <ons-button width="40px" style="background-color: blue" onclick="TestViewController.testCreateFile();">Cre</ons-button>
-      <ons-button width="40px" style="background-color: blue" onclick="TestViewController.testReadFile();">Rea</ons-button>
-      <ons-button width="40px" style="background-color: blue" onclick="TestViewController.testAppendFile();">Ins</ons-button>
-      <ons-button width="40px" style="background-color: blue" onclick="TestViewController.testUpdateFile();">Upd</ons-button>
-      <ons-button width="40px" style="background-color: blue" onclick="TestViewController.testDeleteFile();">Del</ons-button>
-    </p>
+    <table style="width:100%">
+      <tr>
+        <td width="25%"><ons-button onclick="TestViewController.testClearLogArea();">Cl log</ons-button></td>
+        <td width="25%"><ons-button onclick="TestViewController.gotoLogin();">Login</ons-button></td>
+        <td width="25%"><ons-button onclick="TestViewController.fullScreen();">Full Scr</ons-button></td>
+        <td width="25%"><ons-button onclick="TestViewController.showDialog();">Show Dia</ons-button></td>
+      </tr>
+      <tr>
+        <td  colspan="4">
+          <div id="idToggleFullScreen">Full Screen Status</div>
+        </td>
+      </tr>
+    </table>
 
-    <p>
-      DBmanager CRUD
-      <br>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testEmptyTable();">Empty</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testReadTable();">Rea</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testUpdateTable('002');">Upd</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testInsertTable();">Ins</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testDeleteTable();">Del</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testPopulateTable(0, 5);">Pop 5</ons-button>
-      <ons-button width="40px" style="background-color: red" onclick="TestViewController.testPopulateTable(0, 200);">Pop 200</ons-button>
-    </p>
+    <br>
 
-    <p>
-      Category test
-      <br>
-      <ons-button width="60px" style="background-color: green" onclick="TestViewController.loadCategories();">Load cat</ons-button>
-      <ons-button width="60px" style="background-color: green" onclick="TestViewController.deleteCategory('02');">Del cat</ons-button>
-      <ons-button width="60px" style="background-color: green" onclick="TestViewController.bechParse(200);">Bench</ons-button>
-      <ons-button width="60px" style="background-color: green" onclick="TestViewController.deleteUser();">Del usr</ons-button>
-      <ons-button width="60px" style="background-color: green" onclick="TestViewController.loadUsers();">Load usr</ons-button>
-    </p>
+    <table style="width:100%">
+      <tr>
+        <td width="16%">Desc</td>
+        <td width="16%">Cre</td>
+        <td width="16%">Read</td>
+        <td width="16%">Upd</td>
+        <td width="16%">Del</td>
+        <td width="16%">Ext</td>
+      </tr>
+      <tr>
+        <td width="16%">File</td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testCreateFile();">Cre</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testReadFile();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testUpdateFile();">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testDeleteFile();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testAppendFile();">Ins</ons-button></td>
+      </tr>
 
+      <tr>
+        <td width="16%">T.Cat</td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testEmptyTable_Category();">Ety</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testReadTable_Category();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testUpdateTable_Category('002');">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testDeleteTable_Category();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testInsertTable_Category();">Ins</ons-button></td>
+      </tr>
 
-    <p>
-      Delete tables
-      <br>
-      <ons-button width="60px" style="background-color: red" onclick="TestViewController.testDeleteTableByName('Category');">D Category </ons-button>
-      <ons-button width="60px" style="background-color: red" onclick="TestViewController.testDeleteTableByName('User');">D User</ons-button>
-      <ons-button width="60px" style="background-color: red" onclick="TestViewController.testDeleteTableByName('Spent');">D Spent</ons-button>
-      <ons-button width="60px" style="background-color: red" onclick="TestViewController.testDeleteTableByName('SubCategory');">D SubCat</ons-button>
-    </p>
+      <tr>
+        <td width="16%">T.SubCat</td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testEmptyTable_SubCategory();">Ety</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testReadTable_SubCategory();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testUpdateTable_SubCategory('100');">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testDeleteTable_SubCategory();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testInsertTable_SubCategory();">Ins</ons-button></td>
+      </tr>
 
-    <p>
-      <textarea id="logArea" class="textarea" rows="10" cols="40" width="100%"></textarea>
-    </p>
+      <tr>
+        <td width="16%">T.Spent</td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testEmptyTable_Spent();">Ety</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testReadTable_Spent();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testUpdateTable_Spent('100');">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testDeleteTable_Spent();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testInsertTable_Spent();">Ins</ons-button></td>
+      </tr>
+
+      <tr>
+        <td width="16%">T.User</td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testEmptyTable_User();">Ety</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testReadTable_User();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testUpdateTable_User('100');">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testDeleteTable_User();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testInsertTable_User();">Ins</ons-button></td>
+      </tr>
+
+      <tr>
+        <td  colspan="6">
+          <ons-button style="background-color: red" onclick="TestViewController.testPopulateSpentTable(0, 5);">Spt Pop 100</ons-button>
+          <ons-button style="background-color: red" onclick="TestViewController.testPopulateCategoryTable(0, 200);">Cat Pop 100</ons-button>
+        </td>
+       </tr>
+    </table>
+
+    <div id="divLogArea" style="display: block;">
+      <textarea class="myTextArea" id="logArea" rows="10"></textarea>
     </div>
 
+    <ons-alert-dialog id="testView-save" modifier="rowfooter">
+      <div id="testView-save-title" class="alert-dialog-title">...</div>
+      <div id="testView-save-content" class="alert-dialog-content">...</div>
+      <div class="alert-dialog-footer">
+        <ons-alert-dialog-button id="testView-save-button-cancel" onclick="{}">Cancel</ons-alert-dialog-button>
+        <ons-alert-dialog-button id="testView-save-button-ok" onclick="{}">OK</ons-alert-dialog-button>
+      </div>
+    </ons-alert-dialog>
   </ons-page>

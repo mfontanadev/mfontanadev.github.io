@@ -18,7 +18,7 @@ function login()
 			{ 
 				if (_userEntity !== null && _userEntity.getPassword() === password)
 				{
-					whoPaidApplication.getSession().setCurrentUser(_userEntity);
+					appSession().setCurrentUser(_userEntity);
 					onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 				}
 				else

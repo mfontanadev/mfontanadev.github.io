@@ -2,7 +2,9 @@
       <ons-toolbar>
         <div class="left">
           <!-- Toolbar-button with different icons depending on the platform. -->
-          <ons-toolbar-button component="button/menu" onclick="AboutViewController.navigateToBack();">Back</ons-toolbar-button>
+          <ons-toolbar-button component="button/menu">
+            <ons-icon icon="angle-double-left" onclick="AboutViewController.navigateToBack();"></ons-icon>
+          </ons-toolbar-button>
         </div>
         <div id="idAboutView_Title" class="center">...</div>
         <div class="right">

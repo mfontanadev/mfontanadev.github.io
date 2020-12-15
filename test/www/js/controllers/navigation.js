@@ -17,17 +17,21 @@ function onInitEvent(_event)
 	console.log("onInitEvent (pageId, page):", page.id, ",", page);
 
 	if (page.id === C_VIEW_PAGE_ID_ABOUT) 
-		whoPaidApplication.getSession().m_aboutViewController.init();
+		appSession().m_aboutViewController.init();
 	else if (page.id === C_VIEW_PAGE_ID_MENU) 
-		whoPaidApplication.getSession().m_menuViewController.init();		
+		appSession().m_menuViewController.init();		
 	else if (page.id === C_VIEW_PAGE_ID_SPENT) 
-		whoPaidApplication.getSession().m_spentViewController.init();	
+		appSession().m_spentViewController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_MAIN)
-		whoPaidApplication.getSession().m_mainViewController.init();	
+		appSession().m_mainViewController.init();	
+	else if (page.id === C_VIEW_PAGE_ID_MAIN)
+		appSession().m_mainViewContentController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_SPENT_LIST)
-		whoPaidApplication.getSession().m_spentListViewController.init();	
+		appSession().m_spentListViewController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_TEST)
-		whoPaidApplication.getSession().m_testViewController.init();	
+		appSession().m_testViewController.init();	
+	else if (page.id === C_VIEW_PAGE_ID_SPLASH)
+		appSession().m_splashViewController.init();	
 }
 
 function onsenMenuOpen()

@@ -2,7 +2,9 @@
   <ons-toolbar>
     <div class="left">
       <!-- Toolbar-button with different icons depending on the platform. -->
-      <ons-toolbar-button component="button/menu" onclick="SpentViewController.navigateToBack();">Back</ons-toolbar-button>
+      <ons-toolbar-button component="button/menu">
+        <ons-icon icon="angle-double-left" onclick="SpentViewController.navigateToBack();"></ons-icon>
+      </ons-toolbar-button>
     </div>
     <div id="idSpentView_Title" class="center">...</div>
     <div class="right">
@@ -19,26 +21,45 @@
       <ons-list-header id="lblSpentQtty"><strong>Me spent / Not me spent</strong></ons-list-header>
 
       <ons-list-item modifier="nodivider">
-          <ons-input id="edMeNewSpent" class="center list-item__center" modifier="underbar material" value="" type="text" /></ons-input>
-          <ons-input id="edNotMeNewSpent"  class='right list-item__center' modifier="underbar material" value="" type="text" /></ons-input>
-      </ons-list-item>
-
-      <!-- Category input -->
-      <ons-list-header id="lblCategory"><strong>Category</strong></ons-list-header>
-      <ons-list id="idSpentType">
-      </ons-list>
-   
-       <!-- Date -->
-      <ons-list-header id="lblDate"><strong>Date</strong></ons-list-header>
-      <ons-list-item >
-          <ons-input id="edDatePicker" class="list-item__center" vmodifier="underbar material" value="" type="text" ></ons-input>
+          <ons-input id="edMeNewSpent" class="center list-item__center  " modifier="underbar material" value="" type="text" /></ons-input>
+          <ons-input id="edNotMeNewSpent"  class="right list-item__center  " modifier="underbar material" value="" type="text" /></ons-input>
       </ons-list-item>
 
       <!-- Description -->
       <ons-list-header id="lblDescription"><strong>Description</strong></ons-list-header>
-      <ons-list-item >
-          <ons-input id="edObservation" class="list-item__center" modifier="underbar material" value="" type="text"></ons-input>
+      <ons-list-item modifier="nodivider" class="list-item__center__custompadding">
+          <ons-input id="edObservation" class="list-item__center list-item__center__custompadding" modifier="underbar material" value="" type="text"></ons-input>
       </ons-list-item>
+
+      <!-- Category input -->
+      <!--
+      <ons-list-header id="lblCategory"><strong>Type</strong></ons-list-header>
+      <ons-list id="idSpentType">
+      </ons-list>
+      -->
+
+      <!--<ons-list-header id="lblCategory"><strong>Category</strong></ons-list-header>-->
+      <table style="width:100%">
+        <tr style="vertical-align:top">
+          <td width="50%">
+            <ons-list-header><strong>Category</strong></ons-list-header>
+            <ons-list id="idSpentTypeCategory">
+            </ons-list>
+          </td>
+          <td width="50%">
+            <ons-list-header ><strong>Sub category</strong></ons-list-header>
+            <ons-list id="idSpentTypeSubCategory">
+            </ons-list>
+          </td>
+        </tr>
+      </table>
+
+       <!-- Date -->
+      <ons-list-header id="lblDate"><strong>Date</strong></ons-list-header>
+      <ons-list-item modifier="nodivider">
+          <ons-input id="edDatePicker" class="list-item__center  list-item__center__custompadding" vmodifier="underbar material" value="" type="text" ></ons-input>
+      </ons-list-item>
+
   </ons-list>
 
 </ons-page>

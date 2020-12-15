@@ -2,7 +2,6 @@ TimeDiff.logTimes = false;
 TimeDiff.times = new Array();
 
 function TimeDiff() 
-
 {
     this.m_key = "";
     this.m_value = "";
@@ -32,7 +31,7 @@ TimeDiff.prototype.showTimeDiff = function(_key)
     this.showTimeDiffBase(_key, null);
 }
 
-TimeDiff.prototype.showTimeDiffCustomeConsole = function(_key, _customConsoleFunction)
+TimeDiff.prototype.showTimeDiffCustomConsole = function(_key, _customConsoleFunction)
 {
     this.showTimeDiffBase(_key, _customConsoleFunction);
 }

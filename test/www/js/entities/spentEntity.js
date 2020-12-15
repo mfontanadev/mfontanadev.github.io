@@ -83,7 +83,7 @@ SpentEntity.prototype.getPlayer2Spent_float = function()
 SpentEntity.prototype.setDate = function(_Date) 
 {
     if (_Date === "")
-        this.m_Date = "1900/01/01 00:00:00";
+        this.m_Date = Helper.getCurrentDateWithTime();
     else
         this.m_Date = _Date;
 }
@@ -91,7 +91,7 @@ SpentEntity.prototype.setDate = function(_Date)
 SpentEntity.prototype.getDate = function() 
 {
     if (this.m_Date === "")
-        return "1900/01/01 00:00:00";
+        return Helper.getCurrentDateWithTime();
     else
         return this.m_Date;
 }
@@ -134,36 +134,34 @@ SpentEntity.prototype.setDateWithTime = function(_yyyy, _mm, _dd)
     this.setDate(Helper.getDateWithTime(_yyyy, _mm, _dd, this.m_Date.substring(11, 19)));
 }
 
+SpentEntity.prototype.setCategoryDefault = function() 
+{
+    this.setCategoryId("");
+}
+
 SpentEntity.prototype.setCategoryId = function(_CategoryId) 
 {
-    if (_CategoryId === "")
-        this.m_CategoryId = "1";
-    else	
-        this.m_CategoryId = _CategoryId;
+    this.m_CategoryId = _CategoryId;
 }
 
 SpentEntity.prototype.getCategoryId = function() 
 {
-    if (this.m_CategoryId === "")
-        return "1";
-    else	
-        return this.m_CategoryId;
+    return this.m_CategoryId;
+}
+
+SpentEntity.prototype.setSubCategoryDefault = function() 
+{
+    this.setSubCategoryId("");
 }
 
 SpentEntity.prototype.setSubCategoryId = function(_SubCategoryId) 
 {
-    if (_SubCategoryId === "")
-        this.m_SubCategoryId = "1";
-    else	
-        this.m_SubCategoryId = _SubCategoryId;
+    this.m_SubCategoryId = _SubCategoryId;
 }
 
 SpentEntity.prototype.getSubCategoryId = function() 
 {
-    if (this.m_SubCategoryId === "")
-        return "1";
-    else	
-        return this.m_SubCategoryId;
+    return this.m_SubCategoryId;
 }
 
 SpentEntity.prototype.setDetail = function(_Detail) 

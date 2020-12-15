@@ -4,20 +4,49 @@ function SpentViewController()
 {
   SpentViewController._this = this;
   this.VIEW_MODE = C_VIEW_MODE_NOT_SET;
+
+  this.m_edMeNewSpent = null;
+  this.m_edNotMeNewSpent = null;
+  this.m_spentCategory = null;
+  this.m_spentSubCategory = null;
+  this.m_edObservation = null;
+  this.m_edDatePicker = null;
 }
 
 SpentViewController.prototype.init = function()
 {
-  if (whoPaidApplication.getSession().getCurrentSpent() === null)
+  this.handleControls();
+  
+  this.resolveModeView();
+}
+
+SpentViewController.prototype.handleControls = function() 
+{
+  this.m_edMeNewSpent = document.querySelector('#edMeNewSpent');
+  this.m_edNotMeNewSpent = document.querySelector('#edNotMeNewSpent');
+  
+  this.m_spentCategory = document.getElementById("idSpentTypeCategory");
+  this.m_spentSubCategory = document.getElementById("idSpentTypeSubCategory");
+
+  this.m_edObservation = document.querySelector('#edObservation');
+  this.m_edDatePicker = document.querySelector('#edDatePicker');
+}
+
+SpentViewController.prototype.resolveModeView = function() 
+{
+  if (appSession().getCurrentSpent() === null)
   {
     this.VIEW_MODE = C_VIEW_MODE_NEW;
     this.setPageTitle();
 
     // If it is a new spent then create one and wait callback to update controls.
-    whoPaidApplication.getSession().createNewSpent
+    appSession().createNewSpent
     (
       function(_result)
       {
+        appSession().getCurrentSpent().setPlayer1Spent(0);
+        appSession().getCurrentSpent().setPlayer2Spent(0);
+
         SpentViewController._this.updateControlValuesWithData();
       },
       function(_result) 
@@ -47,81 +76,69 @@ SpentViewController.prototype.setPageTitle = function()
 
 SpentViewController.prototype.updateControlValuesWithData = function() 
 {
-  var spent = whoPaidApplication.getSession().getCurrentSpent();
+  var spent = appSession().getCurrentSpent();
   
-  document.querySelector('#edMeNewSpent').value = spent.getPlayer1Spent();
-  document.querySelector('#edNotMeNewSpent').value = spent.getPlayer2Spent();
-  document.querySelector('#edObservation').value = spent.getDetail();
-  document.querySelector('#edDatePicker').value = spent.getDate_YYYMMDD();
-  
-  this.fillSpentTypeExpandableControl();
-  this.updateFormWithSubCategorySelected(spent.getCategoryId());
+  this.m_edMeNewSpent.value = spent.getPlayer1Spent();
+  this.m_edNotMeNewSpent.value = spent.getPlayer2Spent();
+  this.fillCategoryControl();
+  this.fillSubCategoryControl();
+  this.m_edDatePicker.value = spent.getDate_YYYMMDD();
+  this.m_edObservation.value = spent.getDetail();
 }
 
-SpentViewController.prototype.fillSpentTypeExpandableControl = function()
+SpentViewController.prototype.fillCategoryControl = function()
 {
-  var arrayCategory = whoPaidApplication.getSession().m_arrCategory;
-  var arraySubCategory = whoPaidApplication.getSession().m_arrSubCategory;
+  var arrayCategory = appSession().m_arrCategory;
 
-  // Get html control to be injected.
-  var htmlControl = document.getElementById("idSpentType");
+  var _selectedId = appSession().getCurrentSpent().getCategoryId();
 
+  // Set default.
+  if (_selectedId === "" && arrayCategory.length > 0)
+  {
+    _selectedId = arrayCategory[0].getId();
+    appSession().getCurrentSpent().setCategoryId(_selectedId);
+  }
+
+  var itemHTML = "";
+
+   // Sort arrays.
   Helper.arrayCompare(arrayCategory);
-  Helper.arrayCompare(arraySubCategory);
 
   // Iterate over all array items and push them to the html control.
-  var onsItemExpanded = null;
-  var categoryEntityItem = null;
-  for (var i = 0; i < arrayCategory.length; i++) 
-  {
-    categoryEntityItem = arrayCategory[i];
-    
-    // Create item header expandable
-    onsItemExpanded = document.createElement('ons-list-item');
-    onsItemExpanded.setAttribute('expandable');
-    onsItemExpanded.setAttribute('tappable');
-    onsItemExpanded.setAttribute('tap-background-color', "#A0A0A0");
-    
-    // Add subcategory items
-    var itemHTML = "<strong>" + categoryEntityItem.getName() + "</strong>";
-    
-    itemHTML += '<div class="expandable-content">';
+  arrayCategory.forEach(element => {
+    itemHTML += this.categoryListItem_Content(element, _selectedId);
+  });
 
-    var onsItem = null;
-    var subCategoryEntityItem = null;
-    for (var ii = 0; ii < arraySubCategory.length; ii++) 
-    {
-      subCategoryEntityItem = arraySubCategory[ii];
-  
-      if (this.categorySpentForeignKeyValidator(categoryEntityItem, subCategoryEntityItem) === true)
-      {
-          itemHTML += this.categoryTypeListItem_Content
-          (
-            subCategoryEntityItem.getName(), 
-            "SpentViewController.onclick_subCategorySelected(this, " + "'" + subCategoryEntityItem.getId() + "'" + ");"
-          );
-      }
-    }
-
-    itemHTML += '</div>';
-
-    onsItemExpanded.innerHTML = itemHTML;
-
-    // Append header item.
-    htmlControl.appendChild(onsItemExpanded);
-  }
+  // Update control.
+  this.m_spentCategory.innerHTML = itemHTML;
 }
 
-SpentViewController.prototype.categoryTypeListItem_Content = function(_itemDetail, _itemOnClick)
+SpentViewController.prototype.categoryListItem_Content = function(_categoryEntity, _selectedId)
 {
-  var content =
-  `
-   <ons-list-item tappable="undefined" tap-background-color="#FF0000" onclick="{{_itemOnClick}}" class="list-item">
-     <div class="center list-item__center">
-         {{_itemDetail}}    
-      </div>
-   </ons-list-item>
-   `;
+  var _itemOnClick = "SpentViewController.onclick_categorySelected(this, " + "'" + _categoryEntity.getId() + "'" + ");"
+  var _itemDetail = _categoryEntity.getName();
+
+  var content = "";
+  if (_categoryEntity.getId() === _selectedId)
+  {
+    content = `
+    <ons-list-item tappable="undefined" onclick="{{_itemOnClick}}" class="list-item">
+      <div align="left">
+          <strong>{{_itemDetail}}</strong>    
+        </div>
+    </ons-list-item>
+    `;
+  }
+  else
+  {
+    content = `
+    <ons-list-item tappable="undefined" onclick="{{_itemOnClick}}" class="list-item">
+      <div align="left">
+          {{_itemDetail}}
+        </div>
+    </ons-list-item>
+    `;
+  }
  
    content = content.replace("_itemDetail", _itemDetail);
    content = content.replace("_itemOnClick", _itemOnClick);  
@@ -132,33 +149,94 @@ SpentViewController.prototype.categoryTypeListItem_Content = function(_itemDetai
    return content;
 }
 
-SpentViewController.prototype.categorySpentForeignKeyValidator = function(_parentItem, _childItem)
+SpentViewController.prototype.fillSubCategoryControl = function()
+{  
+  var _categoryId = appSession().getCurrentSpent().getCategoryId();
+  var arraySubCategory = CategoryService.WSGetSubcategoriesFromCategory(_categoryId);
+
+  var _selectedId = appSession().getCurrentSpent().getSubCategoryId();
+  if (_selectedId === "" && arraySubCategory.length > 0)
+  {
+    _selectedId = arraySubCategory[0].getId();
+    appSession().getCurrentSpent().setSubCategoryId(_selectedId);
+  }
+
+  var itemHTML = "";
+
+  // Sort arrays
+  Helper.arrayCompare(arraySubCategory);
+
+  // Iterate over all array items and push them to the html control.
+  arraySubCategory.forEach(element => {
+    if (element.getCategoryId() === _categoryId)
+    {
+      itemHTML += this.subCategoryListItem_Content(element, _selectedId);
+    }
+  });
+
+  this.m_spentSubCategory.innerHTML = itemHTML;
+}
+
+SpentViewController.prototype.subCategoryListItem_Content = function(_subCategoryEntity, _selectedId)
 {
-  //console.log (_parentItem.getId() + " ... " +  _childItem.getCategoryId());
-  return _parentItem.getId() === _childItem.getCategoryId();
+  var _itemOnClick = "SpentViewController.onclick_subCategorySelected(this, " + "'" + _subCategoryEntity.getId() + "'" + ");"
+  var _itemDetail = _subCategoryEntity.getName();
+
+  var content = "";
+  if (_subCategoryEntity.getId() === _selectedId)
+  {
+    content = `
+    <ons-list-item tappable="undefined" onclick="{{_itemOnClick}}" class="list-item">
+      <div align="left">
+          <strong>{{_itemDetail}}</strong>    
+        </div>
+    </ons-list-item>
+    `;
+  }
+  else
+  {
+    content = `
+    <ons-list-item tappable="undefined" onclick="{{_itemOnClick}}" class="list-item">
+      <div align="left">
+          {{_itemDetail}}
+        </div>
+    </ons-list-item>
+    `;
+  }
+ 
+  content = content.replace("_itemDetail", _itemDetail);
+  content = content.replace("_itemOnClick", _itemOnClick);  
+   
+  content = content.replace(/{{/gi, "");  
+  content = content.replace(/}}/gi, ""); 
+   
+   return content;
+}
+
+SpentViewController.onclick_categorySelected = function(_sender, _elementId)
+{
+  var spent = appSession().getCurrentSpent();
+  
+  // Update current spent new category selected.
+  spent.setCategoryId(_elementId);
+
+  // Update category selector with selected category.
+  SpentViewController._this.fillCategoryControl();
+
+  // Clear subcategory control.
+  spent.setSubCategoryDefault();
+  SpentViewController._this.fillSubCategoryControl();
 }
 
 SpentViewController.onclick_subCategorySelected = function(_sender, _elementId)
 {
-  whoPaidApplication.getSession().m_spentViewController.updateFormWithSubCategorySelected(_elementId);
-}
+  var spent = appSession().getCurrentSpent();
+  
+  // Update current spent new category selected.
+  spent.setSubCategoryId(_elementId);
 
-// This function can be used at initial time and when user changes category type.
-SpentViewController.prototype.updateFormWithSubCategorySelected = function(_elementId)
-{
-  if (_elementId !== "")
-  {
-    var subCategory = whoPaidApplication.getSession().getSubCategoryById(_elementId);
-    var category = whoPaidApplication.getSession().getCategoryById(subCategory.getCategoryId());
-    
-    // Update category type title element.
-    document.querySelector('#lblCategory').innerHTML = "<strong>" + "Category: " + category.getName() + " \\ " + subCategory.getName() + "</strong>";
-
-    // Update current spent with category type selection.
-    var spent = whoPaidApplication.getSession().getCurrentSpent();
-    spent.setCategoryId(category.getId());
-    spent.setSubCategoryId(subCategory.getId());
-  }
+  // Update subcategory selector with selected subcategory.
+  SpentViewController._this.fillSubCategoryControl(spent.getCategoryId(), spent.getSubCategoryId());
 }
 
 // Current spent can be added or updated depends on VOEW_MODE.
@@ -172,9 +250,19 @@ SpentViewController.onclick_commitSpent = function()
     SpentViewController._this.updateCurrentSpent();
 } 
 
+SpentViewController.prototype.updateDataWithControlValues = function()
+{
+  var spent = appSession().getCurrentSpent();
+
+  spent.setPlayer1Spent(this.m_edMeNewSpent.value);
+  spent.setPlayer2Spent(this.m_edNotMeNewSpent.value);
+  spent.setDetail(this.m_edObservation.value);
+  spent.setDate(this.m_edDatePicker.value);
+}
+
 SpentViewController.prototype.addCurrentSpent = function()
 {
-  var spent = whoPaidApplication.getSession().getCurrentSpent();
+  var spent = appSession().getCurrentSpent();
   console.log("Saving Spent:");
   console.log(spent);
 
@@ -185,17 +273,8 @@ SpentViewController.prototype.addCurrentSpent = function()
     spent,
     function(_result)
     {
-      whoPaidApplication.getSession().loadAllSpent
-      (
-        function(_result)
-        {
-          onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
-        },
-        function(_spents)
-        {
-          onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
-        }
-      );
+      appSession().reloadAllData();
+      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
     },
     function(_result)
     {
@@ -206,7 +285,7 @@ SpentViewController.prototype.addCurrentSpent = function()
 
 SpentViewController.prototype.updateCurrentSpent = function()
 {
-  var spent = whoPaidApplication.getSession().getCurrentSpent();
+  var spent = appSession().getCurrentSpent();
   console.log("Updating Spent:");
   console.log(spent);
 
@@ -217,17 +296,8 @@ SpentViewController.prototype.updateCurrentSpent = function()
     spent,
     function(_result)
     {
-      whoPaidApplication.getSession().loadAllSpent
-      (
-        function(_result)
-        {
-          onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
-        },
-        function(_spents)
-        {
-          onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
-        }
-      );
+      appSession().reloadAllData();
+      onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
     },
     function(_result)
     {
@@ -236,27 +306,10 @@ SpentViewController.prototype.updateCurrentSpent = function()
   );
 }
 
-SpentViewController.prototype.updateDataWithControlValues = function()
-{
-  var spent = whoPaidApplication.getSession().getCurrentSpent();
-
-  spent.setPlayer1Spent(document.querySelector('#edMeNewSpent').value);
-  spent.setPlayer2Spent(document.querySelector('#edNotMeNewSpent').value);
-  spent.setDetail(document.querySelector('#edObservation').value);
-  spent.setDate(document.querySelector('#edDatePicker').value);
-}
-
-SpentViewController.onclick_listSpent = function(_sender, _id)
-{
-  testGetAllSpent();
-} 
-
 SpentViewController.navigateToBack = function()
 {
-  _this = whoPaidApplication.getSession().m_spentViewController;
-
-  if (_this.VIEW_MODE === C_VIEW_MODE_NEW)
+  if (SpentViewController._this.VIEW_MODE === C_VIEW_MODE_NEW)
     onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
-  else if (_this.VIEW_MODE === C_VIEW_MODE_EDITION)
-    onsenNavigateTo(C_VIEW_PAGE_ID_SPENT_LIST);
+  else if (SpentViewController._this.VIEW_MODE === C_VIEW_MODE_EDITION)
+    onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 }

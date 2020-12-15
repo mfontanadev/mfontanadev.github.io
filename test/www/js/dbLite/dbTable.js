@@ -274,7 +274,7 @@ DBTable.prototype.getMaxID = function(_fieldToLook, _callbackOK, _callbackError)
                     for (var i = 0; i < allRecords.rows().length; i++)
                     {
                         fieldValue = allRecords.getString(i, lookToFieldIndex);
-                        console.log(fieldValue);
+                        console.log("GetMaxId=" + fieldValue);
                         if (fieldValue > maxValue)
                             maxValue = fieldValue;
                     }

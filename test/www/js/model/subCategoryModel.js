@@ -36,7 +36,7 @@ SubCategoryModel.prototype.getAllSubCategory = function(_cOK, _cERROR)
 
 	Helper.clearArray(records);
 
-	whoPaidApplication.getDB().selectAll
+	appDB().selectAll
 	(
 		DBAppDictionary.C_DB_TABLE_SUBCATEGORY, 
 		cursor, 
@@ -76,7 +76,7 @@ SubCategoryModel.prototype.addSubCategory = function(_entity, _cOK, _cERROR)
     // Agregar algunas categorias.
 	var record = _entity.getRecord();
 
-	whoPaidApplication.getDB().insertRecord
+	appDB().insertRecord
 	(
 		DBAppDictionary.C_DB_TABLE_SUBCATEGORY,
 		record,

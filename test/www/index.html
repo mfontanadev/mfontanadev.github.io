@@ -26,6 +26,7 @@
                 border: solid lightgray;
                 border-width: 1px;
                 margin: 0px auto;
+                background-color: #efeff4;
                 /*margin: 4px auto;
                 border: solid lightgray;
                 border-width: 3px;
@@ -36,6 +37,11 @@
             #myNavigator 
             {
                 background-color: #efeff4;
+            }
+
+            #splashView .page__background {
+                background-image: url('img/splash_view.png');
+                background-repeat:no-repeat;
             }
         </style>
         
@@ -52,7 +58,6 @@
         <script src="js/app.js"></script>
         <script src="js/config.js"></script>
         <script src="js/constants.js"></script>
-        <script src="js/whoPaidApplication.js"></script>
 
         <!-- Data base engine-->
         <script src="js/dbLite/dbManager.js"></script>
@@ -75,6 +80,10 @@
         <script src="js/model/userModel.js"></script>
         <script src="js/model/session.js"></script>
 
+        <!-- Service -->
+        <script src="js/service/spentService.js"></script>
+        <script src="js/service/categoryService.js"></script>
+
         <!-- Helpers -->
         <script src="js/helpers/fileEx.js"></script>
         <script src="js/helpers/helper.js"></script>
@@ -91,15 +100,17 @@
 
         <script src="js/controllers/aboutViewController.js"></script>
         <script src="js/controllers/spentViewController.js"></script>
+        <script src="js/controllers/splashViewController.js"></script>
         <script src="js/controllers/mainViewController.js"></script>
+        <script src="js/controllers/mainViewContentController.js"></script>
         <script src="js/controllers/spentListViewController.js"></script>
 
         <!-- Test -->
         <script src="js/test/tests.js"></script>
     </head>
 
-    <body style="background-color:green;" onload="init();" >
+    <body style="background-color:efeff4;" onload="init();" >
         <!-- First navigation component: Navigator. This will remain always on top of the app. -->
-        <ons-navigator id="myNavigator" page="views/testView.html"></ons-navigator>
+        <ons-navigator id="myNavigator" page="views/splashView.html"></ons-navigator>
     </body>
 </html>

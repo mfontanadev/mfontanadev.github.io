@@ -36,13 +36,14 @@ SpentModel.prototype.getAllSpent = function(_cOK, _cERROR)
 
 	Helper.clearArray(records);
 
-	whoPaidApplication.getDB().selectAll
+	appDB().selectAll
 	(
 		DBAppDictionary.C_DB_TABLE_SPENT, 
 		cursor, 
 		function(_result)
 		{
-			if (_result === DBManager.C_DB_RESULT_OK)
+            if (_result === DBManager.C_DB_RESULT_OK || 
+                _result === DBManager.C_DB_RESULT_EMPTY_RECORD)
 			{
 				for (var i = 0; i < cursor.rows().length; i++)
 				{
@@ -79,7 +80,7 @@ SpentModel.prototype.addSpent = function(_entity, _cOK, _cERROR)
 {
 	var record = _entity.getRecord();
 
-	whoPaidApplication.getDB().insertRecord
+	appDB().insertRecord
 	(
 		DBAppDictionary.C_DB_TABLE_SPENT,
 		record,
@@ -98,7 +99,7 @@ SpentModel.prototype.updateSpent = function(_entity, _cOK, _cERROR)
 {
 	var record = _entity.getRecord();
 
-    whoPaidApplication.getDB().updateRecord
+    appDB().updateRecord
 	(
         DBAppDictionary.C_DB_TABLE_SPENT,
         DBAppDictionary.C_DB_TABLE_SPENT_ID,
@@ -117,14 +118,14 @@ SpentModel.prototype.updateSpent = function(_entity, _cOK, _cERROR)
 
 SpentModel.prototype.deleteSpentById = function(_id, _cOK, _cERROR) 
 {
-    whoPaidApplication.getDB().deleteRecord
+    appDB().deleteRecord
 	(
         DBAppDictionary.C_DB_TABLE_SPENT,
         DBAppDictionary.C_DB_TABLE_SPENT_ID,
         _id,
         function(_result) 
         { 
-            whoPaidApplication.getSession().loadAllSpent
+            appSession().loadAllSpent
             (
                 function() {_cOK(_result); },
                 function() { Helper.logAndCallError("ERROR (" + _result + "), table:", _cERROR); }

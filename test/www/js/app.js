@@ -1,4 +1,7 @@
-var whoPaidApplication = null;
+var appData = {
+	'session': null,
+	'db': null	
+}
 
 function init()
 {
@@ -8,14 +11,11 @@ function init()
 	{
 		appLog("********** On deviceReady");
 		appLog("Device type:" + getDeviceType());
-		FullScreen.init("myNavigator");
-		//appLogCordovaFile(cordova.file);
-		//log(ons.platform.isIPad());
-
-		// Init app singleton to hold: database, session and global constants.
-		whoPaidApplication = new WhoPaidApplication();
-		whoPaidApplication.init();
 		
+		TimeDiff.logTimes = true;
+		
+		FullScreen.init("myNavigator");
+
 		// Call init function of controllers classes after transition is finished.
 		// This will be called after 'deviceReady'
 		document.addEventListener('init', function(event) 
@@ -23,7 +23,87 @@ function init()
 			appLog("********** On init");
 			onInitEvent(event);
 		});
+
+		// Init app singleton to hold: database, session and global constants.
+		appSession();
+
+		// Initialize data base engine.	
+		appDB().init
+		(
+			function() 
+			{	
+				console.log("Finish");
+				appInitDelayed();
+			}
+		);
 	});
+}
+
+function appSession()
+{
+	if (appData.session === null)
+	{
+		appLog("getSession");
+		appData.session = new Session();
+	}
+
+	return appData.session;
+}
+
+function appDB()
+{
+	if (appData.db === null)
+	{
+		appLog("getDB");
+		appData.db = new DBManager();
+	}
+
+	return appData.db;
+}
+
+// Give time to database files to be ready.
+function appInitDelayed()
+{
+	appLog("initdelayed");
+	
+	// Load all data.
+	appSession().init();
+
+	// Unit Tests
+	// runModelTests();
+
+	// Debug porpouses
+	// appautoLogin();
+
+	onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+}
+
+function appAutoLogin()
+{
+    const username = "User2";
+	const password = "Pass2";
+    var userModel = new UserModel();
+
+	userModel.findUserByName
+	(
+		username, 
+		function(_userEntity) 
+		{ 
+			if (_userEntity !== null)
+			{
+				appSession().setCurrentUser(_userEntity);
+				appLog("Current user ID:" + _userEntity.log());
+				onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+			}
+			else
+                appLog("AutoLogin; FAILED");
+
+		},
+		function(_result) 
+		{
+			appLog("login, " + _result); 
+		}
+	);
 }
 
 function appLog(_string)
@@ -38,6 +118,12 @@ function appLog(_string)
 			logArea.value = logArea.value + _string + "\n"; 
 			logArea.scrollTop = logArea.scrollHeight;
 			logArea.style.display = 'block';	
+
+			var logAreaDiv = document.querySelector('#divLogArea');
+			if (typeof logAreaDiv !== 'undefined' && logAreaDiv !== null)
+			{
+				logArea.style.width = (logAreaDiv.clientWidth - 16) + "px";
+			}
 		}
 	}
 }
@@ -81,7 +167,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.1.17";
+    return "1.3.0";
 }
 
 function appName()
@@ -108,14 +194,14 @@ function appToggleFullScreen()
 	
 	if (!FullScreen.fullScreenApi.isFullScreen()) 
 	{
-		document.getElementById("idToggleFullScreen").innerHTML = "Exit full screen";
 		FullScreen.fullScreenApi.requestFullScreen(fsElement);
 	} 
 	else 
 	{
-		document.getElementById("idToggleFullScreen").innerHTML = "Full Screen";
 		FullScreen.fullScreenApi.cancelFullScreen(fsElement);
 	}
+
+	MenuViewController.updateFullScreenLabel();
 }
 
 function getDeviceType()
@@ -147,72 +233,3 @@ function getDeviceType()
 	appLog("device type:" + returnValue);
 	return returnValue;
 }
-
-/*
-function getDeviceType()
-{
-	const ua = navigator.userAgent;
-
-	appLog(ua);
-	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) 
-	{
-	  return "tablet";
-	}
-
-	if (/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/i.test(ua)) 
-	{
-	  return "mobile";
-	}
-	
-	return "desktop";
-};
-*/
-
-/*
-function appToggleFullScreen() 
-{
-	if (!document.fullscreenElement) 
-	{
-		document.getElementById("idToggleFullScreen").innerHTML = "Exit full screen";
-		document.documentElement.requestFullscreen();
-	} 
-	else 
-	{
-	  if (document.exitFullscreen) 
-	  {
-		document.getElementById("idToggleFullScreen").innerHTML = "Full Screen";
-		document.exitFullscreen(); 
-	  }
-	}
-}
-*/
-
-  /*
-  function appRequestFullscreen(ele) {
-	if (ele.requestFullscreen) {
-	  ele.requestFullscreen();
-	} else if (ele.webkitRequestFullscreen) {
-	  ele.webkitRequestFullscreen();
-	} else if (ele.mozRequestFullScreen) {
-	  ele.mozRequestFullScreen();
-	} else if (ele.msRequestFullscreen) {
-	  ele.msRequestFullscreen();
-	} else {
-	  console.log('Fullscreen API is not supported.');
-	}
-  };
-
-  var exitFullscreen = function () {
-	if (document.exitFullscreen) {
-	  document.exitFullscreen();
-	} else if (document.webkitExitFullscreen) {
-	  document.webkitExitFullscreen();
-	} else if (document.mozCancelFullScreen) {
-	  document.mozCancelFullScreen();
-	} else if (document.msExitFullscreen) {
-	  document.msExitFullscreen();
-	} else {
-	  console.log('Fullscreen API is not supported.');
-	}
-  };
-  */

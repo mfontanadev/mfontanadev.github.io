@@ -73,7 +73,7 @@ function findUser_resultFound()
 
 function testTableExists()
 {
-	whoPaidApplication.getDB().existsTableFile
+	appDB().existsTableFile
 	(
 		DBAppDictionary.C_DB_TABLE_USER, 
 		function(_result)
@@ -92,7 +92,7 @@ function testMaxIDOnUserTable()
     var testDescription = "TEST testMaxIDOnUserTable: ";
     appLog(testDescription);
 
-	whoPaidApplication.getDB().getMaxID
+	appDB().getMaxID
 	(
 		DBAppDictionary.C_DB_TABLE_USER,
 		DBAppDictionary.C_DB_TABLE_USER_ID,
