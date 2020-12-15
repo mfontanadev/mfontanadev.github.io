@@ -87,7 +87,7 @@ function appInitDelayed()
 	// Debug porpouses
 	// appautoLogin();
 
-	//onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+	onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
 }
 
 function appAutoLogin()
@@ -180,7 +180,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.3.0";
+    return "1.3.1";
 }
 
 function appName()

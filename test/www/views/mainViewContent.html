@@ -1,30 +1,21 @@
 <ons-page id="mainViewContent">
     <ons-toolbar>
         <div class="left">
-        <!-- Toolbar-button with different icons depending on the platform. -->
-        <ons-toolbar-button id="idMenu" component="button/menu" onclick="onsenMenuOpen();">
-            <ons-icon icon="md-menu" size="material:24px"></ons-icon>
-        </ons-toolbar-button>
+            <!-- Toolbar-button with different icons depending on the platform. -->
+            <ons-toolbar-button id="idMenu" component="button/menu" onclick="onsenMenuOpen();">
+                <ons-icon icon="md-menu" size="material:24px"></ons-icon>
+            </ons-toolbar-button>
         </div>
-        <div id="idMainView_Title" class="center">Main</div>
+        <div id="idMainView_Title" class="center">
+            Main
+        </div>
         <div class="right">
-        <!-- Toolbar-button  only visible for iOS/other. -->
-        <ons-if platform="ios other">
             <ons-toolbar-button component="button/menu">
             <ons-icon icon="plus-circle" onclick="MainViewContentController.newSpent();"></ons-icon>
             </ons-toolbar-button>
-        </ons-if>
         </div>
     </ons-toolbar>
-          
-        
-    <!-- Floating Action Button only visible for Android. -->
-    <ons-if platform="android">
-    <ons-fab position="right bottom" component="button/new-task" onclick="MainViewContentController.newSpent();">
-        <ons-icon icon="plus-circle"></ons-icon>
-    </ons-fab>
-    </ons-if>
-    
+                 
     <ons-tabbar swipeable position="auto">
         <ons-tab page="views/spentListView.html" label="Spent list" icon="align-left" active>
         </ons-tab>
