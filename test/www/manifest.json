@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "HelloCordova",
-  "short_name": "HelloCordova",
+  "name": "WhoPaidEx",
+  "short_name": "WhoPaidEx",
   "version": "io.cordova.hellocordova",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
+  "description": "App to keep your spents registered.",
+  "author": "mfontanadev",
   "icons": [],
   "start_url": "index.html"
 }
