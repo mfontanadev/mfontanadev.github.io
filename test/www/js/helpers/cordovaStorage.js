@@ -1,53 +1,41 @@
 /**
- * Encapsulate most usefull file properties and uri properties.
+ * Class CordovaStorage:
+ * 		Functions to save, read, insert, and update files
+ * 		usgin cordova file system solution.
+ * 
+ * 
  */
-function FileEx() 
+function CordovaStorage () 
 {
-	this.m_file = null;
-	this.m_fileName = "";
-	this.m_filePath = "";
-	this.uri = "";
 }	
 
-/**
- * Contructor.
- */
-FileEx.prototype.FileEx_withPathAndName = function(_filePath, _fileName)
-{   		
-	this.m_filePath = _filePath;
-	this.m_fileName = _fileName;
+CordovaStorage.prototype.init = function ()
+{
 }
 
-/**
- * Returns string with the path to data directoy inside de app context.
- * Always find external storege before local storage.
- *
- * If none of store types available returns an empty string.
- */
-FileEx.getValidStorageDataPath = function()
+CordovaStorage.isSupported = function()
 {
-	var result = "";
-
-	// Check if cordova file engine is intalled.	
-	if (typeof cordova.file !== 'undefined' && cordova.file !== null)
-	{
-		if (typeof cordova.file.externalDataDirectory !== 'undefined' && cordova.file.externalDataDirectory !== null)
-			result = cordova.file.externalDataDirectory;
-		else if (typeof cordova.file.dataDirectory !== 'undefined' && cordova.file.dataDirectory !== null)
-			result = cordova.file.dataDirectory;
-	}
-
-	result = thi.getFileSystemType();
+	var result = (typeof(cordova.file) !== "undefined" && cordova.file !== null);
+	appLog("cordovaStorage supported:" + result);
 	return result;
+}
+
+CordovaStorage.prototype.test = function ()
+{
+}
+
+CordovaStorage.prototype.dumpFileSystemData = function ()
+{
 }
 
 /**
  * Write data to file (creates output file or delete if it exists and write the data)
  */
-FileEx.writeToFile = function(_fileName, _content, _callbackOK, _callbackError)
+CordovaStorage.prototype.writeToFile = function(_fileName, _content, _callbackOK, _callbackError)
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	window.requestFileSystem
 	(
 		this.getFileSystemType(), 
@@ -61,19 +49,21 @@ FileEx.writeToFile = function(_fileName, _content, _callbackOK, _callbackError)
 				function (fileEntry) 
 				{
 					var dataObj = new Blob([_content], { type: 'text/plain' });
-					FileEx.write(fileEntry, dataObj, _callbackOK, _callbackError);
+					_this.write(fileEntry, dataObj, _callbackOK, _callbackError);
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 		
 	return bRet;
 }
 
-FileEx.write = function(_fileEntry, _dataObj, _callbackOK, _callbackError) 
+CordovaStorage.prototype.write = function(_fileEntry, _dataObj, _callbackOK, _callbackError) 
 {
+	var _this = this;
+
     _fileEntry.createWriter(
 		function (fileWriter) 
 		{
@@ -84,7 +74,7 @@ FileEx.write = function(_fileEntry, _dataObj, _callbackOK, _callbackError)
 
 			fileWriter.onerror = function (e) 
 			{
-				FileEx.errorHandler(e, _fileEntry.name, _callbackError);
+				_this.errorHandler(e, _fileEntry.name, _callbackError);
 			};
 
 			// If data object is not passed in,
@@ -95,7 +85,7 @@ FileEx.write = function(_fileEntry, _dataObj, _callbackOK, _callbackError)
 			}
 			else
 			{
-				FileEx.errorHandler(null, _fileEntry.name, _callbackError);
+				_this.errorHandler(null, _fileEntry.name, _callbackError);
 			}
     });
 }
@@ -103,10 +93,11 @@ FileEx.write = function(_fileEntry, _dataObj, _callbackOK, _callbackError)
 /**
  * Read entiry file data.
  */
-FileEx.readFile = function(_fileName, _callbackOK, _callbackError)
+CordovaStorage.prototype.readFile = function(_fileName, _callbackOK, _callbackError)
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	//appLog("   File: Read");
 	window.requestFileSystem
 	(
@@ -122,20 +113,22 @@ FileEx.readFile = function(_fileName, _callbackOK, _callbackError)
 				{ create: true}, 
 				function (fileEntry) 
 				{
-					FileEx.read(fileEntry, _callbackOK, _callbackError);
+					_this.read(fileEntry, _callbackOK, _callbackError);
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);
+		function(e){_this.errorHandler(e, _fileName, _callbackError);
 		}
 	);
 		
 	return bRet;
 }
 
-FileEx.read = function(_fileEntry, _callbackOK, _callbackError) 
+CordovaStorage.prototype.read = function(_fileEntry, _callbackOK, _callbackError) 
 {
+	var _this = this;
+
     // Create a FileWriter object for our FileEntry (log.txt).
     _fileEntry.file(
 		function (file) 
@@ -149,22 +142,23 @@ FileEx.read = function(_fileEntry, _callbackOK, _callbackError)
 			
 			reader.onerror = function (e) 
 			{
-				FileEx.errorHandler(e, _fileEntry.name, _callbackError);
+				_this.errorHandler(e, _fileEntry.name, _callbackError);
 			};
 
 			reader.readAsText(file);
 		},
-		function(e){FileEx.errorHandler(e, _fileEntry.name, _callbackError);}
+		function(e){_this.errorHandler(e, _fileEntry.name, _callbackError);}
 	);
 }
 
 /**
  * Delete file.
  */
-FileEx.deleteFile = function(_fileName, _callbackOK, _callbackError)
+CordovaStorage.prototype.deleteFile = function(_fileName, _callbackOK, _callbackError)
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	window.requestFileSystem
 	(
 		this.getFileSystemType(), 
@@ -177,22 +171,24 @@ FileEx.deleteFile = function(_fileName, _callbackOK, _callbackError)
 				{ create: false}, 
 				function (fileEntry) 
 				{
-					FileEx.delete(fileEntry, _callbackOK, _callbackError);
+					_this.delete(fileEntry, _callbackOK, _callbackError);
 				}, 
 				function(e)
 				{
-					FileEx.errorHandler(e, _fileName, _callbackError);
+					_this.errorHandler(e, _fileName, _callbackError);
 				}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 		
 	return bRet;
 }
 
-FileEx.delete = function(_fileEntry, _callbackOK, _callbackError) 
+CordovaStorage.prototype.delete = function(_fileEntry, _callbackOK, _callbackError) 
 {
+	var _this = this;
+
 	_fileEntry.remove
 	(
 		function() 
@@ -201,22 +197,20 @@ FileEx.delete = function(_fileEntry, _callbackOK, _callbackError)
 		}, 
 		function(e)
 		{
-			FileEx.errorHandler(e, _fileEntry.name, _callbackError);
+			_this.errorHandler(e, _fileEntry.name, _callbackError);
 		}, 
 		function()
 		{
-			FileEx.errorHandler(null, _fileEntry.name, _callbackError);
+			_this.errorHandler(null, _fileEntry.name, _callbackError);
 		}
 	);
 }
 
-/**
- * Write data to file, deletes previous data.
- */
-FileEx.appendToFile = function(_fileName, _content, _callbackOK, _callbackError)
+CordovaStorage.prototype.appendToFile = function(_fileName, _content, _callbackOK, _callbackError)
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	window.requestFileSystem
 	(
 		this.getFileSystemType(), 
@@ -230,19 +224,21 @@ FileEx.appendToFile = function(_fileName, _content, _callbackOK, _callbackError)
 				function (fileEntry) 
 				{
 					var dataObj = new Blob([_content], { type: 'text/plain' });
-					FileEx.writeAppend(fileEntry, dataObj, _callbackOK, _callbackError);
+					_this.writeAppend(fileEntry, dataObj, _callbackOK, _callbackError);
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 
 	return bRet;
 }
 
-FileEx.writeAppend = function(_fileEntry, dataObj, _callbackOK, _callbackError) 
+CordovaStorage.prototype.writeAppend = function(_fileEntry, dataObj, _callbackOK, _callbackError) 
 {
+	var _this = this;
+
     _fileEntry.createWriter(
 		function (fileWriter) 
 		{
@@ -252,7 +248,7 @@ FileEx.writeAppend = function(_fileEntry, dataObj, _callbackOK, _callbackError)
 
 			fileWriter.onerror = function (e) 
 			{
-				FileEx.errorHandler(e, _fileEntry.name, _callbackError);
+				_this.errorHandler(e, _fileEntry.name, _callbackError);
 			};
 
 			if (dataObj) 
@@ -262,7 +258,7 @@ FileEx.writeAppend = function(_fileEntry, dataObj, _callbackOK, _callbackError)
 			}
 			else
 			{
-				FileEx.errorHandler(null, _fileEntry.name, _callbackError);
+				_this.errorHandler(null, _fileEntry.name, _callbackError);
 			}
     });
 }
@@ -270,9 +266,10 @@ FileEx.writeAppend = function(_fileEntry, dataObj, _callbackOK, _callbackError)
 /**
  * Write data to file, deletes previous data.
  */
-FileEx.updateFile = function(_fileName, _content, _offset, _callbackOK, _callbackError)
+CordovaStorage.prototype.updateFile = function(_fileName, _content, _offset, _callbackOK, _callbackError)
 {
 	var bRet = false;
+	var _this = this;
 
 	window.requestFileSystem
 	(
@@ -287,19 +284,21 @@ FileEx.updateFile = function(_fileName, _content, _offset, _callbackOK, _callbac
 				function (fileEntry) 
 				{
 					var dataObj = new Blob([_content], { type: 'text/plain' });
-					FileEx.writeUpdate(fileEntry, dataObj, _offset, _callbackOK, _callbackError);
+					_this.writeUpdate(fileEntry, dataObj, _offset, _callbackOK, _callbackError);
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 
 	return bRet;
 }
 
-FileEx.writeUpdate = function(_fileEntry, dataObj, _offset, _callbackOK, _callbackError) 
+CordovaStorage.prototype.writeUpdate = function(_fileEntry, dataObj, _offset, _callbackOK, _callbackError) 
 {
+	var _this = this;
+
     _fileEntry.createWriter(
 		function (fileWriter) 
 		{
@@ -310,7 +309,7 @@ FileEx.writeUpdate = function(_fileEntry, dataObj, _offset, _callbackOK, _callba
 
 			fileWriter.onerror = function (e) 
 			{
-				FileEx.errorHandler(e, _fileEntry.name, _callbackError);
+				_this.errorHandler(e, _fileEntry.name, _callbackError);
 			};
 
 			if (dataObj) 
@@ -320,12 +319,15 @@ FileEx.writeUpdate = function(_fileEntry, dataObj, _offset, _callbackOK, _callba
 			}
 			else
 			{
-				FileEx.errorHandler(null, _fileEntry.name, _callbackError);
+				_this.errorHandler(null, _fileEntry.name, _callbackError);
 			}
     });
 }
 
-FileEx.errorHandler = function(e, _fileName, _callback) 
+/**
+ * Error handler.
+ */
+CordovaStorage.prototype.errorHandler = function(e, _fileName, _callback) 
 {
 	var msg = ''
 	var errorCode = "-1";
@@ -361,7 +363,7 @@ FileEx.errorHandler = function(e, _fileName, _callback)
 	}
 }
 
-FileEx.readTextFile_mocked = function(_fileName)
+CordovaStorage.prototype.readTextFile_mocked = function(_fileName)
 {
 	var returnValue = null;
 
@@ -380,10 +382,11 @@ FileEx.readTextFile_mocked = function(_fileName)
  * The idea is read all data, change on the fly and write all data back.
  * PERFOMANCE: I have no words.
  */
-FileEx.updateFileAndroid = function(_fileName, _content, _offset, _callbackOK, _callbackError)
+CordovaStorage.prototype.updateFileAndroid = function(_fileName, _content, _offset, _callbackOK, _callbackError)
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	window.requestFileSystem
 	(
 		this.getFileSystemType(), 
@@ -398,11 +401,11 @@ FileEx.updateFileAndroid = function(_fileName, _content, _offset, _callbackOK, _
 				{ create: true}, 
 				function (fileEntry) 
 				{
-					FileEx.read(
+					_this.read(
 						fileEntry, 
 						function (_data)
 						{
-							appLog("Full read:" + _data);
+							appLog("Update, full read:" + _data);
 
 							// Update string: 
 							// Position:
@@ -426,24 +429,25 @@ FileEx.updateFileAndroid = function(_fileName, _content, _offset, _callbackOK, _
 								}
 
 								var dataObj = new Blob([newData], { type: 'text/plain' });
-								FileEx.write(fileEntry, dataObj, _callbackOK, _callbackError);
+								_this.write(fileEntry, dataObj, _callbackOK, _callbackError);
 							}
 						}, 
 						_callbackError);
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 		
 	return bRet;
 }
 
-FileEx.existsFile = function(_fileName, _callbackOK, _callbackError) 
+CordovaStorage.prototype.existsFile = function(_fileName, _callbackOK, _callbackError) 
 {
 	var bRet = false;
-	
+	var _this = this;
+
 	window.requestFileSystem
 	(
 		this.getFileSystemType(), 
@@ -458,21 +462,16 @@ FileEx.existsFile = function(_fileName, _callbackOK, _callbackError)
 				{
 					_callbackOK();
 				}, 
-				function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
-				/*
-				function(e)
-				{
-					_callbackError(e.code);
-				}*/
+				function(e){_this.errorHandler(e, _fileName, _callbackError);}
 			);
 		}, 
-		function(e){FileEx.errorHandler(e, _fileName, _callbackError);}
+		function(e){_this.errorHandler(e, _fileName, _callbackError);}
 	);
 		
 	return bRet;
 }
 
-FileEx.getFileSystemType = function() 
+CordovaStorage.prototype.getFileSystemType = function() 
 {
 	return (typeof LocalFileSystem != "undefined") ? LocalFileSystem.PERSISTENT : 1;
 }

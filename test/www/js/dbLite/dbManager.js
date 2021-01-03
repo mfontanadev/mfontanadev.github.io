@@ -28,75 +28,45 @@ function DBManager()
 
     this.m_tables = new Array();
     this.m_appDictionary = new DBAppDictionary(this);
-    this.m_dbLocation = "defaultDataPath";
+    this.m_dbLocation = "wp_Storage";
 
     this.m_initTimeout = null;
     this.m_stopDictionaryReadyEvent = false;
-	this.m_dbReadyCallback = null;
+    this.m_dbPopulateInitialDataHandler = null;
+    
+    this.m_localStorage = null;
 }
 
-DBManager.prototype.init = function(_dbReadyCallback) 
+DBManager.prototype.init = function() 
 {
     appLog("\nOn DBManager");
 
-    this.m_dbReadyCallback = _dbReadyCallback;
-    //this.m_dbLocation = FileEx.getValidStorageDataPath();
+    appLog("    DBManager, create database schema...");
+    this.createDBSchema();
 
-    // Some valid db path found
-    if (this.m_dbLocation.log !== 0)
-    {
-        // DBCreation
-        appLog("    DBLocation:" + this.m_dbLocation);
-        appLog("    Create database...");
-        this.createDB(this.m_dbLocation);
-                    
-        // Timeout db initialization, force app init.
-        this.m_initTimeout = window.setTimeout( function() 
-        {	
-            DBManager._this.m_stopDictionaryReadyEvent = true;
-            DBManager._this.triggerDBReadyEvent();
-        }, Config.C_INIT_DB_TIMEOUT * 1000);	
-
-        // Table initialitation.
-        this.m_appDictionary.init
-        (		
-            function() 
-            {	
-                console.log("Finish");
-                DBManager._this.triggerDBReadyEvent();
-            }
-        );
-    }
-    else
-    {
-        appLog("    Storages not availables");
-    }
+    TestViewController.testClearLogArea();
+    appLog("    DBManager, init LocalStorageManager...");
+    this.m_localStorage = new LocalStorageManager();
+    this.m_localStorage.init();
+    //this.m_localStorage.useHtmlStorageSystem();
 }
 
-DBManager.prototype.triggerDBReadyEvent = function()
+DBManager.prototype.populateInitialData = function()
 {
-    clearTimeout(DBManager._this.m_initTimeout);
-
-    if (DBManager._this.m_dbReadyCallback !== null && DBManager._this.m_stopDictionaryReadyEvent === false)
-        DBManager._this.m_dbReadyCallback()
+    appLog("    DBManager, populateInitialData...");
+    this.m_appDictionary.populateInitialData(this.m_dbPopulateInitialDataHandler);
 }
 
-DBManager.prototype.createDB = function(_dbPath)
+DBManager.prototype.onEventPopulateInitialData = function(_callback)
+{
+    this.m_dbPopulateInitialDataHandler = _callback;
+}
+
+DBManager.prototype.createDBSchema = function()
 {
     var bResult = false;
-    
-    //if (FileEx.createDirectory(_dbPath) == true)
-    {
-        this.m_dbLocation = _dbPath;
-        this.m_appDictionary.createDB();
-    }
-    
+    this.m_appDictionary.createDBSchema();
     return bResult;
-}
-
-DBManager.prototype.getDbLocation = function()
-{
-    return this.m_dbLocation;
 }
 
 DBManager.prototype.stopDBReadyEvent = function()

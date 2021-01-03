@@ -8,6 +8,7 @@ function TestViewController()
 
 TestViewController.prototype.init = function()
 {
+
 }
 
 TestViewController.testClearLogArea = function()
@@ -45,9 +46,12 @@ TestViewController.dumpLog = function()
 }
 
 // RAW FILE TESTS
-TestViewController.testCreateFile = function()
+TestViewController.testCreateFileCordova = function()
 {
-	FileEx.writeToFile
+	var ls = new LocalStorageManager();
+	ls.useCordovaStorageSystem();
+
+	ls.writeToFile
 	(
 		"TestFile.txt", 
 		"",
@@ -56,9 +60,12 @@ TestViewController.testCreateFile = function()
 	);
 }
 
-TestViewController.testReadFile = function()
+TestViewController.testReadFileCordova = function()
 {
-	FileEx.readFile
+	var ls = new LocalStorageManager();
+	ls.useCordovaStorageSystem();
+
+	ls.readFile
 	(
 		"TestFile.txt", 
 		function(_data) { appLog("OK, readFile:\n" + "Lenght:" + _data.length + "\nData:"  + _data); },
@@ -66,9 +73,12 @@ TestViewController.testReadFile = function()
 	);
 }
 
-TestViewController.testAppendFile = function()
+TestViewController.testAppendFileCordova = function()
 {
-	FileEx.appendToFile
+	var ls = new LocalStorageManager();
+	ls.useCordovaStorageSystem();
+
+	ls.appendToFile
 	(
 		"TestFile.txt", "line " + (Math.random() * 1000).toString(), 
 		function() { appLog("OK, appendToFile:"); },
@@ -76,19 +86,12 @@ TestViewController.testAppendFile = function()
 	);
 }
 
-TestViewController.testUpdateFileOld = function()
+TestViewController.testUpdateFileCordova = function()
 {
-	FileEx.updateFile
-	(
-		"TestFile.txt", "K", 1, 
-		function() { appLog("OK, updateToFile:"); },
-		function(_result) { appLog("ERROR (" + _result + "), updateToFile:"); }
-	);
-}
+	var ls = new LocalStorageManager();
+	ls.useCordovaStorageSystem();
 
-TestViewController.testUpdateFile = function()
-{
-	FileEx.updateFileAndroid
+	ls.updateFileAndroid
 	(
 		"TestFile.txt", "####", 1, 
 		function() { appLog("OK, updateFileAndroid:"); },
@@ -96,11 +99,80 @@ TestViewController.testUpdateFile = function()
 	);
 }
 
-TestViewController.testDeleteFile = function()
+TestViewController.testDeleteFileCordova = function()
 {
-	FileEx.deleteFile
+	var ls = new LocalStorageManager();
+	ls.useCordovaStorageSystem();
+
+	ls.deleteFile
 	(
 		"TestFile.txt", 
+		function() { appLog("OK, deleteFile:"); },
+		function(_result) { appLog("ERROR (" + _result + "), deleteFile:"); }
+	);
+}
+
+TestViewController.testCreateFileHtml = function()
+{
+	var ls = new LocalStorageManager();
+	ls.useHtmlStorageSystem();
+
+	ls.writeToFile
+	(
+		"TestFileHtml.txt", 
+		"",
+		function() { appLog("OK, writeToFile:"); },
+		function(_result) { appLog("ERROR (" + _result + "), writeToFile:"); }
+	);
+}
+
+TestViewController.testReadFileHtml = function()
+{
+	var ls = new LocalStorageManager();
+	ls.useHtmlStorageSystem();
+
+	ls.readFile
+	(
+		"TestFileHtml.txt", 
+		function(_data) { appLog("OK, readFile:\n" + "Lenght:" + _data.length + "\nData:"  + _data); },
+		function(_result) { appLog("ERROR (" + _result + "), readToFile:"); }
+	);
+}
+
+TestViewController.testAppendFileHtml = function()
+{
+	var ls = new LocalStorageManager();
+	ls.useHtmlStorageSystem();
+
+	ls.appendToFile
+	(
+		"TestFileHtml.txt", "line " + (Math.random() * 1000).toString(), 
+		function() { appLog("OK, appendToFile:"); },
+		function(_result) { appLog("ERROR (" + _result + "), appendToFile:"); }
+	);
+}
+
+TestViewController.testUpdateFileHtml = function()
+{
+	var ls = new LocalStorageManager();
+	ls.useHtmlStorageSystem();
+
+	ls.updateFileAndroid
+	(
+		"TestFileHtml.txt", "####", 1, 
+		function() { appLog("OK, updateFileAndroid:"); },
+		function(_result) { appLog("ERROR (" + _result + "), updateFileAndroid:"); }
+	);
+}
+
+TestViewController.testDeleteFileHtml = function()
+{
+	var ls = new LocalStorageManager();
+	ls.useHtmlStorageSystem();
+
+	ls.deleteFile
+	(
+		"TestFileHtml.txt", 
 		function() { appLog("OK, deleteFile:"); },
 		function(_result) { appLog("ERROR (" + _result + "), deleteFile:"); }
 	);
@@ -533,6 +605,15 @@ TestViewController.testPopulateSpentTable = function()
 		function(_result) { appLog("OK (" + _result + "), table:"); },
 		function(_result) { appLog("ERROR (" + _result + "), table:"); }
 	);
+}
+
+// LOCALSTORAGE
+TestViewController.testLocalStoragemanager = function()
+{
+	TestViewController.testClearLogArea();
+
+	var localStorageManager = new LocalStorageManager();
+	localStorageManager.init();
 }
 
 // TABLE User

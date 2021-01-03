@@ -39,14 +39,21 @@
         <td width="16%">Ext</td>
       </tr>
       <tr>
-        <td width="16%">File</td>
-        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testCreateFile();">Cre</ons-button></td>
-        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testReadFile();">Rea</ons-button></td>
-        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testUpdateFile();">Upd</ons-button></td>
-        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testDeleteFile();">Del</ons-button></td>
-        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testAppendFile();">Ins</ons-button></td>
+        <td width="16%">File Cor</td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testCreateFileCordova();">Cre</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testReadFileCordova();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testUpdateFileCordova();">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testDeleteFileCordova();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testAppendFileCordova();">Ins</ons-button></td>
       </tr>
-
+      <tr>
+        <td width="16%">File Sto</td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testCreateFileHtml();">Cre</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testReadFileHtml();">Rea</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testUpdateFileHtml();">Upd</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testDeleteFileHtml();">Del</ons-button></td>
+        <td width="16%"><ons-button style="background-color: blue" onclick="TestViewController.testAppendFileHtml();">Ins</ons-button></td>
+      </tr>
       <tr>
         <td width="16%">T.Cat</td>
         <td width="16%"><ons-button style="background-color: red" onclick="TestViewController.testEmptyTable_Category();">Ety</ons-button></td>
@@ -87,12 +94,13 @@
         <td  colspan="6">
           <ons-button style="background-color: red" onclick="TestViewController.testPopulateSpentTable(0, 5);">Spt Pop 100</ons-button>
           <ons-button style="background-color: red" onclick="TestViewController.testPopulateCategoryTable(0, 200);">Cat Pop 100</ons-button>
+          <ons-button style="background-color: green" onclick="TestViewController.testLocalStoragemanager();">Sup. Locsto.</ons-button>
         </td>
        </tr>
     </table>
 
     <div id="divLogArea" style="display: block;">
-      <textarea class="myTextArea" id="logArea" rows="10"></textarea>
+      <textarea class="myTextArea" id="logArea" rows="10" readonly></textarea>
     </div>
 
     <ons-alert-dialog id="testView-save" modifier="rowfooter">

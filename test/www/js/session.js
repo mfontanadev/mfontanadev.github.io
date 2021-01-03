@@ -4,7 +4,7 @@ function Session()
 {
     Session.timeDiff = new TimeDiff();
     
-    this.m_dataIsBeingLoaded = false;
+    this.m_dataIsBeingLoaded = true;
 
     this.m_arrEventStartReloadingAllData = new Array();
     this.m_arrEventFinishedReloadingAllData = new Array();
@@ -39,8 +39,7 @@ Session.prototype.init = function()
     this.m_mainViewContentController = new MainViewContentController();
     this.m_testViewController = new TestViewController();
     this.m_splashViewController = new SplashViewController();
-
-    this.reloadAllData();
+    this.m_widgetViewController = new WidgetViewController();
 }
 
 Session.prototype.reloadAllData = function() 
@@ -58,7 +57,7 @@ Session.prototype.reloadAllDataAsynch = function(_currentIndex, _functionsToExec
     {
         if (_currentIndex === 0)
         {
-            console.log("trigger start reading data evenr");
+            //console.log("trigger start reading data evenr");
             Session.timeDiff.startTime("reloadAllDataAsynch");
 
             this.m_dataIsBeingLoaded = true;
@@ -73,7 +72,7 @@ Session.prototype.reloadAllDataAsynch = function(_currentIndex, _functionsToExec
                 {	
                     _currentIndex++;
                     appSession().reloadAllDataAsynch(_currentIndex, _functionsToExecute);
-                }, 1);
+                }, Config.C_DELAY_INSERT_RECORD_MS );
             },
             function(_result) 
             {
@@ -81,7 +80,7 @@ Session.prototype.reloadAllDataAsynch = function(_currentIndex, _functionsToExec
                 {	
                     _currentIndex++;
                     appSession().reloadAllDataAsynch(_currentIndex, _functionsToExecute);
-                }, 1);
+                }, Config.C_DELAY_INSERT_RECORD_MS );
             }
         );
     }
@@ -120,9 +119,7 @@ Session.prototype.loadAllCategory = function(_cOK, _cERROR)
 {
     Session.timeDiff.startTime("loadAllCategory");
 
-    var model = new CategoryModel();
-
-    model.getAllCategory
+    CategoryService.getAllCategory
     (
       function(_result) 
       { 
@@ -141,8 +138,7 @@ Session.prototype.loadAllSubcategory = function(_cOK, _cERROR)
 {
     Session.timeDiff.startTime("loadAllSubcategory");
 
-    var model = new SubCategoryModel();
-    model.getAllSubCategory
+    SubCategoryService.getAllSubCategory
     (
       function(_result) 
       { 
@@ -161,8 +157,7 @@ Session.prototype.loadAllSpent = function(_cOK, _cERROR)
 {
     Session.timeDiff.startTime("loadAllSpent");
 
-    var model = new SpentModel();
-    model.getAllSpent
+    SpentService.getAllSpent
     (
       function(_result) 
       { 

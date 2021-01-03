@@ -31,23 +31,15 @@ function DBAppDictionary(_dbManager)
 {
     this.m_dbManager = _dbManager;
     this.m_stillUpdatingCounter = 0;
-    this.m_dbReadyCallback = null;
-}
-
-/**
- * Init tables with default values, only if debug flag is true.
- */
-DBAppDictionary.prototype.isStillUpdating = function()
-{
-    return this.m_stillUpdatingCounter !== 0;
+    this.m_dbPopulateInitialDataHandler = null;
 }
 
 /**
  * Tables definition.
  */
-DBAppDictionary.prototype.createDB = function() 
+DBAppDictionary.prototype.createDBSchema = function() 
 {
-    appLog("\nOn DBAppDictionary");
+    appLog("    DBAppDictionary, createDBSchema...");
     
     var newTable = null;
 		
@@ -90,18 +82,23 @@ DBAppDictionary.prototype.createDB = function()
 /**
  * Init tables with default values, only if debug flag is true.
  */
-DBAppDictionary.prototype.init = function(_dbReadyCallback)
+DBAppDictionary.prototype.populateInitialData = function(_callnack)
 {
-    this.m_dbReadyCallback = _dbReadyCallback;
-    appLog("\nON DBAppDictionary");
-    appLog("Test 1.0");
+    this.m_dbPopulateInitialDataHandler = _callnack;
+    appLog("    DBAppDictionary, populateInitialData...");
 
-    //if (Consts.DEBUG == true)
+    if (Config.DEBUG === true)
     {
        this.initTableCategoryForTesting();
        this.initTableUserForTesting();
        this.initTableSubCategoryForTesting();
        this.initTableSpentForTesting();
+    }
+    else
+    {
+        //console.log(_this.m_stillUpdatingCounter );
+        if (_this.m_dbPopulateInitialDataHandler !== null)
+            _this.m_dbPopulateInitialDataHandler();
     }
 }
 
@@ -381,8 +378,8 @@ DBAppDictionary.prototype.insertRecords = function(_tableName, _records, _index)
 
     if (_index < _records.length)
     {
-        this.m_stillUpdatingCounter++;
-        this.m_dbManager.insertRecord
+        //_this.m_stillUpdatingCounter++;
+        _this.m_dbManager.insertRecord
         (
             _tableName,
             _records[_index],
@@ -390,7 +387,7 @@ DBAppDictionary.prototype.insertRecords = function(_tableName, _records, _index)
             { 
                 //appLog("OK (" + _result + "), table:" + _tableName);
                 _index++;
-                _this.m_stillUpdatingCounter--;
+                //_this.m_stillUpdatingCounter--;
                 window.setTimeout
                 ( 
                     function() 
@@ -402,17 +399,16 @@ DBAppDictionary.prototype.insertRecords = function(_tableName, _records, _index)
             },
             function(_result) 
             { 
-                _this.m_stillUpdatingCounter -= _index;
+                //_this.m_stillUpdatingCounter = 0;
                 appLog("ERROR (" + _result + "), table:" + _tableName); 
             }
         );
     }
-
-    console.log(this.m_stillUpdatingCounter );
-    if (this.isStillUpdating() === false)
+    else
     {
-        if (this.m_dbReadyCallback !== null)
-            this.m_dbReadyCallback();
+        //console.log(_this.m_stillUpdatingCounter );
+        if (_this.m_dbPopulateInitialDataHandler !== null)
+            _this.m_dbPopulateInitialDataHandler();
     }
 }
 

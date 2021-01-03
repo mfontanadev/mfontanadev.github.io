@@ -9,9 +9,7 @@ function registerNewUser()
 	} 
 	else 
 	{
-		var userModel = new UserModel();
-
-		userModel.findUserByName
+		UserService.findUserByName
 		(
 			username, 
 			function(_userEntity) 
@@ -25,7 +23,7 @@ function registerNewUser()
 					var newUser = new UserEntity();
 					newUser.init("0", username, password, "req1", "anw1");
 
-					userModel.addUser
+					UserService.addUser
 					(
 						newUser,
 						function(_result)

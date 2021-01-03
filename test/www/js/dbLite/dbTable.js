@@ -1,4 +1,3 @@
-
 function DBTable() 
 {
     this.m_dbManager = null;
@@ -61,7 +60,7 @@ DBTable.prototype.existsTableFile = function(_callbackOK, _callbackError)
 {
     appLog("table existsTableFile (" + this.getTableFilePath() + ")");
     
-    FileEx.existsFile
+    this.m_dbManager.m_localStorage.existsFile
     (
         this.getTableFilePath(),
         function()
@@ -79,7 +78,7 @@ DBTable.prototype.createFile = function(_callbackOK, _callbackError)
 {
     appLog("table createFile (" + this.getTableFilePath() + ")");
     
-    FileEx.writeToFile
+    this.m_dbManager.m_localStorage.writeToFile
     (
         this.getTableFilePath(),
         "",
@@ -98,7 +97,7 @@ DBTable.prototype.delete = function(_callbackOK, _callbackError)
 {
     appLog("table delete (" + this.getTableFilePath() + ")");
     
-    FileEx.deleteFile
+    this.m_dbManager.m_localStorage.deleteFile
     (
         this.getTableFilePath(),
         function()
@@ -117,7 +116,7 @@ DBTable.prototype.read = function(_callbackOK, _callbackError)
 {
     appLog("table read (" + this.getTableFilePath()+ ")");
 
-    FileEx.readFile
+    this.m_dbManager.m_localStorage.readFile
     (
         this.getTableFilePath(),
         function(_data)
@@ -143,7 +142,7 @@ DBTable.prototype.insertRecord = function(_values, _callbackOK, _callbackError)
             tmpRecord += "\n";
             appLog("table insert (" + this.getTableFilePath() + "): [" + tmpRecord + "]");
 
-            FileEx.appendToFile
+            this.m_dbManager.m_localStorage.appendToFile
             (
                 this.getTableFilePath(),
                 tmpRecord,
@@ -218,7 +217,7 @@ DBTable.prototype.selectAll = function(_cursor, includeDeletedRecords, _callback
 {
     var _this = this;
 
-    FileEx.readFile
+    this.m_dbManager.m_localStorage.readFile
     (
         this.getTableFilePath(), 
         function(_data)
@@ -359,7 +358,7 @@ DBTable.prototype.updateRecord = function(_fieldToLook, _criteria, _values, _del
                         tmpRecord += "\n";
                         var offset = tmpRecord.length * i; 
 
-                        FileEx.updateFileAndroid
+                        _this.m_dbManager.m_localStorage.updateFileAndroid
                         (
                             _this.getTableFilePath(), 
                             tmpRecord, 
@@ -507,6 +506,5 @@ DBTable.prototype.flushData = function()
 
 DBTable.prototype.getTableFilePath = function()
 {
-    //return this.m_dbManager.getDbLocation() + "\\" + this.getName() + ".txt";
     return this.getName() + ".txt";
 }

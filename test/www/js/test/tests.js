@@ -1,4 +1,4 @@
-function runModelTests()
+function runServiceTests()
 {
 	appLog("\n\n\n\n\n\n\n\n");
 	appLog("START TESTS");
@@ -8,17 +8,18 @@ function runModelTests()
 	testTableExists();
 	testMaxIDOnUserTable();
 	testSpentEntityDatesFunctons();
-	*/
+
 	testGetAllCategory();
 	testGetAllSubCategory();
 	testGetAllSpent();
 	
 	testDumpFiles();
+	*/
 	appLog("END TESTS");
 	appLog("\n\n\n\n\n\n\n\n");
 }
 
-// MODEL TESTS
+// SERVICE TESTS
 function findUser_resultNotFound()
 {
     const username = "user1";
@@ -26,8 +27,7 @@ function findUser_resultNotFound()
     var testDescription = "TEST findUser_resultNotFound: " + username + "," + password;
     appLog(testDescription);
 
-    var userModel = new UserModel();
-	userModel.findUserByName
+	UserService.findUserByName
 	(
 		username, 
 		function(_userEntity) 
@@ -52,8 +52,7 @@ function findUser_resultFound()
     var testDescription = "TEST findUser_resultFound: " + username + "," + password;
     appLog(testDescription);
 
-    var userModel = new UserModel();
-	userModel.findUserByName
+	UserService.findUserByName
 	(
 		username, 
 		function(_userEntity) 
@@ -125,8 +124,7 @@ function testGetAllCategory()
     var testDescription = "TEST testGetAllCategory: ";
     appLog(testDescription);
 
-    var model = new CategoryModel();
-	model.getAllCategory
+	CategoryService.getAllCategory
 	(
 		function(_result) 
 		{ 
@@ -144,8 +142,7 @@ function testGetAllSubCategory()
     var testDescription = "TEST testGetAllSubCategory: ";
     appLog(testDescription);
 
-    var model = new SubCategoryModel();
-	model.getAllSubCategory
+	SubCategoryService.getAllSubCategory
 	(
 		function(_result) 
 		{ 
@@ -160,20 +157,17 @@ function testGetAllSubCategory()
 
 function testGetAllSpent()
 {
-	
-	FileEx.readFile
+	CordovaStorage.readFile
 	(
 		"Spent.txt", 
 		function(_data) { appLog("OK, readFile:Spent.txt \n" + "Lenght:" + _data.length + "\nData:"  + _data); },
 		function(_result) { appLog("ERROR, readFile:Spent.txt (" + _result + "), readToFile:"); }
 	);
-	
-	
+		
 	var testDescription = "TEST testGetAllSpent: ";
     appLog(testDescription);
 
-    var model = new SpentModel();
-	model.getAllSpent
+	SpentService.getAllSpent
 	(
 		function(_result) 
 		{ 
@@ -188,17 +182,69 @@ function testGetAllSpent()
 
 function testDumpFiles()
 {
-	FileEx.readFile
+	CordovaStorage.readFile
 	(
 		"Category.txt", 
 		function(_data) { appLog("OK, readFile:Category.txt \n" + "Lenght:" + _data.length + "\nData:\n"  + _data); },
 		function(_result) { appLog("ERROR, readFile:Category.txt (" + _result + "), readToFile:"); }
 	);
 
-	FileEx.readFile
+	CordovaStorage.readFile
 	(
 		"SubCategory.txt", 
 		function(_data) { appLog("OK, readFile:SubCategory.txt \n" + "Lenght:" + _data.length + "\nData:\n"  + _data); },
 		function(_result) { appLog("ERROR, readFile:SubCategory.txt (" + _result + "), readToFile:"); }
 	);
+}
+
+
+function testHtmlStorage()
+{
+	var TEST_FILE_NAME = "html_storage_testfile.txt";
+	var TEST_FILE_CONTENT_DATA = "Content of html_srtorage_testfile.txt";
+
+	var localStorageManager = new LocalStorageManager();
+	localStorageManager.useHtmlStorageSystem();
+	
+	localStorageManager.deleteFile(
+		TEST_FILE_NAME, 
+		function() {appLog("OK, HTML_deleteFile: file=" + TEST_FILE_NAME); },
+		function(_result) {appLog("ERROR, HTML_deleteFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	);
+
+	localStorageManager.writeToFile(
+		TEST_FILE_NAME, 
+		TEST_FILE_CONTENT_DATA,
+		function() 	{ appLog("OK, HTML_writeToFile: file=" + TEST_FILE_NAME); },
+		function(_result) 	{ appLog("ERROR, HTML_writeToFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	)
+
+	localStorageManager.readFile(
+		TEST_FILE_NAME, 
+		function(_data) { appLog("OK, HTML_readFile: file=" + TEST_FILE_NAME + ",Lenght:" + _data.length + ", Data:("  + _data + ")"); },
+		function(_result) 	{ appLog("ERROR, HTML_readFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	)
+
+	localStorageManager.appendToFile(
+		TEST_FILE_NAME, 
+		"line " + (Math.random() * 1000).toString(), 
+		function() 	{ appLog("OK, HTML_appendToFile: file=" + TEST_FILE_NAME); },
+		function(_result) 	{ appLog("ERROR, HTML_appendToFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	);
+
+	localStorageManager.updateFile(
+		TEST_FILE_NAME, 
+		"####",
+		2, 
+		function() 	{ appLog("OK, HTML_updateFile: file=" + TEST_FILE_NAME); },
+		function(_result) 	{ appLog("ERROR, HTML_updateFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	);
+
+	localStorageManager.existsFile(
+		TEST_FILE_NAME, 
+		function() 	{ appLog("OK, HTML_existsFile: file=" + TEST_FILE_NAME); },
+		function(_result) 	{ appLog("ERROR, HTML_existsFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); }
+	);
+
+	localStorageManager.dumpFileSystemData();
 }

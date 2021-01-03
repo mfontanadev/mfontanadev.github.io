@@ -23,12 +23,12 @@ SpentListViewController.prototype.init = function()
 SpentListViewController.prototype.handleControls = function() 
 {
   this.m_lstSpentList = document.querySelector('#idSpentList');
-  this.m_eleWidget = document.querySelector('#idSpentidget');
+  this.m_eleWidget = document.querySelector('#idSpentWidget');
 }
 
 SpentListViewController.prototype.resolveModeView = function() 
 {
-  this.glData = SpentService.WSGetSpentsOrderedByMonthAndCategory();
+  this.glData = SpentService.getSpentsOrderedByMonthAndCategory();
 
   this.fillSpentExpandableControl();
   this.fillSpentWidget();
@@ -36,14 +36,14 @@ SpentListViewController.prototype.resolveModeView = function()
 
 SpentListViewController.prototype.onEventStartReloadingAllData = function()
 {
-  console.log("addEventStartReloadingAllData");
+  //console.log("addEventStartReloadingAllData");
   SpentListViewController._this.fillSpentExpandableControl();
   SpentListViewController._this.fillSpentWidget();
 }
 
 SpentListViewController.prototype.onEventFinishedReloadingAllData = function()
 {
-  SpentListViewController._this.glData = SpentService.WSGetSpentsOrderedByMonthAndCategory();
+  SpentListViewController._this.glData = SpentService.getSpentsOrderedByMonthAndCategory();
 
   console.log("addEventFinishedReloadingAllData");
   SpentListViewController._this.fillSpentExpandableControl();
@@ -242,8 +242,8 @@ SpentListViewController.prototype.spentListItemExpandable_Content = function(_ca
     var _itemSpentMe =    Helper.getFormattedFloat(eSpent.getPlayer1Spent_float());
     var _itemSpentNotMe = Helper.getFormattedFloat(eSpent.getPlayer2Spent_float());
 
-    var _itemOnClick = "SpentListViewController.onclick_spentSelected(event, this, " + index.toString() + ");";
-    var _itemDeleteOnClick = "SpentListViewController.onclick_delete(event, this, " + index.toString() + ");";
+    var _itemOnClick = "SpentListViewController.onclick_spentSelected(event, this, " + eSpent.getId() + ");";
+    var _itemDeleteOnClick = "SpentListViewController.onclick_delete(event, this, " + eSpent.getId() + ");";
 
     var content =
     `
@@ -289,9 +289,9 @@ SpentListViewController.prototype.spentListItemExpandable_Content = function(_ca
   return result;
 }
 
-SpentListViewController.onclick_spentSelected = function(_event, _sender, _arrayIndex)
+SpentListViewController.onclick_spentSelected = function(_event, _sender, _spentId)
 {
-  var spent = appSession().m_arrSpent[_arrayIndex];
+  var spent = SpentService.getSpentById(_spentId);
   console.log("Spent:" + spent);
 
   appSession().setCurrentSpent(spent);
@@ -299,28 +299,27 @@ SpentListViewController.onclick_spentSelected = function(_event, _sender, _array
   onsenNavigateTo(C_VIEW_PAGE_ID_SPENT);
 }
 
-SpentListViewController.onclick_delete = function(_event, _sender, _arrayIndex)
+SpentListViewController.onclick_delete = function(_event, _sender, _spentId)
 {
   _event.stopPropagation();
 
   console.log("FULLSCREEN", FullScreen.fullScreenApi.isFullScreen());
 
-	Helper.showCustomDialog('spentListView-delete', 'Alert', 'Are you sure?', "SpentListViewController.callbackDialogDelete", _arrayIndex.toString());
+	Helper.showCustomDialog('spentListView-delete', 'Alert', 'Are you sure?', "SpentListViewController.callbackDialogDelete", _spentId.toString());
 }
 
-SpentListViewController.callbackDialogDelete = function(_senderName, _code, _metadata)
+SpentListViewController.callbackDialogDelete = function(_senderName, _code, _spentId)
 {
   Helper.hideCustomDialog(_senderName);
 
   if (_code === 1 /*1= OK*/)
   {
     // Log spent before delete.
-    var spent = appSession().m_arrSpent[parseInt(_metadata)];
+    var spent = SpentService.getSpentById(_spentId);
     console.log("Delete Spent:" + spent);
 
     // Delete spent
-    var spentModel = new SpentModel();
-    spentModel.deleteSpentById
+    SpentService.deleteSpentById
     (
       spent.getId(),
       function(_result)

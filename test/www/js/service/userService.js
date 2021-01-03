@@ -1,8 +1,8 @@
-function UserModel() 
+function UserService() 
 {
 }
 
-UserModel.prototype.findUserByName = function(_userName, _cOK, _cERROR) 
+UserService.findUserByName = function(_userName, _cOK, _cERROR) 
 {
     this.getAllUsers
     (
@@ -28,7 +28,7 @@ UserModel.prototype.findUserByName = function(_userName, _cOK, _cERROR)
     )
 }
 
-UserModel.prototype.getAllUsers = function(_cOK, _cERROR) 
+UserService.getAllUsers = function(_cOK, _cERROR) 
 {
     var ent = null;
 	var userCursor = new DBCursor();
@@ -72,7 +72,7 @@ UserModel.prototype.getAllUsers = function(_cOK, _cERROR)
 	);
 }
 
-UserModel.prototype.addUser = function(_userEntity, _cOK, _cERROR) 
+UserService.addUser = function(_userEntity, _cOK, _cERROR) 
 {
     // Agregar algunas categorias.
 	var record = _userEntity.getRecord();

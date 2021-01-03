@@ -11,10 +11,10 @@ function onsenNavigateTo(_target)
 	myNavigator.resetToPage(Config.C_FOLDER_VIEWS + _target);
 }
 
-function onInitEvent(_event)
+function onNavigationInitEvent(_event)
 {
 	var page = event.target;
-	console.log("onInitEvent (pageId, page):", page.id, ",", page);
+	console.log("onNavigationInitEvent (pageId, page):", page.id, ",", page);
 
 	if (page.id === C_VIEW_PAGE_ID_ABOUT) 
 		appSession().m_aboutViewController.init();
@@ -24,10 +24,10 @@ function onInitEvent(_event)
 		appSession().m_spentViewController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_MAIN)
 		appSession().m_mainViewController.init();	
-	else if (page.id === C_VIEW_PAGE_ID_MAIN)
-		appSession().m_mainViewContentController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_SPENT_LIST)
-		appSession().m_spentListViewController.init();	
+		appSession().m_spentListViewController.init();
+	else if (page.id === C_VIEW_PAGE_ID_WIDGET)
+		appSession().m_widgetViewController.init();		
 	else if (page.id === C_VIEW_PAGE_ID_TEST)
 		appSession().m_testViewController.init();	
 	else if (page.id === C_VIEW_PAGE_ID_SPLASH)

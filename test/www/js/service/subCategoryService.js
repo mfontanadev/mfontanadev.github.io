@@ -1,10 +1,10 @@
-function SubCategoryModel() 
+function SubCategoryService() 
 {
 }
 
-SubCategoryModel.prototype.findSubCategoryById = function(_id, _cOK, _cERROR) 
+SubCategoryService.findSubCategoryById = function(_id, _cOK, _cERROR) 
 {
-    this.getAllCategory
+    SubCategoryService.getAllCategory
     (
         function(_result) 
         { 
@@ -28,7 +28,7 @@ SubCategoryModel.prototype.findSubCategoryById = function(_id, _cOK, _cERROR)
     )
 }
 
-SubCategoryModel.prototype.getAllSubCategory = function(_cOK, _cERROR) 
+SubCategoryService.getAllSubCategory = function(_cOK, _cERROR) 
 {
     var ent = null;
 	var cursor = new DBCursor();
@@ -71,7 +71,7 @@ SubCategoryModel.prototype.getAllSubCategory = function(_cOK, _cERROR)
 	);
 }
 
-SubCategoryModel.prototype.addSubCategory = function(_entity, _cOK, _cERROR) 
+SubCategoryService.addSubCategory = function(_entity, _cOK, _cERROR) 
 {
     // Agregar algunas categorias.
 	var record = _entity.getRecord();

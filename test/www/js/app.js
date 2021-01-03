@@ -1,7 +1,8 @@
 var appData = {
 	'session': null,
 	'db': null,	
-	'log': ""
+	'log': "",
+	'localStorageManager': null
 }
 
 function init()
@@ -10,34 +11,56 @@ function init()
 
 	document.addEventListener('deviceReady', function () 
 	{
+		//testHtmlStorage();
+				
+		TimeDiff.logTimes = true;
+
 		appLog("********** On deviceReady");
 		appLog("Device type:" + getDeviceType());
-		
-		TimeDiff.logTimes = true;
+		appLogCordovaFile();
 		
 		FullScreen.init("myNavigator");
 
-		// Call init function of controllers classes after transition is finished.
-		// This will be called after 'deviceReady'
-		document.addEventListener('init', function(event) 
-		{
-			appLog("********** On init");
-			onInitEvent(event);
-		});
+		registerOnInitNavigationEvent();
 
-		// Init app singleton to hold: database, session and global constants.
-		appSession();
+		sessionInitialization();
 
-		// Initialize data base engine.	
-		appDB().init
-		(
-			function() 
-			{	
-				console.log("Finish");
-				appInitDelayed();
-			}
-		);
+		dbInitialization();
+
+		showInitialView();
 	});
+}
+
+
+function registerOnInitNavigationEvent()
+{
+	// Call init function of controllers classes after transition is finished.
+	// This will be called after 'deviceReady'
+	document.addEventListener('init', function(event) 
+	{
+		appLog("********** On init");
+		onNavigationInitEvent(event);
+	});
+}
+
+// Initialize data base engine.	
+function sessionInitialization()
+{
+	var session = appSession();
+	session.init();
+}
+
+// Initialize data base engine.	
+function dbInitialization()
+{
+	var database = appDB();
+
+	database.init();
+	database.onEventPopulateInitialData
+	(
+		function(){appSession().reloadAllData();}
+	);
+    database.populateInitialData();
 }
 
 function appSession()
@@ -55,8 +78,19 @@ function appDB()
 {
 	if (appData.db === null)
 	{
-		appLog("getDB");
+		//appLog("getDB");
 		appData.db = new DBManager();
+	}
+
+	return appData.db;
+}
+
+function appLocalStorage()
+{
+	if (appData.localStorageManager === null)
+	{
+		appLog("appLocalStorage()");
+		appData.localStorageManager = new LocalStorageManager();
 	}
 
 	return appData.db;
@@ -74,29 +108,30 @@ function appLogData()
 }
 
 // Give time to database files to be ready.
-function appInitDelayed()
+function showInitialView()
 {
-	appLog("initdelayed");
+	appLog("\n\n********** initdelayed");
 	
-	// Load all data.
-	appSession().init();
-
 	// Unit Tests
-	// runModelTests();
+	// runServiceTests();
 
 	// Debug porpouses
 	// appautoLogin();
 
 	onsenNavigateTo(C_VIEW_PAGE_ID_MAIN);
+
+	//onsenNavigateTo(C_VIEW_PAGE_ID_LOGIN);
+	//onsenNavigateTo(C_VIEW_PAGE_ID_TEST);
+
+	//appSession().reloadAllData();
 }
 
 function appAutoLogin()
 {
     const username = "User2";
 	const password = "Pass2";
-    var userModel = new UserModel();
 
-	userModel.findUserByName
+	UserService.findUserByName
 	(
 		username, 
 		function(_userEntity) 
@@ -162,6 +197,7 @@ function appLogCordovaFile(_file)
 
 	if (typeof cordova.file !== 'undefined')
 	{
+		_file =  cordova.file;
 		appLog("applicationDirectory:" + _file.applicationDirectory);
 		appLog("applicationStorageDirectory:" + _file.applicationStorageDirectory);
 		appLog("dataDirectory:" + _file.dataDirectory);
@@ -180,7 +216,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.3.1";
+    return "1.4.2";
 }
 
 function appName()

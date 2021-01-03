@@ -9,9 +9,7 @@ function login()
 	} 
 	else 
 	{
-		var userModel = new UserModel();
-
-		userModel.findUserByName
+		UserService.findUserByName
 		(
 			username, 
 			function(_userEntity) 

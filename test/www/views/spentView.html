@@ -21,8 +21,12 @@
       <ons-list-header id="lblSpentQtty"><strong>Me spent / Not me spent</strong></ons-list-header>
 
       <ons-list-item modifier="nodivider">
-          <ons-input id="edMeNewSpent" class="center list-item__center  " modifier="underbar material" value="" type="text" /></ons-input>
-          <ons-input id="edNotMeNewSpent"  class="right list-item__center  " modifier="underbar material" value="" type="text" /></ons-input>
+          <ons-input id="edMeNewSpent" class="center list-item__center  " modifier="underbar material" value="" type="number" 
+          onclick="this._input.focus();this._input.select();"
+          /></ons-input>
+          <ons-input id="edNotMeNewSpent"  class="right list-item__center  " modifier="underbar material" value="" type="number" 
+          onclick="this._input.focus();this._input.select();"
+          /></ons-input>
       </ons-list-item>
 
       <!-- Description -->
@@ -57,7 +61,7 @@
        <!-- Date -->
       <ons-list-header id="lblDate"><strong>Date</strong></ons-list-header>
       <ons-list-item modifier="nodivider">
-          <ons-input id="edDatePicker" class="list-item__center  list-item__center__custompadding" vmodifier="underbar material" value="" type="text" ></ons-input>
+          <ons-input id="edDatePicker" class="list-item__center  list-item__center__custompadding" vmodifier="underbar material" value="" type="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}"></ons-input>
       </ons-list-item>
 
   </ons-list>

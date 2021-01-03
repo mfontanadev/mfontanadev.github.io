@@ -82,8 +82,12 @@ SpentViewController.prototype.updateControlValuesWithData = function()
   this.m_edNotMeNewSpent.value = spent.getPlayer2Spent();
   this.fillCategoryControl();
   this.fillSubCategoryControl();
-  this.m_edDatePicker.value = spent.getDate_YYYMMDD();
+  this.m_edDatePicker.value = spent.getDate_YYYMMDD_datePickerFormat();
   this.m_edObservation.value = spent.getDetail();
+
+  // Default focus and selection.
+  this.m_edMeNewSpent._input.focus();
+  this.m_edMeNewSpent._input.select();
 }
 
 SpentViewController.prototype.fillCategoryControl = function()
@@ -152,7 +156,7 @@ SpentViewController.prototype.categoryListItem_Content = function(_categoryEntit
 SpentViewController.prototype.fillSubCategoryControl = function()
 {  
   var _categoryId = appSession().getCurrentSpent().getCategoryId();
-  var arraySubCategory = CategoryService.WSGetSubcategoriesFromCategory(_categoryId);
+  var arraySubCategory = CategoryService.getSubcategoriesFromCategory(_categoryId);
 
   var _selectedId = appSession().getCurrentSpent().getSubCategoryId();
   if (_selectedId === "" && arraySubCategory.length > 0)
@@ -267,8 +271,7 @@ SpentViewController.prototype.addCurrentSpent = function()
   console.log(spent);
 
   // Save spent and navigate back.
-  var spentModel = new SpentModel();
-  spentModel.addSpent
+  SpentService.addSpent
   (
     spent,
     function(_result)
@@ -290,8 +293,7 @@ SpentViewController.prototype.updateCurrentSpent = function()
   console.log(spent);
 
   // Save spent and navigate back.
-  var spentModel = new SpentModel();
-  spentModel.updateSpent
+  SpentService.updateSpent
   (
     spent,
     function(_result)

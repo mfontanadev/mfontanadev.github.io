@@ -45,19 +45,24 @@
             }
         </style>
         
+        <link rel="manifest" href="manifest.json">
         <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
         <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
         <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
         <link rel="stylesheet" href="css/style_whopaid.css">
 
-        <!-- UX lib -->
-        <!--<script src="lib_onsenui/js/onsenui.js"></script>-->
+        <!-- libs -->
+        <!--<script src="libs/lib_onsenui/js/onsenui.js"></script>-->
+        <!--Thanks to https://github.com/nezartarbin/carbox-date-picker-->
         <script src="cordova.js"></script>
+        <link rel="stylesheet" href="libs/lib_chartist/chartist.min.css">
+        <script src="libs/lib_chartist/chartist.min.js"></script>
 
         <!-- Application and configs -->
         <script src="js/app.js"></script>
         <script src="js/config.js"></script>
         <script src="js/constants.js"></script>
+        <script src="js/session.js"></script>
 
         <!-- Data base engine-->
         <script src="js/dbLite/dbManager.js"></script>
@@ -73,19 +78,16 @@
         <script src="js/entities/userEntity.js"></script>
         <script src="js/entities/spentEntity.js"></script>
 
-        <!-- Model -->
-        <script src="js/model/subCategoryModel.js"></script>
-        <script src="js/model/categoryModel.js"></script>
-        <script src="js/model/spentModel.js"></script>
-        <script src="js/model/userModel.js"></script>
-        <script src="js/model/session.js"></script>
-
         <!-- Service -->
-        <script src="js/service/spentService.js"></script>
+        <script src="js/service/subCategoryService.js"></script>
         <script src="js/service/categoryService.js"></script>
+        <script src="js/service/spentService.js"></script>
+        <script src="js/service/userService.js"></script>
 
         <!-- Helpers -->
-        <script src="js/helpers/fileEx.js"></script>
+        <script src="js/helpers/cordovaStorage.js"></script>
+        <script src="js/helpers/htmlStorage.js"></script>
+        <script src="js/helpers/localStorageManager.js"></script>
         <script src="js/helpers/helper.js"></script>
         <script src="js/helpers/fullScreen.js"></script>
         <script src="js/helpers/timeDiff.js"></script>
@@ -104,6 +106,7 @@
         <script src="js/controllers/mainViewController.js"></script>
         <script src="js/controllers/mainViewContentController.js"></script>
         <script src="js/controllers/spentListViewController.js"></script>
+        <script src="js/controllers/WidgetViewController.js"></script>
 
         <!-- Test -->
         <script src="js/test/tests.js"></script>

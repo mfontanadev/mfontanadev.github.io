@@ -12,3 +12,4 @@ var C_VIEW_PAGE_ID_SPENT_LIST = "spentListView";
 var C_VIEW_PAGE_ID_TEST = "testView";
 var C_VIEW_PAGE_ID_LOGIN = "loginView";
 var C_VIEW_PAGE_ID_SPLASH = "splashView";
+var C_VIEW_PAGE_ID_WIDGET = "widgetView";
