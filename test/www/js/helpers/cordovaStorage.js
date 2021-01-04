@@ -15,9 +15,50 @@ CordovaStorage.prototype.init = function ()
 
 CordovaStorage.isSupported = function()
 {
-	var result = (typeof(cordova.file) !== "undefined" && cordova.file !== null);
-	appLog("cordovaStorage supported:" + result);
-	return result;
+	var bRet = false;
+	var _this = this;
+	
+	var bRet = (typeof(cordova.file) !== "undefined" && cordova.file !== null);
+	var fleSytemType = (typeof LocalFileSystem != "undefined") ? LocalFileSystem.PERSISTENT : 1;
+
+	if (bRet === true)
+	{
+		window.requestFileSystem
+		(
+			fleSytemType, 
+			0, 
+			function (fs) 
+			{
+				fs.root.getFile
+				(
+					"cordovasupport.txt", 
+					{ create: true, exclusive: false }, 
+					function (fileEntry) 
+					{
+						var dataObj = new Blob(["cordova file supported"], { type: 'text/plain' });
+						//_this.write(fileEntry, dataObj, _callbackOK, _callbackError);
+						appLog("write data:");
+					}, 
+					function(e)
+					{
+						appLog("cordovaStorage getFile error not supported:" + e);
+						//_this.errorHandler(e, _fileName, _callbackError);
+					}
+				);
+			}, 
+			function(e)
+			{
+				appLog("cordovaStorage error not supported:" + e);
+				//_this.errorHandler(e, _fileName, _callbackError);
+			}
+		);
+	}
+	else
+	{
+		appLog("cordovaStorage supported:" + bRet);
+	}
+
+	return bRet;
 }
 
 CordovaStorage.prototype.test = function ()
