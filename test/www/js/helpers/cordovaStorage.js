@@ -37,7 +37,35 @@ CordovaStorage.isSupported = function()
 					{
 						var dataObj = new Blob(["cordova file supported"], { type: 'text/plain' });
 						//_this.write(fileEntry, dataObj, _callbackOK, _callbackError);
-						appLog("write data:");
+
+						fileEntry.createWriter(
+							function (fileWriter) 
+							{
+								fileWriter.onwriteend = function() 
+								{
+									appLog("cordovaStorage write end:");
+									//_callbackOK();
+								};
+					
+								fileWriter.onerror = function (e) 
+								{
+									appLog("cordovaStorage error end:");
+									//_this.errorHandler(e, _fileEntry.name, _callbackError);
+								};
+					
+								// If data object is not passed in,
+								// create a new Blob instead.
+								if (dataObj) 
+								{
+									fileWriter.write(dataObj);
+								}
+								else
+								{
+									appLog("cordovaStorage error end:");
+									//_this.errorHandler(null, _fileEntry.name, _callbackError);
+								}
+						});
+
 					}, 
 					function(e)
 					{
