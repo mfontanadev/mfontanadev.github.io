@@ -13,12 +13,15 @@ HtmlStorage.prototype.init = function ()
 {
 }
 
-HtmlStorage.isSupported = function()
+HtmlStorage.isSupported = function(_ok, _error)
 {
 	var result = (typeof(Storage) !== "undefined");
 	appLog("htmlStorage supported:" + result);
 
-	return result;
+	if (result === true)
+		_ok();
+	else
+		_error();
 }
 
 HtmlStorage.prototype.test = function ()

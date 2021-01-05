@@ -13,7 +13,61 @@ CordovaStorage.prototype.init = function ()
 {
 }
 
-CordovaStorage.isSupported = function()
+CordovaStorage.isSupported = function(_ok, _error)
+{
+	// Idea of the function:
+	// Cordova support will be true if we can write and read some data.
+
+	var bRet = false;
+	var _this = this;
+	
+	var bRet = (typeof(cordova.file) !== "undefined" && cordova.file !== null);
+
+	if (bRet === true)
+	{
+		var fileSystem = new CordovaStorage();
+		var TEST_FILE_NAME = "html_storage_testfile.txt";
+		var TEST_FILE_CONTENT_DATA = "Support content of html_srtorage_testfile.txt";
+
+		fileSystem.writeToFile(
+			TEST_FILE_NAME, 
+			TEST_FILE_CONTENT_DATA,
+			function() 	
+			{ 
+				appLog("OK, HTML_writeToFile: file=" + TEST_FILE_NAME); 
+
+				fileSystem.readFile
+				(
+					TEST_FILE_NAME, 
+					function(_data) 
+					{ 
+						appLog("OK, readFile:\n" + "Lenght:" + _data.length + "\nData:"  + _data); 
+
+						if (_data.length > 0)
+							_ok();
+						else
+							_error();
+					},
+					function(_result) 
+					{ 
+						appLog("ERROR (" + _result + "), readToFile:"); 
+						_error();
+					}
+				);
+
+			},
+			function(_result) 
+			{ 
+				appLog("ERROR, HTML_writeToFile: file=" + TEST_FILE_NAME + ", result(" + _result + ")"); 
+				_error();
+			}
+		)
+
+	}
+}
+
+
+CordovaStorage.isSupported2 = function()
 {
 	var bRet = false;
 	var _this = this;

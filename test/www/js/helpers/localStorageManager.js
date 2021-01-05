@@ -9,35 +9,69 @@ function LocalStorageManager ()
 	this.storageSystem = null;		
 }
 
-LocalStorageManager.prototype.init = function ()
+LocalStorageManager.prototype.init = function (_ok, _error)
 {
-	if (this.isSupportCordovaStorage())
-	{
-		this.useCordovaStorageSystem();
-	}
-	else if (thid.isSupportHtmlStorage())
-	{
-		this.useHtmlStorageSystem();
-	}
-	else
-	{
-		appLog("Local storages not supported");
-	}
+	var _this = this;
+
+	_this.isSupportCordovaStorage(
+		function() 
+		{ 
+			_this.useCordovaStorageSystem(); 
+			_ok(); 
+		},
+		function() 	
+		{ 
+			_this.isSupportHtmlStorage(
+				function() 
+				{ 
+					_this.useHtmlStorageSystem();
+					_ok(); 
+				},
+				function() 
+				{ 
+					appLog("Local storages not supported");
+					_error(); 
+				}
+			);
+		}
+	);
 };
 
-LocalStorageManager.prototype.isSupportedLocalStorage = function ()
+LocalStorageManager.prototype.isSupportedLocalStorage = function (_ok, _error)
 {
-	return this.supportCordovaStorage() === true || this.supportHtmlStorage() === true; 
+	var _this = this;
+
+	// Make an OR  using asynch aproach.
+	// If the first try gives error then tray the second one.
+	_this.isSupportCordovaStorage(
+		function() 
+		{ 
+			_ok(); 
+		},
+		function() 	
+		{ 
+			_this.isSupportHtmlStorage(
+				function() 
+				{ 
+					_ok(); 
+				},
+				function() 
+				{ 
+					_error(); 
+				}
+			);
+		}
+	);
 }
 
-LocalStorageManager.prototype.isSupportCordovaStorage = function ()
+LocalStorageManager.prototype.isSupportCordovaStorage = function (_ok, _error)
 {
-	return CordovaStorage.isSupported();
+	CordovaStorage.isSupported(_ok, _error);
 }
 
-LocalStorageManager.prototype.isSupportHtmlStorage = function ()
+LocalStorageManager.prototype.isSupportHtmlStorage = function (_ok, _error)
 {
-	return HtmlStorage.isSupported();
+	HtmlStorage.isSupported(_ok, _error);
 }
 
 LocalStorageManager.prototype.test = function ()

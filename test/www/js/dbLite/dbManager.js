@@ -37,7 +37,7 @@ function DBManager()
     this.m_localStorage = null;
 }
 
-DBManager.prototype.init = function() 
+DBManager.prototype.init = function(_ok, _error) 
 {
     appLog("\nOn DBManager");
 
@@ -47,7 +47,12 @@ DBManager.prototype.init = function()
     TestViewController.testClearLogArea();
     appLog("    DBManager, init LocalStorageManager...");
     this.m_localStorage = new LocalStorageManager();
-    this.m_localStorage.init();
+	this.m_localStorage.init
+	(
+		function() { appLog("testLocalStoragemanager, ok callback"); _ok(); },
+		function() { appLog("testLocalStoragemanager, error callback"); _error(); }
+	);
+
     //this.m_localStorage.useHtmlStorageSystem();
 }
 

@@ -45,7 +45,7 @@ TestViewController.dumpLog = function()
 	}
 }
 
-// RAW FILE TESTS
+// RAW FILE TESTS CORDOVA
 TestViewController.testCreateFileCordova = function()
 {
 	var ls = new LocalStorageManager();
@@ -112,6 +112,7 @@ TestViewController.testDeleteFileCordova = function()
 	);
 }
 
+// RAW FILE TESTS HTML
 TestViewController.testCreateFileHtml = function()
 {
 	var ls = new LocalStorageManager();
@@ -613,7 +614,11 @@ TestViewController.testLocalStoragemanager = function()
 	TestViewController.testClearLogArea();
 
 	var localStorageManager = new LocalStorageManager();
-	localStorageManager.init();
+	localStorageManager.init
+	(
+		function() { appLog("testLocalStoragemanager, ok callback"); },
+		function() { appLog("testLocalStoragemanager, error callback"); }
+	);
 }
 
 // TABLE User

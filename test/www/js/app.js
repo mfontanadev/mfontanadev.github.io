@@ -55,12 +55,24 @@ function dbInitialization()
 {
 	var database = appDB();
 
-	database.init();
-	database.onEventPopulateInitialData
+	database.init
 	(
-		function(){appSession().reloadAllData();}
+		function() 
+		{ 
+			database.onEventPopulateInitialData
+			(
+				function(){appSession().reloadAllData();}
+			);
+
+			database.populateInitialData();
+		},
+		function() 
+		{ 
+			appLog("dbInitialization, error callback");
+		}
 	);
-    database.populateInitialData();
+
+
 }
 
 function appSession()
@@ -216,7 +228,7 @@ function appLogCordovaFile(_file)
 
 function appVersion()
 {
-    return "1.4.5";
+    return "1.4.6";
 }
 
 function appName()
