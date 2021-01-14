@@ -29,7 +29,7 @@ function populateCardsData_english(_cards)
 			"Telefono (Telephone)",
 			"img/telefono_mysite_thumb.png",
 			"It is an imitation of the popular game called Simon but using telephone numbers instead. Made with QuickBasic 4.5 in 1995. NOTE: download required, press PLAY to download from itchio or press SOURCES button.",
-			"https://github.com/mfontanadev/retroProjects/tree/main/TELEFONO",
+			"https://mfontanadev.itch.io/telefono",
 			"https://github.com/mfontanadev/retroProjects/tree/main/TELEFONO"
 		)
 	)
