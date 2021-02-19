@@ -61,7 +61,16 @@ Last Updated: 07/07/2020
 
 			<!-- Title -->
 			<title>Rise of Ladybug v0.0.0</title>
-			<!-- Viewport -->
+			
+			<!-- PWA support -->
+	        <meta name="format-detection" content="telephone=no">
+	        <meta name="msapplication-tap-highlight" content="no">
+	        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+	        <meta name="apple-mobile-web-app-capable" content="yes">
+	        <meta name="mobile-web-app-capable" content="yes">
+			<link rel="manifest" href="manifest.json">
+					
+			<!-- Viewport / Style -->
 			<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
 			<style>
 				body { margin: 0; }
@@ -89,8 +98,7 @@ Last Updated: 07/07/2020
 			</script>
 				
 			<!-- Custom Apis-->
-			<link rel="manifest" href="manifest.json">
-			
+	
 			<script src="lib/chel-dist/js/consts.js"></script>
 			<script src="js/globalDefinitions.js"></script>			
 			<script src="lib/chel-dist/js/chlib.js"></script>
