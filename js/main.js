@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idTetris", 
+			"Tetris",
+			"img/tetris_mysite_thumb.png",
+			"It is an imitation of the popular game Tetris, programed with QuickBasic 4.5, monochromatic displays (those times) near 1995. NOTE: download required, press PLAY to download from itchio or press SOURCES button.",
+			"https://mfontanadev.itch.io/tetris",
+			"https://github.com/mfontanadev/retroProjects/tree/main/TETRIS"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idTelefono", 
 			"Telefono (Telephone)",
 			"img/telefono_mysite_thumb.png",
