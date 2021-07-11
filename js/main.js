@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idMinirally", 
+			"Minirally",
+			"img/minirally_mysite_thumb.png",
+			"It is an imitation of the popular real game Mini Rally, programed with QuickBasic 4.5, monochromatic displays (those times). NOTE: download required, press PLAY to download from itchio or press SOURCES button.",
+			"https://mfontanadev.itch.io/minirally",
+			"https://github.com/mfontanadev/retroProjects/tree/main/MINIRALLY"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idTetris", 
 			"Tetris",
 			"img/tetris_mysite_thumb.png",
