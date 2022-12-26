@@ -25,6 +25,17 @@ function populateCardsData_english(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idMemotest", 
+			"Memotest",
+			"img/memotest_mysite_thumb.png",
+			"It is an imitation of the a real game called Memotest. NOTE: it is not intended to be a commercial stuff., programed with QuickBasic 4.5. NOTE: download required, press PLAY to download from itchio or press SOURCES button.",
+			"https://mfontanadev.itch.io/memotest",
+			"https://github.com/mfontanadev/retroProjects/tree/main/MEMOTEST"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"idMinirally", 
 			"Minirally",
 			"img/minirally_mysite_thumb.png",
