@@ -28,7 +28,7 @@ function populateCardsData_english(_cards)
 			"id8bitminirally", 
 			"8_bit_minirally",
 			"img/8_bit_minirally_mysite_thumb.png",
-			"I ported my QuickBasic 4.5 game called Minirally to TIC-80, just for: fun, leard lua and enjoy TIC-80 console. NOTE: it is not intended to be a commercial stuff. NOTE: press PLAY to download from itchio or press SOURCES button.",
+			"I ported my QuickBasic 4.5 game called Minirally to TIC-80, just for: fun, learn lua and enjoy TIC-80 console. NOTE: it is not intended to be a commercial stuff. NOTE: press PLAY to download from itchio or press SOURCES button.",
 			"https://mfontanadev.itch.io/8-bit-minirally",
 			"https://github.com/mfontanadev/retroProjects/tree/main/8_BIT_MINIRALLY"
 		)
