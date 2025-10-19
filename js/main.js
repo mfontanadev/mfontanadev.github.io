@@ -2,7 +2,8 @@ var Cards = new Array();
 
 function setSiteTitle()
 {
-	document.title = "mfontanadev home v1.2.2"
+  // Version 1.3.0: fixing about.html page, sizeable image
+	document.title = "mfontanadev home v1.3.0"
 }
 
 function init()
