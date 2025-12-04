@@ -40,3 +40,20 @@ body
   width: 40%;
   padding: 0px 10px 10px 0px
 }
+
+.language-selector:hover 
+{
+	cursor: pointer;
+}
+
+.language-flag
+{
+  margin: 0px 10px 10px 0px
+}
+
+.modal-body-centered 
+{
+  display: flex;
+  justify-content: center; 
+}
+

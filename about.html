@@ -9,10 +9,28 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
 	<script type='text/javascript' src="js/main.js"></script>
+
 	<script>
-		setSiteTitle();
-		injectionOfNavigationBar("#id_nav-bar-item-about");
-	</script> 
+		function applyLocalization() {
+			if (getLanguageCode() === "eng") {
+				setText("idSectionTitle", "About me / this site");
+				setText("idSectionInfo1", "I'm passionate (obsessive optimization) for nature designs, maths, music, teaching and all kind of stuffs where you can create. Sometimes I use these algorithms to make digital art (like flowers patterns), but that is another history.");
+				setText("idSectionInfo2", "I began programming with a C64 (when I was 12 years old) and play arcade games at the same time but I always wanted to make them."); 
+				setText("idSectionInfo3", "Now, the focus is on sharing and give some educational value to all of those things (I use them mini objectives to push myself to learn something).");
+				setText("idSectionInfo4", "Besides, the spirit of the site is to have all my works in one place and give some educational value to it.");
+				setText("idSectionInfo5", "So, enjoy and be patient.");
+			}
+			else if (getLanguageCode() === "spa") {
+				setText("idSectionTitle", "Sobre mí / este sitio web");
+				setText("idSectionInfo1", "Soy un apasionado (obsesionado por la optimización) de la igenieria de la naturaleza, matemáticas, música, enseñar y toda clase de cosas donde uno pueda crear. A veces uso estos algorítmos para hacer arte digital (por ejemplo patrones florales), pero esa es otra historia.");
+				setText("idSectionInfo2", "Comensé a programar con una C64 (a la edad de 12 años) y también jugaba arcades pero lo que siempre quise, fue crearlos."); 
+				setText("idSectionInfo3", "Hoy en día, el foco está puesto en compartir y dar algo de valor educacional a todas estas cosas (los uso como mini objetivos para empujarme algo nuevo).");
+				setText("idSectionInfo4", "Además, el espíritu de este sitio web es que funcione como un contenedor de todos mis trabajos.");
+				setText("idSectionInfo5", "Asi que (so), a disfrutar y ser paciente.");
+			}
+	}
+
+</script> 
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
 	<script>
@@ -24,7 +42,7 @@
 	</script>
 </head>
 
-<body>
+<body onload="init('#id_nav-bar-item-about', 'about.html')">
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
@@ -40,15 +58,15 @@
 					<div class="col">
 							<img src="img/about_me_photo1.jpg" class="card-img-top f-left" alt="wishflower">
   
-							<h4 class="main-title">
+							<h2 id="idSectionTitle" class="main-title">
 								About me / this site
 							</h4>
 							<div class="rich-text z-container text-justify ">
-									<p class="card-text">I'm passionate (obsessive optimization) for nature designs, maths, music, teaching and all kind of stuffs where you can create. Sometimes I use these algorithms to make art (like flowers patterns), but that is another history.</p>
-									<p class="card-text">I began programming with a C64 (when I was 12 years old) and play arcade games at the same time but I always wanted to make them. </p>
-									<p class="card-text">Now, the focus is on sharing and give some educational value to all of those things (they works as mini objectives to push myself to learn something).</p>
-									<p class="card-text">Besides, the spirit of the site is to have all my works in one place and give some educational value to it.</p>
-									<p class="card-text">So, enjoy and be patient.</p>
+									<p id="idSectionInfo1" class="card-text">I'm passionate (obsessive optimization) for nature designs, maths, music, teaching and all kind of stuffs where you can create. Sometimes I use these algorithms to make digital art (like flowers patterns), but that is another history.</p>
+									<p id="idSectionInfo2" class="card-text">I began programming with a C64 (when I was 12 years old) and play arcade games at the same time but I always wanted to make them. </p>
+									<p id="idSectionInfo3" class="card-text">Now, the focus is on sharing and give some educational value to all of those things (I use them as mini objectives to push myself to learn something).</p>
+									<p id="idSectionInfo4" class="card-text">Besides, the spirit of the site is to have all my works in one place.</p>
+									<p id="idSectionInfo5" class="card-text">So, enjoy and be patient.</p>
 							</div>							
 							<div class="z-container" align="center" >
 									<br>
@@ -66,6 +84,9 @@
 					</div>					
 			</div>	
 	</div>
+
+			<!--Language selector-->
+	<div id="language-selector-placeholder"></div>
 
 </body>
 

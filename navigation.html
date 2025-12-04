@@ -1,10 +1,12 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
   <img id="id_imgLogo" src="img/site-logo.png" width="30" height="30" alt="">
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
       <li class="nav-item">
@@ -22,12 +24,26 @@
       <li class="nav-item">
         <a id="id_nav-bar-item-about"  class="nav-link" href="about.html">About</a>
       </li>
+      <li class="nav-item">
+        <div id="id_nav-bar-item-language" class="nav-link language-selector" title="Language selector">
+          <img id="idLanguageFlagIcon_eng" src="img/flag_icon_eng.png" style="display:none" width="30" height="20" alt="Select language">
+          <img id="idLanguageFlagIcon_spa" src="img/flag_icon_spa.png" style="display:none" width="30" height="20" alt="Select language">
+        </div>
+      </li>
     </ul>
+
+     <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="navbar-brand" href="http://twitter.com/mfontanadev" target="_blank" rel="noopener">
+            <img id="idDonateButton" src="img/donate_box.png" width="30" height="30" alt="Donate" title="Donate">
+          </a>
+        </li>
+    </ul>    
 
     <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
-          <a class="navbar-brand" href="http://twitter.com/mfontanadev">
-            <img src="img/X_Logo_toolbar.png" width="30" height="30" alt="">
+          <a class="navbar-brand" href="http://twitter.com/mfontanadev" target="_blank" rel="noopener">
+            <img id="idTwittxButton" src="img/X_Logo_toolbar.png" width="30" height="30" alt="Twittx" title="Twittx">
           </a>
         </li>
     </ul>    

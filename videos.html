@@ -10,8 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
-		setSiteTitle();
-		injectionOfNavigationBar("#id_nav-bar-item-videos");
+		function applyLocalization() {
+			if (getLanguageCode() === "eng") {
+				setText("idSectionTitle", "Under construction");
+			}
+			else if (getLanguageCode() === "spa") {
+				setText("idSectionTitle", "En construcción");
+			}
+		}
 	</script> 
 	
 	<!-- Google tag (gtag.js) -->
@@ -24,8 +30,8 @@
 		gtag('config', 'G-FZZTP9WEFJ');
 	</script>
 </head>
-
-<body>
+		
+<body onload="init('#id_nav-bar-item-videos', 'videos.html');">
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 		<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
@@ -33,19 +39,21 @@
 		</nav>
 	</div>
 	
+	<br>
+	
 	<!-- Page Content -->
 	<div class="container">
-			<br>
-	
 			<div class="row">
 				<div class="col">
-					<h2 class="main-title">
+					<h2 id="idSectionTitle" class="main-title">
 						Under construction
 					</h2>
 				</div>
 			</div>
 	</div>
 
+	<!--Language selector-->
+	<div id="language-selector-placeholder"></div>
 
 </body>
 

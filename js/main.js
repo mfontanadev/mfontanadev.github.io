@@ -1,4 +1,5 @@
 var Cards = new Array();
+var LanguageCodes = ["eng", "spa"];
 
 function setSiteTitle()
 {
@@ -6,10 +7,21 @@ function setSiteTitle()
 	document.title = "mfontanadev home v1.3.1"
 }
 
-function init()
+function init(_htmlControlNavBar, _refreshPage)
 {
-	populateCardsData_english(Cards);
-	setCardsHtmlElements(Cards);
+	setSiteTitle();
+
+	injectionOfNavigationBar(_htmlControlNavBar);
+	injectionOfLanguageSelector(_refreshPage);
+
+	setTimeout(function() {
+		applyLocalization();
+
+		setTimeout(function() {
+			populateCardsData_english(Cards);
+			setCardsHtmlElements(Cards);
+		}, 100);
+	}, 100);
 }
 
 function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
@@ -238,23 +250,88 @@ function navigateTo(_url)
 }
 
 
-function injectionOfNavigationBar(_menuItemIdToBeHighLighted)
+function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 {
 	$(
 	    function()
 	    {
 	      $("#nav-placeholder").load
 	      	(
-				//"http://localhost:8080/navigation.html",
-				"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+						"http://127.0.0.1:3000/navigation.html",
+						//"http://localhost:8080/navigation.html",
+						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
-					$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
-					$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
-		      	}
+							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
+							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
+
+							applyLocalizationToNavigationBar();
+						}
 	      	); 
 	    }
 	);
+}
+
+function applyLocalizationToNavigationBar() {
+
+	if (getLanguageCode() === "eng") {
+		setText("id_nav-bar-item-home", "Home");
+		setText("id_nav-bar-item-projects", "Projects");
+		setText("id_nav-bar-item-videos", "Videos");
+		setText("id_nav-bar-item-products", "Products");
+		setText("id_nav-bar-item-about", "About");
+		document.getElementById("id_nav-bar-item-language").title = "Language selector";
+		document.getElementById("idDonateButton").title = "Donate";
+		document.getElementById("idTwittxButton").title = "Twittx";
+	}		
+	else if (getLanguageCode() === "spa") {
+		setText("id_nav-bar-item-home", "Principal");
+		setText("id_nav-bar-item-projects", "Proyectos");
+		setText("id_nav-bar-item-videos", "Videos");
+		setText("id_nav-bar-item-products", "Productos");
+		setText("id_nav-bar-item-about", "Contacto");
+		document.getElementById("id_nav-bar-item-language").title = "Selector de lenguaje";
+		document.getElementById("idDonateButton").title = "Donar";
+		document.getElementById("idTwittxButton").title = "Twittx";
+	}
+}
+
+function injectionOfLanguageSelector(_hrefToRefresh)
+{
+	$(
+	    function()
+	    {
+	      $("#language-selector-placeholder").load
+	      	(
+						"http://127.0.0.1:3000/language-selector.html",
+						//"http://localhost:8080/navigation.html",
+						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+		      	function()
+		      	{
+							$('#id_nav-bar-item-language').click(function() { languageDialogSelector();});	
+							
+							LanguageCodes.forEach(langCode => {
+								$('#idLanguage_' + langCode).click(function() { changeLanguage(langCode, _hrefToRefresh);});	
+							});
+							
+							document.getElementById("idLanguageFlagIcon_" + getLanguageCode()).style = "display: block";
+				
+							applyLocalizationToLanguageDialog();
+						}
+	      	); 
+	    }
+	);
+}
+
+
+function applyLocalizationToLanguageDialog() {
+
+	if (getLanguageCode() === "eng") {
+		setText("idLanguageDialogTitle", "Clic on a flag to change the language");
+	}		
+	else if (getLanguageCode() === "spa") {
+		setText("idLanguageDialogTitle", "Clic sobre una bandera para cambiar el lenguaje");
+	}
 }
 
 function logoClick(_currentPageTag)
@@ -267,6 +344,11 @@ function logoClick(_currentPageTag)
 	{
 		window.location.href = "index.html";
 	}
+}
+
+function languageDialogSelector()
+{
+	$('#languageDialog').modal('show')
 }
 
 function showCardButtons(_idElement)
@@ -289,3 +371,23 @@ function hideCardButtons(_idElement)
 	elementButtons.addClass('d-none');
 }
 
+function setLanguageCode(_languageCode){
+	localStorage.setItem("LANGUAGE", _languageCode);
+}
+
+function getLanguageCode(){
+	let returnValue = localStorage.getItem("LANGUAGE");
+	return returnValue === null ? "eng" : returnValue;
+}
+
+function changeLanguage(_languagecode, _hrefToRefresh){
+	setLanguageCode(_languagecode);
+	
+	document.getElementById('idCloseLanguageDialogButton').click();
+
+	window.location.href = _hrefToRefresh;
+}
+
+function setText(_idControl, _text) {
+	document.getElementById(_idControl).innerHTML = _text;
+}

@@ -10,8 +10,17 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
-		setSiteTitle();
-		injectionOfNavigationBar("#id_nav-bar-item-projects");
+		function applyLocalization() {
+			if (getLanguageCode() === "eng") {
+				setText("idSectionTitle", "What is here?");
+				setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
+			}
+			else if (getLanguageCode() === "spa") {
+				setText("idSectionTitle", "Qué hay acá?");
+				setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
+			}
+		}
+	
 	</script>
 	
 	<!-- Google tag (gtag.js) -->
@@ -25,7 +34,7 @@
 	</script>
 </head>
 
-<body onload="init();">
+<body onload="init('#id_nav-bar-item-projects', 'projects.html');">
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
@@ -39,10 +48,10 @@
 	<div class="container">
 		<div class="row">
 				<div class="col">
-					<h2 class="main-title">
+					<h2 id="idSectionTitle" class="main-title">
 						What is here?
 					</h2>
-					<div class="rich-text z-container text-justify">
+					<div id="idSectionInfo" class="rich-text z-container text-justify">
 						<p class="card-text">Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.</p>
 					</div>
 				</div>
@@ -374,6 +383,10 @@
 			</div>
 		</div>	
 	</div>
+
+	<!--Language selector-->
+	<div id="language-selector-placeholder"></div>
+
 </body>
 
 </html>
