@@ -57,3 +57,6 @@ body
   justify-content: center; 
 }
 
+.inside-circle {
+  border-radius: 50% 
+ }

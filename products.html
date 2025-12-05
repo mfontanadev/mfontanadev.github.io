@@ -11,10 +11,10 @@
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyLocalization() {
-			if (getLanguageCode() === "eng") {
+			if (getLanguageCode() === LANG_ENG) {
 				setText("idSectionTitle", "Under construction");
 			}
-			else if (getLanguageCode() === "spa") {
+			else if (getLanguageCode() === LANG_ARG) {
 				setText("idSectionTitle", "En construcción");
 			}
 		}
@@ -31,6 +31,9 @@
 </head>
 
 <body onload="init('#id_nav-bar-item-products', 'products.html');">
+	<br>
+	<br>
+
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">

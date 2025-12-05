@@ -1,5 +1,8 @@
 var Cards = new Array();
-var LanguageCodes = ["eng", "spa"];
+
+const LANG_ARG = "arg";
+const LANG_ENG = "eng";
+var LanguageCodes = [LANG_ARG, LANG_ENG];
 
 function setSiteTitle()
 {
@@ -274,7 +277,7 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 
 function applyLocalizationToNavigationBar() {
 
-	if (getLanguageCode() === "eng") {
+	if (getLanguageCode() === LANG_ENG) {
 		setText("id_nav-bar-item-home", "Home");
 		setText("id_nav-bar-item-projects", "Projects");
 		setText("id_nav-bar-item-videos", "Videos");
@@ -284,7 +287,7 @@ function applyLocalizationToNavigationBar() {
 		document.getElementById("idDonateButton").title = "Donate";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}		
-	else if (getLanguageCode() === "spa") {
+	else if (getLanguageCode() === LANG_ARG) {
 		setText("id_nav-bar-item-home", "Principal");
 		setText("id_nav-bar-item-projects", "Proyectos");
 		setText("id_nav-bar-item-videos", "Videos");
@@ -326,10 +329,10 @@ function injectionOfLanguageSelector(_hrefToRefresh)
 
 function applyLocalizationToLanguageDialog() {
 
-	if (getLanguageCode() === "eng") {
+	if (getLanguageCode() === LANG_ENG) {
 		setText("idLanguageDialogTitle", "Clic on a flag to change the language");
 	}		
-	else if (getLanguageCode() === "spa") {
+	else if (getLanguageCode() === LANG_ARG) {
 		setText("idLanguageDialogTitle", "Clic sobre una bandera para cambiar el lenguaje");
 	}
 }
@@ -377,7 +380,7 @@ function setLanguageCode(_languageCode){
 
 function getLanguageCode(){
 	let returnValue = localStorage.getItem("LANGUAGE");
-	return returnValue === null ? "eng" : returnValue;
+	return returnValue === null ? LANG_ENG : returnValue;
 }
 
 function changeLanguage(_languagecode, _hrefToRefresh){

@@ -11,11 +11,11 @@
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyLocalization() {
-			if (getLanguageCode() === "eng") {
+			if (getLanguageCode() === LANG_ENG) {
 				setText("idSectionTitle", "What is here?");
 				setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
 			}
-			else if (getLanguageCode() === "spa") {
+			else if (getLanguageCode() === LANG_ARG) {
 				setText("idSectionTitle", "Qué hay acá?");
 				setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
 			}
@@ -35,6 +35,9 @@
 </head>
 
 <body onload="init('#id_nav-bar-item-projects', 'projects.html');">
+	<br>
+	<br>
+
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">

@@ -11,7 +11,7 @@
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyLocalization() {
-			if (getLanguageCode() === "eng") {
+			if (getLanguageCode() === LANG_ENG) {
 				setText("idSectionTitle", "What is here?");
 				setText("idSectionInfo", "Essentially, I want to share my programs (many inspired on the desingns of the nature), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing. Enjoy and I hope it be usefull, sources on github (see <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>link</a>).");
 
@@ -21,7 +21,7 @@
 				setText("idOldSiteDialogButtonYes", "Yes");
 				setText("idOldSiteDialogButtonNo", "No"); // I know, spanish word is the same, why the translation? because I am freak. 
 			}
-			else if (getLanguageCode() === "spa") {
+			else if (getLanguageCode() === LANG_ARG) {
 				setText("idSectionTitle", "Qué hay acá?");
 				setText("idSectionInfo", "Escencialmente, Mi idea es compartir mis programas (muchos inspirados en diseños de la naturaleza), también dar algo a la comunidad and ser una inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo. Diviertanse y espero que les sea de utilidad, los fuentes estan en github (see <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>link</a>).");
 
@@ -56,7 +56,8 @@
 
 	<!-- Page Content -->
 	<div class="container">
-
+		<br>
+		<br>
 		<div class="row">
 			<div class="col">
 				<h2 id="idSectionTitle" class="main-title">

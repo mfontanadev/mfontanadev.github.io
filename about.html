@@ -12,7 +12,7 @@
 
 	<script>
 		function applyLocalization() {
-			if (getLanguageCode() === "eng") {
+			if (getLanguageCode() === LANG_ENG) {
 				setText("idSectionTitle", "About me / this site");
 				setText("idSectionInfo1", "I'm passionate (obsessive optimization) for nature designs, maths, music, teaching and all kind of stuffs where you can create. Sometimes I use these algorithms to make digital art (like flowers patterns), but that is another history.");
 				setText("idSectionInfo2", "I began programming with a C64 (when I was 12 years old) and play arcade games at the same time but I always wanted to make them."); 
@@ -20,7 +20,7 @@
 				setText("idSectionInfo4", "Besides, the spirit of the site is to have all my works in one place and give some educational value to it.");
 				setText("idSectionInfo5", "So, enjoy and be patient.");
 			}
-			else if (getLanguageCode() === "spa") {
+			else if (getLanguageCode() === LANG_ARG) {
 				setText("idSectionTitle", "Sobre mí / este sitio web");
 				setText("idSectionInfo1", "Soy un apasionado (obsesionado por la optimización) de la igenieria de la naturaleza, matemáticas, música, enseñar y toda clase de cosas donde uno pueda crear. A veces uso estos algorítmos para hacer arte digital (por ejemplo patrones florales), pero esa es otra historia.");
 				setText("idSectionInfo2", "Comensé a programar con una C64 (a la edad de 12 años) y también jugaba arcades pero lo que siempre quise, fue crearlos."); 
@@ -43,6 +43,9 @@
 </head>
 
 <body onload="init('#id_nav-bar-item-about', 'about.html')">
+	<br>
+	<br>
+
 	<!--Navigation bar-->
 	<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
