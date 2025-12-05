@@ -6,8 +6,8 @@ var LanguageCodes = [LANG_ARG, LANG_ENG];
 
 function setSiteTitle()
 {
-  // Version 1.3.1: changing about page's text.
-	document.title = "mfontanadev home v1.3.1"
+  // Version 1.4.0: adding localization
+	document.title = "mfontanadev home v1.4.0"
 }
 
 function init(_htmlControlNavBar, _refreshPage)
@@ -312,14 +312,7 @@ function injectionOfLanguageSelector(_hrefToRefresh)
 		      	function()
 		      	{
 							$('#id_nav-bar-item-language').click(function() { languageDialogSelector();});	
-							
-							LanguageCodes.forEach(langCode => {
-								$('#idLanguage_' + langCode).click(function() { changeLanguage(langCode, _hrefToRefresh);});	
-							});
-							
-							document.getElementById("idLanguageFlagIcon_" + getLanguageCode()).style = "display: block";
-				
-							applyLocalizationToLanguageDialog();
+							applyLocalizationToLanguageDialog(_hrefToRefresh);
 						}
 	      	); 
 	    }
@@ -327,8 +320,22 @@ function injectionOfLanguageSelector(_hrefToRefresh)
 }
 
 
-function applyLocalizationToLanguageDialog() {
+function applyLocalizationToLanguageDialog(_hrefToRefresh) {
+	// Set event to each flag in the language selector.
+	LanguageCodes.forEach(langCode => {
+		$('#idLanguage_' + langCode).click(function() { changeLanguage(langCode, _hrefToRefresh);});	
+	});
 
+	// Show the current lenaguage flag in the navigation bar.
+	let showNavBarFlag = document.getElementById("idLanguageFlagIcon_" + getLanguageCode()); 
+	if (showNavBarFlag !== null ) {
+		showNavBarFlag.style = "display: block";
+	}
+	else {
+		document.getElementById("idLanguageFlagIcon_eng").style = "display: block";
+	}	
+
+	// Apply localization to language selector dialog.
 	if (getLanguageCode() === LANG_ENG) {
 		setText("idLanguageDialogTitle", "Clic on a flag to change the language");
 	}		
