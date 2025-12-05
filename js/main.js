@@ -401,3 +401,7 @@ function changeLanguage(_languagecode, _hrefToRefresh){
 function setText(_idControl, _text) {
 	document.getElementById(_idControl).innerHTML = _text;
 }
+
+function donationDialogBox() {
+	$('#languageDialog').modal('show')
+}
