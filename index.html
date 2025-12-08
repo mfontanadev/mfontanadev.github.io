@@ -8,13 +8,15 @@
 	<script type='text/javascript' src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+	<script type='text/javascript' src="js/cards_data_arg.js"></script>
+	<script type='text/javascript' src="js/cards_data_eng.js"></script>
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyLocalization() {
 			if (getLanguageCode() === LANG_ENG) {
 				setText("idSectionTitle", "What is here?");
 				setText("idSectionInfo1", "Essentially, I want to share my programs (many inspired on the desingns of the nature), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing.");
-				setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, please use donation icon (<img class='language-selector' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be usefull, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
+				setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, here is the donation button (<img class='language-selector' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be usefull, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
 
 				setText("idOldSiteDialogTitle", "Back in time");
 				setText("idOldSiteDialogInfoLine1", "Are you sure you want to travel back in time to the original site?");
@@ -25,7 +27,7 @@
 			else if (getLanguageCode() === LANG_ARG) {
 				setText("idSectionTitle", "Qué hay acá?");
 				setText("idSectionInfo1", "Escencialmente, Mi idea es compartir mis programas (muchos inspirados en diseños de la naturaleza), también dar algo a la comunidad and ser una inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo.");
-				setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, utiliza el botón de donación (<img class='language-selector' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes estan en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
+				setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, este es el botón de donación (<img class='language-selector' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes estan en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
 
 				setText("idOldSiteDialogTitle", "Viaje al pasado");
 				setText("idOldSiteDialogInfoLine1", "Estás seguro que querés viajar al pasado al sitio original?");
@@ -79,19 +81,20 @@
 		<div class="row">
 			<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+	
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('id8bitminirally');">
 			  		</div>
 
-			  		<div class="d-none" id="cardButtons">    
+			  	<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -99,6 +102,8 @@
 						
 			<div id="idMemotest" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idMemotest');">
 			  		</div>
@@ -106,12 +111,11 @@
 			  		<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -119,6 +123,7 @@
 
 			<div id="idMinirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idMinirally');">
 			  		</div>
@@ -126,12 +131,11 @@
 			  		<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -139,6 +143,7 @@
 
 			<div id="idTetris" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTetris');">
 			  		</div>
@@ -146,12 +151,11 @@
 			  		<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -159,6 +163,7 @@
 
 			<div id="idTelefono" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTelefono');">
 			  		</div>
@@ -166,12 +171,11 @@
 			  		<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -187,6 +191,7 @@
 			  
 			<div id="idLittleConstructorThreeJSEx" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idLittleConstructorThreeJSEx');">
 			  		</div>
@@ -194,12 +199,11 @@
 			  		<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
 				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
@@ -207,6 +211,7 @@
 
 			<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
 				<div class="card text-justify border-0" >
+					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
 				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idWishFlower');">
 			  		</div>
@@ -214,12 +219,11 @@
 					<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>
 
 					<div class="card-body" id="cardBody">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 
@@ -228,19 +232,19 @@
 
 			<div id="idRiseOfLadybug_part3" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 				<div class="card text-justify border-0" >
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
 					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
-			  		</div>
+						<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
+					</div>
 
-			  		<div class="d-none" id="cardButtons">    
+					<div class="d-none" id="cardButtons">    
 						<table class="nostyle" style="width:100%">
 							<tr style="height:5px"></tr>
-							<tr align="center"><th id="idButtons" style="width:100%"></th></tr>
+							<tr ><th id="idButtons" style="width:100%"></th></tr>
 						</table>
 					</div>	
 
-				  	<div class="card-body" id="cardBody">
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div class="card-body" id="cardBody">
 						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
