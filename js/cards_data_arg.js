@@ -137,7 +137,7 @@ function populateCardsData_arg(_cards)
 			"idLittleConstructorThreeJS", 
 			"Little constructor ThreeJS",
 			"img/little-constructor-threejs.jpg",
-			"Same as 'Little constructor' with ThreeJS render engine (it looks solid). Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
+			"Es lo mismo que 'Little constructor' pero coin el motor de render ThreeJS (el cueal se ve más sólido). Juaga y crea usando el modelo de casa prediseñado. Este proyecto fue motivado por el tutorial de @javidx9, el cual enseña a hacer un motor 3D, así que hice el mío en (javascript). Por otro lado lo que tratré de modelar fue un viejo jueg ode mi infancia llamado 'Pequeño constructor' (acá una versión actualizada <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
 			"https://mfontanadev.github.io/games/deployLittleConstructorThreeJS/index.html",
 			"https://github.com/mfontanadev/appLittleConstructor/tree/ThreeJS"
 		)
@@ -148,7 +148,7 @@ function populateCardsData_arg(_cards)
 			"idLittleConstructor", 
 			"Little constructor" ,
 			"img/little-constructor.jpg",
-			"Play and build your own house model. Following @javidx9 tutorial I made my own 3D Engine (javascript). I tried to modelate this amazing toy from my childhood (see <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
+			"Juaga y crea usando el modelo de casa prediseñado. Este proyecto fue motivado por el tutorial de @javidx9, el cual enseña a hacer un motor 3D, así que hice el mío en (javascript). Por otro lado lo que tratré de modelar fue un viejo jueg ode mi infancia llamado 'Pequeño constructor' (acá una versión actualizada <a href='http://www.instagram.com/casitas_frm/'>link</a>).",
 			"http://mfontanadev.github.io/games/deployLittleConstructor/index.html",
 			"https://github.com/mfontanadev/appLittleConstructor"
 		)
@@ -159,7 +159,7 @@ function populateCardsData_arg(_cards)
 			"idWishFlower", 
 			"Wishflower" ,
 			"img/wishflower.jpg",
-			"Artgame where you can make a wish. Using fractal L-Systems and inspired in 'Plum Park in Kameido'.",
+			"Juago para galeria de arte, donde pides un deseo a la 'Vaquita de San Antonio' y lueg olo ves llegar volando y convertirse en una flor. Basado en los L-Systems y en el cuadro 'Plum Park in Kameido'.",
 			"http://wishflower.herokuapp.com",
 			"https://github.com/mfontanadev/wishflower"
 		)
@@ -170,7 +170,7 @@ function populateCardsData_arg(_cards)
 			"idPoliticFight", 
 			"Politic Fight" ,
 			"img/politic-fight.jpg",
-			"An excuse to make my own platform game engine (javascript). Sprites were supposed to be politician but I'm not good at drawing.",
+			"Una excusa para crear mi propio motor para juegos de plataforma (en javascript). Los personajes se suponían que eran políticos pero no soy bueno dibujando.",
 			"http://mfontanadev.github.io/games/deployPoliticFight/index.html",
 			"https://github.com/mfontanadev/appPoliticFight"
 		)

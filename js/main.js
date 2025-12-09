@@ -155,6 +155,7 @@ function applyLocalizationToLanguageDialog(_hrefToRefresh) {
 	// Set event to each flag in the language selector.
 	LanguageCodes.forEach(langCode => {
 		$('#idLanguage_' + langCode).click(function() { changeLanguage(langCode, _hrefToRefresh);});	
+		document.getElementById("idLanguageFlagIcon_" + langCode).style = "display: none";
 	});
 
 	// Show the current lenaguage flag in the navigation bar.
@@ -218,7 +219,14 @@ function setLanguageCode(_languageCode){
 
 function getLanguageCode(){
 	let returnValue = localStorage.getItem("LANGUAGE");
-	return returnValue === null ? LANG_ENG : returnValue;
+
+	if (returnValue === null || !LanguageCodes.includes(returnValue))
+	{
+		returnValue = LANG_ENG;
+		setLanguageCode(returnValue);
+	}
+
+	return returnValue;
 }
 
 function changeLanguage(_languagecode, _hrefToRefresh){

@@ -1,408 +1,417 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>mfontanadev home</title>
-	
-	<script type='text/javascript' src='js/jquery-3.4.1.min.js'></script>
-	<script type='text/javascript' src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-	<script type='text/javascript' src="js/cards_data_arg.js"></script>
-	<script type='text/javascript' src="js/cards_data_eng.js"></script>
-	<script type='text/javascript' src="js/main.js"></script>
-	<script>
-		function applyLocalization() {
-			if (getLanguageCode() === LANG_ENG) {
-				setText("idSectionTitle", "What is here?");
-				setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>mfontanadev home</title>
+
+		<script type='text/javascript' src='js/jquery-3.4.1.min.js'></script>
+		<script type='text/javascript' src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+		<script type='text/javascript' src="js/cards_data_arg.js"></script>
+		<script type='text/javascript' src="js/cards_data_eng.js"></script>
+		<script type='text/javascript' src="js/main.js"></script>
+		<script>
+			function applyLocalization() {
+				if (getLanguageCode() === LANG_ENG) {
+					setText("idSectionTitle", "What is here?");
+					setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
+				}
+				else if (getLanguageCode() === LANG_ARG) {
+					setText("idSectionTitle", "Qué hay acá?");
+					setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
+				}
 			}
-			else if (getLanguageCode() === LANG_ARG) {
-				setText("idSectionTitle", "Qué hay acá?");
-				setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
-			}
-		}
-	
-	</script>
-	
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
+		</script>
 
-		gtag('config', 'G-FZZTP9WEFJ');
-	</script>
-</head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-FZZTP9WEFJ');
+		</script>
+	</head>
 
-<body onload="init('#id_nav-bar-item-projects', 'projects.html');">
-	<br>
-	<br>
+	<body onload="init('#id_nav-bar-item-projects', 'projects.html');">
+		<br>
+		<br>
 
-	<!--Navigation bar-->
-	<div id="nav-placeholder">
+		<!--Navigation bar-->
+		<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
-			<div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav mx-auto"><li class="nav-item"><a id="id_nav-bar-item-home" class="nav-link">...</a></li></ul></div>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item"><a id="id_nav-bar-item-home" class="nav-link">...</a></li>
+					</ul>
+				</div>
 			</nav>
 		</div>
 
-	<br>
+		<br>
 
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
+		<!-- Page Content -->
+		<div class="container">
+			<div class="row">
 				<div class="col">
 					<h2 id="idSectionTitle" class="main-title">
 						What is here?
 					</h2>
 					<div id="idSectionInfo" class="rich-text z-container text-justify">
-						<p class="card-text">Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.</p>
-					</div>
-				</div>
-			</div>
-	
-		<br>
-		
-		<div class="row"><div class="col"><h4>Projects</h4></div></div>
-
-		<div class="row">
-			<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-			    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('id8bitminirally');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
+						<p class="card-text">Here is the complete universe of projects. WARNING: they can be very, very raw or almost
+							finished.</p>
 					</div>
 				</div>
 			</div>
 
-			<div id="idMemotest" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-				    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+			<br>
 
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idMemotest');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
+			<div class="row">
+				<div class="col">
+					<h4>Projects</h4>
 				</div>
 			</div>
 
-			<div id="idMinirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idMinirally');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-		
-			<div id="idTetris" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTetris');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-						
-			<div id="idTelefono" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTelefono');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-			
-			<div id="idLittleConstructorThreeJSEx" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idLittleConstructorThreeJSEx');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-			
-			<div id="idMicroSpy" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idRiseOfLadybug_part3" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-			
-			<div id="idRiseOfLadybug_part2" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-						<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
-					</div>
-
-			  		<div class="d-none" id="cardButtons">    
-							<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-					
-					<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idRiseOfLadybug_part1" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-						<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idRiseOfLadybug');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-					
-					<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idThreeJSSenoid" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idEngineJSSenoid');">
-			  		</div>
-
-			  		<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-					
-			<div id="idEngineJSSenoid" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idEngineJSSenoid');">
-			  		</div>
-				  	<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idLittleConstructorThreeJS" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idLittleConstructorThreeJS');">
-			  		</div>
-
-				  	<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idLittleConstructor" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idLittleConstructor');">
-			  		</div>
-				  	<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>	
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				</div>
-			</div>
-
-			<div id="idPoliticFight" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-				<div class="card text-justify border-0" >
-					    <h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idPoliticFight');">
-			  		</div>
-					
-					<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
-					</div>
-
-				  	<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
-					</div>
-				
-				</div>
-		  	</div>
-
-			<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4" >
-				<div class="card text-justify border-0" >
+			<div class="row">
+				<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
 						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-					<div id="cardImage">
-				  		<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idWishFlower');">
-			  		</div>
-
-					<div class="d-none" id="cardButtons">    
-						<table class="nostyle" style="width:100%">
-							<tr style="height:5px"></tr>
-							<tr ><th id="idButtons" style="width:100%"></th></tr>
-						</table>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('id8bitminirally');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
 					</div>
+				</div>
 
-					<div class="card-body" id="cardBody">
-						<p id="cardDescription" class="card-text">...</p>
+				<div id="idMemotest" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idMemotest');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
 					</div>
+				</div>
 
+				<div id="idMinirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idMinirally');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idTetris" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTetris');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idTelefono" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idTelefono');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idLittleConstructorThreeJSEx" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idLittleConstructorThreeJSEx');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idMicroSpy" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idRiseOfLadybug');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idRiseOfLadybug_part3" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idRiseOfLadybug');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idRiseOfLadybug_part2" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idRiseOfLadybug');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idRiseOfLadybug_part1" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idRiseOfLadybug');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idThreeJSSenoid" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idEngineJSSenoid');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idEngineJSSenoid" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idEngineJSSenoid');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idLittleConstructorThreeJS" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idLittleConstructorThreeJS');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idLittleConstructor" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idLittleConstructor');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idPoliticFight" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idPoliticFight');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
+				<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idWishFlower');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>	
-	</div>
+		</div>
 
-	<!--Language selector-->
-	<div id="language-selector-placeholder"></div>
-
-</body>
-
+		<!--Language selector-->
+		<div id="language-selector-placeholder"></div>
+	</body>
 </html>
-
-
-
-
-
-
-
-
-
