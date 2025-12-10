@@ -8,16 +8,16 @@
 		<script type='text/javascript' src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-		<script type='text/javascript' src="js/cards_data_arg.js"></script>
+		<script type='text/javascript' src="js/cards_data_spa.js"></script>
 		<script type='text/javascript' src="js/cards_data_eng.js"></script>
 		<script type='text/javascript' src="js/main.js"></script>
 		<script>
 			function applyLocalization() {
-				if (getLanguageCode() === LANG_ENG) {
+				if (getLocalization().langCode === LANG_ENG) {
 					setText("idSectionTitle", "What is here?");
 					setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
 				}
-				else if (getLanguageCode() === LANG_ARG) {
+				else if (getLocalization().langCode === LANG_SPA) {
 					setText("idSectionTitle", "Qué hay acá?");
 					setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
 				}
@@ -412,6 +412,6 @@
 		</div>
 
 		<!--Language selector-->
-		<div id="language-selector-placeholder"></div>
+		<div id="localization-placeholder"></div>
 	</body>
 </html>

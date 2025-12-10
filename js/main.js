@@ -1,8 +1,24 @@
 var Cards = new Array();
 
-const LANG_ARG = "arg";
+const LANG_SPA = "spa";
 const LANG_ENG = "eng";
-var LanguageCodes = [LANG_ARG, LANG_ENG];
+const KEY_LOCALIZATION_COUNTRY = "localization.country";
+const KEY_LOCALIZATION_LANGCODE = "localization.langCode";
+
+var Localization = [
+	{country: "arg", langCode: LANG_SPA},
+	{country: "usa", langCode: LANG_ENG}
+];
+
+function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
+{
+	this.id = _id;
+	this.title = _title;
+	this.image = _image;
+	this.description = _description;
+	this.appURL = _appURL;
+	this.sourcesURL = _sourcesURL;	
+}
 
 function setSiteTitle()
 {
@@ -15,7 +31,7 @@ function init(_htmlControlNavBar, _refreshPage)
 	setSiteTitle();
 
 	injectionOfNavigationBar(_htmlControlNavBar);
-	injectionOfLanguageSelector(_refreshPage);
+	injectionOfLocalization(_refreshPage);
 
 	setTimeout(function() {
 		applyLocalization();
@@ -27,16 +43,6 @@ function init(_htmlControlNavBar, _refreshPage)
 	}, 100);
 }
 
-function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
-{
-	this.id = _id;
-	this.title = _title;
-	this.image = _image;
-	this.description = _description;
-	this.appURL = _appURL;
-	this.sourcesURL = _sourcesURL;	
-}
-
 function setCardsHtmlElements(_cards)
 {
 	_cards.forEach(cardItem => {
@@ -45,14 +51,13 @@ function setCardsHtmlElements(_cards)
 }
 
 function populateCardsDataWithLocalization(_cards) {
-	if (getLanguageCode() === LANG_ARG) {
+	if (getLocalization().langCode === LANG_SPA) {
 		populateCardsData_arg(_cards);
 	}
-	else if (getLanguageCode() === LANG_ENG) {
+	else if (getLocalization().langCode === LANG_ENG) {
 		populateCardsData_eng(_cards);
 	}
 }
-
 
 function injectionCardsText(_cardItem)
 {
@@ -83,7 +88,6 @@ function navigateTo(_url)
 	window.open(_url);
 }
 
-
 function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 {
 	$(
@@ -106,76 +110,6 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 	);
 }
 
-function applyLocalizationToNavigationBar() {
-
-	if (getLanguageCode() === LANG_ENG) {
-		setText("id_nav-bar-item-home", "Home");
-		setText("id_nav-bar-item-projects", "Projects");
-		setText("id_nav-bar-item-videos", "Videos");
-		setText("id_nav-bar-item-products", "Products");
-		setText("id_nav-bar-item-about", "About");
-		document.getElementById("id_nav-bar-item-language").title = "Language selector";
-		document.getElementById("idDonateButton").title = "Donate";
-		document.getElementById("idTwittxButton").title = "Twittx";
-	}		
-	else if (getLanguageCode() === LANG_ARG) {
-		setText("id_nav-bar-item-home", "Principal");
-		setText("id_nav-bar-item-projects", "Proyectos");
-		setText("id_nav-bar-item-videos", "Videos");
-		setText("id_nav-bar-item-products", "Productos");
-		setText("id_nav-bar-item-about", "Contacto");
-		document.getElementById("id_nav-bar-item-language").title = "Selector de lenguaje";
-		document.getElementById("idDonateButton").title = "Donar";
-		document.getElementById("idTwittxButton").title = "Twittx";
-	}
-}
-
-function injectionOfLanguageSelector(_hrefToRefresh)
-{
-	$(
-	    function()
-	    {
-	      $("#language-selector-placeholder").load
-	      	(
-						"http://127.0.0.1:3000/language-selector.html",
-						//"http://localhost:8080/navigation.html",
-						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
-		      	function()
-		      	{
-							$('#id_nav-bar-item-language').click(function() { languageDialogSelector();});	
-							applyLocalizationToLanguageDialog(_hrefToRefresh);
-						}
-	      	); 
-	    }
-	);
-}
-
-
-function applyLocalizationToLanguageDialog(_hrefToRefresh) {
-	// Set event to each flag in the language selector.
-	LanguageCodes.forEach(langCode => {
-		$('#idLanguage_' + langCode).click(function() { changeLanguage(langCode, _hrefToRefresh);});	
-		document.getElementById("idLanguageFlagIcon_" + langCode).style = "display: none";
-	});
-
-	// Show the current lenaguage flag in the navigation bar.
-	let showNavBarFlag = document.getElementById("idLanguageFlagIcon_" + getLanguageCode()); 
-	if (showNavBarFlag !== null ) {
-		showNavBarFlag.style = "display: block";
-	}
-	else {
-		document.getElementById("idLanguageFlagIcon_eng").style = "display: block";
-	}	
-
-	// Apply localization to language selector dialog.
-	if (getLanguageCode() === LANG_ENG) {
-		setText("idLanguageDialogTitle", "Clic on a flag to change the language");
-	}		
-	else if (getLanguageCode() === LANG_ARG) {
-		setText("idLanguageDialogTitle", "Clic sobre una bandera para cambiar el lenguaje");
-	}
-}
-
 function logoClick(_currentPageTag)
 {
 	if (_currentPageTag === "#id_nav-bar-item-home")
@@ -186,11 +120,6 @@ function logoClick(_currentPageTag)
 	{
 		window.location.href = "index.html";
 	}
-}
-
-function languageDialogSelector()
-{
-	$('#languageDialog').modal('show')
 }
 
 function showCardButtons(_idElement)
@@ -213,34 +142,132 @@ function hideCardButtons(_idElement)
 	elementButtons.addClass('d-none');
 }
 
-function setLanguageCode(_languageCode){
-	localStorage.setItem("LANGUAGE", _languageCode);
-}
-
-function getLanguageCode(){
-	let returnValue = localStorage.getItem("LANGUAGE");
-
-	if (returnValue === null || !LanguageCodes.includes(returnValue))
-	{
-		returnValue = LANG_ENG;
-		setLanguageCode(returnValue);
-	}
-
-	return returnValue;
-}
-
-function changeLanguage(_languagecode, _hrefToRefresh){
-	setLanguageCode(_languagecode);
-	
-	document.getElementById('idCloseLanguageDialogButton').click();
-
-	window.location.href = _hrefToRefresh;
-}
-
 function setText(_idControl, _text) {
 	document.getElementById(_idControl).innerHTML = _text;
 }
 
 function donationDialogBox() {
-	$('#languageDialog').modal('show')
+	$('#localizationDialog').modal('show')
+}
+
+// Localizatoin helper
+function applyLocalizationToLocalizationDialog(_hrefToRefresh) {
+	// Set event to each flag in the language selector.
+	Localization.forEach(localize => {
+		$('#idCountry_' + localize.country).click(function() { changeLocalization(localize, _hrefToRefresh);});	
+		document.getElementById("idCountryFlagIcon_" + localize.country).style = "display: none";
+	});
+
+	// Show the current lenaguage flag in the navigation bar.
+	let showNavBarFlag = document.getElementById("idCountryFlagIcon_" + getLocalization().country); 
+	if (showNavBarFlag !== null ) {
+		showNavBarFlag.style = "display: block";
+	}
+	else {
+		document.getElementById("idCountryFlagIcon_arg").style = "display: block";
+	}	
+
+	// Apply localization to language selector dialog.
+	if (getLocalization().langCode === LANG_ENG) {
+		setText("idLocalizationDialog'Title", "Clic on a flag to change the language");
+	}		
+	else if (getLocalization().langCode === LANG_SPA) {
+		setText("idLocalizationDialog'Title", "Clic sobre una bandera para cambiar el lenguaje");
+	}
+}
+
+function applyLocalizationToNavigationBar() {
+
+	if (getLocalization().langCode === LANG_ENG) {
+		setText("id_nav-bar-item-home", "Home");
+		setText("id_nav-bar-item-projects", "Projects");
+		setText("id_nav-bar-item-videos", "Videos");
+		setText("id_nav-bar-item-products", "Products");
+		setText("id_nav-bar-item-about", "About");
+		document.getElementById("id_nav-bar-item-localization").title = "Language selector";
+		document.getElementById("idDonateButton").title = "Donate";
+		document.getElementById("idTwittxButton").title = "Twittx";
+	}		
+	else if (getLocalization().langCode === LANG_SPA) {
+		setText("id_nav-bar-item-home", "Principal");
+		setText("id_nav-bar-item-projects", "Proyectos");
+		setText("id_nav-bar-item-videos", "Videos");
+		setText("id_nav-bar-item-products", "Productos");
+		setText("id_nav-bar-item-about", "Contacto");
+		document.getElementById("id_nav-bar-item-localization").title = "Selector de lenguaje";
+		document.getElementById("idDonateButton").title = "Donar";
+		document.getElementById("idTwittxButton").title = "Twittx";
+	}
+}
+
+function injectionOfLocalization(_hrefToRefresh)
+{
+	$(
+	    function()
+	    {
+	      $("#localization-placeholder").load
+	      	(
+						"http://127.0.0.1:3000/localization.html",
+						//"http://localhost:8080/navigation.html",
+						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+		      	function()
+		      	{
+							$('#id_nav-bar-item-localization').click(function() { localizationDialogSelector();});	
+							applyLocalizationToLocalizationDialog(_hrefToRefresh);
+						}
+	      	); 
+	    }
+	);
+}
+
+function localizationDialogSelector()
+{
+	$('#localizationDialog').modal('show')
+}
+
+function setLocalizationCode(_localization){
+	localStorage.setItem(KEY_LOCALIZATION_COUNTRY, _localization.country);
+	localStorage.setItem(KEY_LOCALIZATION_LANGCODE, _localization.langCode);
+}
+
+function getLocalization() {
+	let country = localStorage.getItem(KEY_LOCALIZATION_COUNTRY);
+	let langCode = localStorage.getItem(KEY_LOCALIZATION_LANGCODE);
+	let returnValue = {country: "arg", langCode: LANG_SPA};
+ 
+	if (country !== null && langCode !== null && validateLocalization(returnValue))
+	{
+		returnValue = {country: country, langCode: langCode};
+	}
+	else
+	{
+		setLocalizationCode(returnValue);
+	}
+
+	return returnValue;
+}
+
+function validateLocalization(_localization){
+	let found = false
+
+	Localization.forEach(localize => {
+		if (localize.country === _localization.country && 
+				localize.langCode === _localization.langCode) {
+					found = true;
+				}
+	});
+
+	return found;
+}
+
+function changeLocalization(_localization, _hrefToRefresh){
+	let currentLocalization = getLocalization();
+
+	if (_localization.country !== currentLocalization.country) {
+		setLocalizationCode(_localization);
+		
+		document.getElementById('idCloseLocalizationDialogButton').click();
+
+		window.location.href = _hrefToRefresh;
+	}
 }

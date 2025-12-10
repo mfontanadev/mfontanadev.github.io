@@ -8,15 +8,15 @@
 	<script type='text/javascript' src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-	<script type='text/javascript' src="js/cards_data_arg.js"></script>
+	<script type='text/javascript' src="js/cards_data_spa.js"></script>
 	<script type='text/javascript' src="js/cards_data_eng.js"></script>
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyLocalization() {
-			if (getLanguageCode() === LANG_ENG) {
+			if (getLocalization().langCode === LANG_ENG) {
 				setText("idSectionTitle", "Under construction");
 			}
-			else if (getLanguageCode() === LANG_ARG) {
+			else if (getLocalization().langCode === LANG_SPA) {
 				setText("idSectionTitle", "En construcción");
 			}
 		}
@@ -58,7 +58,7 @@
 	</div>
 
 	<!--Language selector-->
-	<div id="language-selector-placeholder"></div>
+	<div id="localization-placeholder"></div>
 
 </body>
 

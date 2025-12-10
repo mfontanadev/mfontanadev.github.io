@@ -41,12 +41,12 @@ body
   padding: 0px 10px 10px 0px
 }
 
-.language-selector:hover 
+.localization:hover 
 {
 	cursor: pointer;
 }
 
-.language-flag
+.country_flag
 {
   margin: 0px 10px 10px 0px
 }
