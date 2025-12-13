@@ -12,7 +12,7 @@
 	<script type='text/javascript' src="js/cards_data_eng.js"></script>
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
-		function applyLocalization() {
+		function applyPageLocalization() {
 			if (getLocalization().langCode === LANG_ENG) {
 				setText("idSectionTitle", "Under construction");
 			}
@@ -21,6 +21,9 @@
 			}
 		}
 	</script> 
+
+	<style>body { visibility: hidden; }</style>
+	<noscript><style>body { visibility: visible; }</style></noscript>
 	
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
@@ -33,7 +36,7 @@
 	</script>
 </head>
 		
-<body onload="init('#id_nav-bar-item-videos', 'videos.html');">
+<body>
 	<br>
 	<br>
 
@@ -60,6 +63,7 @@
 	<!--Language selector-->
 	<div id="localization-placeholder"></div>
 
+	<script defer>init('#id_nav-bar-item-videos', 'videos.html');</script>
 </body>
 
 </html>

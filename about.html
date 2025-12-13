@@ -13,7 +13,7 @@
   <script type='text/javascript' src="js/main.js"></script>
 
 	<script>
-		function applyLocalization() {
+		function applyPageLocalization() {
 			if (getLocalization().langCode === LANG_ENG) {
 				setText("idSectionTitle", "About me / this site");
 				setText("idSectionInfo1", "I'm passionate (obsessive optimization) for nature designs, maths, music, teaching and all kind of stuffs where you can create. Sometimes I use these algorithms to make digital art (like flowers patterns), but that is another history.");
@@ -31,8 +31,11 @@
 				setText("idSectionInfo5", "Asi que (so), a disfrutar y ser paciente.");
 			}
 	}
+	</script> 
 
-</script> 
+	<style>body { visibility: hidden; }</style>
+	<noscript><style>body { visibility: visible; }</style></noscript>
+
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
 	<script>
@@ -44,7 +47,7 @@
 	</script>
 </head>
 
-<body onload="init('#id_nav-bar-item-about', 'about.html')">
+<body>
 	<br>
 	<br>
 
@@ -93,6 +96,7 @@
 			<!--Language selector-->
 	<div id="localization-placeholder"></div>
 
+	<script defer>init('#id_nav-bar-item-item', 'about.html');</script>
 </body>
 
 </html>

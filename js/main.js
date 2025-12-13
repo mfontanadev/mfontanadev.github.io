@@ -30,45 +30,46 @@ function init(_htmlControlNavBar, _refreshPage)
 {
 	setSiteTitle();
 
-	injectionOfNavigationBar(_htmlControlNavBar);
-	injectionOfLocalization(_refreshPage);
-
-	setTimeout(function() {
-		applyLocalization();
-
-		setTimeout(function() {
-			populateCardsDataWithLocalization(Cards);
-			setCardsHtmlElements(Cards);
-		}, 100);
-	}, 100);
+	loadLocalizatoinDataForCards(Cards);
+	injectionOfNavigationBar(_htmlControlNavBar, _refreshPage);
 }
 
-function setCardsHtmlElements(_cards)
+function initafterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
+{
+	injectionOfLocalizationDialog(_refreshPage);
+
+	applyPageLocalization();
+	setCardsHtmlText(Cards);
+	document.body.style.visibility = "visible";
+	
+	setCardsImages(Cards);
+}
+
+function loadLocalizatoinDataForCards(_cards) {
+	if (getLocalization().langCode === LANG_SPA) {
+		loadCardsDataLocalizated_arg(_cards);
+	}
+	else if (getLocalization().langCode === LANG_ENG) {
+		loadCardsDataLocalizated_eng(_cards);
+	}
+}
+
+function setCardsHtmlText(_cards)
 {
 	_cards.forEach(cardItem => {
-		injectionCardsText(cardItem);
+		injectionOfCardsText(cardItem);
 	});
 }
 
-function populateCardsDataWithLocalization(_cards) {
-	if (getLocalization().langCode === LANG_SPA) {
-		populateCardsData_arg(_cards);
-	}
-	else if (getLocalization().langCode === LANG_ENG) {
-		populateCardsData_eng(_cards);
-	}
-}
-
-function injectionCardsText(_cardItem)
+function injectionOfCardsText(_cardItem)
 {
 	// Card title
 	$("#"+_cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
 	$("#"+_cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
 
 	// Card image
-	var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
-
-	$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
+	//var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
+	//$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
 
 	// Card buttons play and close.
 	var buttonsHtml = "<button id=\"btnPlay\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
@@ -82,32 +83,24 @@ function injectionCardsText(_cardItem)
 	$("#"+_cardItem.id).find("[id='idButtons']").html(buttonsHtml);
 }
 
+function setCardsImages(_cards)
+{
+	_cards.forEach(cardItem => {
+		injectionOfCardsImages(cardItem);
+	});
+}
+
+function injectionOfCardsImages(_cardItem)
+{
+	// Card image
+	var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
+	$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
+}
+
 function navigateTo(_url)
 {
 	//window.location = _url;
 	window.open(_url);
-}
-
-function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
-{
-	$(
-	    function()
-	    {
-	      $("#nav-placeholder").load
-	      	(
-						"http://127.0.0.1:3000/navigation.html",
-						//"http://localhost:8080/navigation.html",
-						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
-		      	function()
-		      	{
-							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
-							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
-
-							applyLocalizationToNavigationBar();
-						}
-	      	); 
-	    }
-	);
 }
 
 function logoClick(_currentPageTag)
@@ -150,30 +143,27 @@ function donationDialogBox() {
 	$('#localizationDialog').modal('show')
 }
 
-// Localizatoin helper
-function applyLocalizationToLocalizationDialog(_hrefToRefresh) {
-	// Set event to each flag in the language selector.
-	Localization.forEach(localize => {
-		$('#idCountry_' + localize.country).click(function() { changeLocalization(localize, _hrefToRefresh);});	
-		document.getElementById("idCountryFlagIcon_" + localize.country).style = "display: none";
-	});
+function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
+{
+	$(
+	    function()
+	    {
+	      $("#nav-placeholder").load
+	      	(
+						"http://127.0.0.1:3000/navigation.html",
+						//"http://localhost:8080/navigation.html",
+						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+		      	function()
+		      	{
+							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
+							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
 
-	// Show the current lenaguage flag in the navigation bar.
-	let showNavBarFlag = document.getElementById("idCountryFlagIcon_" + getLocalization().country); 
-	if (showNavBarFlag !== null ) {
-		showNavBarFlag.style = "display: block";
-	}
-	else {
-		document.getElementById("idCountryFlagIcon_arg").style = "display: block";
-	}	
-
-	// Apply localization to language selector dialog.
-	if (getLocalization().langCode === LANG_ENG) {
-		setText("idLocalizationDialog'Title", "Clic on a flag to change the language");
-	}		
-	else if (getLocalization().langCode === LANG_SPA) {
-		setText("idLocalizationDialog'Title", "Clic sobre una bandera para cambiar el lenguaje");
-	}
+							applyLocalizationToNavigationBar();
+							initafterNavigationBarLoaded(_menuItemIdToBeHighLighted, _reloadSection);
+						}
+	      	); 
+	    }
+	);
 }
 
 function applyLocalizationToNavigationBar() {
@@ -198,9 +188,23 @@ function applyLocalizationToNavigationBar() {
 		document.getElementById("idDonateButton").title = "Donar";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}
+
+	// Set event to each flag in the navigation bar.
+	Localization.forEach(localize => {
+		document.getElementById("idCountryFlagIcon_" + localize.country).style = "display: none";
+	});
+
+	// Show the current language flag in the navigation bar.
+	let showNavBarFlag = document.getElementById("idCountryFlagIcon_" + getLocalization().country); 
+	if (showNavBarFlag !== null ) {
+		showNavBarFlag.style = "display: block";
+	}
+	else {
+		document.getElementById("idCountryFlagIcon_arg").style = "display: block";
+	}	
 }
 
-function injectionOfLocalization(_hrefToRefresh)
+function injectionOfLocalizationDialog(_hrefToRefresh)
 {
 	$(
 	    function()
@@ -212,7 +216,7 @@ function injectionOfLocalization(_hrefToRefresh)
 						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
-							$('#id_nav-bar-item-localization').click(function() { localizationDialogSelector();});	
+							$('#id_nav-bar-item-localization').click(function() { showLocalizationDialogSelectorOnClickOverFlagIcon();});	
 							applyLocalizationToLocalizationDialog(_hrefToRefresh);
 						}
 	      	); 
@@ -220,7 +224,22 @@ function injectionOfLocalization(_hrefToRefresh)
 	);
 }
 
-function localizationDialogSelector()
+function applyLocalizationToLocalizationDialog(_hrefToRefresh) {
+	// Set event to each flag in the localization dialog.
+	Localization.forEach(localize => {
+		$('#idCountry_' + localize.country).click(function() { changeLocalization(localize, _hrefToRefresh);});	
+	});
+
+	// Apply localization to language selector dialog.
+	if (getLocalization().langCode === LANG_ENG) {
+		setText("idLocalizationDialog'Title", "Clic on a flag to change the language");
+	}		
+	else if (getLocalization().langCode === LANG_SPA) {
+		setText("idLocalizationDialog'Title", "Clic sobre una bandera para cambiar el lenguaje");
+	}
+}
+
+function showLocalizationDialogSelectorOnClickOverFlagIcon()
 {
 	$('#localizationDialog').modal('show')
 }

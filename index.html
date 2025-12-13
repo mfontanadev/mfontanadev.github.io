@@ -8,11 +8,12 @@
 		<script type='text/javascript' src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+		
 		<script type='text/javascript' src="js/cards_data_spa.js"></script>
 		<script type='text/javascript' src="js/cards_data_eng.js"></script>
 		<script type='text/javascript' src="js/main.js"></script>
 		<script>
-			function applyLocalization() {
+			function applyPageLocalization() {
 				if (getLocalization().langCode === LANG_ENG) {
 					setText("idSectionTitle", "What is here?");
 					setText("idSectionInfo1", "Essentially, I want to share my programs (many inspired on the desingns of the nature), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing.");
@@ -35,6 +36,9 @@
 				}
 			}
 		</script>
+		
+		<style>body { visibility: hidden; }</style>
+		<noscript><style>body { visibility: visible; }</style></noscript>
 
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
@@ -46,7 +50,7 @@
 		</script>
 	</head>
 
-	<body onload="init('#id_nav-bar-item-home', 'index.html');">
+	<body>
 		<!--Navigation bar-->
 		<div id="nav-placeholder">
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
@@ -295,5 +299,7 @@
 
 		<!--Language selector-->
 		<div id="localization-placeholder"></div>
+	
+		<script defer>init('#id_nav-bar-item-home', 'index.html');</script>
 	</body>
 </html>

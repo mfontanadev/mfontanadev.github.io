@@ -1,4 +1,4 @@
-function populateCardsData_eng(_cards)
+function loadCardsDataLocalizated_eng(_cards)
 {
 	_cards.push(
 		new CardItem(
