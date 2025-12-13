@@ -17,22 +17,26 @@
 				if (getLocalization().langCode === LANG_ENG) {
 					setText("idSectionTitle", "What is here?");
 					setText("idSectionInfo1", "Essentially, I want to share my programs (many inspired on the desingns of the nature), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing.");
-					setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, here is the donation button (<img class='localization' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be usefull, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
+					setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, click on (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be usefull, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
 					setText("idOldSiteDialogTitle", "Back in time");
 					setText("idOldSiteDialogInfoLine1", "Are you sure you want to travel back in time to the original site?");
 					setText("idOldSiteDialogInfoLine2", "You will find: games from year 1995, a not responsive UI and a lot of funny things.");
 					setText("idOldSiteDialogButtonYes", "Yes");
 					setText("idOldSiteDialogButtonNo", "No"); // I know, spanish word is the same, why the translation? because I am freak. 
+					setText("idLatestSectionTitle", "Latest"); 
+					setText("idVeryFunSectionTitle", "Very fun"); 
 				}
 				else if (getLocalization().langCode === LANG_SPA) {
 					setText("idSectionTitle", "Qué hay acá?");
 					setText("idSectionInfo1", "Escencialmente, Mi idea es compartir mis programas (muchos inspirados en diseños de la naturaleza), también dar algo a la comunidad and ser una inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo.");
-					setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, este es el botón de donación (<img class='localization' id='idDonateButton2' src='img/donate_box.png' onclick='donationDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes estan en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
+					setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, click sobre (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes estan en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
 					setText("idOldSiteDialogTitle", "Viaje al pasado");
 					setText("idOldSiteDialogInfoLine1", "Estás seguro que querés viajar al pasado al sitio original?");
 					setText("idOldSiteDialogInfoLine2", "Vas a encontrar: juegos hechos en 1995, una no responsiva UI y muchas cosas divertidas.");
 					setText("idOldSiteDialogButtonYes", "Si");
 					setText("idOldSiteDialogButtonNo", "No");
+					setText("idLatestSectionTitle", "Lo último"); 
+					setText("idVeryFunSectionTitle", "Muy divertido"); 
 				}
 			}
 		</script>
@@ -78,9 +82,8 @@
 							work I did during my years as a programmer (since 1990, C64 in those times) and still doing. Enjoy and I
 							hope it be usefull, sources on github (<a href='https://github.com/mfontanadev' target='_blank'
 								rel='noopener noreferrer'>link</a>).</p>
-						<p id="idSectionInfo2" class="card-text">Finally, if you consider supporting this site and helping me, please
-							use donation icon (<img class="localization" id="idDonateButton2" src="img/donate_box.png"
-								onclick="donationDialogBox();" width="20" height="20" alt="Donate" title="Donate">)</p>
+						<p id="idSectionInfo2" class="card-text">Finally, if you consider supporting this site and helping me, click on (<img class="localization" id="idDonateButton" src="img/donate_box.png"
+								onclick="donateDialogBox();" width="20" height="20" alt="Donate" title="Donate">)</p>
 					</div>
 				</div>
 			</div>
@@ -89,7 +92,7 @@
 
 			<div class="row">
 				<div class="col">
-					<h4>Latest</h4>
+					<h4 id="idLatestSectionTitle">Latest</h4>
 				</div>
 			</div>
 
@@ -203,7 +206,7 @@
 
 			<div class="row">
 				<div class="col">
-					<h4>Very fun</h4>
+					<h4 id="idVeryFunSectionTitle">Very fun</h4>
 				</div>
 			</div>
 
@@ -299,7 +302,10 @@
 
 		<!--Language selector-->
 		<div id="localization-placeholder"></div>
-	
+
+		<!--Donaton dialog-->
+		<div id="donate-placeholder"></div>
+
 		<script defer>init('#id_nav-bar-item-home', 'index.html');</script>
 	</body>
 </html>

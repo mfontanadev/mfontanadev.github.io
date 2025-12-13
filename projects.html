@@ -16,10 +16,12 @@
 				if (getLocalization().langCode === LANG_ENG) {
 					setText("idSectionTitle", "What is here?");
 					setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
+					setText("idProjectsSectionTitle", "Projects");
 				}
 				else if (getLocalization().langCode === LANG_SPA) {
 					setText("idSectionTitle", "Qué hay acá?");
 					setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: pueden estar muy pero muy crudos o pronto a estar completos.");
+					setText("idProjectsSectionTitle", "Proyectos");
 				}
 			}
 		</script>
@@ -72,7 +74,7 @@
 
 			<div class="row">
 				<div class="col">
-					<h4>Projects</h4>
+					<h4 id="idProjectsSectionTitle">Projects</h4>
 				</div>
 			</div>
 

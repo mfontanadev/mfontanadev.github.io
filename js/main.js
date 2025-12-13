@@ -36,6 +36,8 @@ function init(_htmlControlNavBar, _refreshPage)
 
 function initafterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
 {
+	injectionOfDonateDialog(_refreshPage);
+
 	injectionOfLocalizationDialog(_refreshPage);
 
 	applyPageLocalization();
@@ -139,8 +141,8 @@ function setText(_idControl, _text) {
 	document.getElementById(_idControl).innerHTML = _text;
 }
 
-function donationDialogBox() {
-	$('#localizationDialog').modal('show')
+function donateDialogBox() {
+	$('#donateDialog').modal('show')
 }
 
 function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
@@ -157,6 +159,7 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 		      	{
 							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
 							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
+							$('#idDonateButton2').click(function() { donateDialogBox();});	
 
 							applyLocalizationToNavigationBar();
 							initafterNavigationBarLoaded(_menuItemIdToBeHighLighted, _reloadSection);
@@ -175,7 +178,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-products", "Products");
 		setText("id_nav-bar-item-about", "About");
 		document.getElementById("id_nav-bar-item-localization").title = "Language selector";
-		document.getElementById("idDonateButton").title = "Donate";
+		document.getElementById("idDonateButton2").title = "Donate";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}		
 	else if (getLocalization().langCode === LANG_SPA) {
@@ -185,7 +188,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-products", "Productos");
 		setText("id_nav-bar-item-about", "Contacto");
 		document.getElementById("id_nav-bar-item-localization").title = "Selector de lenguaje";
-		document.getElementById("idDonateButton").title = "Donar";
+		document.getElementById("idDonateButton2").title = "Donar";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}
 
@@ -202,6 +205,28 @@ function applyLocalizationToNavigationBar() {
 	else {
 		document.getElementById("idCountryFlagIcon_arg").style = "display: block";
 	}	
+}
+
+function injectionOfDonateDialog(_hrefToRefresh)
+{
+	$(
+	    function()
+	    {
+	      $("#donate-placeholder").load
+	      	(
+						"http://127.0.0.1:3000/donate.html",
+						//"http://localhost:8080/navigation.html",
+						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+		      	function()
+		      	{
+							applyLocalizationToDonateDialog(_hrefToRefresh);
+						}
+	      	); 
+	    }
+	);
+}
+
+function applyLocalizationToDonateDialog(_hrefToRefresh) {
 }
 
 function injectionOfLocalizationDialog(_hrefToRefresh)
