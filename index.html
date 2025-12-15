@@ -25,11 +25,12 @@
 					setText("idOldSiteDialogButtonNo", "No"); // I know, spanish word is the same, why the translation? because I am freak. 
 					setText("idLatestSectionTitle", "Latest"); 
 					setText("idVeryFunSectionTitle", "Very fun"); 
+					document.getElementById("idDonateButton").title = "Donate";
 				}
 				else if (getLocalization().langCode === LANG_SPA) {
 					setText("idSectionTitle", "Qué hay acá?");
 					setText("idSectionInfo1", "Escencialmente, Mi idea es compartir mis programas (muchos inspirados en diseños de la naturaleza), también dar algo a la comunidad and ser una inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo.");
-					setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, click sobre (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes estan en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
+					setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, click sobre (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes están en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
 					setText("idOldSiteDialogTitle", "Viaje al pasado");
 					setText("idOldSiteDialogInfoLine1", "Estás seguro que querés viajar al pasado al sitio original?");
 					setText("idOldSiteDialogInfoLine2", "Vas a encontrar: juegos hechos en 1995, una no responsiva UI y muchas cosas divertidas.");
@@ -37,6 +38,7 @@
 					setText("idOldSiteDialogButtonNo", "No");
 					setText("idLatestSectionTitle", "Lo último"); 
 					setText("idVeryFunSectionTitle", "Muy divertido"); 
+					document.getElementById("idDonateButton").title = "Donar";
 				}
 			}
 		</script>

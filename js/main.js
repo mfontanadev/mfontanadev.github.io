@@ -159,7 +159,6 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 		      	{
 							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
 							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
-							$('#idDonateButton2').click(function() { donateDialogBox();});	
 
 							applyLocalizationToNavigationBar();
 							initafterNavigationBarLoaded(_menuItemIdToBeHighLighted, _reloadSection);
@@ -178,7 +177,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-products", "Products");
 		setText("id_nav-bar-item-about", "About");
 		document.getElementById("id_nav-bar-item-localization").title = "Language selector";
-		document.getElementById("idDonateButton2").title = "Donate";
+		document.getElementById("idDonateButtonNavBar").title = "Donate";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}		
 	else if (getLocalization().langCode === LANG_SPA) {
@@ -188,7 +187,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-products", "Productos");
 		setText("id_nav-bar-item-about", "Contacto");
 		document.getElementById("id_nav-bar-item-localization").title = "Selector de lenguaje";
-		document.getElementById("idDonateButton2").title = "Donar";
+		document.getElementById("idDonateButtonNavBar").title = "Donar";
 		document.getElementById("idTwittxButton").title = "Twittx";
 	}
 
@@ -227,6 +226,16 @@ function injectionOfDonateDialog(_hrefToRefresh)
 }
 
 function applyLocalizationToDonateDialog(_hrefToRefresh) {
+	if (getLocalization().langCode === LANG_ENG) {
+		setText("idDonateDialogTitle", "Many thanks.");
+		setText("idMercadoPagoFreeAmount", "$x");
+		setText("idPayPalFreeAmount", "$x");
+	}		
+	else if (getLocalization().langCode === LANG_SPA) {
+		setText("idDonateDialogTitle", "Muchas gracias.");
+		setText("idMercadoPagoFreeAmount", "$x");
+		setText("idPayPalFreeAmount", "$x");
+	}
 }
 
 function injectionOfLocalizationDialog(_hrefToRefresh)
