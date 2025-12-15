@@ -185,7 +185,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-projects", "Proyectos");
 		setText("id_nav-bar-item-videos", "Videos");
 		setText("id_nav-bar-item-products", "Productos");
-		setText("id_nav-bar-item-about", "Acerca de");
+		setText("id_nav-bar-item-about", "Acerca");
 		document.getElementById("id_nav-bar-item-localization").title = "Selector de lenguaje";
 		document.getElementById("idDonateButtonNavBar").title = "Donar";
 		document.getElementById("idTwittxButton").title = "Twittx";
