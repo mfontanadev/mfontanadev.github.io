@@ -152,9 +152,9 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 	    {
 	      $("#nav-placeholder").load
 	      	(
-						"http://127.0.0.1:3000/navigation.html",
+						//"http://127.0.0.1:3000/navigation.html",
 						//"http://localhost:8080/navigation.html",
-						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
 		      	function()
 		      	{
 							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
@@ -185,7 +185,7 @@ function applyLocalizationToNavigationBar() {
 		setText("id_nav-bar-item-projects", "Proyectos");
 		setText("id_nav-bar-item-videos", "Videos");
 		setText("id_nav-bar-item-products", "Productos");
-		setText("id_nav-bar-item-about", "Contacto");
+		setText("id_nav-bar-item-about", "Acerca de");
 		document.getElementById("id_nav-bar-item-localization").title = "Selector de lenguaje";
 		document.getElementById("idDonateButtonNavBar").title = "Donar";
 		document.getElementById("idTwittxButton").title = "Twittx";
@@ -213,9 +213,9 @@ function injectionOfDonateDialog(_hrefToRefresh)
 	    {
 	      $("#donate-placeholder").load
 	      	(
-						"http://127.0.0.1:3000/donate.html",
-						//"http://localhost:8080/navigation.html",
-						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+						//"http://127.0.0.1:3000/donate.html",
+						//"http://localhost:8080/donate.html",
+						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/donate.html",
 		      	function()
 		      	{
 							applyLocalizationToDonateDialog(_hrefToRefresh);
@@ -245,9 +245,9 @@ function injectionOfLocalizationDialog(_hrefToRefresh)
 	    {
 	      $("#localization-placeholder").load
 	      	(
-						"http://127.0.0.1:3000/localization.html",
-						//"http://localhost:8080/navigation.html",
-						//"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+						//"http://127.0.0.1:3000/localization.html",
+						//"http://localhost:8080/localization.html",
+						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/localization.html",
 		      	function()
 		      	{
 							$('#id_nav-bar-item-localization').click(function() { showLocalizationDialogSelectorOnClickOverFlagIcon();});	

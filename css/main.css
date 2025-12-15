@@ -113,6 +113,12 @@ body
     height: auto;
 }
 
+.fixed-70w-btn-hide {
+    width: 70px; 
+    height: auto;
+    visibility: hidden;
+}
+
 @media (max-width: 575px) {
     .buttons-container {
         flex-direction: column; 
@@ -121,5 +127,9 @@ body
     .fixed-70w-btn {
         flex: none; /* Desactiva la distribución equitativa de flex */
         width: 100%;
+    }
+
+    .fixed-70w-btn-hide {
+      display: none;
     }
 }
