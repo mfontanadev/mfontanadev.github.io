@@ -22,8 +22,8 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function setSiteTitle()
 {
-  // Version 1.4.0: adding localization
-	document.title = "mfontanadev home v1.4.0"
+  // Version 2.0.0: adding localization and donate functionality.
+	document.title = "mfontanadev home v2.0.0"
 }
 
 function init(_htmlControlNavBar, _refreshPage)
