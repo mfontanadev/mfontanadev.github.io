@@ -4,6 +4,9 @@ const LANG_SPA = "spa";
 const LANG_ENG = "eng";
 const KEY_LOCALIZATION_COUNTRY = "localization.country";
 const KEY_LOCALIZATION_LANGCODE = "localization.langCode";
+//const SERVER_URL = "http://127.0.0.1:3000/";		// VsCode plugin
+//const SERVER_URL = "http://localhost:8080/";		// localhost
+const SERVER_URL = "https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/";		//git hub
 
 var Localization = [
 	{country: "arg", langCode: LANG_SPA},
@@ -22,8 +25,8 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function setSiteTitle()
 {
-  // Version 2.0.2: Not using Paypal.me, creating links with my PayPal account
-	document.title = "mfontanadev home v2.0.2"
+  // Version 2.0.3: Redirect to donate functionality.
+	document.title = "mfontanadev home v2.0.3"
 }
 
 function init(_htmlControlNavBar, _refreshPage)
@@ -45,6 +48,22 @@ function initafterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
 	document.body.style.visibility = "visible";
 	
 	setCardsImages(Cards);
+
+	redirectToDonatePageIfApplies();
+}
+
+function redirectToDonatePageIfApplies() {
+	const urlParams = new URLSearchParams(window.location.search);
+	let redirectToPage = urlParams.get('redirectToPage')
+
+	if (redirectToPage !== null) { 
+		if (redirectToPage.toUpperCase() === "DONATE-PAGE")
+		{
+			setTimeout(() => {
+				document.getElementById("idDonateButton").click();						
+			}, 100);
+		}
+	}
 }
 
 function loadLocalizatoinDataForCards(_cards) {
@@ -152,9 +171,8 @@ function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
 	    {
 	      $("#nav-placeholder").load
 	      	(
-						//"http://127.0.0.1:3000/navigation.html",
-						//"http://localhost:8080/navigation.html",
-						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/navigation.html",
+
+						SERVER_URL + "navigation.html",
 		      	function()
 		      	{
 							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
@@ -213,9 +231,7 @@ function injectionOfDonateDialog(_hrefToRefresh)
 	    {
 	      $("#donate-placeholder").load
 	      	(
-						//"http://127.0.0.1:3000/donate.html",
-						//"http://localhost:8080/donate.html",
-						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/donate.html",
+						SERVER_URL + "donate.html",
 		      	function()
 		      	{
 							applyLocalizationToDonateDialog(_hrefToRefresh);
@@ -245,9 +261,7 @@ function injectionOfLocalizationDialog(_hrefToRefresh)
 	    {
 	      $("#localization-placeholder").load
 	      	(
-						//"http://127.0.0.1:3000/localization.html",
-						//"http://localhost:8080/localization.html",
-						"https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/localization.html",
+						SERVER_URL + "localization.html",
 		      	function()
 		      	{
 							$('#id_nav-bar-item-localization').click(function() { showLocalizationDialogSelectorOnClickOverFlagIcon();});	
