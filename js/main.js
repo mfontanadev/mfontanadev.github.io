@@ -22,8 +22,8 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function setSiteTitle()
 {
-  // Version 2.0.0: adding localization and donate functionality.
-	document.title = "mfontanadev home v2.0.0"
+  // Version 2.0.1: adding fixed ammount button for PayPal
+	document.title = "mfontanadev home v2.0.1"
 }
 
 function init(_htmlControlNavBar, _refreshPage)
@@ -228,13 +228,13 @@ function injectionOfDonateDialog(_hrefToRefresh)
 function applyLocalizationToDonateDialog(_hrefToRefresh) {
 	if (getLocalization().langCode === LANG_ENG) {
 		setText("idDonateDialogTitle", "Many thanks.");
-		setText("idMercadoPagoFreeAmount", "$x");
-		setText("idPayPalFreeAmount", "$x");
+		setText("idMercadoPagoFreeAmount", "$ x");
+		setText("idPayPalFreeAmount", "USD x");
 	}		
 	else if (getLocalization().langCode === LANG_SPA) {
 		setText("idDonateDialogTitle", "Muchas gracias.");
-		setText("idMercadoPagoFreeAmount", "$x");
-		setText("idPayPalFreeAmount", "$x");
+		setText("idMercadoPagoFreeAmount", "$ x");
+		setText("idPayPalFreeAmount", "USD x");
 	}
 }
 

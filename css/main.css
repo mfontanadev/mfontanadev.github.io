@@ -111,12 +111,7 @@ body
 .fixed-70w-btn {
     width: 70px; 
     height: auto;
-}
-
-.fixed-70w-btn-hide {
-    width: 70px; 
-    height: auto;
-    visibility: hidden;
+    font-size: 14px;
 }
 
 @media (max-width: 575px) {
