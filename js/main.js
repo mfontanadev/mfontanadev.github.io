@@ -22,8 +22,8 @@ function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL)
 
 function setSiteTitle()
 {
-  // Version 2.0.1: adding fixed ammount button for PayPal
-	document.title = "mfontanadev home v2.0.1"
+  // Version 2.0.2: Not using Paypal.me, creating links with my PayPal account
+	document.title = "mfontanadev home v2.0.2"
 }
 
 function init(_htmlControlNavBar, _refreshPage)
