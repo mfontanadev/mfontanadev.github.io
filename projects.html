@@ -8,17 +8,18 @@
 		<script type='text/javascript' src="js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+		<script type='text/javascript' src="js/localization_config.js"></script>
 		<script type='text/javascript' src="js/cards_data_spa.js"></script>
 		<script type='text/javascript' src="js/cards_data_eng.js"></script>
 		<script type='text/javascript' src="js/main.js"></script>
 		<script>
 			function applyPageLocalization() {
-				if (getLocalization().langCode === LANG_ENG) {
+				if (getLocalization().langCode === lz_def.USA.languageCode) {
 					setText("idSectionTitle", "What is here?");
 					setText("idSectionInfo", "Here is the complete universe of projects. WARNING: they can be very, very raw or almost finished.");
 					setText("idProjectsSectionTitle", "Projects");
 				}
-				else if (getLocalization().langCode === LANG_SPA) {
+				else if (getLocalization().langCode === lz_def.ARG.languageCode) {
 					setText("idSectionTitle", "Qué hay acá?");
 					setText("idSectionInfo", "Acá encontramos el universo de todos los projectos. NOTA: puesden estar muy, pero muy, crudos o pronto a completarse.");
 					setText("idProjectsSectionTitle", "Proyectos");
@@ -79,6 +80,27 @@
 			</div>
 
 			<div class="row">
+				<div id="idFlappyRoll" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+					<div class="card text-justify border-0">
+						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+						<div id="cardImage">
+							<img src="img/card-image-not-found.png" class="card-img-top pointer"
+								onclick="showCardButtons('idFlappyRoll');">
+						</div>
+						<div class="d-none" id="cardButtons">
+							<table class="nostyle" style="width:100%">
+								<tr style="height:5px"></tr>
+								<tr>
+									<th id="idButtons" style="width:100%"></th>
+								</tr>
+							</table>
+						</div>
+						<div class="card-body" id="cardBody">
+							<p id="cardDescription" class="card-text">...</p>
+						</div>
+					</div>
+				</div>
+
 				<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 					<div class="card text-justify border-0">
 						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>

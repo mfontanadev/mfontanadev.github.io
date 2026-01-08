@@ -2,6 +2,17 @@ function loadCardsDataLocalizated_eng(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idFlappyRoll", 
+			"Flappy Roll",
+			"img/flappy_roll_mysite_thumb.png",
+	  	"This time I based my inspiration in the real Flappy Bird and then added a twist. The idea is that you need to stay between two bands (top and bottom), they represent the flotation bands used in Argentina to contain the dollar. NOTA: press PLAY to play from itchio or sources on SOURCES.",
+			"https://mfontanadev.itch.io/flappy-roll",
+			"https://github.com/mfontanadev/POCs/tree/master/FlappyRoll"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"id8bitminirally", 
 			"8_bit_minirally",
 			"img/8_bit_minirally_mysite_thumb.png",

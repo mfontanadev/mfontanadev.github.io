@@ -8,15 +8,16 @@
 	<script type='text/javascript' src="js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+	<script type='text/javascript' src="js/localization_config.js"></script>
 	<script type='text/javascript' src="js/cards_data_spa.js"></script>
 	<script type='text/javascript' src="js/cards_data_eng.js"></script>
 	<script type='text/javascript' src="js/main.js"></script>
 	<script>
 		function applyPageLocalization() {
-			if (getLocalization().langCode === LANG_ENG) {
+			if (getLocalization().langCode === lz_def.USA.languageCode) {
 				setText("idSectionTitle", "Under construction");
 			}
-			else if (getLocalization().langCode === LANG_SPA) {
+			else if (getLocalization().langCode === lz_def.ARG.languageCode) {
 				setText("idSectionTitle", "En construcción");
 			}
 		}

@@ -2,10 +2,21 @@ function loadCardsDataLocalizated_arg(_cards)
 {
 	_cards.push(
 		new CardItem(
+			"idFlappyRoll", 
+			"Flappy Roll",
+			"img/flappy_roll_mysite_thumb.png",
+	  	"En esta oportunidad basé mi inspiración en Flappy Bird con algunas modificaciones. La idea es mantenerse dentro de las bandas de flotacioni de contencion del dolar. NOTA: apretar PLAY para jugar desde itchio o fuentes botón SOURCES.",
+			"https://mfontanadev.itch.io/flappy-roll",
+			"https://github.com/mfontanadev/POCs/tree/master/FlappyRoll"
+		)
+	)
+
+	_cards.push(
+		new CardItem(
 			"id8bitminirally", 
 			"8_bit_minirally",
 			"img/8_bit_minirally_mysite_thumb.png",
-	  	"Porté mi videojuego de QuickBasic 4.5 llamado Minirally a TIC-80, solo por: diversión, aprender Lua y divertirme con la consola TIC-80. NOTA: mi intención no fué hacer algo comercial. NOTA: apretar PLAY para jugar desde itchioo apretar el botón SOURCES.",
+	  	"Porté mi videojuego de QuickBasic 4.5 llamado Minirally a TIC-80, solo por: diversión, aprender Lua y divertirme con la consola TIC-80. NOTA: mi intención no fué hacer algo comercial. NOTA: apretar PLAY para jugar desde itchio o fuentes botón SOURCES.",
 			"https://mfontanadev.itch.io/8-bit-minirally",
 			"https://github.com/mfontanadev/retroProjects/tree/main/8_BIT_MINIRALLY"
 		)
