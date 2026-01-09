@@ -18,15 +18,25 @@ function init(_htmlControlNavBar, _refreshPage)
 {
 	setSiteTitle();
 
+  processUrlsParams();
+
 	loadLocalizatoinDataForCards(Cards);
 
 	injectionOfNavigationBar(_htmlControlNavBar, _refreshPage);
 }
 
+function processUrlsParams() {
+  let localizationFromUrlParams = getLocalizationFromUrlParam();
+	
+	if (validateLocalization(localizationFromUrlParams)) {
+		setLocalizationCode(localizationFromUrlParams);
+	}
+}
+
 function setSiteTitle()
 {
-  // Version 2.1.0: Adding localization coinfig and wait donate dialog functionality.
-	document.title = "mfontanadev home v2.1.0"
+  // Version 2.1.1: Adding localization from url param: example localization=arg-spa.
+	document.title = "mfontanadev home v2.1.1"
 }
 
 function loadLocalizatoinDataForCards(_cards) {
@@ -167,10 +177,10 @@ function applyLocalizationToLocalizationDialog(_hrefToRefresh) {
 
 	// Apply localization to language selector dialog.
 	if (getLocalization().langCode === lz_def.USA.languageCode) {
-		setText("idLocalizationDialog'Title", "Clic on a flag to change the language");
+		setText("idLocalizationDialog", "Clic on a flag to change the language");
 	}		
 	else if (getLocalization().langCode === lz_def.ARG.languageCode) {
-		setText("idLocalizationDialog'Title", "Clic sobre una bandera para cambiar el lenguaje");
+		setText("idLocalizationDialog", "Clic sobre una bandera para cambiar el lenguaje");
 	}
 }
 
@@ -184,10 +194,6 @@ function injectionOfCardsText(_cardItem) {
 	// Card title
 	$("#"+_cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
 	$("#"+_cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
-
-	// Card image
-	//var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
-	//$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
 
 	// Card buttons play and close.
 	var buttonsHtml = "<button id=\"btnPlay\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
@@ -209,10 +215,10 @@ function redirectToDonatePageIfApplies() {
 		if (redirectToPage !== null) { 
 			if (redirectToPage.toUpperCase() === "DONATE-PAGE")
 			{
-					document.getElementById("idDonateButton").click();						
+					donateDialogBox();						
 			}
 		}
-	}, 1000);
+	}, 500);
 }
 
 function setCardsImages(_cards) {
@@ -228,7 +234,6 @@ function injectionOfCardsImages(_cardItem) {
 }
 
 function navigateTo(_url) {
-	//window.location = _url;
 	window.open(_url);
 }
 
@@ -279,17 +284,31 @@ function setLocalizationCode(_localization) {
 }
 
 function getLocalization() {
-	let country = localStorage.getItem(KEY_LOCALIZATION_COUNTRY);
-	let langCode = localStorage.getItem(KEY_LOCALIZATION_LANGCODE);
-	let returnValue = {country: DEFAULT_COUNTRY, langCode: DEFAULT_LANG};
- 
-	if (country !== null && langCode !== null && validateLocalization(returnValue))
-	{
-		returnValue = {country: country, langCode: langCode};
+	let returnValue = {
+		country: localStorage.getItem(KEY_LOCALIZATION_COUNTRY), 
+		langCode: localStorage.getItem(KEY_LOCALIZATION_LANGCODE)
+	};
+	
+	if (!validateLocalization(returnValue)) {
+		returnValue = {country: DEFAULT_COUNTRY, langCode: DEFAULT_LANG};
 	}
-	else
-	{
-		setLocalizationCode(returnValue);
+	 
+	return returnValue;
+}
+
+function getLocalizationFromUrlParam() {
+	let returnValue = null;
+	
+	const urlParams = new URLSearchParams(window.location.search);
+	let localizationUrlParam = urlParams.get('localization')
+
+	if (localizationUrlParam !== null) { 
+		let splitLocalization =  localizationUrlParam.split('-', 2); 
+		
+		returnValue = {
+			country: splitLocalization[0], 
+			langCode: splitLocalization[1]
+		};
 	}
 
 	return returnValue;
@@ -298,12 +317,15 @@ function getLocalization() {
 function validateLocalization(_localization) {
 	let found = false
 
-	Localization.forEach(localize => {
-		if (localize.country === _localization.country && 
-				localize.langCode === _localization.langCode) {
-					found = true;
-				}
-	});
+	if (_localization !== null)
+	{
+		Localization.forEach(localize => {
+			if (localize.country === _localization.country && 
+					localize.langCode === _localization.langCode) {
+				found = true;
+			}
+		});
+	}
 
 	return found;
 }
