@@ -2,8 +2,8 @@ const KEY_LOCALIZATION_COUNTRY = "localization.country";
 const KEY_LOCALIZATION_LANGCODE = "localization.langCode";
 
 var lz_def = { 
-	ARG : {countryCode: "arg", languageCode : "spa"},
-	USA : {countryCode: "usa", languageCode : "eng"}
+	ARG : {countryCode: "ARG", languageCode : "SPA"},
+	USA : {countryCode: "USA", languageCode : "ENG"}
 }
 
 const DEFAULT_LANG = lz_def.USA.languageCode;

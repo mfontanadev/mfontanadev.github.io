@@ -35,7 +35,7 @@ function processUrlsParams() {
 
 function setSiteTitle()
 {
-  // Version 2.1.1: Adding localization from url param: example localization=arg-spa.
+  // Version 2.1.1: Adding localization from url param: example localization=ARG-SPA.
 	document.title = "mfontanadev home v2.1.1"
 }
 
