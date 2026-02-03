@@ -1,8 +1,8 @@
 var Cards = new Array();
 
-const SERVER_URL = "http://127.0.0.1:3000/";		// VsCode plugin
+//const SERVER_URL = "http://127.0.0.1:3002/";		// VsCode plugin
 //const SERVER_URL = "http://localhost:8080/";		// localhost
-//const SERVER_URL = "https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/";		//git hub
+const SERVER_URL = "https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/";		//git hub
 
 function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
 {
@@ -35,13 +35,13 @@ function processUrlsParams() {
 
 function setSiteTitle()
 {
-  // Version 2.1.1: Adding localization from url param: example localization=ARG-SPA.
-	document.title = "mfontanadev home v2.1.1"
+  // Version 2.2.0: adding automatic dialog to donation and final upload.
+	document.title = "mfontanadev home v2.2.0"
 }
 
 function loadLocalizatoinDataForCards(_cards) {
 	if (getLocalization().langCode === lz_def.ARG.languageCode) {
-		loadCardsDataLocalizated_arg(_cards);
+		loadCardsDataLocalizated_spa(_cards);
 	}
 	else if (getLocalization().langCode === lz_def.USA.languageCode) {
 		loadCardsDataLocalizated_eng(_cards);

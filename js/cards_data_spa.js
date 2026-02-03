@@ -1,4 +1,4 @@
-function loadCardsDataLocalizated_arg(_cards)
+function loadCardsDataLocalizated_spa(_cards)
 {
 	_cards.push(
 		new CardItem(
