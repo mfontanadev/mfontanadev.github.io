@@ -55,7 +55,7 @@ Last Updated: 20/04/2020
 // --------------------------------------------------------------- 
 // --------------------------------------------------------------------
 // Minimal engine to render points, lines, keyboard, save files, 
-// and some usefull functions.
+// and some useful functions.
 //
 
 /* thanks to @Javidx9, this was inspired in his youtube tutorials
@@ -837,7 +837,7 @@ JSGameEngine.resolveURLToResourceFolder = function(_filename)
 // --------------------------------------------------------------- 
 // --------------------------------------------------------------------
 // Minimal engine to render points, lines, keyboard, save files, 
-// and some usefull functions.
+// and some useful functions.
 //
 
 /* thanks to @Javidx9, this was inspired in his youtube tutorials
@@ -3427,7 +3427,7 @@ Triangle.prototype.getNormalVisible = function()
 // --------------------------------------------------------------- 
 // --------------------------------------------------------------------
 // This class stores vertex data used by render engine.
-// Has some usefull functions to load data from a files.
+// Has some useful functions to load data from a files.
 // Also stores rotation. position, scale used to place
 // mesh in world coordinates.
 //

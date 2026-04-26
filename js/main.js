@@ -35,8 +35,8 @@ function processUrlsParams() {
 
 function setSiteTitle()
 {
-  // Version 2.2.2: fix typo usefull by useful. 
-	document.title = "mfontanadev home v2.2.2"
+  // Version 2.2.3: fix all typos useful by useful. 
+	document.title = "mfontanadev home v2.2.3"
 }
 
 function loadLocalizatoinDataForCards(_cards) {

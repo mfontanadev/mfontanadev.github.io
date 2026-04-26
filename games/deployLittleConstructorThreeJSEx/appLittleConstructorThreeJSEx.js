@@ -751,7 +751,7 @@ Triangle.prototype.getNormalVisible = function()
 // --------------------------------------------------------------- 
 // --------------------------------------------------------------------
 // This class stores vertex data used by render engine.
-// Has some usefull functions to load data from a files.
+// Has some useful functions to load data from a files.
 // Also stores rotation. position, scale used to place
 // mesh in world coordinates.
 //
