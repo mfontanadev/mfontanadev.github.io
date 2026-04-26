@@ -35,8 +35,8 @@ function processUrlsParams() {
 
 function setSiteTitle()
 {
-  // Version 2.2.1: bug fixing: flags images using _ARG and _USA not found, repository is lowercase. 
-	document.title = "mfontanadev home v2.2.1"
+  // Version 2.2.2: fix typo usefull by useful. 
+	document.title = "mfontanadev home v2.2.2"
 }
 
 function loadLocalizatoinDataForCards(_cards) {
