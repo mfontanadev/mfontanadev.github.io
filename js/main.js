@@ -1,24 +1,22 @@
 var Cards = new Array();
 
 //const SERVER_URL = "http://127.0.0.1:3002/";		// VsCode plugin
-//const SERVER_URL = "http://localhost:8080/";		// localhost
+//const SERVER_URL = "http://localhost:8080/";		// run: npx http-server -p 8080 inside mfontanadev.github.io then localhost:8080
 const SERVER_URL = "https://raw.githubusercontent.com/mfontanadev/mfontanadev.github.io/master/";		//git hub
 
-function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) 
-{
+function CardItem(_id, _title, _image, _description, _appURL, _sourcesURL) {
 	this.id = _id;
 	this.title = _title;
 	this.image = _image;
 	this.description = _description;
 	this.appURL = _appURL;
-	this.sourcesURL = _sourcesURL;	
+	this.sourcesURL = _sourcesURL;
 }
 
-function init(_htmlControlNavBar, _refreshPage)
-{
+function init(_htmlControlNavBar, _refreshPage) {
 	setSiteTitle();
 
-  processUrlsParams();
+	processUrlsParams();
 
 	loadLocalizatoinDataForCards(Cards);
 
@@ -26,17 +24,16 @@ function init(_htmlControlNavBar, _refreshPage)
 }
 
 function processUrlsParams() {
-  let localizationFromUrlParams = getLocalizationFromUrlParam();
-	
+	let localizationFromUrlParams = getLocalizationFromUrlParam();
+
 	if (validateLocalization(localizationFromUrlParams)) {
 		setLocalizationCode(localizationFromUrlParams);
 	}
 }
 
-function setSiteTitle()
-{
-  // Version 2.2.3: fix all typos useful by useful. 
-	document.title = "mfontanadev home v2.2.3"
+function setSiteTitle() {
+	// Version 2.3.0: obfuscation. 
+	document.title = "mfontanadev home v2.3.0"
 }
 
 function loadLocalizatoinDataForCards(_cards) {
@@ -48,25 +45,22 @@ function loadLocalizatoinDataForCards(_cards) {
 	}
 }
 
-function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection)
-{
+function injectionOfNavigationBar(_menuItemIdToBeHighLighted, _reloadSection) {
 	$(
-	    function()
-	    {
-	      $("#nav-placeholder").load
-	      	(
+		function () {
+			$("#nav-placeholder").load
+				(
 
-						SERVER_URL + "navigation.html",
-		      	function()
-		      	{
-							$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
-							$('#id_imgLogo').click(function() { logoClick(_menuItemIdToBeHighLighted);});
+					SERVER_URL + "navigation.html",
+					function () {
+						$(_menuItemIdToBeHighLighted).css('font-weight', 'bold');
+						$('#id_imgLogo').click(function () { logoClick(_menuItemIdToBeHighLighted); });
 
-							applyLocalizationToNavigationBar();
-							initAfterNavigationBarLoaded(_menuItemIdToBeHighLighted, _reloadSection);
-						}
-	      	); 
-	    }
+						applyLocalizationToNavigationBar();
+						initAfterNavigationBarLoaded(_menuItemIdToBeHighLighted, _reloadSection);
+					}
+				);
+		}
 	);
 }
 
@@ -81,7 +75,7 @@ function applyLocalizationToNavigationBar() {
 		document.getElementById("id_nav-bar-item-localization").title = "Language selector";
 		document.getElementById("idDonateButtonNavBar").title = "Donate";
 		document.getElementById("idTwittxButton").title = "Twittx";
-	}		
+	}
 	else if (getLocalization().langCode === lz_def.ARG.languageCode) {
 		setText("id_nav-bar-item-home", "Principal");
 		setText("id_nav-bar-item-projects", "Proyectos");
@@ -99,17 +93,16 @@ function applyLocalizationToNavigationBar() {
 	});
 
 	// Show the current language flag in the navigation bar.
-	let showNavBarFlag = document.getElementById("idCountryFlagIcon_" + getLocalization().country); 
-	if (showNavBarFlag !== null ) {
+	let showNavBarFlag = document.getElementById("idCountryFlagIcon_" + getLocalization().country);
+	if (showNavBarFlag !== null) {
 		showNavBarFlag.style = "display: block";
 	}
 	else {
 		document.getElementById("idCountryFlagIcon_usa").style = "display: block";
-	}	
+	}
 }
 
-function initAfterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
-{
+function initAfterNavigationBarLoaded(_htmlControlNavBar, _refreshPage) {
 	injectionOfDonateDialog(_refreshPage);
 
 	injectionOfLocalizationDialog(_refreshPage);
@@ -117,7 +110,7 @@ function initAfterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
 	applyPageLocalization();
 	setCardsHtmlText(Cards);
 	document.body.style.visibility = "visible";
-	
+
 	setCardsImages(Cards);
 
 	redirectToDonatePageIfApplies();
@@ -125,17 +118,15 @@ function initAfterNavigationBarLoaded(_htmlControlNavBar, _refreshPage)
 
 function injectionOfDonateDialog(_hrefToRefresh) {
 	$(
-	    function()
-	    {
-	      $("#donate-placeholder").load
-	      	(
-						SERVER_URL + "donate.html",
-		      	function()
-		      	{
-							applyLocalizationToDonateDialog(_hrefToRefresh);
-						}
-	      	); 
-	    }
+		function () {
+			$("#donate-placeholder").load
+				(
+					SERVER_URL + "donate.html",
+					function () {
+						applyLocalizationToDonateDialog(_hrefToRefresh);
+					}
+				);
+		}
 	);
 }
 
@@ -144,7 +135,7 @@ function applyLocalizationToDonateDialog(_hrefToRefresh) {
 		setText("idDonateDialogTitle", "Many thanks.");
 		setText("idMercadoPagoFreeAmount", "$ x");
 		setText("idPayPalFreeAmount", "USD x");
-	}		
+	}
 	else if (getLocalization().langCode === lz_def.ARG.languageCode) {
 		setText("idDonateDialogTitle", "Muchas gracias.");
 		setText("idMercadoPagoFreeAmount", "$ x");
@@ -154,31 +145,29 @@ function applyLocalizationToDonateDialog(_hrefToRefresh) {
 
 function injectionOfLocalizationDialog(_hrefToRefresh) {
 	$(
-	    function()
-	    {
-	      $("#localization-placeholder").load
-	      	(
-						SERVER_URL + "localization.html",
-		      	function()
-		      	{
-							$('#id_nav-bar-item-localization').click(function() { showLocalizationDialogSelectorOnClickOverFlagIcon();});	
-							applyLocalizationToLocalizationDialog(_hrefToRefresh);
-						}
-	      	); 
-	    }
+		function () {
+			$("#localization-placeholder").load
+				(
+					SERVER_URL + "localization.html",
+					function () {
+						$('#id_nav-bar-item-localization').click(function () { showLocalizationDialogSelectorOnClickOverFlagIcon(); });
+						applyLocalizationToLocalizationDialog(_hrefToRefresh);
+					}
+				);
+		}
 	);
 }
 
 function applyLocalizationToLocalizationDialog(_hrefToRefresh) {
 	// Set event to each flag in the localization dialog.
 	Localization.forEach(localize => {
-		$('#idCountry_' + localize.country).click(function() { changeLocalization(localize, _hrefToRefresh);});	
+		$('#idCountry_' + localize.country).click(function () { changeLocalization(localize, _hrefToRefresh); });
 	});
 
 	// Apply localization to language selector dialog.
 	if (getLocalization().langCode === lz_def.USA.languageCode) {
 		setText("idLocalizationDialog", "Clic on a flag to change the language");
-	}		
+	}
 	else if (getLocalization().langCode === lz_def.ARG.languageCode) {
 		setText("idLocalizationDialog", "Clic sobre una bandera para cambiar el lenguaje");
 	}
@@ -192,19 +181,18 @@ function setCardsHtmlText(_cards) {
 
 function injectionOfCardsText(_cardItem) {
 	// Card title
-	$("#"+_cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
-	$("#"+_cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
+	$("#" + _cardItem.id).find("[id='cardTitle']").html(_cardItem.title);
+	$("#" + _cardItem.id).find("[id='cardDescription']").html(_cardItem.description);
 
 	// Card buttons play and close.
 	var buttonsHtml = "<button id=\"btnPlay\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.appURL + "');\">Play</button>";
 
-	if (_cardItem.sourcesURL.length > 0)
-	{
+	if (_cardItem.sourcesURL.length > 0) {
 		buttonsHtml += "<button id=\"btnSources\" style=\"font-size:.675rem; width:30%; margin-right:5px\" type=\"button\" class=\"btn btn-secondary btn-sm\" onclick=\"navigateTo('" + _cardItem.sourcesURL + "');\">Sources</button>";
 	}
 	buttonsHtml += "<button id=\"btnClose\" style=\"font-size:.675rem; width:30%;\" type=\"button\" class=\"btn btn-dark btn-sm\" onclick=\"hideCardButtons('" + _cardItem.id + "');\">Close</button>";
-	
-	$("#"+_cardItem.id).find("[id='idButtons']").html(buttonsHtml);
+
+	$("#" + _cardItem.id).find("[id='idButtons']").html(buttonsHtml);
 }
 
 function redirectToDonatePageIfApplies() {
@@ -212,10 +200,9 @@ function redirectToDonatePageIfApplies() {
 		const urlParams = new URLSearchParams(window.location.search);
 		let redirectToPage = urlParams.get('redirectToPage')
 
-		if (redirectToPage !== null) { 
-			if (redirectToPage.toUpperCase() === "DONATE-PAGE")
-			{
-					donateDialogBox();						
+		if (redirectToPage !== null) {
+			if (redirectToPage.toUpperCase() === "DONATE-PAGE") {
+				donateDialogBox();
 			}
 		}
 	}, 500);
@@ -230,7 +217,7 @@ function setCardsImages(_cards) {
 function injectionOfCardsImages(_cardItem) {
 	// Card image
 	var imgHtlm = "<img id=\"cardImage\" src=\"" + _cardItem.image + "\" class=\"card-img-top pointer\" onclick=\"showCardButtons('" + _cardItem.id + "');\">";
-	$("#"+_cardItem.id).find("[id='cardImage']").html(imgHtlm);
+	$("#" + _cardItem.id).find("[id='cardImage']").html(imgHtlm);
 }
 
 function navigateTo(_url) {
@@ -238,28 +225,26 @@ function navigateTo(_url) {
 }
 
 function logoClick(_currentPageTag) {
-	if (_currentPageTag === "#id_nav-bar-item-home")
-	{
+	if (_currentPageTag === "#id_nav-bar-item-home") {
 		$('#myModal').modal('show')
 	}
-	else
-	{
+	else {
 		window.location.href = "index.html";
 	}
 }
 
 function showCardButtons(_idElement) {
-	var elementBody = $("#"+_idElement).find("[id='cardBody']");
-	var elementButtons = $("#"+_idElement).find("[id='cardButtons']");
-	
+	var elementBody = $("#" + _idElement).find("[id='cardBody']");
+	var elementButtons = $("#" + _idElement).find("[id='cardButtons']");
+
 	elementBody.removeClass("d-none");
 	elementBody.addClass("d-none");
 	elementButtons.removeClass("d-none");
 }
 
 function hideCardButtons(_idElement) {
-	var elementBody = $("#"+_idElement).find("[id='cardBody']");
-	var elementButtons = $("#"+_idElement).find("[id='cardButtons']");
+	var elementBody = $("#" + _idElement).find("[id='cardBody']");
+	var elementButtons = $("#" + _idElement).find("[id='cardButtons']");
 
 	elementBody.removeClass('d-none');
 	elementButtons.removeClass('d-none');
@@ -285,28 +270,28 @@ function setLocalizationCode(_localization) {
 
 function getLocalization() {
 	let returnValue = {
-		country: localStorage.getItem(KEY_LOCALIZATION_COUNTRY), 
+		country: localStorage.getItem(KEY_LOCALIZATION_COUNTRY),
 		langCode: localStorage.getItem(KEY_LOCALIZATION_LANGCODE)
 	};
-	
+
 	if (!validateLocalization(returnValue)) {
-		returnValue = {country: DEFAULT_COUNTRY, langCode: DEFAULT_LANG};
+		returnValue = { country: DEFAULT_COUNTRY, langCode: DEFAULT_LANG };
 	}
-	 
+
 	return returnValue;
 }
 
 function getLocalizationFromUrlParam() {
 	let returnValue = null;
-	
+
 	const urlParams = new URLSearchParams(window.location.search);
 	let localizationUrlParam = urlParams.get('localization')
 
-	if (localizationUrlParam !== null) { 
-		let splitLocalization =  localizationUrlParam.split('-', 2); 
-		
+	if (localizationUrlParam !== null) {
+		let splitLocalization = localizationUrlParam.split('-', 2);
+
 		returnValue = {
-			country: splitLocalization[0], 
+			country: splitLocalization[0],
 			langCode: splitLocalization[1]
 		};
 	}
@@ -317,11 +302,10 @@ function getLocalizationFromUrlParam() {
 function validateLocalization(_localization) {
 	let found = false
 
-	if (_localization !== null)
-	{
+	if (_localization !== null) {
 		Localization.forEach(localize => {
-			if (localize.country === _localization.country && 
-					localize.langCode === _localization.langCode) {
+			if (localize.country === _localization.country &&
+				localize.langCode === _localization.langCode) {
 				found = true;
 			}
 		});
@@ -335,7 +319,7 @@ function changeLocalization(_localization, _hrefToRefresh) {
 
 	if (_localization.country !== currentLocalization.country) {
 		setLocalizationCode(_localization);
-		
+
 		document.getElementById('idCloseLocalizationDialogButton').click();
 
 		window.location.href = _hrefToRefresh;

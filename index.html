@@ -1,335 +1,348 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>mfontanadev home</title>
 
-		<script type='text/javascript' src='js/jquery-3.4.1.min.js'></script>
-		<script type='text/javascript' src="js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
-		<script type='text/javascript' src="js/localization_config.js"></script>
-		<script type='text/javascript' src="js/cards_data_spa.js"></script>
-		<script type='text/javascript' src="js/cards_data_eng.js"></script>
-		<script type='text/javascript' src="js/main.js"></script>
-		<script>
-			function applyPageLocalization() {
-				if (getLocalization().langCode === lz_def.USA.languageCode) {
-					setText("idSectionTitle", "What is here?");
-					setText("idSectionInfo1", "Essentially, I want to share my programs (video games and nature designs), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing.");
-					setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, click on (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be useful, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
-					setText("idOldSiteDialogTitle", "Back in time");
-					setText("idOldSiteDialogInfoLine1", "Are you sure you want to travel back in time to the original site?");
-					setText("idOldSiteDialogInfoLine2", "You will find: games from year 1995, a not responsive UI and a lot of funny things.");
-					setText("idOldSiteDialogButtonYes", "Yes");
-					setText("idOldSiteDialogButtonNo", "No"); // I know, spanish word is the same, why the translation? because I am freak. 
-					setText("idLatestSectionTitle", "Latest"); 
-					setText("idVeryFunSectionTitle", "Very fun"); 
-					document.getElementById("idDonateButton").title = "Donate";
-				}
-				else if (getLocalization().langCode === lz_def.ARG.languageCode) {
-					setText("idSectionTitle", "Qué hay acá?");
-					setText("idSectionInfo1", "Escencialmente, la idea es compartir mis programas (videojuegos e ingeniería de la naturaleza), también dar algo a la comunidad y que sirva como inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo.");
-					setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, click sobre (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes están en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
-					setText("idOldSiteDialogTitle", "Viaje al pasado");
-					setText("idOldSiteDialogInfoLine1", "Estás seguro que querés viajar al pasado al sitio original?");
-					setText("idOldSiteDialogInfoLine2", "Vas a encontrar: juegos hechos en 1995, una no responsiva UI y muchas cosas divertidas.");
-					setText("idOldSiteDialogButtonYes", "Si");
-					setText("idOldSiteDialogButtonNo", "No");
-					setText("idLatestSectionTitle", "Lo último"); 
-					setText("idVeryFunSectionTitle", "Muy divertido"); 
-					document.getElementById("idDonateButton").title = "Donar";
-				}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=uft8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>mfontanadev home</title>
+
+	<script type='text/javascript' src='js/jquery-3.4.1.min.js'></script>
+	<script type='text/javascript' src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+	<script type='text/javascript' src="js/localization_config.js"></script>
+	<script type='text/javascript' src="js/cards_data_spa.min.js"></script>
+	<script type='text/javascript' src="js/cards_data_eng.min.js"></script>
+	<script type='text/javascript' src="js/main.min.js"></script>
+	<script>
+		function applyPageLocalization() {
+			if (getLocalization().langCode === lz_def.USA.languageCode) {
+				setText("idSectionTitle", "What is here?");
+				setText("idSectionInfo1", "Essentially, I want to share my programs (video games and nature designs), give something back to community and be inspirational. All these resources are the work I did during my years as a programmer (since 1990, C64 in those times) and still doing.");
+				setText("idSectionInfo2", "Finally, if you consider supporting this site and helping me, click on (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). Enjoy and I hope it be useful, sources on <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>");
+				setText("idOldSiteDialogTitle", "Back in time");
+				setText("idOldSiteDialogInfoLine1", "Are you sure you want to travel back in time to the original site?");
+				setText("idOldSiteDialogInfoLine2", "You will find: games from year 1995, a not responsive UI and a lot of funny things.");
+				setText("idOldSiteDialogButtonYes", "Yes");
+				setText("idOldSiteDialogButtonNo", "No"); // I know, spanish word is the same, why the translation? because I am freak. 
+				setText("idLatestSectionTitle", "Latest");
+				setText("idVeryFunSectionTitle", "Very fun");
+				document.getElementById("idDonateButton").title = "Donate";
 			}
-		</script>
-		
-		<style>body { visibility: hidden; }</style>
-		<noscript><style>body { visibility: visible; }</style></noscript>
+			else if (getLocalization().langCode === lz_def.ARG.languageCode) {
+				setText("idSectionTitle", "Qué hay acá?");
+				setText("idSectionInfo1", "Escencialmente, la idea es compartir mis programas (videojuegos e ingeniería de la naturaleza), también dar algo a la comunidad y que sirva como inspiración. Todos estos recursos son el trabajo que hice durante mis años como programador (desde 1990, C64 en aquellos itempos) y los que aún estoy haciendo.");
+				setText("idSectionInfo2", "Finalmente, si consideras que puedes ayudarme, click sobre (<img class='localization' id='idDonateButton' src='img/donate_box.png' onclick='donateDialogBox();'' width='20' height='20' alt='Donate' title='Donate'>). A divertirse y espero que sea de utilidad, los fuentes están en <a href='https://github.com/mfontanadev' target='_blank' rel='noopener noreferrer'>github</a>.");
+				setText("idOldSiteDialogTitle", "Viaje al pasado");
+				setText("idOldSiteDialogInfoLine1", "Estás seguro que querés viajar al pasado al sitio original?");
+				setText("idOldSiteDialogInfoLine2", "Vas a encontrar: juegos hechos en 1995, una no responsiva UI y muchas cosas divertidas.");
+				setText("idOldSiteDialogButtonYes", "Si");
+				setText("idOldSiteDialogButtonNo", "No");
+				setText("idLatestSectionTitle", "Lo último");
+				setText("idVeryFunSectionTitle", "Muy divertido");
+				document.getElementById("idDonateButton").title = "Donar";
+			}
+		}
+	</script>
 
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() { dataLayer.push(arguments); }
-			gtag('js', new Date());
-			gtag('config', 'G-FZZTP9WEFJ');
-		</script>
-	</head>
+	<style>
+		body {
+			visibility: hidden;
+		}
+	</style>
+	<noscript>
+		<style>
+			body {
+				visibility: visible;
+			}
+		</style>
+	</noscript>
 
-	<body>
-		<!--Navigation bar-->
-		<div id="nav-placeholder">
-			<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mx-auto">
-						<li class="nav-item"><a id="id_nav-bar-item-home" class="nav-link">...</a></li>
-					</ul>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZZTP9WEFJ"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-FZZTP9WEFJ');
+	</script>
+</head>
+
+<body>
+	<!--Navigation bar-->
+	<div id="nav-placeholder">
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item"><a id="id_nav-bar-item-home" class="nav-link">...</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<br>
+
+	<!-- Page Content -->
+	<div class="container">
+		<br>
+		<br>
+		<div class="row">
+			<div class="col">
+				<h2 id="idSectionTitle" class="main-title">
+					What is this?
+				</h2>
+				<div class="rich-text z-container text-justify">
+					<p id="idSectionInfo1" class="card-text">Essentially, I want to share my programs (many inspired on the
+						desingns of the nature), give something back to community and be inspirational. All these resources are the
+						work I did during my years as a programmer (since 1990, C64 in those times) and still doing. Enjoy and I
+						hope it be useful, sources on github (<a href='https://github.com/mfontanadev' target='_blank'
+							rel='noopener noreferrer'>link</a>).</p>
+					<p id="idSectionInfo2" class="card-text">Finally, if you consider supporting this site and helping me, click
+						on (<img class="localization" id="idDonateButton" src="img/donate_box.png" onclick="donateDialogBox();"
+							width="20" height="20" alt="Donate" title="Donate">)</p>
 				</div>
-			</nav>
+			</div>
 		</div>
+
 		<br>
 
-		<!-- Page Content -->
-		<div class="container">
-			<br>
-			<br>
-			<div class="row">
-				<div class="col">
-					<h2 id="idSectionTitle" class="main-title">
-						What is this?
-					</h2>
-					<div class="rich-text z-container text-justify">
-						<p id="idSectionInfo1" class="card-text">Essentially, I want to share my programs (many inspired on the
-							desingns of the nature), give something back to community and be inspirational. All these resources are the
-							work I did during my years as a programmer (since 1990, C64 in those times) and still doing. Enjoy and I
-							hope it be useful, sources on github (<a href='https://github.com/mfontanadev' target='_blank'
-								rel='noopener noreferrer'>link</a>).</p>
-						<p id="idSectionInfo2" class="card-text">Finally, if you consider supporting this site and helping me, click on (<img class="localization" id="idDonateButton" src="img/donate_box.png"
-								onclick="donateDialogBox();" width="20" height="20" alt="Donate" title="Donate">)</p>
+		<div class="row">
+			<div class="col">
+				<h4 id="idLatestSectionTitle">Latest</h4>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div id="idFlappyRoll" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idFlappyRoll');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
 			</div>
 
-			<br>
-
-			<div class="row">
-				<div class="col">
-					<h4 id="idLatestSectionTitle">Latest</h4>
-				</div>
-			</div>
-
-
-			<div class="row">
-				<div id="idFlappyRoll" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idFlappyRoll');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+			<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('id8bitminirally');">
 					</div>
-				</div>
-
-				<div id="id8bitminirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('id8bitminirally');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
 					</div>
-				</div>
-
-				<div id="idMemotest" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idMemotest');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
-					</div>
-				</div>
-
-				<div id="idMinirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idMinirally');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
-					</div>
-				</div>
-
-				<div id="idTetris" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTetris');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
-					</div>
-				</div>
-
-				<div id="idTelefono" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idTelefono');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
 			</div>
 
-			<br>
-
-			<div class="row">
-				<div class="col">
-					<h4 id="idVeryFunSectionTitle">Very fun</h4>
+			<div id="idMemotest" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idMemotest');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
 				</div>
 			</div>
 
-			<div class="row">
-
-				<div id="idLittleConstructorThreeJSEx" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idLittleConstructorThreeJSEx');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+			<div id="idMinirally" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idMinirally');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
+			</div>
 
-				<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idWishFlower');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+			<div id="idTetris" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer" onclick="showCardButtons('idTetris');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
+			</div>
 
-				<div id="idRiseOfLadybug_part3" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div class="card text-justify border-0">
-						<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
-						<div id="cardImage">
-							<img src="img/card-image-not-found.png" class="card-img-top pointer"
-								onclick="showCardButtons('idRiseOfLadybug');">
-						</div>
-						<div class="d-none" id="cardButtons">
-							<table class="nostyle" style="width:100%">
-								<tr style="height:5px"></tr>
-								<tr>
-									<th id="idButtons" style="width:100%"></th>
-								</tr>
-							</table>
-						</div>
-						<div class="card-body" id="cardBody">
-							<p id="cardDescription" class="card-text">...</p>
-						</div>
+			<div id="idTelefono" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idTelefono');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div id="myModal" class="modal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 id="idOldSiteDialogTitle" class="modal-title">Back in time.</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+		<br>
+
+		<div class="row">
+			<div class="col">
+				<h4 id="idVeryFunSectionTitle">Very fun</h4>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div id="idLittleConstructorThreeJSEx" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idLittleConstructorThreeJSEx');">
 					</div>
-					<div class="modal-body">
-						<p id="idOldSiteDialogInfoLine1">Are you sure you want to travel back in time to the original site?</p>
-						<p id="idOldSiteDialogInfoLine2">You will find: games from year 1995, a not responsive UI and a lot of funny
-							things.</p>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
 					</div>
-					<div class="modal-footer">
-						<button id="idOldSiteDialogButtonYes" type="button" class="btn btn-primary"
-							onClick="window.open('oldsite/index.html', '_blanck')">Yes</button>
-						<button id="idOldSiteDialogButtonNo" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="idWishFlower" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idWishFlower');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="idRiseOfLadybug_part3" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				<div class="card text-justify border-0">
+					<h6 id="cardTitle" class="card-title card-title-bold">...</h6>
+					<div id="cardImage">
+						<img src="img/card-image-not-found.png" class="card-img-top pointer"
+							onclick="showCardButtons('idRiseOfLadybug');">
+					</div>
+					<div class="d-none" id="cardButtons">
+						<table class="nostyle" style="width:100%">
+							<tr style="height:5px"></tr>
+							<tr>
+								<th id="idButtons" style="width:100%"></th>
+							</tr>
+						</table>
+					</div>
+					<div class="card-body" id="cardBody">
+						<p id="cardDescription" class="card-text">...</p>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!--Language selector-->
-		<div id="localization-placeholder"></div>
+	<div id="myModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 id="idOldSiteDialogTitle" class="modal-title">Back in time.</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p id="idOldSiteDialogInfoLine1">Are you sure you want to travel back in time to the original site?</p>
+					<p id="idOldSiteDialogInfoLine2">You will find: games from year 1995, a not responsive UI and a lot of funny
+						things.</p>
+				</div>
+				<div class="modal-footer">
+					<button id="idOldSiteDialogButtonYes" type="button" class="btn btn-primary"
+						onClick="window.open('oldsite/index.html', '_blanck')">Yes</button>
+					<button id="idOldSiteDialogButtonNo" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<!--Donaton dialog-->
-		<div id="donate-placeholder"></div>
+	<!--Language selector-->
+	<div id="localization-placeholder"></div>
 
-		<script defer>init('#id_nav-bar-item-home', 'index.html');</script>
-	</body>
+	<!--Donaton dialog-->
+	<div id="donate-placeholder"></div>
+
+	<script defer>init('#id_nav-bar-item-home', 'index.html');</script>
+</body>
+
 </html>
