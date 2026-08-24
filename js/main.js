@@ -32,8 +32,8 @@ function processUrlsParams() {
 }
 
 function setSiteTitle() {
-	// Version 2.3.0: obfuscation. 
-	document.title = "mfontanadev home v2.3.0"
+	// Version 2.3.1: default localization to Argentina. 
+	document.title = "mfontanadev home v2.3.1"
 }
 
 function loadLocalizatoinDataForCards(_cards) {
